@@ -1,5 +1,8 @@
 package br.edu.ifsp.domain.entities.user;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
     private int id;
     private String fullName;
@@ -31,8 +34,8 @@ public class User {
         this.passwordHash = passwordHash;
         this.active = active;
 
-        this.roles = new ArrayList<Role>;
-        this.days = new ArrayList<Day>;
+        this.roles = new ArrayList<Role>();
+        this.days = new ArrayList<Day>();
     }
 
     public int getId() {
