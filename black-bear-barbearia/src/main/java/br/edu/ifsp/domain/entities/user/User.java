@@ -125,17 +125,17 @@ public class User {
         this.active = active;
     }
 
-    boolean isValidPassWord(String password) {
+    public boolean isValidPassWord(String password) {
         if (password.equals(passwordHash))
             return true;
         return false;
     }
 
-    void clearPasswordHash() {}
+    public void clearPasswordHash() {}
 
-    void addRole(Role role) {}
+    public void addRole(Role role) {}
 
-    void removeRole(Role role) {}
+    public void removeRole(Role role) {}
 
-    boolean hasRole(Role role) {return false;}
+    public boolean hasRole(Role role) {return false;}
 }
