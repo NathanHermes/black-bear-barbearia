@@ -131,9 +131,7 @@ public class User {
         return false;
     }
 
-    public void clearPasswordHash() {
-
-    }
+    public void clearPasswordHash() {}
 
     public void addRole(Role role) {}
 
