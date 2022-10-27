@@ -14,7 +14,10 @@ public class User {
     private String passwordHash;
     private boolean active;
 
-    public User(int id, String fullName, String email, String phone, String address, String number, String complement, String district, String city, String login, String passwordHash, boolean active) {
+    private List<Role> roles;
+    private List<Day> days;
+
+    public User(int id, String fullName, String email, String phone, String address, String number, String complement, String district, String city, String login, String passwordHash, boolean active, ArrayList<Role> roles) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
@@ -27,6 +30,9 @@ public class User {
         this.login = login;
         this.passwordHash = passwordHash;
         this.active = active;
+
+        this.roles = new ArrayList<Role>;
+        this.days = new ArrayList<Day>;
     }
 
     public int getId() {
@@ -126,16 +132,33 @@ public class User {
     }
 
     public boolean isValidPassWord(String password) {
-        if (password.equals(passwordHash))
-            return true;
+        if(password.equals(passwordHash)) return true;
         return false;
     }
 
-    public void clearPasswordHash() {}
+    public void clearPasswordHash() {
+        if(this.passwordHash != null)
+            this.passwordHash = null;
+    }
 
-    public void addRole(Role role) {}
+    public void addRole(Role role) {
+        if(!roles.contains(role)) roles.add(role);
+    }
 
-    public void removeRole(Role role) {}
+    public void removeRole(Role role) {
+        roles.remove(role);
+    }
 
-    public boolean hasRole(Role role) {return false;}
+    public boolean hasRole(Role role) {
+        if(roles.contains(role)) return true;
+        return false;
+    }
+
+    public void addDay(Day day) {
+        if(!days.contains(day) && days.size() < 6) days.add(day);
+    }
+
+    public void removeDay(Day day) {
+        days.remove(day);
+    }
 }
