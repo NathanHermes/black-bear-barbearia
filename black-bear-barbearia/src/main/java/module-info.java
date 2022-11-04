@@ -1,8 +1,8 @@
-module br.edu.ifsp.blackbearbarbearia {
+module br.ifsp.edu.blackbearbarbearia {
     requires javafx.controls;
     requires javafx.fxml;
 
 
-    opens br.edu.ifsp.blackbearbarbearia to javafx.fxml;
-    exports br.edu.ifsp.blackbearbarbearia;
+    opens br.ifsp.edu.blackbearbarbearia to javafx.fxml;
+    exports br.ifsp.edu.blackbearbarbearia;
 }
