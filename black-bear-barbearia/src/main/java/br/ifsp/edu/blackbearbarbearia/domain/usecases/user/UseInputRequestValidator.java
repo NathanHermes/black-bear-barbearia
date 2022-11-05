@@ -22,7 +22,6 @@ public class UseInputRequestValidator extends Validator<User> {
         return notification;
     }
 
-    @Override
     public Notification validate(String login, String password) {
         Notification notification = new Notification();
 

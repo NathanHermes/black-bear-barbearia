@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    private int id;
+    private Integer id;
     private String fullName;
     private String email;
     private String phone;
@@ -16,7 +16,6 @@ public class User {
     private String login;
     private String passwordHash;
     private boolean active;
-
     private List<Role> roles;
     private List<Day> days;
 
@@ -25,7 +24,7 @@ public class User {
         this.passwordHash = passwordHash;
     }
 
-    public User(int id, String fullName, String email, String phone, String address, String number, String complement, String district, String city, String login, String passwordHash, boolean active, ArrayList<Role> roles) {
+    public User(Integer id, String fullName, String email, String phone, String address, String number, String complement, String district, String city, String login, String passwordHash, boolean active, ArrayList<Role> roles) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
@@ -38,13 +37,15 @@ public class User {
         this.login = login;
         this.passwordHash = passwordHash;
         this.active = active;
-
         this.roles = new ArrayList<Role>();
         this.days = new ArrayList<Day>();
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getFullName() {
