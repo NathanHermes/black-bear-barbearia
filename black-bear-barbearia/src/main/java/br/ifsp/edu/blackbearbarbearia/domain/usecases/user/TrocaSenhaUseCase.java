@@ -8,8 +8,14 @@ public class TrocaSenhaUseCase {
         this.dao = dao;
     }
 
-    public boolean trocarSenha(User user, String senha) {
-        user.setPasswordHash(senha);
+    public boolean trocarSenha(User user, String password, String confirmPassword) {
+        if (password == null || password.isEmpty())
+            throw new IllegalArgumentException("Invalid password.");
+        if (confirmPassword == null || confirmPassword.isEmpty())
+            throw new IllegalArgumentException("Invalid confirm password.");
+
+        if (!password.equals(confirmPassword))
+            return false;
         return true;
     }
 }
