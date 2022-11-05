@@ -2,13 +2,12 @@ package br.ifsp.edu.blackbearbarbearia.application.repository.inmemory;
 
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.UserDAO;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityNotFoundException;
 
 import java.util.*;
 
 public class InMemoryUserDAO implements UserDAO {
     private static final Map<Integer, User> database = new LinkedHashMap<>();
-    private static Integer userID;
+    private Integer userID = 0;
     @Override
     public Integer create(User user) {
         userID++;
@@ -52,9 +51,9 @@ public class InMemoryUserDAO implements UserDAO {
     }
 
     @Override
-    public User findOneByLogin(String login) {
+    public Optional<User> findOneByLogin(String login) {
         return database.values().stream()
                 .filter(user -> user.getLogin().equals(login))
-                .findAny().orElse(null);
+                .findAny();
     }
 }
