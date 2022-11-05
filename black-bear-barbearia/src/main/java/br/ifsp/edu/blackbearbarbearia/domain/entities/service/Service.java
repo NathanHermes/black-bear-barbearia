@@ -18,8 +18,7 @@ public class Service {
     private List<Type> types;
     private Booking booking;
 
-    public Service(Integer id, String nome, BigDecimal price, BigDecimal comissionPercentage, BigDecimal taxPercentage, Boolean active, Booking booking) {
-        this.id = id;
+    public Service(String nome, BigDecimal price, BigDecimal comissionPercentage, BigDecimal taxPercentage, Boolean active, Booking booking) {
         this.nome = nome;
         this.price = price;
         this.comissionPercentage = comissionPercentage;
@@ -31,6 +30,10 @@ public class Service {
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -71,6 +74,14 @@ public class Service {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public List<Type> getTypes() {
+        return types;
+    }
+
+    public void setTypes(List<Type> types) {
+        this.types = types;
     }
 
     public Booking getBooking() {
