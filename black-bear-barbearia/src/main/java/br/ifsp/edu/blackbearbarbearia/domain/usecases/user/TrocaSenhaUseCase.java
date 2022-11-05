@@ -3,8 +3,8 @@ package br.ifsp.edu.blackbearbarbearia.domain.usecases.user;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
 
 public class TrocaSenhaUseCase {
-    private UserDao dao;
-    public TrocaSenhaUseCase(UserDao dao) {
+    private UserDAO dao;
+    public TrocaSenhaUseCase(UserDAO dao) {
         this.dao = dao;
     }
 

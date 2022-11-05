@@ -5,10 +5,12 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityNotFoundExcept
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Notification;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Validator;
 
-public class LoginUseCase {
-    private UserDao dao;
+import java.util.Optional;
 
-    public LoginUseCase(UserDao dao) {
+public class LoginUseCase {
+    private UserDAO dao;
+
+    public LoginUseCase(UserDAO dao) {
         this.dao = dao;
     }
     public User login(String login, String password) {
@@ -21,10 +23,10 @@ public class LoginUseCase {
         if (dao.findOneByLogin(login) == null)
             throw new EntityNotFoundException("Login not found.");
 
-        User user = dao.findOneByLogin(login);
+        Optional<User> user = dao.findOneByLogin(login);
 
-        if (!password.equals(user.getPasswordHash()))
+        if (!password.equals(user.get().getPasswordHash()))
             throw new IllegalArgumentException("Invalid password.");
-        return user;
+        return user.get();
     }
 }

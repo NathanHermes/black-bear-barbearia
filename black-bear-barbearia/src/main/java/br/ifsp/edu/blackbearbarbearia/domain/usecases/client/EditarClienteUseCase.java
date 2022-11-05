@@ -6,9 +6,9 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Notification;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Validator;
 
 public class EditarClienteUseCase {
-    private ClientDao dao;
+    private ClientDAO dao;
 
-    public EditarClienteUseCase(ClientDao dao) {
+    public EditarClienteUseCase(ClientDAO dao) {
         this.dao = dao;
     }
 

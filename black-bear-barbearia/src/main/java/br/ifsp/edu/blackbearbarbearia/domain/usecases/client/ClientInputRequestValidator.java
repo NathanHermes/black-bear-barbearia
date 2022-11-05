@@ -22,9 +22,4 @@ public class ClientInputRequestValidator extends Validator<Client> {
 
         return notification;
     }
-
-    @Override
-    public Notification validate(String login, String password) {
-        return null;
-    }
 }
