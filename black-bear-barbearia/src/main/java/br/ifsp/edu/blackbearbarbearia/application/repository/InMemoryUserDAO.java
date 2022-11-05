@@ -1,4 +1,4 @@
-package br.ifsp.edu.blackbearbarbearia.application.repository.inmemory;
+package br.ifsp.edu.blackbearbarbearia.application.repository;
 
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.UserDAO;
