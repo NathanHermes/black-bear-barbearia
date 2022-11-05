@@ -1,7 +1,7 @@
 package br.ifsp.edu.blackbearbarbearia.domain.usecases.service;
 
 import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Service;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Dao;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.DAO;
 
-public interface ServiceDao extends Dao<Service, Integer> {
+public interface ServiceDAO extends DAO<Service, Integer> {
 }
