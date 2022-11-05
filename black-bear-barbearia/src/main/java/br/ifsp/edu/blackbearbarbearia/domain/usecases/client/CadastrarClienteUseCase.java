@@ -21,7 +21,7 @@ public class CadastrarClienteUseCase {
 
         String email = client.getEmail();
         if(dao.findOneByEmail(email).isPresent())
-            throw new EntityAlreadyExistsException("This e-mail is already is use.");
+            throw new EntityAlreadyExistsException("This e-mail is already in use.");
 
         return dao.create(client);
     }
