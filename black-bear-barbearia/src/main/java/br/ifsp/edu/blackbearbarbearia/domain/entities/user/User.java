@@ -24,8 +24,7 @@ public class User {
         this.passwordHash = passwordHash;
     }
 
-    public User(Integer id, String fullName, String email, String phone, String address, String number, String complement, String district, String city, String login, String passwordHash, boolean active) {
-        this.id = id;
+    public User(String fullName, String email, String phone, String address, String number, String complement, String district, String city, String login, String passwordHash, boolean active) {
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
