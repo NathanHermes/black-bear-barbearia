@@ -2,7 +2,6 @@ package br.ifsp.edu.blackbearbarbearia.domain.usecases.client;
 
 import br.ifsp.edu.blackbearbarbearia.domain.entities.client.Client;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ListarClientesUseCase {
@@ -12,7 +11,7 @@ public class ListarClientesUseCase {
         this.dao = dao;
     }
 
-    public List<Client> list() {
+    public List<Client> findAll() {
         List<Client> clients = dao.findAll();
 
         if (clients.isEmpty())
