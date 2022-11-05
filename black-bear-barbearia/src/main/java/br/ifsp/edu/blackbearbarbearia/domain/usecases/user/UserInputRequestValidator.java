@@ -4,7 +4,7 @@ import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Notification;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Validator;
 
-public class UseInputRequestValidator extends Validator<User> {
+public class UserInputRequestValidator extends Validator<User> {
     @Override
     public Notification validate(User user) {
         Notification notification = new Notification();

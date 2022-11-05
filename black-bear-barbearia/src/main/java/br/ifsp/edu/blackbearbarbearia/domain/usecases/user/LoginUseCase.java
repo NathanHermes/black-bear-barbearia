@@ -15,17 +15,17 @@ public class LoginUseCase {
     }
 
     public User login(User user) {
-        Validator<User> validator = new UseInputRequestValidator();
+        Validator<User> validator = new UserInputRequestValidator();
         Notification notification = validator.validate(user);
 
         if (notification.hasErros())
             throw new IllegalArgumentException(notification.errorMessage());
 
-        User userDAO = dao.findOneByLogin(user.getLogin());
-        if (userDAO == null)
+        Optional<User> userDAO = dao.findOneByLogin(user.getLogin());
+        if (userDAO.isEmpty())
             throw new EntityNotFoundException("Login not found.");
 
-        if (!user.getPasswordHash().equals(userDAO.getPasswordHash()))
+        if (!user.getPasswordHash().equals(userDAO.get().getPasswordHash()))
             throw new IllegalArgumentException("Invalid password.");
         return user;
     }
