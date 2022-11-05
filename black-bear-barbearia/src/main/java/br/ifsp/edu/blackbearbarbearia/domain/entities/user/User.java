@@ -18,13 +18,13 @@ public class User {
     private boolean active;
     private List<Role> roles;
     private List<Day> days;
-
+    private String lastPassword;
     public User(String login, String passwordHash) {
         this.login = login;
         this.passwordHash = passwordHash;
     }
 
-    public User(Integer id, String fullName, String email, String phone, String address, String number, String complement, String district, String city, String login, String passwordHash, boolean active, ArrayList<Role> roles) {
+    public User(Integer id, String fullName, String email, String phone, String address, String number, String complement, String district, String city, String login, String passwordHash, boolean active) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
@@ -132,9 +132,8 @@ public class User {
         this.active = active;
     }
 
-    public boolean isValidPassWord(String password) {
-        if(password.equals(passwordHash)) return true;
-        return false;
+    public boolean isValidPassword(String password) {
+        return !password.equals(lastPassword);
     }
 
     public void clearPasswordHash() {

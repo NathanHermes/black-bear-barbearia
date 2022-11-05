@@ -2,6 +2,7 @@ package br.ifsp.edu.blackbearbarbearia.application.repository.inmemory;
 
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.UserDAO;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityNotFoundException;
 
 import java.util.*;
 
@@ -51,9 +52,9 @@ public class InMemoryUserDAO implements UserDAO {
     }
 
     @Override
-    public Optional<User> findOneByLogin(String login) {
+    public User findOneByLogin(String login) {
         return database.values().stream()
                 .filter(user -> user.getLogin().equals(login))
-                .findAny();
+                .findAny().orElse(null);
     }
 }

@@ -21,15 +21,4 @@ public class UseInputRequestValidator extends Validator<User> {
 
         return notification;
     }
-
-    public Notification validate(String login, String password) {
-        Notification notification = new Notification();
-
-        if (nullOrEmpty(login))
-            notification.addError("Login is null or empty");
-        if (nullOrEmpty(password))
-            notification.addError("Password is null or empty");
-
-        return notification;
-    }
 }
