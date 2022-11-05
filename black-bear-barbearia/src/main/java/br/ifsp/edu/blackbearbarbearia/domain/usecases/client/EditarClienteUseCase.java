@@ -6,7 +6,7 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Notification;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Validator;
 
 public class EditarClienteUseCase {
-    private ClientDAO dao;
+    private final ClientDAO dao;
 
     public EditarClienteUseCase(ClientDAO dao) {
         this.dao = dao;
@@ -20,7 +20,7 @@ public class EditarClienteUseCase {
             throw new IllegalArgumentException(notification.errorMessage());
 
         String id = client.getId();
-        if (dao.findOne(id) == null)
+        if (dao.findOne(Integer.valueOf(id)).isEmpty())
             throw new EntityNotFoundException("Client not found.");
 
         return dao.update(client);

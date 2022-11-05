@@ -26,6 +26,10 @@ public class Client {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -50,12 +54,12 @@ public class Client {
         this.phone = phone;
     }
 
-    public void addBookings(Booking booking) {
-        bookings.add(booking);
+    public List<Booking> getBookings() {
+        return bookings;
     }
 
-    public void removeBookings(Booking booking) {
-        bookings.remove(booking);
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
     }
 
     @Override

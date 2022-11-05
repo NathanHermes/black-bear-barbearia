@@ -6,7 +6,7 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Notification;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Validator;
 
 public class CadastrarClienteUseCase {
-    private ClientDAO dao;
+    private final ClientDAO dao;
 
     public CadastrarClienteUseCase(ClientDAO dao) {
         this.dao = dao;
@@ -20,7 +20,7 @@ public class CadastrarClienteUseCase {
             throw new IllegalArgumentException(notification.errorMessage());
 
         String email = client.getEmail();
-        if(dao.findOneByEmail(email) != null)
+        if(dao.findOneByEmail(email).isPresent())
             throw new EntityAlreadyExistsException("This e-mail is already is use.");
 
         return dao.create(client);
