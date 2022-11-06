@@ -1,4 +1,4 @@
 package br.ifsp.edu.blackbearbarbearia.application.repository;
 
-public class InMemoryBookingDAO {
+public class inMemoryBookingDao {
 }

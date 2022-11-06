@@ -1,5 +1,6 @@
 package br.ifsp.edu.blackbearbarbearia.application.repository;
 
+import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Day;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.UserDAO;
 
@@ -55,5 +56,19 @@ public class InMemoryUserDAO implements UserDAO {
         return database.values().stream()
                 .filter(user -> user.getLogin().equals(login))
                 .findAny();
+    }
+
+    @Override
+    public Optional<User> findOneByEmail(String email) {
+        return database.values().stream()
+                .filter(user -> user.getEmail().equals(email))
+                .findAny();
+    }
+
+    @Override
+    public List<User> findByDay(Day day) {
+        return database.values().stream()
+                .filter(user -> user.getDays().contains(day))
+                .toList();
     }
 }
