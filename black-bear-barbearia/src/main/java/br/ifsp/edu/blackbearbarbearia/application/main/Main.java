@@ -5,17 +5,21 @@ import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Day;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Role;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.CadastrarFuncionarioUseCase;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.ListarFuncionariosUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.LoginUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.UserDAO;
 
 import java.nio.charset.IllegalCharsetNameException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static LoginUseCase loginUseCase;
     public static CadastrarFuncionarioUseCase cadastrarFuncionarioUseCase;
+
+    public static ListarFuncionariosUseCase listarFuncionariosUseCase;
     private static User user = null;
-    private final Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         configureInjection();
@@ -52,6 +56,7 @@ public class Main {
         UserDAO userDAO = new InMemoryUserDAO();
         cadastrarFuncionarioUseCase = new CadastrarFuncionarioUseCase(userDAO);
         loginUseCase = new LoginUseCase(userDAO);
+        listarFuncionariosUseCase = new ListarFuncionariosUseCase(userDAO);
     }
     private static void createAdmin() {
         User adm = new User("Black Bear ADM", "blackbear@adm.com", "(16) 99999-9999", "Av. São Carlos", "2120", "", "SP", "São Carlos", "BBAdmin", "Admin123", true);
@@ -176,9 +181,37 @@ public class Main {
         return Integer.parseInt(scanner.nextLine());
     }
     private static void updateEmployee() {
+        if (!user.hasRole(Role.ADMIN))
+            throw new IllegalArgumentException("You are not an administrator.");
+
+        System.out.println("> EMPLOYEES");
+        listEmployee();
+
+        System.out.println("> Inform the ID: ");
+        Integer id = Integer.valueOf(scanner.nextLine());
+
+        System.out.println("> UPDATE EMPLOYEE");
+
+        System.out.println("> Email .......:");
+        String email = scanner.nextLine();
+        System.out.println("> Phone .......:");
+        String phone = scanner.nextLine();
+        System.out.println("> Address .....:");
+        String address = scanner.nextLine();
+        System.out.println("> Number ......:");
+        String number = scanner.nextLine();
+        System.out.println("> Complement ..:");
+        String complement = scanner.nextLine();
+        System.out.println("> District ....:");
+        String district = scanner.nextLine();
+        System.out.println("> City ........:");
+        String city = scanner.nextLine();
+        System.out.println("> Active [Y/N].:");
+        Boolean active = Boolean.valueOf(scanner.nextLine());
     }
 
     private static void listEmployee() {
+        listarFuncionariosUseCase.findAll().forEach(System.out::println);
     }
 }
 

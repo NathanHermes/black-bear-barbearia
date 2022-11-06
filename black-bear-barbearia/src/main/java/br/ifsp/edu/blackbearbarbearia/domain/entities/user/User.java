@@ -24,6 +24,17 @@ public class User {
         this.passwordHash = passwordHash;
     }
 
+    public User(String email, String phone, String address, String number, String complement, String district, String city, boolean active) {
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.number = number;
+        this.complement = complement;
+        this.district = district;
+        this.city = city;
+        this.active = active;
+    }
+
     public User(String fullName, String email, String phone, String address, String number, String complement, String district, String city, String login, String passwordHash, boolean active) {
         this.fullName = fullName;
         this.email = email;
@@ -161,5 +172,9 @@ public class User {
         days.remove(day);
     }
 
-
+    @Override
+    public String toString() {
+        return "Employee " + id + "\n" +
+                "FullName: " + fullName + "\n";
+    }
 }

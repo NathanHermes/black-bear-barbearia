@@ -5,7 +5,7 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.ServiceDAO;
 
 import java.util.*;
 
-public class inMemoryServiceDao implements ServiceDAO {
+public class InMemoryServiceDAO implements ServiceDAO {
     private static final Map<Integer, Service> database = new LinkedHashMap<>();
     private static Integer serviceID;
 
