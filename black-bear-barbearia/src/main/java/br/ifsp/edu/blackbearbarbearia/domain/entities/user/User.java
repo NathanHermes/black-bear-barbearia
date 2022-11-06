@@ -131,6 +131,10 @@ public class User {
         this.active = active;
     }
 
+    public List<Day> getDays() {
+        return days;
+    }
+
     public boolean isValidPassword(String password) {
         return !password.equals(lastPassword);
     }
@@ -141,23 +145,21 @@ public class User {
     }
 
     public void addRole(Role role) {
-        if(!roles.contains(role)) roles.add(role);
+        if(!this.roles.contains(role)) this.roles.add(role);
     }
-
     public void removeRole(Role role) {
-        roles.remove(role);
+        this.roles.remove(role);
     }
-
     public boolean hasRole(Role role) {
-        if(roles.contains(role)) return true;
-        return false;
+        return roles.contains(role);
     }
 
     public void addDay(Day day) {
         if(!days.contains(day) && days.size() < 6) days.add(day);
     }
-
     public void removeDay(Day day) {
         days.remove(day);
     }
+
+
 }
