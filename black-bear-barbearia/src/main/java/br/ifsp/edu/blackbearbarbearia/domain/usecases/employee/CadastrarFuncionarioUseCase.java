@@ -31,7 +31,7 @@ public class CadastrarFuncionarioUseCase {
             throw new EntityAlreadyExistsException("This login is already in use.");
 
         List<Day> daysEmployee = employee.getDays();
-        if (daysEmployee.stream().filter(day -> dao.findByDay(day).size() >= 3).count() == 1)
+        if (daysEmployee.stream().filter(day -> dao.findOneByDay(day).size() >= 3).count() == 1)
             throw new IllegalArgumentException("Days with work limit reached.");
 
         return dao.create(employee);

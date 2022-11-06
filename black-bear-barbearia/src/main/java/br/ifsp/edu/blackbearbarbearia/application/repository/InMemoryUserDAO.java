@@ -66,7 +66,7 @@ public class InMemoryUserDAO implements UserDAO {
     }
 
     @Override
-    public List<User> findByDay(Day day) {
+    public List<User> findOneByDay(Day day) {
         return database.values().stream()
                 .filter(user -> user.getDays().contains(day))
                 .toList();
