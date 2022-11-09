@@ -12,14 +12,10 @@ public class Client {
     private String email;
     private String phone;
 
-    private List<Booking> bookings;
-
-    public Client(Integer id, String name, String email, String phone) {
-        this.id = id;
+    public Client(String name, String email, String phone) {
         this.name = name;
         this.email = email;
         this.phone = phone;
-        this.bookings = new ArrayList<>();
     }
 
     public Integer getId() {
@@ -54,14 +50,6 @@ public class Client {
         this.phone = phone;
     }
 
-    public List<Booking> getBookings() {
-        return bookings;
-    }
-
-    public void setBookings(List<Booking> bookings) {
-        this.bookings = bookings;
-    }
-
     @Override
     public String toString() {
         return "Client{" +
@@ -69,7 +57,6 @@ public class Client {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
-                ", bookings=" + bookings +
                 '}';
     }
 
