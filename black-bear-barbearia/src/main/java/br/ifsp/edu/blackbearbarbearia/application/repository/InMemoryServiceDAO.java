@@ -7,7 +7,7 @@ import java.util.*;
 
 public class InMemoryServiceDAO implements ServiceDAO {
     private static final Map<Integer, Service> database = new LinkedHashMap<>();
-    private static Integer serviceID;
+    private Integer serviceID = 0;
 
     @Override
     public Integer create(Service service) {
