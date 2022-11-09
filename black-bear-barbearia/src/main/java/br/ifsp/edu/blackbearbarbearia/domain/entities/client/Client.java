@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Objects;
 
 public class Client {
-    private String id;
+    private Integer id;
     private String name;
     private String email;
     private String phone;
 
     private List<Booking> bookings;
 
-    public Client(String id, String name, String email, String phone) {
+    public Client(Integer id, String name, String email, String phone) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -22,11 +22,11 @@ public class Client {
         this.bookings = new ArrayList<>();
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
