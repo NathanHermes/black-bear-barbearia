@@ -18,13 +18,13 @@ public class InMemoryUserDAO implements UserDAO {
     }
 
     @Override
-    public boolean update(User user) {
+    public Boolean update(User user) {
         database.replace(user.getId(), user);
         return true;
     }
 
     @Override
-    public boolean deleteByKey(Integer key) {
+    public Boolean deleteByKey(Integer key) {
         if (!database.containsKey(key)) return false;
 
         database.remove(key);
@@ -32,7 +32,7 @@ public class InMemoryUserDAO implements UserDAO {
     }
 
     @Override
-    public boolean delete(User user) {
+    public Boolean delete(User user) {
         return deleteByKey(user.getId());
     }
 
