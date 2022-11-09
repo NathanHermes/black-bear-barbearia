@@ -16,7 +16,7 @@ public class CadastrarFuncionarioUseCase {
     }
 
     public Integer create(User employee) {
-        Validator<User> validator = new EmployeeInputRequestValidator();
+        Validator<User> validator = new CreateEmployeeInputRequestValidator();
         Notification notification = validator.validate(employee);
 
         if (notification.hasErros()) throw new IllegalArgumentException(notification.errorMessage());
