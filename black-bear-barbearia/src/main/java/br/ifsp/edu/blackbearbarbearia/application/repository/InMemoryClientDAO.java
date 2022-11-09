@@ -12,14 +12,14 @@ public class InMemoryClientDAO implements ClientDAO {
     @Override
     public Integer create(Client client) {
         clientID++;
-        client.setId(String.valueOf(clientID));
+        client.setId(clientID);
         database.put(clientID, client);
         return clientID;
     }
 
     @Override
     public boolean update(Client client) {
-        Integer id = Integer.valueOf(client.getId());
+        Integer id = client.getId();
         if (!database.containsKey(id)) return false;
 
         database.replace(id, client);
@@ -36,7 +36,7 @@ public class InMemoryClientDAO implements ClientDAO {
 
     @Override
     public boolean delete(Client client) {
-        return deleteByKey(Integer.valueOf(client.getId()));
+        return deleteByKey(client.getId());
     }
 
     @Override

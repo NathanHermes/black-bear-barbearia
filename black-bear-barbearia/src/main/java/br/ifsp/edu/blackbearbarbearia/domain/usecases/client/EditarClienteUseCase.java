@@ -19,8 +19,8 @@ public class EditarClienteUseCase {
         if (notification.hasErros())
             throw new IllegalArgumentException(notification.errorMessage());
 
-        String id = client.getId();
-        if (dao.findOne(Integer.valueOf(id)).isEmpty())
+        Integer id = client.getId();
+        if (dao.findOne(id).isEmpty())
             throw new EntityNotFoundException("Client not found.");
 
         return dao.update(client);
