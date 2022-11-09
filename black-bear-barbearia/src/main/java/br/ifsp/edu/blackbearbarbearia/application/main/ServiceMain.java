@@ -135,7 +135,7 @@ public class ServiceMain {
 
     private static void findService() {
         try {
-            System.out.println(listarServicosUseCase.findOne(1));
+            System.out.println(listarServicosUseCase.findOne(4));
         } catch (Exception e) {
             System.out.println("> ERROR ...: " + e.getMessage() + "\n");
         }
