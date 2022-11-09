@@ -23,6 +23,13 @@ public class Service {
         this.types = new ArrayList<>();
     }
 
+    public Service(BigDecimal comissionPercentage, BigDecimal taxPercentage, Boolean active) {
+        this.comissionPercentage = comissionPercentage;
+        this.taxPercentage = taxPercentage;
+        this.active = active;
+        this.types = new ArrayList<>();
+    }
+
     public Integer getId() {
         return id;
     }
