@@ -18,24 +18,16 @@ public class InMemoryServiceDAO implements ServiceDAO {
     }
 
     @Override
-    public boolean update(Service service) {
-        Integer id = service.getId();
-        if(!database.containsKey(id)) return false;
-
-        database.replace(id, service);
+    public Boolean update(Service service) {
+        database.replace(service.getId(), service);
         return true;
     }
 
     @Override
-    public boolean deleteByKey(Integer key) {
-        if (!database.containsKey(key)) return false;
-
-        database.remove(key);
-        return true;
-    }
+    public Boolean deleteByKey(Integer key) {return Boolean.FALSE;}
 
     @Override
-    public boolean delete(Service service) {
+    public Boolean delete(Service service) {
         return deleteByKey(service.getId());
     }
 
