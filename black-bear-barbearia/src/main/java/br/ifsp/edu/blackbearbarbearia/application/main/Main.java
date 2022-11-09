@@ -27,13 +27,16 @@ public class Main {
     public static void main(String[] args) {
         configureInjection();
         createAdmin();
-        login();
+        login(new User("BB", "123"));
 
         injectCreateEmployee();
         updateEmployee();
 
-
+        modifyEmployeePassword();
         deleteEmployeePassword();
+
+        login(new User("Grace", "Hopper"));
+        modifyEmployeePassword();
     }
 
 
@@ -58,17 +61,17 @@ public class Main {
 
         try {
             cadastrarFuncionarioUseCase.create(adm);
-            System.out.println("\n> SUCCESS .....: Administrator created\n");
+            System.out.println("> SUCCESS .....: Administrator created");
         }
         catch (Exception e) {
             System.out.println("\n> ERROR ...: " + e.getMessage() + "\n");
         }
     }
 
-    private static void login() {
+    private static void login(User login) {
         try {
-            user = loginUseCase.login(new User("BB", "123"));
-            System.out.println("\n> SUCCESS .....: Log-in success\n");
+            user = loginUseCase.login(login);
+            System.out.println("> SUCCESS .....: Log-in success");
         }
         catch (Exception e) {
             user = null;
@@ -83,7 +86,6 @@ public class Main {
         e00.addDay(Day.MONDAY);
         e00.addDay(Day.TUESDAY);
         e00.addDay(Day.WEDNESDAY);
-        cadastrarFuncionarioUseCase.create(e00);
 
         Address e01Address = new Address("Rua Tenente Vítor Batista", "1", "Realengo", "RJ", "Rio de Janeiro");
         User e01 = new User("John Backus", "john.backus@email.com", "(24) 2208-8210", e01Address, "John", "Backus", Boolean.TRUE);
@@ -92,20 +94,17 @@ public class Main {
         e01.addDay(Day.TUESDAY);
         e01.addDay(Day.THURSDAY);
         e01.addDay(Day.SATURDAY);
-        cadastrarFuncionarioUseCase.create(e01);
 
         Address e02Address = new Address("Rua dos Crenaques", "2", "", "MG", "Belo Horizonte");
         User e02 = new User("Bill Gates", "gates.bill@email.com", "(33) 2544-6585", e02Address, "Gates", "Bill", Boolean.TRUE);
         e02.addRole(Role.EMPLOYEE);
         e02.addDay(Day.FRIDAY);
-        cadastrarFuncionarioUseCase.create(e02);
 
         Address e03Address = new Address("Rua Suzano", "3", "", "PR", "Foz do Iguaçu");
         User e03 = new User("Brian Kernighan", "brian.kernighan@email.com", "(45) 2583-1359", e03Address, "Brian", "Brian", Boolean.TRUE);
         e03.addRole(Role.EMPLOYEE);
         e03.addDay(Day.THURSDAY);
         e03.addDay(Day.SATURDAY);
-        cadastrarFuncionarioUseCase.create(e03);
 
         Address e04Address = new Address("Rua Isaura Magdalena", "4", "São Matheus", "MT", "Várzea Grande");
         User e04 = new User("Ken Thompson", "ken.thompson@email.com", "(65) 2642-6225", e04Address, "Thompson", "Ken", Boolean.TRUE);
@@ -114,7 +113,21 @@ public class Main {
         e04.addDay(Day.WEDNESDAY);
         e04.addDay(Day.THURSDAY);
         e04.addDay(Day.SATURDAY);
-        cadastrarFuncionarioUseCase.create(e04);
+
+        try {
+            cadastrarFuncionarioUseCase.create(e00);
+            System.out.println("> SUCCESS .....: Employee created");
+            cadastrarFuncionarioUseCase.create(e01);
+            System.out.println("> SUCCESS .....: Employee created");
+            cadastrarFuncionarioUseCase.create(e02);
+            System.out.println("> SUCCESS .....: Employee created");
+            cadastrarFuncionarioUseCase.create(e03);
+            System.out.println("> SUCCESS .....: Employee created");
+            cadastrarFuncionarioUseCase.create(e04);
+            System.out.println("> SUCCESS .....: Employee created");
+        } catch (Exception e) {
+            System.out.println("\n> ERROR ...: " + e.getMessage() + "\n");
+        }
     }
 
     private static void updateEmployee() {
@@ -124,25 +137,33 @@ public class Main {
         Address employeeUpdateAddress = new Address("Rua dos Crenaques", "40", "Venda nova", "MG", "Belo Horizonte");
         User employeeUpdate = new User("bill.gates@email.com", "(65) 2642-6225", employeeUpdateAddress, Boolean.FALSE);
 
-        editarFuncionarioUseCase.update(4, employeeUpdate);
+        try {
+            editarFuncionarioUseCase.update(4, employeeUpdate);
+            System.out.println("> SUCCESS .....: Employee updated");
+        } catch (Exception e) {
+            System.out.println("\n> ERROR ...: " + e.getMessage() + "\n");
+        }
     }
 
     private static void deleteEmployeePassword() {
         if (user.hasRole(Role.ADMIN))
             throw new IllegalArgumentException("You are not an administrator.");
 
-        apagarSenhaFuncionarioUseCase.deletePassword(2);
+        try{
+            apagarSenhaFuncionarioUseCase.deletePassword(2);
+            System.out.println("> SUCCESS .....: Password is deleted");
+        } catch (Exception e) {
+            System.out.println("\n> ERROR ...: " + e.getMessage() + "\n");
+        }
     }
 
     private static void modifyEmployeePassword() {
-        if (user.getPasswordHash() != null) throw new IllegalArgumentException("To change the password it needs to be deleted by the administrator");
-
-        //trocaSenhaUseCase.modifyPassword(user, lastPassword, newPassword, newPasswordConfirm);
+        try {
+            trocaSenhaUseCase.modifyPassword(user, "Hopper", "Grace", "Grace");
+            System.out.println("> SUCCESS .....: Password is modified");
+        } catch (Exception e) {
+            System.out.println("\n> ERROR ...: " + e.getMessage() + "\n");
+        }
     }
-
-    private static void createClient() {
-
-    }
-
 }
 
