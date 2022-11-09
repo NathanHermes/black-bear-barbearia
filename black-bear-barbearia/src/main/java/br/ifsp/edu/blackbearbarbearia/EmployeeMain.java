@@ -58,7 +58,7 @@ public class EmployeeMain {
         e01.addDay(Day.SATURDAY);
 
         System.out.println(dao.findOne(id));
-        editarFuncionarioUseCase.update(e00, e01);
+        //editarFuncionarioUseCase.update(e00, e01);
         System.out.println(dao.findOne(id));
 
         // Listar
