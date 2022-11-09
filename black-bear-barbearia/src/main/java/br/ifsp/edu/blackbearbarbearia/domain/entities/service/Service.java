@@ -79,19 +79,19 @@ public class Service {
     }
 
     public List<Type> getTypes() {
-        return types;
+        return this.types;
     }
 
     public void addType(Type type) {
-        if(!types.contains(type)) types.add(type);
+        if(!types.contains(type)) this.types.add(type);
     }
 
     public void removeType(Type type) {
-        types.remove(type);
+        this.types.remove(type);
     }
 
     public boolean isOneOfType(Type type) {
-        return types.contains(type);
+        return this.types.contains(type);
     }
 
     public BigDecimal calculateComission() {
