@@ -30,7 +30,8 @@ public class EditarFuncionarioUseCase {
             lastEmployee.getAddress().setDistrict(employeeAddress.getDistrict());
         if (!employeeAddress.getCity().isBlank() && employeeAddress.getCity() != null)
             lastEmployee.getAddress().setCity(employeeAddress.getCity());
-        lastEmployee.setActive(employee.isActive());
+        if (employee.isActive() != null)
+            lastEmployee.setActive(employee.isActive());
 
         dao.update(lastEmployee);
     }

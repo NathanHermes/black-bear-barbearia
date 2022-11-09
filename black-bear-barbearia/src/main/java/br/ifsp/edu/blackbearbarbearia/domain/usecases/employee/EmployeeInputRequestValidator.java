@@ -30,6 +30,7 @@ public class EmployeeInputRequestValidator extends Validator<User> {
         if (nullOrEmpty(employeeAddress.getCity())) notification.addError("City is null or empty");
         if (nullOrEmpty(employee.getLogin())) notification.addError("Login is null or empty");
         if (nullOrEmpty(employee.getPasswordHash())) notification.addError("Password is null or empty");
+        if (employee.isActive() == null) notification.addError("Active is null");
 
         return notification;
     }
