@@ -13,9 +13,7 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.LoginUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.TrocaSenhaUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.UserDAO;
 
-import java.util.Scanner;
-
-public class Main {
+public class EmployeeMain {
     public static LoginUseCase loginUseCase;
     public static CadastrarFuncionarioUseCase cadastrarFuncionarioUseCase;
     public static EditarFuncionarioUseCase editarFuncionarioUseCase;
