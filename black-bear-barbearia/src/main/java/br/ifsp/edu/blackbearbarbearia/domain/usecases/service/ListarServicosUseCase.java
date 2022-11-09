@@ -21,9 +21,9 @@ public class ListarServicosUseCase {
         return services;
     }
 
-    public Optional<Service> findOne(Integer serviceId) {
+    public Service findOne(Integer serviceId) {
         if (dao.findOne(serviceId).isEmpty()) throw new IllegalArgumentException("Service not found");
 
-        return dao.findOne(serviceId);
+        return dao.findOne(serviceId).get();
     }
 }
