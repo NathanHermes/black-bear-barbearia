@@ -15,24 +15,27 @@ public class EditarFuncionarioUseCase {
         this.dao = dao;
     }
 
-    public void update(User lastEmployee, User employee) {
-        Address employeeAddress = employee.getAddress();
+    public void update(Integer employeeId, User employeeUpdate) {
+        Validator<User> validator = new UpdateEmployeeInputResquestValidator();
+        Notification notification = validator.validate(employeeUpdate);
 
-        if (!employee.getEmail().isBlank() && employee.getEmail() != null)
-            lastEmployee.setEmail(employee.getEmail());
-        if (!employee.getPhone().isBlank() && employee.getPhone() != null)
-            lastEmployee.setPhone(employee.getPhone());
-        if (!employeeAddress.getAddress().isBlank() && employeeAddress.getAddress() != null)
-            lastEmployee.getAddress().setAddress(employeeAddress.getAddress());
-        if (!employeeAddress.getNumber().isBlank() && employeeAddress.getNumber() != null)
-            lastEmployee.getAddress().setNumber(employeeAddress.getNumber());
-        if (!employeeAddress.getDistrict().isBlank() && employeeAddress.getDistrict() != null)
-            lastEmployee.getAddress().setDistrict(employeeAddress.getDistrict());
-        if (!employeeAddress.getCity().isBlank() && employeeAddress.getCity() != null)
-            lastEmployee.getAddress().setCity(employeeAddress.getCity());
-        if (employee.isActive() != null)
-            lastEmployee.setActive(employee.isActive());
+        if (notification.hasErros()) throw new IllegalArgumentException(notification.errorMessage());
 
-        dao.update(lastEmployee);
+        if (dao.findOne(employeeId).isEmpty())
+            throw new EntityNotFoundException("User not found");
+
+        User employee = dao.findOne(employeeId).get();
+
+        employee.setEmail(employeeUpdate.getEmail());
+        employee.setPhone(employeeUpdate.getPhone());
+        employee.setActive(employeeUpdate.isActive());
+
+        Address employeeAddress = employeeUpdate.getAddress();
+        employee.getAddress().setAddress(employeeAddress.getAddress());
+        employee.getAddress().setNumber(employeeAddress.getNumber());
+        employee.getAddress().setDistrict(employeeAddress.getDistrict());
+        employee.getAddress().setCity(employeeAddress.getCity());
+
+        dao.update(employee);
     }
 }
