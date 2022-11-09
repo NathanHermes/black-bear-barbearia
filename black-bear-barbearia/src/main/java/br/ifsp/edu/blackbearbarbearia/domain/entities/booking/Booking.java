@@ -16,8 +16,7 @@ public class Booking {
     private User user;
     private Status status;
 
-    public Booking(int id, LocalDate date, boolean paid, Client client, Service service, User user) {
-        this.id = id;
+    public Booking(LocalDate date, boolean paid, Client client, Service service, User user) {
         this.date = date;
         this.paid = paid;
         this.client = client;
