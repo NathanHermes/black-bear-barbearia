@@ -8,42 +8,31 @@ public class User {
     private String fullName;
     private String email;
     private String phone;
-    private String address;
-    private String number;
-    private String complement;
-    private String district;
-    private String city;
+    private Address address;
     private String login;
     private String passwordHash;
-    private boolean active;
+    private Boolean active;
+    private String lastPassword;
     private List<Role> roles;
     private List<Day> days;
-    private String lastPassword;
+
     public User(String login, String passwordHash) {
         this.login = login;
         this.passwordHash = passwordHash;
     }
 
-    public User(String email, String phone, String address, String number, String complement, String district, String city, boolean active) {
+    public User(String email, String phone, Address address, Boolean active) {
         this.email = email;
         this.phone = phone;
         this.address = address;
-        this.number = number;
-        this.complement = complement;
-        this.district = district;
-        this.city = city;
         this.active = active;
     }
 
-    public User(String fullName, String email, String phone, String address, String number, String complement, String district, String city, String login, String passwordHash, boolean active) {
+    public User(String fullName, String email, String phone, Address address, String login, String passwordHash, Boolean active) {
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
         this.address = address;
-        this.number = number;
-        this.complement = complement;
-        this.district = district;
-        this.city = city;
         this.login = login;
         this.passwordHash = passwordHash;
         this.active = active;
@@ -61,7 +50,6 @@ public class User {
     public String getFullName() {
         return fullName;
     }
-
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
@@ -69,59 +57,27 @@ public class User {
     public String getEmail() {
         return email;
     }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getPhone() {
         return phone;
     }
-
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
-
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public String getComplement() {
-        return complement;
-    }
-
-    public void setComplement(String complement) {
-        this.complement = complement;
-    }
-
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
     }
 
     public String getLogin() {
         return login;
     }
-
     public void setLogin(String login) {
         this.login = login;
     }
@@ -129,17 +85,22 @@ public class User {
     public String getPasswordHash() {
         return passwordHash;
     }
-
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return active;
     }
-
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public String getLastPassword() {
+        return lastPassword;
+    }
+    public void setLastPassword(String lastPassword) {
+        this.lastPassword = lastPassword;
     }
 
     public List<Day> getDays() {
@@ -151,8 +112,7 @@ public class User {
     }
 
     public void clearPasswordHash() {
-        if(this.passwordHash != null)
-            this.passwordHash = null;
+        this.passwordHash = null;
     }
 
     public void addRole(Role role) {
@@ -162,11 +122,13 @@ public class User {
         this.roles.remove(role);
     }
     public boolean hasRole(Role role) {
-        return roles.contains(role);
+        return !roles.contains(role);
     }
 
     public void addDay(Day day) {
-        if(!days.contains(day) && days.size() < 6) days.add(day);
+        if(this.days.size() == 6)
+            throw new IllegalArgumentException("Days with work limit reached");
+        this.days.add(day);
     }
     public void removeDay(Day day) {
         days.remove(day);
