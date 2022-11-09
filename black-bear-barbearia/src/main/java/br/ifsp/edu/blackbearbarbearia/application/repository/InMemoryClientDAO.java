@@ -18,7 +18,7 @@ public class InMemoryClientDAO implements ClientDAO {
     }
 
     @Override
-    public boolean update(Client client) {
+    public Boolean update(Client client) {
         Integer id = client.getId();
         if (!database.containsKey(id)) return false;
 
@@ -27,7 +27,7 @@ public class InMemoryClientDAO implements ClientDAO {
     }
 
     @Override
-    public boolean deleteByKey(Integer key) {
+    public Boolean deleteByKey(Integer key) {
         if (!database.containsKey(key)) return false;
 
         database.remove(key);
@@ -35,7 +35,7 @@ public class InMemoryClientDAO implements ClientDAO {
     }
 
     @Override
-    public boolean delete(Client client) {
+    public Boolean delete(Client client) {
         return deleteByKey(client.getId());
     }
 
