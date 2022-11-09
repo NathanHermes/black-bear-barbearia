@@ -8,7 +8,7 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Validator;
 import java.util.Optional;
 
 public class LoginUseCase {
-    private UserDAO dao;
+    private final UserDAO dao;
 
     public LoginUseCase(UserDAO dao) {
         this.dao = dao;
@@ -18,15 +18,17 @@ public class LoginUseCase {
         Validator<User> validator = new UserInputRequestValidator();
         Notification notification = validator.validate(user);
 
-        if (notification.hasErros())
-            throw new IllegalArgumentException(notification.errorMessage());
+        if (notification.hasErros()) throw new IllegalArgumentException(notification.errorMessage());
 
         Optional<User> userDAO = dao.findOneByLogin(user.getLogin());
-        if (userDAO.isEmpty())
-            throw new EntityNotFoundException("Login not found.");
+        if (userDAO.isEmpty()) throw new EntityNotFoundException("Login not found");
 
-        if (!user.getPasswordHash().equals(userDAO.get().getPasswordHash()))
-            throw new IllegalArgumentException("Invalid password.");
+        if (userDAO.get().getPasswordHash() != null && !user.getPasswordHash().equals(userDAO.get().getPasswordHash()))
+            throw new IllegalArgumentException("Invalid password");
+
+        if (userDAO.get().getPasswordHash() == null && !user.getPasswordHash().equals(userDAO.get().getLastPassword()))
+            throw new IllegalArgumentException("Invalid password");
+
         return userDAO.get();
     }
 }
