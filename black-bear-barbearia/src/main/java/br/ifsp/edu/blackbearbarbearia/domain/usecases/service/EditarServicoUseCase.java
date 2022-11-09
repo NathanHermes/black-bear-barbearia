@@ -26,6 +26,7 @@ public class EditarServicoUseCase {
 
         service.setComissionPercentage(serviceUpdate.getComissionPercentage());
         service.setTaxPercentage(serviceUpdate.getTaxPercentage());
+        service.setActive(serviceUpdate.getActive());
         service.getTypes().forEach(service::removeType);
         serviceUpdate.getTypes().forEach(service::addType);
 
