@@ -8,9 +8,9 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Booking {
-    private int id;
+    private Integer id;
     private LocalDate date;
-    private boolean paid;
+    private Boolean paid;
 
     private Client client;
     private Service service;
@@ -31,6 +31,10 @@ public class Booking {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public LocalDate getDate() {
         return date;
     }
@@ -39,7 +43,7 @@ public class Booking {
         this.date = date;
     }
 
-    public boolean isPaid() {
+    public Boolean isPaid() {
         return paid;
     }
 
