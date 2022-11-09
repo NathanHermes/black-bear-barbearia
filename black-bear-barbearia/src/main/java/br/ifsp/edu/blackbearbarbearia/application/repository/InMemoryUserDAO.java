@@ -19,10 +19,7 @@ public class InMemoryUserDAO implements UserDAO {
 
     @Override
     public boolean update(User user) {
-        Integer id = user.getId();
-        if (!database.containsKey(id)) return false;
-
-        database.replace(id, user);
+        database.replace(user.getId(), user);
         return true;
     }
 
