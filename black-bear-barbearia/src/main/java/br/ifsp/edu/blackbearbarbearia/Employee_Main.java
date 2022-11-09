@@ -10,7 +10,7 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.EditarFuncionario
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.ListarFuncionariosUseCase;
 
 
-public class EmployeeMain {
+public class Employee_Main {
     public static void main(String[] args) {
         InMemoryUserDAO dao = new InMemoryUserDAO();
         Integer id;
