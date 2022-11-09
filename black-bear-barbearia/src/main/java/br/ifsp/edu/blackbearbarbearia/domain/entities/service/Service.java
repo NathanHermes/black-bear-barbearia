@@ -1,7 +1,5 @@
 package br.ifsp.edu.blackbearbarbearia.domain.entities.service;
 
-import br.ifsp.edu.blackbearbarbearia.domain.entities.booking.Booking;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,18 +12,15 @@ public class Service {
     private BigDecimal comissionPercentage;
     private BigDecimal taxPercentage;
     private Boolean active;
+    private final List<Type> types;
 
-    private List<Type> types;
-    private Booking booking;
-
-    public Service(String nome, BigDecimal price, BigDecimal comissionPercentage, BigDecimal taxPercentage, Boolean active, Booking booking) {
+    public Service(String nome, BigDecimal price, BigDecimal comissionPercentage, BigDecimal taxPercentage, Boolean active) {
         this.nome = nome;
         this.price = price;
         this.comissionPercentage = comissionPercentage;
         this.taxPercentage = taxPercentage;
         this.active = active;
         this.types = new ArrayList<>();
-        this.booking = booking;
     }
 
     public Integer getId() {
@@ -80,18 +75,6 @@ public class Service {
         return types;
     }
 
-    public void setTypes(List<Type> types) {
-        this.types = types;
-    }
-
-    public Booking getBooking() {
-        return booking;
-    }
-
-    public void setBooking(Booking booking) {
-        this.booking = booking;
-    }
-
     public void addType(Type type) {
         if(!types.contains(type)) types.add(type);
     }
@@ -101,8 +84,7 @@ public class Service {
     }
 
     public boolean isOneOfType(Type type) {
-        if(types.contains(type)) return true;
-        return false;
+        return types.contains(type);
     }
 
     public BigDecimal calculateComission() {
@@ -127,7 +109,6 @@ public class Service {
                 ", taxPercentage=" + taxPercentage +
                 ", active=" + active +
                 ", types=" + types +
-                ", booking=" + booking +
                 '}';
     }
 
