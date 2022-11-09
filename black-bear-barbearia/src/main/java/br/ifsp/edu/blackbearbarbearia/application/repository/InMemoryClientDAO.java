@@ -7,7 +7,7 @@ import java.util.*;
 
 public class InMemoryClientDAO implements ClientDAO {
     private static final Map<Integer, Client> database = new LinkedHashMap<>();
-    private static Integer clientID;
+    private Integer clientID = 0;
 
     @Override
     public Integer create(Client client) {
