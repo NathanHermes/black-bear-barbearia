@@ -53,7 +53,7 @@ public class BookingMain {
         injectCreateBooking();
         completeBooking();
         canceledBooking();
-
+        filterBookingByDay();
     }
 
     private static void configureInjection() {
@@ -219,9 +219,20 @@ public class BookingMain {
             criarAgendamentoUseCase.create(booking05);
             System.out.println("> SUCCESS .....: Booking created");
 
-            filtrarFuncionariosAgendadosPorDiaUseCase.findByDay();
-            filtrarFuncionariosAgendadosPorDiaUseCase.findByUser(user);
-            filtrarFuncionariosAgendadosPorDiaUseCase.findByService(service);
+            System.out.println("> SUCCESS .....: Filter by day");
+            for(Booking booking : filtrarFuncionariosAgendadosPorDiaUseCase.findByDay()) {
+                System.out.println(booking.toString());
+            }
+
+            System.out.println("> SUCCESS .....: Filter by user");
+            for(Booking booking : filtrarFuncionariosAgendadosPorDiaUseCase.findByUser(user)) {
+                System.out.println(booking.toString());
+            }
+
+            System.out.println("> SUCCESS .....: Filter by service");
+            for(Booking booking : filtrarFuncionariosAgendadosPorDiaUseCase.findByService(service)) {
+                System.out.println(booking.toString());
+            }
         } catch (Exception e) {
             System.out.println("\n> ERROR ...: " + e.getMessage() + "\n");
         }
