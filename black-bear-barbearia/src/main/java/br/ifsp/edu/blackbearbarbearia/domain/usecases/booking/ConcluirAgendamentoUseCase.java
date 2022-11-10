@@ -1,12 +1,14 @@
 package br.ifsp.edu.blackbearbarbearia.domain.usecases.booking;
 
 import br.ifsp.edu.blackbearbarbearia.domain.entities.booking.Booking;
+import br.ifsp.edu.blackbearbarbearia.domain.entities.booking.Status;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Service;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityNotFoundException;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Notification;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Validator;
 
 import java.math.BigDecimal;
+import java.util.Map;
 
 public class ConcluirAgendamentoUseCase {
     private final BookingDAO dao;
@@ -26,6 +28,7 @@ public class ConcluirAgendamentoUseCase {
             throw new EntityNotFoundException("Booking not found.");
 
         booking.setPaid(true);
+        booking.setStatus(Status.DONE);
         dao.update(booking);
 
         Service service = booking.getService();
@@ -34,6 +37,9 @@ public class ConcluirAgendamentoUseCase {
         BigDecimal comissionPercentage = service.getComissionPercentage();
 
         BigDecimal commission = price.multiply(comissionPercentage);
+
+        Map<String, String> notaFiscal = new EmitirNotaFiscalUseCase().create(booking);
+        notaFiscal.forEach((key, value) -> System.out.println(key + ": " + value));
 
         return commission;
     }
