@@ -12,9 +12,7 @@ import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Address;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Day;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Role;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.booking.BookingDAO;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.booking.ConcluirAgendamentoUseCase;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.booking.CriarAgendamentoUseCase;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.booking.*;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.CadastrarClienteUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.ClientDAO;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.ListarClientesUseCase;
@@ -28,6 +26,7 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.UserDAO;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Map;
 
 public class BookingMain {
     public static LoginUseCase loginUseCase;
@@ -39,6 +38,8 @@ public class BookingMain {
     public static ListarServicosUseCase listarServicosUseCase;
     public static ListarFuncionariosUseCase listarFuncionariosUseCase;
     public static ConcluirAgendamentoUseCase concluirAgendamentoUseCase;
+    public static CancelarAgendamentoUseCase cancelarAgendamentoUseCase;
+    public static FiltrarFuncionariosAgendadosPorDiaUseCase filtrarFuncionariosAgendadosPorDiaUseCase;
 
     private static User user = null;
 
@@ -50,6 +51,8 @@ public class BookingMain {
         injectCreateClient();
         injectCreateService();
         injectCreateBooking();
+        completeBooking();
+        canceledBooking();
 
     }
 
@@ -70,7 +73,8 @@ public class BookingMain {
         BookingDAO bookingDAO = new InMemoryBookingDAO();
         criarAgendamentoUseCase = new CriarAgendamentoUseCase(bookingDAO);
         concluirAgendamentoUseCase = new ConcluirAgendamentoUseCase(bookingDAO);
-
+        cancelarAgendamentoUseCase = new CancelarAgendamentoUseCase(bookingDAO);
+        filtrarFuncionariosAgendadosPorDiaUseCase = new FiltrarFuncionariosAgendadosPorDiaUseCase(userDAO, bookingDAO, serviceDAO);
     }
 
     private static void createUser() {
@@ -135,16 +139,89 @@ public class BookingMain {
         }
     }
 
-    private static void  injectCreateBooking() {
+    private static void injectCreateBooking() {
         Client client = listarClientesUseCase.findOne(1);
         Service service = listarServicosUseCase.findOne(1);
         User user1 = listarFuncionariosUseCase.findOne(1);
 
-        Booking booking = new Booking(LocalDate.of(2022,12,5), false, client, service, user1);
+        Booking booking01 = new Booking(LocalDate.now(), false, client, service, user1);
+        Booking booking02 = new Booking(LocalDate.now(), false, client, service, user1);
+        Booking booking03 = new Booking(LocalDate.now(), false, client, service, user1);
+        Booking booking04 = new Booking(LocalDate.now(), false, client, service, user1);
+        Booking booking05 = new Booking(LocalDate.now(), false, client, service, user1);
 
         try {
-            criarAgendamentoUseCase.create(booking);
+            criarAgendamentoUseCase.create(booking01);
             System.out.println("> SUCCESS .....: Booking created");
+            criarAgendamentoUseCase.create(booking02);
+            System.out.println("> SUCCESS .....: Booking created");
+            criarAgendamentoUseCase.create(booking03);
+            System.out.println("> SUCCESS .....: Booking created");
+            criarAgendamentoUseCase.create(booking04);
+            System.out.println("> SUCCESS .....: Booking created");
+            criarAgendamentoUseCase.create(booking05);
+            System.out.println("> SUCCESS .....: Booking created");
+        } catch (Exception e) {
+            System.out.println("\n> ERROR ...: " + e.getMessage() + "\n");
+        }
+    }
+
+    private static void completeBooking() {
+        Client client = listarClientesUseCase.findOne(1);
+        Service service = listarServicosUseCase.findOne(1);
+        User user1 = listarFuncionariosUseCase.findOne(1);
+
+        Booking bookingComplete = new Booking(LocalDate.now(), false, client, service, user1);
+
+        try {
+            concluirAgendamentoUseCase.update(bookingComplete);
+            System.out.println("> SUCCESS .....: Booking completed");
+        } catch (Exception e) {
+            System.out.println("\n> ERROR ...: " + e.getMessage() + "\n");
+        }
+    }
+
+    private static void canceledBooking() {
+        Client client = listarClientesUseCase.findOne(1);
+        Service service = listarServicosUseCase.findOne(1);
+        User user1 = listarFuncionariosUseCase.findOne(1);
+
+        Booking bookingCanceled = new Booking(LocalDate.now(), false, client, service, user1);
+
+        try {
+            cancelarAgendamentoUseCase.update(bookingCanceled);
+            System.out.println("> SUCCESS .....: Booking canceled");
+        } catch (Exception e) {
+            System.out.println("\n> ERROR ...: " + e.getMessage() + "\n");
+        }
+    }
+
+    private static void filterBookingByDay() {
+        Client client = listarClientesUseCase.findOne(1);
+        Service service = listarServicosUseCase.findOne(1);
+        User user1 = listarFuncionariosUseCase.findOne(1);
+
+        Booking booking01 = new Booking(LocalDate.now(), false, client, service, user1);
+        Booking booking02 = new Booking(LocalDate.now(), false, client, service, user1);
+        Booking booking03 = new Booking(LocalDate.now(), false, client, service, user1);
+        Booking booking04 = new Booking(LocalDate.now(), false, client, service, user1);
+        Booking booking05 = new Booking(LocalDate.now(), false, client, service, user1);
+
+        try{
+            criarAgendamentoUseCase.create(booking01);
+            System.out.println("> SUCCESS .....: Booking created");
+            criarAgendamentoUseCase.create(booking02);
+            System.out.println("> SUCCESS .....: Booking created");
+            criarAgendamentoUseCase.create(booking03);
+            System.out.println("> SUCCESS .....: Booking created");
+            criarAgendamentoUseCase.create(booking04);
+            System.out.println("> SUCCESS .....: Booking created");
+            criarAgendamentoUseCase.create(booking05);
+            System.out.println("> SUCCESS .....: Booking created");
+
+            filtrarFuncionariosAgendadosPorDiaUseCase.findByDay();
+            filtrarFuncionariosAgendadosPorDiaUseCase.findByUser(user);
+            filtrarFuncionariosAgendadosPorDiaUseCase.findByService(service);
         } catch (Exception e) {
             System.out.println("\n> ERROR ...: " + e.getMessage() + "\n");
         }

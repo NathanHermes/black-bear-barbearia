@@ -12,7 +12,7 @@ public class CancelarAgendamentoUseCase {
         this.dao = dao;
     }
 
-    public boolean delete(Booking booking) {
+    public boolean update(Booking booking) {
         Validator<Booking> validator = new BookingInputRequestValidator();
         Notification notification = validator.validate(booking);
 
