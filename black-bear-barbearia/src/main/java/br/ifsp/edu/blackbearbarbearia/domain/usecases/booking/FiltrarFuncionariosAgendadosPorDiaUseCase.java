@@ -4,7 +4,6 @@ import br.ifsp.edu.blackbearbarbearia.domain.entities.booking.Booking;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Service;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.ServiceDAO;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.ServiceInputRequestValidator;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.UserDAO;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.UserInputRequestValidator;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityNotFoundException;
@@ -51,12 +50,6 @@ public class FiltrarFuncionariosAgendadosPorDiaUseCase {
     }
 
     public List<Booking> findByService(Service service) {
-        Validator<Service> validator = new ServiceInputRequestValidator();
-        Notification notification = validator.validate(service);
-
-        if (notification.hasErros())
-            throw new IllegalArgumentException(notification.errorMessage());
-
         Integer id = service.getId();
         if (serviceDAO.findOne(id).isEmpty())
             throw new EntityNotFoundException("Service not found.");
