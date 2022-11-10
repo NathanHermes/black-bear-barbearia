@@ -24,8 +24,6 @@ public class CriarAgendamentoUseCase {
         User user = booking.getUser();
         if (dao.findOneByDateAndUser(date, user).isPresent()) throw new EntityAlreadyExistsException("This date and user is already in use");
 
-        // Verificar dispinibilidade do user
-
         return dao.create(booking);
     }
 }

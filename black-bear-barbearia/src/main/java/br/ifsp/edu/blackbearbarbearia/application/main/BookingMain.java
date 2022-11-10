@@ -117,9 +117,12 @@ public class BookingMain {
 
     private static void injectCreateClient() {
         Client client1 = new Client("Patrícia Celestino Montilla", "patricia.montilla@gmail.com", "(89) 99963-7882");
+        Client client2 = new Client("Lucimberto Cristo Leonicio", "lucimberto.leonicio@gmail.com.br", "(83) 96938-6221");
 
         try {
             cadastrarClienteUseCase.create(client1);
+            System.out.println("> SUCCESS .....: Client created");
+            cadastrarClienteUseCase.create(client2);
             System.out.println("> SUCCESS .....: Client created");
         } catch (Exception e) {
             System.out.println("\n> ERROR ...: " + e.getMessage() + "\n");
@@ -144,22 +147,16 @@ public class BookingMain {
         Service service = listarServicosUseCase.findOne(1);
         User user1 = listarFuncionariosUseCase.findOne(1);
 
+        Client client2 = listarClientesUseCase.findOne(2);
+        User user2 = listarFuncionariosUseCase.findOne(1);
+
         Booking booking01 = new Booking(LocalDate.now(), false, client, service, user1);
-        Booking booking02 = new Booking(LocalDate.now(), false, client, service, user1);
-        Booking booking03 = new Booking(LocalDate.now(), false, client, service, user1);
-        Booking booking04 = new Booking(LocalDate.now(), false, client, service, user1);
-        Booking booking05 = new Booking(LocalDate.now(), false, client, service, user1);
+        Booking booking02 = new Booking(LocalDate.of(2022,11,8), false, client2, service, user2);
 
         try {
             criarAgendamentoUseCase.create(booking01);
             System.out.println("> SUCCESS .....: Booking created");
             criarAgendamentoUseCase.create(booking02);
-            System.out.println("> SUCCESS .....: Booking created");
-            criarAgendamentoUseCase.create(booking03);
-            System.out.println("> SUCCESS .....: Booking created");
-            criarAgendamentoUseCase.create(booking04);
-            System.out.println("> SUCCESS .....: Booking created");
-            criarAgendamentoUseCase.create(booking05);
             System.out.println("> SUCCESS .....: Booking created");
         } catch (Exception e) {
             System.out.println("\n> ERROR ...: " + e.getMessage() + "\n");
@@ -171,9 +168,10 @@ public class BookingMain {
         Service service = listarServicosUseCase.findOne(1);
         User user1 = listarFuncionariosUseCase.findOne(1);
 
-        Booking bookingComplete = new Booking(LocalDate.now(), false, client, service, user1);
+        Booking bookingComplete = new Booking(LocalDate.of(2022,11,7), false, client, service, user1);
 
         try {
+            criarAgendamentoUseCase.create(bookingComplete);
             concluirAgendamentoUseCase.update(bookingComplete);
             System.out.println("> SUCCESS .....: Booking completed");
         } catch (Exception e) {
@@ -186,9 +184,10 @@ public class BookingMain {
         Service service = listarServicosUseCase.findOne(1);
         User user1 = listarFuncionariosUseCase.findOne(1);
 
-        Booking bookingCanceled = new Booking(LocalDate.now(), false, client, service, user1);
+        Booking bookingCanceled = new Booking(LocalDate.of(2022,11,6), false, client, service, user1);
 
         try {
+            criarAgendamentoUseCase.create(bookingCanceled);
             cancelarAgendamentoUseCase.update(bookingCanceled);
             System.out.println("> SUCCESS .....: Booking canceled");
         } catch (Exception e) {
