@@ -11,7 +11,6 @@ public class Booking {
     private Integer id;
     private LocalDate date;
     private Boolean paid;
-
     private Client client;
     private Service service;
     private User user;
@@ -86,8 +85,7 @@ public class Booking {
     public boolean isPastDate() {
         LocalDate today = LocalDate.now();
 
-        if(this.date.isBefore(today)) return true;
-        return false;
+        return this.date.isBefore(today);
     }
 
     @Override
@@ -108,7 +106,7 @@ public class Booking {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Booking booking = (Booking) o;
-        return id == booking.id;
+        return Objects.equals(id, booking.id);
     }
 
     @Override

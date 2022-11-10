@@ -13,7 +13,7 @@ public class CadastrarServicosUseCase {
     }
 
     public Integer create(Service service) {
-        Validator<Service> validator = new ServiceInputRequestValidator();
+        Validator<Service> validator = new CreateServiceInputRequestValidator();
         Notification notification = validator.validate(service);
 
         if (notification.hasErros())
@@ -21,7 +21,7 @@ public class CadastrarServicosUseCase {
 
         String name = service.getNome();
         if (dao.findOneByName(name).isPresent())
-            throw new EntityAlreadyExistsException("This name is already in use.");
+            throw new EntityAlreadyExistsException("This name is already in use");
 
         return dao.create(service);
     }

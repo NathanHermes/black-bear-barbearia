@@ -20,7 +20,7 @@ public class InMemoryBookingDAO implements BookingDAO {
     }
 
     @Override
-    public boolean update(Booking booking) {
+    public Boolean update(Booking booking) {
         Integer id = Integer.valueOf(booking.getId());
         if (!database.containsKey(id)) return false;
 
@@ -29,7 +29,7 @@ public class InMemoryBookingDAO implements BookingDAO {
     }
 
     @Override
-    public boolean deleteByKey(Integer key) {
+    public Boolean deleteByKey(Integer key) {
         if (!database.containsKey(key)) return false;
 
         database.remove(key);
@@ -37,7 +37,7 @@ public class InMemoryBookingDAO implements BookingDAO {
     }
 
     @Override
-    public boolean delete(Booking booking) {
+    public Boolean delete(Booking booking) {
         return deleteByKey(Integer.valueOf(booking.getId()));
     }
 

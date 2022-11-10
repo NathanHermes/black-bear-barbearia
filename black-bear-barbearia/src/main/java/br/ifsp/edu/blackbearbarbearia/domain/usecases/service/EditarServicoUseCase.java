@@ -12,17 +12,24 @@ public class EditarServicoUseCase {
         this.dao = dao;
     }
 
-    public boolean update(Service service) {
-        Validator<Service> validator = new ServiceInputRequestValidator();
-        Notification notification = validator.validate(service);
+    public void update(Integer serviceId, Service serviceUpdate) {
+        Validator<Service> validator = new UpdateServiceInputRequestValidator();
+        Notification notification = validator.validate(serviceUpdate);
 
         if (notification.hasErros())
             throw new IllegalArgumentException(notification.errorMessage());
 
-        String name = service.getNome();
-        if(dao.findOneByName(name).isEmpty())
-            throw new EntityNotFoundException(name);
+        if(dao.findOne(serviceId).isEmpty())
+            throw new EntityNotFoundException("Service not found");
 
-        return dao.update(service);
+        Service service = dao.findOne(serviceId).get();
+
+        service.setComissionPercentage(serviceUpdate.getComissionPercentage());
+        service.setTaxPercentage(serviceUpdate.getTaxPercentage());
+        service.setActive(serviceUpdate.getActive());
+        service.getTypes().clear();
+        serviceUpdate.getTypes().forEach(service::addType);
+
+        dao.update(service);
     }
 }

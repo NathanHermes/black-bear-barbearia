@@ -4,9 +4,7 @@ import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Service;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Notification;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Validator;
 
-import java.util.Collection;
-
-public class ServiceInputRequestValidator extends Validator<Service> {
+public class UpdateServiceInputRequestValidator extends Validator<Service> {
     @Override
     public Notification validate(Service service) {
         Notification notification = new Notification();
@@ -16,11 +14,10 @@ public class ServiceInputRequestValidator extends Validator<Service> {
             return notification;
         }
 
-        if (nullOrEmpty(service.getNome())) notification.addError("Name is null or empty.");
-        if (nullOrEmpty(String.valueOf(service.getPrice()))) notification.addError("Price is null or empty.");
-        if (nullOrEmpty(String.valueOf(service.getComissionPercentage()))) notification.addError("Commission is null or empty.");
-        if (nullOrEmpty(String.valueOf(service.getTaxPercentage()))) notification.addError("Taxa percentage is null or empty.");
-
+        if (nullOrEmpty(String.valueOf(service.getComissionPercentage()))) notification.addError("Commission is null or empty");
+        if (nullOrEmpty(String.valueOf(service.getTaxPercentage()))) notification.addError("Taxa percentage is null or empty");
+        if (nullOrEmpty(String.valueOf(service.getActive()))) notification.addError("Service status is null or empty");
+        if (service.getTypes().isEmpty()) notification.addError("The type of this service is empty");
 
         return notification;
     }

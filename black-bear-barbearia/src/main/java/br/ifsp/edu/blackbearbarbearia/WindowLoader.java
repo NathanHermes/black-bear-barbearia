@@ -12,7 +12,6 @@ import java.io.IOException;
  * JavaFX App
  */
 public class WindowLoader extends Application {
-
     private static Scene scene;
     private static Object controller;
 
