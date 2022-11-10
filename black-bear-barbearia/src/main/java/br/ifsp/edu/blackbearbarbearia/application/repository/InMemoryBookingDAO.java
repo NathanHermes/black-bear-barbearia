@@ -9,7 +9,7 @@ import java.util.*;
 
 public class InMemoryBookingDAO implements BookingDAO {
     private static final Map<Integer, Booking> database = new LinkedHashMap<>();
-    private static Integer bookingID;
+    private Integer bookingID = 0;
 
     @Override
     public Integer create(Booking booking) {
