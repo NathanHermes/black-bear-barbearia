@@ -1,6 +1,7 @@
 package br.ifsp.edu.blackbearbarbearia.domain.usecases.booking;
 
 import br.ifsp.edu.blackbearbarbearia.domain.entities.booking.Booking;
+import br.ifsp.edu.blackbearbarbearia.domain.entities.booking.Status;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityNotFoundException;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Notification;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Validator;
@@ -22,6 +23,7 @@ public class CancelarAgendamentoUseCase {
         if (dao.findOne(id).isEmpty())
             throw new EntityNotFoundException("Booking not found.");
 
-        return dao.delete(booking);
+        booking.setStatus(Status.CANCELLED);
+        return dao.update(booking);
     }
 }
