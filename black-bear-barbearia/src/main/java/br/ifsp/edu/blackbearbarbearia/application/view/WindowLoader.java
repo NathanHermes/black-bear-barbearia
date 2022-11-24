@@ -1,4 +1,4 @@
-package br.ifsp.edu.blackbearbarbearia;
+package br.ifsp.edu.blackbearbarbearia.application.view;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,17 +7,15 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
-/**
- * JavaFX App
- */
 public class WindowLoader extends Application {
     private static Scene scene;
     private static Object controller;
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("MainUI"));
+        scene = new Scene(loadFXML("Login"));
         stage.setScene(scene);
         stage.show();
     }
@@ -28,7 +26,7 @@ public class WindowLoader extends Application {
 
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent parent = fxmlLoader.load(WindowLoader.class.getResource(fxml + ".fxml").openStream());
+        Parent parent = fxmlLoader.load(Objects.requireNonNull(WindowLoader.class.getResource(fxml + ".fxml")).openStream());
         controller = fxmlLoader.getController();
         return parent;
     }
