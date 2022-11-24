@@ -21,7 +21,7 @@ public class InMemoryBookingDAO implements BookingDAO {
 
     @Override
     public Boolean update(Booking booking) {
-        Integer id = Integer.valueOf(booking.getId());
+        Integer id = booking.getId();
         if (!database.containsKey(id)) return false;
 
         database.replace(id, booking);

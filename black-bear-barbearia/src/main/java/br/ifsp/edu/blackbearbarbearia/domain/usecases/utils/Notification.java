@@ -20,7 +20,7 @@ public class Notification {
     }
 
     public boolean hasErros(){
-        return ! isCorrect();
+        return !isCorrect();
     }
 
     private static class Error{
