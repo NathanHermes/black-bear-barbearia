@@ -23,6 +23,7 @@ public class LoginUseCase {
         Optional<User> userDAO = dao.findOneByLogin(user.getLogin());
         if (userDAO.isEmpty()) throw new EntityNotFoundException("Login not found");
 
+
         if (userDAO.get().getPasswordHash() != null && !user.getPasswordHash().equals(userDAO.get().getPasswordHash()))
             throw new IllegalArgumentException("Invalid password");
 
