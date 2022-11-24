@@ -1,5 +1,6 @@
 package br.ifsp.edu.blackbearbarbearia.domain.entities.user;
 
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class User {
     private Boolean active;
     private String lastPassword;
     private List<Role> roles;
-    private List<Day> days;
+    private List<DayOfWeek> days;
 
     public User(String login, String passwordHash) {
         this.login = login;

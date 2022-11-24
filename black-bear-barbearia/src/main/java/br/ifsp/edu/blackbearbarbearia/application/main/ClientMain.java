@@ -109,7 +109,6 @@ public class ClientMain {
         try {
             editarClienteUseCase.update(1, clientUpdate);
             System.out.println("> SUCCESS .....: Client updated");
-            System.out.println();
         } catch (Exception e) {
             System.out.println("\n> ERROR ...: " + e.getMessage() + "\n");
         }
