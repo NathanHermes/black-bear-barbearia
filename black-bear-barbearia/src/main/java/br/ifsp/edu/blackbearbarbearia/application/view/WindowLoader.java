@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class WindowLoader extends Application {
     private static Scene scene;
@@ -16,6 +15,7 @@ public class WindowLoader extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("Login"));
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }
@@ -26,7 +26,7 @@ public class WindowLoader extends Application {
 
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent parent = fxmlLoader.load(Objects.requireNonNull(WindowLoader.class.getResource(fxml + ".fxml")).openStream());
+        Parent parent = fxmlLoader.load(WindowLoader.class.getResource(fxml + ".fxml").openStream());
         controller = fxmlLoader.getController();
         return parent;
     }
@@ -39,3 +39,5 @@ public class WindowLoader extends Application {
         return controller;
     }
 }
+
+// Fonte padrão: Cambria
