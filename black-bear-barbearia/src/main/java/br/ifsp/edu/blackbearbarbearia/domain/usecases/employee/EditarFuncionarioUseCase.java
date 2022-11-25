@@ -26,9 +26,9 @@ public class EditarFuncionarioUseCase {
 
         User employee = dao.findOne(employeeId).get();
 
-        employee.setEmail(employeeUpdate.getEmail());
-        employee.setPhone(employeeUpdate.getPhone());
-        employee.setActive(employeeUpdate.isActive());
+        //employee.setEmail(employeeUpdate.getEmail());
+        //employee.setPhone(employeeUpdate.getPhone());
+        //employee.setActive(employeeUpdate.isActive());
 
         Address employeeAddress = employeeUpdate.getAddress();
         employee.getAddress().setAddress(employeeAddress.getAddress());
