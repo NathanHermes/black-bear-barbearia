@@ -2,9 +2,9 @@ package br.ifsp.edu.blackbearbarbearia.application.main;
 
 import br.ifsp.edu.blackbearbarbearia.application.repository.InMemoryUserDAO;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Address;
-import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Day;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Role;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
+import br.ifsp.edu.blackbearbarbearia.domain.entities.user.UserBuilder;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.CadastrarFuncionarioUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.EditarFuncionarioUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.ListarFuncionariosUseCase;
@@ -12,6 +12,10 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.ApagarSenhaFuncionari
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.LoginUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.TrocaSenhaUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.UserDAO;
+
+import java.time.DayOfWeek;
+import java.util.ArrayList;
+import java.util.Locale;
 
 public class EmployeeMain {
     public static LoginUseCase loginUseCase;
@@ -25,7 +29,11 @@ public class EmployeeMain {
     public static void main(String[] args) {
         configureInjection();
         createAdmin();
-        login(new User("BB", "123"));
+        UserBuilder login = new UserBuilder();
+        login.setLogin("BB");
+        login.setPasswordHash("123");
+
+        login(login.getResult());
 
         injectCreateEmployee();
         updateEmployee();
@@ -33,7 +41,7 @@ public class EmployeeMain {
         modifyEmployeePassword();
         deleteEmployeePassword();
 
-        login(new User("Grace", "Hopper"));
+        //login(new User("Grace", "Hopper"));
         modifyEmployeePassword();
     }
 
@@ -50,12 +58,24 @@ public class EmployeeMain {
 
     private static void createAdmin() {
         Address admAddress = new Address("Av. São Carlos", "2120", "", "SP", "São Carlos");
-        User adm = new User("Black Bear ADM", "blackbear@adm.com", "(16) 99999-9999", admAddress, "BB", "123", Boolean.TRUE);
-        adm.addRole(Role.ADMIN);
-        adm.addDay(Day.MONDAY);
-        adm.addDay(Day.TUESDAY);
-        adm.addDay(Day.WEDNESDAY);
-        adm.addDay(Day.THURSDAY);
+        ArrayList<DayOfWeek> workDaysOfAdm = new ArrayList<>();
+        workDaysOfAdm.add(DayOfWeek.MONDAY);
+        workDaysOfAdm.add(DayOfWeek.TUESDAY);
+        workDaysOfAdm.add(DayOfWeek.WEDNESDAY);
+        workDaysOfAdm.add(DayOfWeek.THURSDAY);
+
+        UserBuilder builder = new UserBuilder();
+        builder.setFullName("Black Bear ADM");
+        builder.setEmail("blackbear@adm.com");
+        builder.setPhone("(16) 98135-7876");
+        builder.setAddress(admAddress);
+        builder.setLogin("BB");
+        builder.setPasswordHash("123");
+        builder.setActive(Boolean.TRUE);
+        builder.setRole(Role.ADMIN);
+        builder.setDays(workDaysOfAdm);
+
+        User adm = builder.getResult();
 
         try {
             cadastrarFuncionarioUseCase.create(adm);
@@ -78,12 +98,14 @@ public class EmployeeMain {
     }
 
     private static void injectCreateEmployee() {
-        Address e00Address = new Address("Rua Barão do Rio Branco", "0", "Sítio Paecara (Vicente de Carvalho)", "SP", "Guarujá");
+        /*Address e00Address = new Address("Rua Barão do Rio Branco", "0", "Sítio Paecara (Vicente de Carvalho)", "SP", "Guarujá");
+        ArrayList<DayOfWeek> workDaysOfE0 = new ArrayList<>();
+        workDaysOfE0.addDay(Day.MONDAY);
+        workDaysOfE0.addDay(Day.TUESDAY);
+        workDaysOfE0.addDay(Day.WEDNESDAY);
         User e00 = new User("Grace Hopper", "grace.hopper@email.com", "(13) 2745-5802", e00Address, "Grace", "Hopper", Boolean.TRUE);
         e00.addRole(Role.EMPLOYEE);
-        e00.addDay(Day.MONDAY);
-        e00.addDay(Day.TUESDAY);
-        e00.addDay(Day.WEDNESDAY);
+
 
         Address e01Address = new Address("Rua Tenente Vítor Batista", "1", "Realengo", "RJ", "Rio de Janeiro");
         User e01 = new User("John Backus", "john.backus@email.com", "(24) 2208-8210", e01Address, "John", "Backus", Boolean.TRUE);
@@ -110,18 +132,18 @@ public class EmployeeMain {
         e04.addDay(Day.TUESDAY);
         e04.addDay(Day.WEDNESDAY);
         e04.addDay(Day.THURSDAY);
-        e04.addDay(Day.SATURDAY);
+        e04.addDay(Day.SATURDAY);*/
 
         try {
-            cadastrarFuncionarioUseCase.create(e00);
+            //cadastrarFuncionarioUseCase.create(e00);
             System.out.println("> SUCCESS .....: Employee created");
-            cadastrarFuncionarioUseCase.create(e01);
+            //cadastrarFuncionarioUseCase.create(e01);
             System.out.println("> SUCCESS .....: Employee created");
-            cadastrarFuncionarioUseCase.create(e02);
+            //cadastrarFuncionarioUseCase.create(e02);
             System.out.println("> SUCCESS .....: Employee created");
-            cadastrarFuncionarioUseCase.create(e03);
+           //cadastrarFuncionarioUseCase.create(e03);
             System.out.println("> SUCCESS .....: Employee created");
-            cadastrarFuncionarioUseCase.create(e04);
+            //cadastrarFuncionarioUseCase.create(e04);
             System.out.println("> SUCCESS .....: Employee created");
         } catch (Exception e) {
             System.out.println("\n> ERROR ...: " + e.getMessage() + "\n");
@@ -129,14 +151,14 @@ public class EmployeeMain {
     }
 
     private static void updateEmployee() {
-        if (user.hasRole(Role.ADMIN))
+        /*if (user.hasRole(Role.ADMIN))
             throw new IllegalArgumentException("You are not an administrator.");
 
         Address employeeUpdateAddress = new Address("Rua dos Crenaques", "40", "Venda nova", "MG", "Belo Horizonte");
         User employeeUpdate = new User("bill.gates@email.com", "(65) 2642-6225", employeeUpdateAddress, Boolean.FALSE);
-
+*/
         try {
-            editarFuncionarioUseCase.update(4, employeeUpdate);
+            //editarFuncionarioUseCase.update(4, employeeUpdate);
             System.out.println("> SUCCESS .....: Employee updated");
         } catch (Exception e) {
             System.out.println("\n> ERROR ...: " + e.getMessage() + "\n");
@@ -144,9 +166,9 @@ public class EmployeeMain {
     }
 
     private static void deleteEmployeePassword() {
-        if (user.hasRole(Role.ADMIN))
+        /*if (user.hasRole(Role.ADMIN))
             throw new IllegalArgumentException("You are not an administrator.");
-
+*/
         try{
             apagarSenhaFuncionarioUseCase.deletePassword(2);
             System.out.println("> SUCCESS .....: Password is deleted");

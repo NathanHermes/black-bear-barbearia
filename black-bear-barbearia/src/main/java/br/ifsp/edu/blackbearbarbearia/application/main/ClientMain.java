@@ -4,7 +4,6 @@ import br.ifsp.edu.blackbearbarbearia.application.repository.InMemoryClientDAO;
 import br.ifsp.edu.blackbearbarbearia.application.repository.InMemoryUserDAO;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.client.Client;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Address;
-import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Day;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Role;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.CadastrarClienteUseCase;
@@ -27,7 +26,7 @@ public class ClientMain {
     public static void main(String[] args) {
         configureInjection();
         createAdmin();
-        login(new User("BB", "123"));
+        //login(new User("BB", "123"));
 
         injectCreateClient();
         listClients();
@@ -48,15 +47,15 @@ public class ClientMain {
     }
     private static void createAdmin() {
         Address admAddress = new Address("Av. São Carlos", "2120", "", "SP", "São Carlos");
-        User adm = new User("Black Bear ADM", "blackbear@adm.com", "(16) 99999-9999", admAddress, "BB", "123", Boolean.TRUE);
+        /*User adm = new User("Black Bear ADM", "blackbear@adm.com", "(16) 99999-9999", admAddress, "BB", "123", Boolean.TRUE);
         adm.addRole(Role.ADMIN);
         adm.addDay(Day.MONDAY);
         adm.addDay(Day.TUESDAY);
         adm.addDay(Day.WEDNESDAY);
-        adm.addDay(Day.THURSDAY);
+        adm.addDay(Day.THURSDAY);*/
 
         try {
-            cadastrarFuncionarioUseCase.create(adm);
+            //cadastrarFuncionarioUseCase.create(adm);
             System.out.println("> SUCCESS .....: Administrator created");
         }
         catch (Exception e) {

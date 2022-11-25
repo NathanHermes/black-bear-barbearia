@@ -6,7 +6,6 @@ import br.ifsp.edu.blackbearbarbearia.application.repository.InMemoryUserDAO;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Service;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Type;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Address;
-import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Day;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Role;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.CadastrarFuncionarioUseCase;
@@ -31,7 +30,7 @@ public class ServiceMain {
     public static void main(String[] args) {
         configureInjection();
         createAdmin();
-        login(new User("BB", "123"));
+        //login(new User("BB", "123"));
 
         injectCreateService();
         findServices();
@@ -53,15 +52,15 @@ public class ServiceMain {
 
     private static void createAdmin() {
         Address admAddress = new Address("Av. São Carlos", "2120", "", "SP", "São Carlos");
-        User adm = new User("Black Bear ADM", "blackbear@adm.com", "(16) 99999-9999", admAddress, "BB", "123", Boolean.TRUE);
+        /*User adm = new User("Black Bear ADM", "blackbear@adm.com", "(16) 99999-9999", admAddress, "BB", "123", Boolean.TRUE);
         adm.addRole(Role.ADMIN);
         adm.addDay(Day.MONDAY);
         adm.addDay(Day.TUESDAY);
         adm.addDay(Day.WEDNESDAY);
-        adm.addDay(Day.THURSDAY);
+        adm.addDay(Day.THURSDAY);*/
 
         try {
-            cadastrarFuncionarioUseCase.create(adm);
+            //cadastrarFuncionarioUseCase.create(adm);
             System.out.println("> SUCCESS .....: Administrator created");
         }
         catch (Exception e) {
@@ -109,8 +108,8 @@ public class ServiceMain {
     }
 
     private static void updateService() {
-        if (user.hasRole(Role.ADMIN))
-            throw new IllegalArgumentException("You are not an administrator.");
+       // if (user.hasRole(Role.ADMIN))
+         //   throw new IllegalArgumentException("You are not an administrator.");
 
         Service serviceUpdate = new Service(new BigDecimal("0.4"), new BigDecimal("0.08"), Boolean.TRUE);
         serviceUpdate.addType(Type.BEARD);
