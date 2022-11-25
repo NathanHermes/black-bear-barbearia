@@ -20,9 +20,9 @@ public class TrocaSenhaUseCase {
         if (notification.hasErros()) throw new IllegalArgumentException(notification.errorMessage());
 
         if (!newPassword.equals(confirmPassword)) throw new IllegalArgumentException("New password is not the same as confirm new password");
-        if (user.isValidPassword(lastPassword)) throw new IllegalArgumentException("Invalid last password");
+        //if (user.isValidPassword(lastPassword)) throw new IllegalArgumentException("Invalid last password");
 
-        user.setPasswordHash(newPassword);
+        //user.setPasswordHash(newPassword);
         user.setLastPassword(newPassword);
 
         dao.update(user);
