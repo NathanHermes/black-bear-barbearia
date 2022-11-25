@@ -65,14 +65,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>br.ifsp.edu.blackbearbarbearia/br.ifsp.edu.blackbearbarbearia.HelloApplication
-                            </mainClass>
-                            <launcher>app</launcher>
-                            <jlinkZipName>app</jlinkZipName>
-                            <jlinkImageName>app</jlinkImageName>
-                            <noManPages>true</noManPages>
-                            <stripDebug>true</stripDebug>
-                            <noHeaderFiles>true</noHeaderFiles>
+                            <mainClass>br.ifsp.edu.blackbearbarbearia.application.view.WindowLoader</mainClass>
                         </configuration>
                     </execution>
                 </executions>
