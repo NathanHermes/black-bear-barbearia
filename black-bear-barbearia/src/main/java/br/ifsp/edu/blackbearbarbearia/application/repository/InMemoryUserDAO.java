@@ -1,9 +1,9 @@
 package br.ifsp.edu.blackbearbarbearia.application.repository;
 
-import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Day;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.UserDAO;
 
+import java.time.DayOfWeek;
 import java.util.*;
 
 public class InMemoryUserDAO implements UserDAO {
@@ -63,7 +63,7 @@ public class InMemoryUserDAO implements UserDAO {
     }
 
     @Override
-    public List<User> findOneByDay(Day day) {
+    public List<User> findOneByDay(DayOfWeek day) {
         return database.values().stream()
                 .filter(user -> user.getDays().contains(day))
                 .toList();
