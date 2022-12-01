@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #f0f2f5;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.CadastrarClientesController">
+   <children>
+      <Label fx:id="lblCadastrar" alignment="CENTER" contentDisplay="CENTER" layoutX="377.0" layoutY="140.0" text="CADASTRAR" textAlignment="JUSTIFY" textFill="#1d4c88" AnchorPane.leftAnchor="377.0" AnchorPane.rightAnchor="377.0" AnchorPane.topAnchor="140.0">
+         <font>
+            <Font name="Cambria Bold" size="36.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtNome" focusTraversable="false" layoutX="377.0" layoutY="184.0" prefHeight="30.0" prefWidth="206.0" promptText="Digite o nome" AnchorPane.leftAnchor="377.0" AnchorPane.rightAnchor="377.0" AnchorPane.topAnchor="204.0">
+         <font>
+            <Font name="Roboto" size="14.0" />
+         </font>
+      </TextField>
+      <Button fx:id="btnCadastrar" layoutX="377.0" layoutY="334.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#cadastrar" prefHeight="46.0" prefWidth="206.0" style="-fx-background-color: #e3383e;" text="Cadastrar" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="377.0" AnchorPane.rightAnchor="377.0">
+         <font>
+            <Font name="Cambria Bold" size="24.0" />
+         </font>
+      </Button>
+      <TextField fx:id="txtTelefone" focusTraversable="false" layoutX="377.0" layoutY="234.0" prefHeight="30.0" prefWidth="206.0" promptText="Digite o telefone" AnchorPane.leftAnchor="377.0" AnchorPane.rightAnchor="377.0" AnchorPane.topAnchor="254.0">
+         <font>
+            <Font name="Roboto" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtEmail" focusTraversable="false" layoutX="377.0" layoutY="284.0" prefHeight="30.0" prefWidth="206.0" promptText="Digite o e-mail" AnchorPane.leftAnchor="377.0" AnchorPane.rightAnchor="377.0" AnchorPane.topAnchor="304.0">
+         <font>
+            <Font name="Roboto" size="14.0" />
+         </font>
+      </TextField>
+   </children>
+</AnchorPane>
