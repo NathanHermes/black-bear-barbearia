@@ -4,27 +4,18 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #1d4c88;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="173.0" text="LOGIN" textAlignment="JUSTIFY" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="143.0">
-         <font>
-            <Font name="Cambria Bold" size="36.0" />
-         </font>
-      </Label>
-      <TextField focusTraversable="false" layoutX="390.0" layoutY="217.0" maxWidth="180.0" prefWidth="180.0" promptText="Digite o login" AnchorPane.leftAnchor="390.0" AnchorPane.rightAnchor="390.0" AnchorPane.topAnchor="217.0">
-         <font>
-            <Font name="Roboto" size="14.0" />
-         </font>
-      </TextField>
-      <TextField focusTraversable="false" layoutX="389.0" layoutY="279.0" prefWidth="180.0" promptText="Digite a senha" AnchorPane.leftAnchor="390.0" AnchorPane.rightAnchor="390.0" AnchorPane.topAnchor="279.0">
-         <font>
-            <Font name="Roboto" size="14.0" />
-         </font>
-      </TextField>
-      <Button layoutX="390.0" layoutY="339.0" maxWidth="-Infinity" mnemonicParsing="false" prefWidth="180.0" style="-fx-background-color: #e3383e;" text="Login" AnchorPane.bottomAnchor="155.0" AnchorPane.leftAnchor="390.0" AnchorPane.rightAnchor="390.0">
-         <font>
-            <Font name="Cambria Bold" size="24.0" />
-         </font>
-      </Button>
-   </children>
-</AnchorPane>
+<VBox fillWidth="false" styleClass="anchor" stylesheets="@css/Global.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.LoginController">
+   <Label alignment="CENTER" contentDisplay="CENTER" styleClass="session-title" text="Login" textAlignment="JUSTIFY" />
+   <TextField fx:id="txtLogin" alignment="CENTER" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Digite o login" styleClass="input">
+      <font>
+         <Font name="Roboto" size="14.0" />
+      </font>
+   </TextField>
+   <TextField fx:id="txtPassword" alignment="CENTER" focusTraversable="false" promptText="Digite a senha" styleClass="input">
+      <font>
+         <Font name="" size="14.0" />
+      </font>
+   </TextField>
+   <Button alignment="CENTER" contentDisplay="CENTER" maxWidth="-Infinity" mnemonicParsing="false" onAction="#makeLogin" styleClass="button" text="LOGIN" />
+   <Label fx:id="lblError" />
+</VBox>
