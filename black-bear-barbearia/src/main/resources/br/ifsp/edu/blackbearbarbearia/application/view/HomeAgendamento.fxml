@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.HomeAgendamentoController">
+   <children>
+      <TableView fx:id="tableView" layoutX="50.0" layoutY="203.0" prefHeight="466.0" prefWidth="924.0" AnchorPane.bottomAnchor="99.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="223.0">
+         <columns>
+            <TableColumn fx:id="cCliente" prefWidth="173.0" text="CLIENTE" />
+            <TableColumn fx:id="cFuncionario" prefWidth="173.0" text="FUNCINÁRIO" />
+            <TableColumn fx:id="cServico" prefWidth="173.0" text="SERVIÇO" />
+            <TableColumn fx:id="cData" prefWidth="173.0" text="DATA" />
+            <TableColumn fx:id="cStatus" prefWidth="114.0" text="STATUS" />
+            <TableColumn fx:id="cPago" prefWidth="117.0" text="PAGO" />
+         </columns>
+      </TableView>
+      <Button fx:id="btnRelatorio" layoutX="791.0" layoutY="689.0" mnemonicParsing="false" onAction="#relatorio" text="RELATÓRIO" AnchorPane.bottomAnchor="48.0" AnchorPane.rightAnchor="50.0" />
+      <Button fx:id="btnNotaFiscal" layoutX="768.0" layoutY="689.0" mnemonicParsing="false" onAction="#notaFiscal" text="NOTA FISCAL" AnchorPane.bottomAnchor="48.0" AnchorPane.rightAnchor="167.0" />
+      <DatePicker fx:id="dtData" layoutX="81.0" layoutY="121.0" prefHeight="31.0" prefWidth="200.0" AnchorPane.leftAnchor="101.0" AnchorPane.topAnchor="121.0" />
+      <Label fx:id="lblData" layoutX="53.0" layoutY="126.0" text="Data" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="126.0" />
+      <Button fx:id="btnCadastrar" layoutX="50.0" layoutY="689.0" mnemonicParsing="false" onAction="#cadastrar" text="CADASTRAR" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="50.0" />
+      <Button fx:id="btnDesmarcar" layoutX="153.0" layoutY="689.0" mnemonicParsing="false" onAction="#desmarcar" text="DESMARCAR" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="173.0" />
+      <Button fx:id="btnConcluir" layoutX="280.0" layoutY="689.0" mnemonicParsing="false" onAction="#concluir" text="CONCLUIR" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="300.0" />
+      <ComboBox fx:id="cbFuncionario" layoutX="775.0" layoutY="121.0" prefWidth="200.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="121.0" />
+      <Label fx:id="lblFuncionario" layoutX="701.0" layoutY="126.0" text="Funcionáro" AnchorPane.rightAnchor="270.0" AnchorPane.topAnchor="126.0" />
+      <Label fx:id="lblServico" layoutX="50.0" layoutY="177.0" text="Serviço" AnchorPane.leftAnchor="50.0" />
+      <ComboBox fx:id="cbServico" layoutX="101.0" layoutY="172.0" prefWidth="200.0" AnchorPane.leftAnchor="121.0" AnchorPane.topAnchor="172.0" />
+      <ComboBox fx:id="cbCliente" layoutX="443.0" layoutY="182.0" prefWidth="200.0" AnchorPane.leftAnchor="427.0" AnchorPane.topAnchor="172.0" />
+      <Label fx:id="lblCliente" layoutX="382.0" layoutY="177.0" text="Cliente" AnchorPane.leftAnchor="362.0" AnchorPane.topAnchor="177.0" />
+      <TextField fx:id="txtHorario" layoutX="427.0" layoutY="121.0" prefWidth="200.0" AnchorPane.leftAnchor="427.0" AnchorPane.topAnchor="121.0" />
+      <Label fx:id="lblHorario" layoutX="357.0" layoutY="126.0" text="Horario" AnchorPane.leftAnchor="357.0" AnchorPane.topAnchor="126.0" />
+      <Button fx:id="btnFiltrar" layoutX="904.0" layoutY="152.0" mnemonicParsing="false" onAction="#filtrar" prefHeight="31.0" prefWidth="200.0" text="FILTRAR" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="172.0" />
+      <Button fx:id="btnServicosPrestados" layoutX="577.0" layoutY="689.0" mnemonicParsing="false" onAction="#servicosPrestados" text="SERVIÇOS PRESTADOS" AnchorPane.bottomAnchor="48.0" AnchorPane.rightAnchor="297.0" />
+      <Button fx:id="btnGerenciarServicos" layoutX="727.0" layoutY="50.0" mnemonicParsing="false" onAction="#gerenciarServicos" text="GERENCIAR SERVIÇOS" AnchorPane.rightAnchor="149.0" AnchorPane.topAnchor="50.0" />
+      <Button fx:id="btnGerenciarClientes" layoutX="30.0" layoutY="14.0" mnemonicParsing="false" onAction="#gerenciarClientes" text="GERENCIAR CLIENTES" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0" />
+      <Button fx:id="btnGerenciarFuncionarios" layoutX="498.0" layoutY="50.0" mnemonicParsing="false" onAction="#gerenciarFuncionario" text="GERENCIAR FUNCIONÁRIOS" AnchorPane.rightAnchor="338.0" AnchorPane.topAnchor="50.0" />
+      <Line endX="974.0" layoutX="236.0" layoutY="111.0" startX="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="101.0" />
+      <Button fx:id="btnLogout" layoutX="896.0" layoutY="50.0" mnemonicParsing="false" onAction="#logout" text="LOGOUT" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0" />
+   </children>
+</AnchorPane>
