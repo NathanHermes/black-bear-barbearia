@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.HomefuncionariosController">
+   <children>
+      <Label fx:id="lblPesquisar" layoutX="220.0" layoutY="25.0" text="Pesquisar" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="25.0" />
+      <TextField fx:id="txtPesquisar" layoutX="284.0" layoutY="20.0" prefHeight="31.0" prefWidth="460.0" promptText="Digite o funcionario" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="216.0" AnchorPane.topAnchor="20.0" />
+      <TableView fx:id="tableView" layoutX="220.0" layoutY="74.0" prefHeight="356.0" prefWidth="520.0" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="74.0">
+        <columns>
+          <TableColumn fx:id="cNome" prefWidth="519.0" text="FUNCIONÁRIOS" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnLogout" layoutX="867.0" layoutY="20.0" mnemonicParsing="false" onAction="#logout" text="LOGOUT" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+      <Button fx:id="btnApagarSenha" layoutX="522.0" layoutY="450.0" mnemonicParsing="false" onAction="#apagarSenha" prefHeight="31.0" prefWidth="129.0" text="APAGAR SENHA" AnchorPane.bottomAnchor="59.0" AnchorPane.rightAnchor="309.0" />
+      <Button fx:id="btnCadastrar" layoutX="220.0" layoutY="450.0" mnemonicParsing="false" onAction="#cadastrar" text="CADASTRAR" AnchorPane.bottomAnchor="59.0" AnchorPane.leftAnchor="220.0" />
+      <Button fx:id="btnEditar" layoutX="671.0" layoutY="450.0" mnemonicParsing="false" onAction="#editar" text="EDITAR" AnchorPane.bottomAnchor="59.0" AnchorPane.rightAnchor="220.0" />
+   </children>
+</AnchorPane>
