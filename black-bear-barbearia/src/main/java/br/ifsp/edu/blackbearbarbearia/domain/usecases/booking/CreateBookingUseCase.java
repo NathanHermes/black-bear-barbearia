@@ -8,9 +8,9 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Validator;
 
 import java.time.LocalDate;
 
-public class CriarAgendamentoUseCase {
+public class CreateBookingUseCase {
     private final BookingDAO dao;
-    public CriarAgendamentoUseCase(BookingDAO dao) {
+    public CreateBookingUseCase(BookingDAO dao) {
         this.dao = dao;
     }
 
@@ -20,8 +20,8 @@ public class CriarAgendamentoUseCase {
 
         if (notification.hasErros()) throw new IllegalArgumentException(notification.errorMessage());
 
-        LocalDate date = booking.getDate();
-        User user = booking.getUser();
+        LocalDate date = booking.getNoFormattedDate();
+        User user = booking.getInfoEmployee();
         if (dao.findOneByDateAndUser(date, user).isPresent()) throw new EntityAlreadyExistsException("This date and user is already in use");
 
         return dao.create(booking);
