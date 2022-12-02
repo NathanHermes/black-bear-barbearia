@@ -10,9 +10,9 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Validator;
 import java.math.BigDecimal;
 import java.util.Map;
 
-public class ConcluirAgendamentoUseCase {
+public class FinishBookingUseCase {
     private final BookingDAO dao;
-    public ConcluirAgendamentoUseCase(BookingDAO dao) {
+    public FinishBookingUseCase(BookingDAO dao) {
         this.dao = dao;
     }
 
@@ -25,18 +25,17 @@ public class ConcluirAgendamentoUseCase {
 
         Integer id = booking.getId();
         if (dao.findOne(id).isEmpty())
-            throw new EntityNotFoundException("Booking not found.");
+            throw new EntityNotFoundException("Booking not found");
 
-        booking.setPaid(true);
+        booking.setPaid(Boolean.TRUE);
         booking.setStatus(Status.DONE);
         dao.update(booking);
 
-        Service service = booking.getService();
+        Service service = booking.getInfoService();
 
         BigDecimal price = service.getPrice();
-        BigDecimal comissionPercentage = service.getComissionPercentage();
-
-        BigDecimal commission = price.multiply(comissionPercentage);
+        BigDecimal commissionPercentage = service.getComissionPercentage();
+        BigDecimal commission = price.multiply(commissionPercentage);
 
         Map<String, String> notaFiscal = new EmitirNotaFiscalUseCase().create(booking);
         notaFiscal.forEach((key, value) -> System.out.println(key + ": " + value));
