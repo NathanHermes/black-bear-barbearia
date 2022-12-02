@@ -5,6 +5,7 @@ import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Service;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Booking {
@@ -13,64 +14,68 @@ public class Booking {
     private Boolean paid;
     private Client client;
     private Service service;
-    private User user;
+    private User employee;
     private Status status;
 
-    public Booking(LocalDate date, boolean paid, Client client, Service service, User user) {
+    public Booking(LocalDate date, boolean paid, Client client, Service service, User employee) {
         this.date = date;
         this.paid = paid;
         this.client = client;
         this.service = service;
-        this.user = user;
+        this.employee = employee;
         this.status = Status.BOOKED;
     }
 
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
+        return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+    public LocalDate getNoFormattedDate() {
         return date;
     }
-
     public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public Boolean isPaid() {
-        return paid;
+    public String isPaid() {
+        return paid == Boolean.TRUE ? "PAGO" : "À PAGAR";
     }
-
     public void setPaid(boolean paid) {
         this.paid = paid;
     }
 
-    public Client getClient() {
+    public String getClient() { return client.getName(); }
+    public Client getInfoClient() {
         return client;
     }
-
     public void setClient(Client client) {
         this.client = client;
     }
 
-    public Service getService() {
+    public String getService() {
+        return service.getNome();
+    }
+    public Service getInfoService() {
         return service;
     }
-
     public void setService(Service service) {
         this.service = service;
     }
 
-    public User getUser() {
-        return user;
+    public String getEmployee() {
+        return employee.getFullName();
     }
-
-    public void setUser(User user) {
-        this.user = user;
+    public User getInfoEmployee() {
+        return employee;
+    }
+    public void setEmployee(User employee) {
+        this.employee = employee;
     }
 
     public Status getStatus() {
@@ -95,7 +100,7 @@ public class Booking {
                 ", paid=" + paid +
                 ", client=" + client +
                 ", service=" + service +
-                ", user=" + user +
+                ", user=" + employee +
                 ", status=" + status +
                 '}';
     }
