@@ -16,15 +16,15 @@ public class EmitirNotaFiscalUseCase {
     public Map<String, String> create(Booking booking) {
         notaFiscal = new LinkedHashMap<>();
 
-        notaFiscal.put("Date", booking.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString());
+        notaFiscal.put("Date", booking.getDate());
 
-        Client client = booking.getClient();
-        notaFiscal.put("Client", client.getName());
+        String client = booking.getClient();
+        notaFiscal.put("Client", client);
 
-        User user = booking.getUser();
-        notaFiscal.put("Employee", user.getFullName());
+        String user = booking.getEmployee();
+        notaFiscal.put("Employee", user);
 
-        Service service = booking.getService();
+        Service service = booking.getInfoService();
         notaFiscal.put("Service", service.getNome());
         notaFiscal.put("Price", service.getPrice().toString());
 
