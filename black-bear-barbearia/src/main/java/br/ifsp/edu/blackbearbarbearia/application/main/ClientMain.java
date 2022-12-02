@@ -4,9 +4,8 @@ import br.ifsp.edu.blackbearbarbearia.application.repository.InMemoryClientDAO;
 import br.ifsp.edu.blackbearbarbearia.application.repository.InMemoryUserDAO;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.client.Client;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Address;
-import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Role;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.CadastrarClienteUseCase;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.CreateClientUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.ClientDAO;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.EditarClienteUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.ListarClientesUseCase;
@@ -15,7 +14,7 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.LoginUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.UserDAO;
 
 public class ClientMain {
-    public static CadastrarClienteUseCase cadastrarClienteUseCase;
+    public static CreateClientUseCase createClientUseCase;
     public static EditarClienteUseCase editarClienteUseCase;
     public static ListarClientesUseCase listarClientesUseCase;
     public static LoginUseCase loginUseCase;
@@ -40,7 +39,7 @@ public class ClientMain {
         loginUseCase = new LoginUseCase(userDAO);
 
         ClientDAO clientDAO = new InMemoryClientDAO();
-        cadastrarClienteUseCase = new CadastrarClienteUseCase(clientDAO);
+        createClientUseCase = new CreateClientUseCase(clientDAO);
         listarClientesUseCase = new ListarClientesUseCase(clientDAO);
         editarClienteUseCase = new EditarClienteUseCase(clientDAO);
 
@@ -87,15 +86,15 @@ public class ClientMain {
 
 
         try {
-            cadastrarClienteUseCase.create(client1);
+            createClientUseCase.create(client1);
             System.out.println("> SUCCESS .....: Client created");
-            cadastrarClienteUseCase.create(client2);
+            createClientUseCase.create(client2);
             System.out.println("> SUCCESS .....: Client created");
-            cadastrarClienteUseCase.create(client3);
+            createClientUseCase.create(client3);
             System.out.println("> SUCCESS .....: Client created");
-            cadastrarClienteUseCase.create(client4);
+            createClientUseCase.create(client4);
             System.out.println("> SUCCESS .....: Client created");
-            cadastrarClienteUseCase.create(client5);
+            createClientUseCase.create(client5);
             System.out.println("> SUCCESS .....: Client created");
         } catch (Exception e) {
             System.out.println("\n> ERROR ...: " + e.getMessage() + "\n");
