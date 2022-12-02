@@ -5,10 +5,10 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityAlreadyExistsE
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Notification;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Validator;
 
-public class CadastrarServicosUseCase {
+public class CreateServiceUseCase {
     private final ServiceDAO dao;
 
-    public CadastrarServicosUseCase(ServiceDAO dao) {
+    public CreateServiceUseCase(ServiceDAO dao) {
         this.dao = dao;
     }
 
