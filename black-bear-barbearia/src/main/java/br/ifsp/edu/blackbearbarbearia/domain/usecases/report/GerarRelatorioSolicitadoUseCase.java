@@ -50,7 +50,7 @@ public class GerarRelatorioSolicitadoUseCase {
             throw new EntityNotFoundException("User not found.");
 
         return findByPeriod(start, end).stream()
-                .filter(booking -> booking.getUser().equals(user))
+                .filter(booking -> booking.getEmployee().equals(user))
                 .toList();
     }
 

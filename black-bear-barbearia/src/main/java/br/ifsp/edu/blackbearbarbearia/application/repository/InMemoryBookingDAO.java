@@ -57,7 +57,7 @@ public class InMemoryBookingDAO implements BookingDAO {
     public Optional<Booking> findOneByDateAndUser(LocalDate date, User user) {
         return database.values().stream()
                 .filter(booking -> booking.getDate().equals(date))
-                .filter(booking -> booking.getUser().equals(user))
+                .filter(booking -> booking.getEmployee().equals(user))
                 .findAny();
     }
 
@@ -78,9 +78,9 @@ public class InMemoryBookingDAO implements BookingDAO {
     @Override
     public List<Booking> findAllByUserAndPeriod(User user, LocalDate start, LocalDate end) {
         return database.values().stream()
-                .filter(booking -> booking.getDate().equals(user))
-                .filter(booking -> booking.getDate().isAfter(start))
-                .filter(booking -> booking.getDate().isBefore(end))
+                .filter(booking -> booking.getNoFormattedDate().equals(user))
+                .filter(booking -> booking.getNoFormattedDate().isAfter(start))
+                .filter(booking -> booking.getNoFormattedDate().isBefore(end))
                 .toList();
     }
 
@@ -93,8 +93,8 @@ public class InMemoryBookingDAO implements BookingDAO {
 
     public List<Booking> findAllByPeriod(LocalDate start, LocalDate end) {
         return database.values().stream()
-                .filter(booking -> booking.getDate().isAfter(start))
-                .filter(booking -> booking.getDate().isBefore(end))
+                .filter(booking -> booking.getNoFormattedDate().isAfter(start))
+                .filter(booking -> booking.getNoFormattedDate().isBefore(end))
                 .toList();
     }
 }
