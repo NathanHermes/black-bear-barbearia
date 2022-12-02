@@ -44,7 +44,7 @@ public class FiltrarFuncionariosAgendadosPorDiaUseCase {
             throw new EntityNotFoundException("User not found.");
 
         return findByDay().stream()
-                .filter(booking -> booking.getUser().equals(user))
+                .filter(booking -> booking.getEmployee().equals(user))
                 .toList();
 
     }
