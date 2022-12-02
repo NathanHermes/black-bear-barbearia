@@ -9,15 +9,14 @@ import br.ifsp.edu.blackbearbarbearia.domain.entities.client.Client;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Service;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Type;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Address;
-import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Role;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.booking.*;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.CadastrarClienteUseCase;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.CreateClientUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.ClientDAO;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.ListarClientesUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.CadastrarFuncionarioUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.ListarFuncionariosUseCase;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.CadastrarServicosUseCase;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.CreateServiceUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.ListarServicosUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.ServiceDAO;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.LoginUseCase;
@@ -27,11 +26,11 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class BookingMain {
-    public static LoginUseCase loginUseCase;
+    /*public static LoginUseCase loginUseCase;
     public static CadastrarFuncionarioUseCase cadastrarFuncionarioUseCase;
-    public static CadastrarClienteUseCase cadastrarClienteUseCase;
-    public static CadastrarServicosUseCase cadastrarServicosUseCase;
-    public static CriarAgendamentoUseCase criarAgendamentoUseCase;
+    public static CreateClientUseCase createClientUseCase;
+    public static CreateServiceUseCase createServiceUseCase;
+    public static CreateBookingUseCase createBookingUseCase;
     public static ListarClientesUseCase listarClientesUseCase;
     public static ListarServicosUseCase listarServicosUseCase;
     public static ListarFuncionariosUseCase listarFuncionariosUseCase;
@@ -61,15 +60,15 @@ public class BookingMain {
         loginUseCase = new LoginUseCase(userDAO);
 
         ClientDAO clientDAO = new InMemoryClientDAO();
-        cadastrarClienteUseCase = new CadastrarClienteUseCase(clientDAO);
+        createClientUseCase = new CreateClientUseCase(clientDAO);
         listarClientesUseCase = new ListarClientesUseCase(clientDAO);
 
         ServiceDAO serviceDAO = new InMemoryServiceDAO();
-        cadastrarServicosUseCase = new CadastrarServicosUseCase(serviceDAO);
+        createServiceUseCase = new CreateServiceUseCase(serviceDAO);
         listarServicosUseCase = new ListarServicosUseCase(serviceDAO);
 
         BookingDAO bookingDAO = new InMemoryBookingDAO();
-        criarAgendamentoUseCase = new CriarAgendamentoUseCase(bookingDAO);
+        createBookingUseCase = new CreateBookingUseCase(bookingDAO);
         concluirAgendamentoUseCase = new ConcluirAgendamentoUseCase(bookingDAO);
         cancelarAgendamentoUseCase = new CancelarAgendamentoUseCase(bookingDAO);
         filtrarFuncionariosAgendadosPorDiaUseCase = new FiltrarFuncionariosAgendadosPorDiaUseCase(userDAO, bookingDAO, serviceDAO);
@@ -89,7 +88,7 @@ public class BookingMain {
         e00.addRole(Role.EMPLOYEE);
         e00.addDay(Day.MONDAY);
         e00.addDay(Day.TUESDAY);
-        e00.addDay(Day.WEDNESDAY);*/
+        e00.addDay(Day.WEDNESDAY);
 
         try {
             //cadastrarFuncionarioUseCase.create(adm);
@@ -118,9 +117,9 @@ public class BookingMain {
         Client client2 = new Client("Lucimberto Cristo Leonicio", "lucimberto.leonicio@gmail.com.br", "(83) 96938-6221");
 
         try {
-            cadastrarClienteUseCase.create(client1);
+            createClientUseCase.create(client1);
             System.out.println("> SUCCESS .....: Client created");
-            cadastrarClienteUseCase.create(client2);
+            createClientUseCase.create(client2);
             System.out.println("> SUCCESS .....: Client created");
         } catch (Exception e) {
             System.out.println("\n> ERROR ...: " + e.getMessage() + "\n");
@@ -133,7 +132,7 @@ public class BookingMain {
         s0.addType(Type.BEARD);
 
         try {
-            cadastrarServicosUseCase.create(s0);
+            createServiceUseCase.create(s0);
             System.out.println("> SUCCESS .....: Service created");
         } catch (Exception e) {
             System.out.println("\n> ERROR ...: " + e.getMessage() + "\n");
@@ -148,13 +147,13 @@ public class BookingMain {
         Client client2 = listarClientesUseCase.findOne(2);
         User user2 = listarFuncionariosUseCase.findOne(1);
 
-        Booking booking01 = new Booking(LocalDate.now(), false, client, service, user1);
-        Booking booking02 = new Booking(LocalDate.of(2022,11,8), false, client2, service, user2);
+        //Booking booking01 = new Booking(LocalDate.now(), false, client, service, user1);
+        //Booking booking02 = new Booking(LocalDate.of(2022,11,8), false, client2, service, user2);
 
         try {
-            criarAgendamentoUseCase.create(booking01);
+            //createBookingUseCase.create(booking01);
             System.out.println("> SUCCESS .....: Booking created");
-            criarAgendamentoUseCase.create(booking02);
+           //createBookingUseCase.create(booking02);
             System.out.println("> SUCCESS .....: Booking created");
         } catch (Exception e) {
             System.out.println("\n> ERROR ...: " + e.getMessage() + "\n");
@@ -169,7 +168,7 @@ public class BookingMain {
         Booking bookingComplete = new Booking(LocalDate.of(2022,11,7), false, client, service, user1);
 
         try {
-            criarAgendamentoUseCase.create(bookingComplete);
+            createBookingUseCase.create(bookingComplete);
             concluirAgendamentoUseCase.update(bookingComplete);
             System.out.println("> SUCCESS .....: Booking completed");
         } catch (Exception e) {
@@ -182,11 +181,11 @@ public class BookingMain {
         Service service = listarServicosUseCase.findOne(1);
         User user1 = listarFuncionariosUseCase.findOne(1);
 
-        Booking bookingCanceled = new Booking(LocalDate.of(2022,11,6), false, client, service, user1);
+        //Booking bookingCanceled = new Booking(LocalDate.of(2022,11,6), false, client, service, user1);
 
         try {
-            criarAgendamentoUseCase.create(bookingCanceled);
-            cancelarAgendamentoUseCase.update(bookingCanceled);
+            //createBookingUseCase.create(bookingCanceled);
+            //cancelarAgendamentoUseCase.update(bookingCanceled);
             System.out.println("> SUCCESS .....: Booking canceled");
         } catch (Exception e) {
             System.out.println("\n> ERROR ...: " + e.getMessage() + "\n");
@@ -205,15 +204,15 @@ public class BookingMain {
         Booking booking05 = new Booking(LocalDate.now(), false, client, service, user1);
 
         try{
-            criarAgendamentoUseCase.create(booking01);
+            createBookingUseCase.create(booking01);
             System.out.println("> SUCCESS .....: Booking created");
-            criarAgendamentoUseCase.create(booking02);
+            createBookingUseCase.create(booking02);
             System.out.println("> SUCCESS .....: Booking created");
-            criarAgendamentoUseCase.create(booking03);
+            createBookingUseCase.create(booking03);
             System.out.println("> SUCCESS .....: Booking created");
-            criarAgendamentoUseCase.create(booking04);
+            createBookingUseCase.create(booking04);
             System.out.println("> SUCCESS .....: Booking created");
-            criarAgendamentoUseCase.create(booking05);
+            createBookingUseCase.create(booking05);
             System.out.println("> SUCCESS .....: Booking created");
 
             System.out.println("> SUCCESS .....: Filter by day");
@@ -233,5 +232,5 @@ public class BookingMain {
         } catch (Exception e) {
             System.out.println("\n> ERROR ...: " + e.getMessage() + "\n");
         }
-    }
+    }*/
 }
