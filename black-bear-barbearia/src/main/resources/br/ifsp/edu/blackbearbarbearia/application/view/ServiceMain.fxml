@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.HomeServiçosController">
+   <children>
+      <Button fx:id="btnFiltrar" layoutX="751.0" layoutY="57.0" mnemonicParsing="false" onAction="#filtrar" text="FILTRAR" />
+      <Button fx:id="btnEditar" layoutX="194.0" layoutY="473.0" mnemonicParsing="false" onAction="#editar" text="EDITAR" />
+      <Label fx:id="lblPesquisar" layoutX="71.0" layoutY="62.0" text="Pesquisar" />
+      <TextField fx:id="txtPesquisar" layoutX="155.0" layoutY="57.0" prefHeight="31.0" prefWidth="578.0" promptText="Digite o clientes" />
+      <Button fx:id="btnCadastrar" layoutX="71.0" layoutY="473.0" mnemonicParsing="false" onAction="#cadastrar" text="CADASTRAR" />
+      <TableView fx:id="tbvService" layoutX="71.0" layoutY="108.0" prefHeight="345.0" prefWidth="838.0">
+         <columns>
+            <TableColumn fx:id="cNome" prefWidth="226.0" text="NOME" />
+            <TableColumn fx:id="cPreco" prefWidth="128.0" text="PREÇO" />
+            <TableColumn fx:id="cComissao" prefWidth="128.0" text="COMISSÃO" />
+            <TableColumn fx:id="cTaxa" prefWidth="128.0" text="TAXA" />
+            <TableColumn fx:id="cAtivo" prefWidth="128.0" text="ATIVO" />
+            <TableColumn fx:id="cTipo" prefWidth="128.0" text="TIPO" />
+         </columns>
+      </TableView>
+      <Button fx:id="btnLogout" layoutX="830.0" layoutY="57.0" mnemonicParsing="false" onAction="#logout" text="LOGOUT" />
+   </children>
+</AnchorPane>
