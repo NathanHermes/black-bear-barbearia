@@ -1,0 +1,54 @@
+@font-face {
+    font-family: "Mochary PERSONAL USE ONLY";
+    src: url('../fonts/Mochary.ttf');
+}
+@font-face {
+    font-family: "Young Heart";
+    src: url('../fonts/YoungHeart.ttf');
+
+}
+.anchor {
+    -fx-pref-width: 1024px;
+    -fx-pref-height: 768px;
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+    -fx-background-color: #f0f2f5;
+}
+.message {
+    -fx-font-family: "Mochary PERSONAL USE ONLY";
+    -fx-font-size: 36;
+}
+.groupButton {
+    -fx-spacing: 50px;
+}
+.btnNo {
+    -fx-pref-width: 80px;
+    -fx-pref-height: 40px;
+    -fx-border-color: #e3383e;
+    -fx-border-width: 2;
+    -fx-text-fill: #e3383e;
+    -fx-background-color: #f0f2f5;
+    -fx-font-family: "Young Heart";
+    -fx-font-size: 18;
+    -fx-font-weight: 700;
+}
+.btnNo:hover {
+    -fx-background-color: #e3383e;
+    -fx-text-fill: #f0f2f5;
+}
+.btnYes {
+    -fx-pref-width: 80px;
+    -fx-pref-height: 40px;
+    -fx-border-color: #1d4c84;
+    -fx-border-width: 2;
+    -fx-text-fill: #1d4c84;
+    -fx-background-color: #f0f2f5;
+    -fx-font-family: "Young Heart";
+    -fx-font-size: 18;
+    -fx-font-weight: 700;
+    -fx-: 2;
+}
+.btnYes:hover {
+    -fx-background-color: #1d4c84;
+    -fx-text-fill: #f0f2f5;
+}
