@@ -6,10 +6,9 @@ import br.ifsp.edu.blackbearbarbearia.application.repository.InMemoryUserDAO;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Service;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Type;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Address;
-import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Role;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.CadastrarFuncionarioUseCase;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.CadastrarServicosUseCase;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.CreateServiceUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.EditarServicoUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.ListarServicosUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.ServiceDAO;
@@ -21,7 +20,7 @@ import java.math.BigDecimal;
 public class ServiceMain {
     public static LoginUseCase loginUseCase;
     public static CadastrarFuncionarioUseCase cadastrarFuncionarioUseCase;
-    public static CadastrarServicosUseCase cadastrarServicosUseCase;
+    public static CreateServiceUseCase createServiceUseCase;
     public static EditarServicoUseCase editarServicoUseCase;
     public static ListarServicosUseCase listarServicosUseCase;
 
@@ -45,7 +44,7 @@ public class ServiceMain {
         cadastrarFuncionarioUseCase = new CadastrarFuncionarioUseCase(userDAO);
 
         ServiceDAO serviceDAO = new InMemoryServiceDAO();
-        cadastrarServicosUseCase = new CadastrarServicosUseCase(serviceDAO);
+        createServiceUseCase = new CreateServiceUseCase(serviceDAO);
         editarServicoUseCase = new EditarServicoUseCase(serviceDAO);
         listarServicosUseCase = new ListarServicosUseCase(serviceDAO);
     }
@@ -94,13 +93,13 @@ public class ServiceMain {
         s3.addType(Type.OTHER);
 
         try {
-            cadastrarServicosUseCase.create(s0);
+            createServiceUseCase.create(s0);
             System.out.println("> SUCCESS .....: Service created");
-            cadastrarServicosUseCase.create(s1);
+            createServiceUseCase.create(s1);
             System.out.println("> SUCCESS .....: Service created");
-            cadastrarServicosUseCase.create(s2);
+            createServiceUseCase.create(s2);
             System.out.println("> SUCCESS .....: Service created");
-            cadastrarServicosUseCase.create(s3);
+            createServiceUseCase.create(s3);
             System.out.println("> SUCCESS .....: Service created");
         } catch (Exception e) {
             System.out.println("\n> ERROR ...: " + e.getMessage() + "\n");
