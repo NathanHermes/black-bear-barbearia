@@ -1,30 +1,52 @@
 package br.ifsp.edu.blackbearbarbearia.application.main;
 
+import br.ifsp.edu.blackbearbarbearia.application.repository.InMemoryBookingDAO;
+import br.ifsp.edu.blackbearbarbearia.application.repository.InMemoryClientDAO;
+import br.ifsp.edu.blackbearbarbearia.application.repository.InMemoryServiceDAO;
 import br.ifsp.edu.blackbearbarbearia.application.repository.InMemoryUserDAO;
 import br.ifsp.edu.blackbearbarbearia.application.view.WindowLoader;
+import br.ifsp.edu.blackbearbarbearia.domain.entities.booking.Booking;
+import br.ifsp.edu.blackbearbarbearia.domain.entities.client.Client;
+import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Service;
+import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Type;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Address;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Role;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.UserBuilder;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.booking.BookingDAO;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.booking.CreateBookingUseCase;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.booking.FindBookingUseCase;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.booking.FinishBookingUseCase;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.ClientDAO;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.CreateClientUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.CadastrarFuncionarioUseCase;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.CreateServiceUseCase;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.ServiceDAO;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.LoginUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.UserDAO;
 
+import java.math.BigDecimal;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Main {
     public static LoginUseCase loginUseCase;
     public static CadastrarFuncionarioUseCase cadastrarFuncionarioUseCase;
+    public static CreateClientUseCase createClientUseCase;
+    public static CreateServiceUseCase createServiceUseCase;
+    public static CreateBookingUseCase createBookingUseCase;
+    public static FinishBookingUseCase finishBookingUseCase;
+    public static FindBookingUseCase findBookingUseCase;
     public static User USER;
 
     public static void main(String[] args) {
         configureInjection();
-        createAdmin();
+        testsInjection();
         WindowLoader.main(args);
     }
 
-    private static void createAdmin() {
+    private static void testsInjection() {
         Address admAddress = new Address("Av. São Carlos", "2120", "", "SP", "São Carlos");
         ArrayList<DayOfWeek> workDaysOfAdm = new ArrayList<>();
         workDaysOfAdm.add(DayOfWeek.MONDAY);
@@ -45,9 +67,19 @@ public class Main {
 
         User adm = builder.getResult();
 
+        Client client = new Client("Patrícia Celestino Montilla", "patricia.montilla@gmail.com", "(89) 99963-7882");
+        Service service = new Service("Corte de cabelo e barba", new BigDecimal("45.0"), new BigDecimal("0.48"), new BigDecimal("0.1"), Boolean.TRUE);
+        service.addType(Type.HAIR);
+        service.addType(Type.BEARD);
+
+        Booking booking = new Booking(LocalDate.now(), false, client, service, adm);
+
         try {
             cadastrarFuncionarioUseCase.create(adm);
-            System.out.println("> SUCCESS .....: Administrator created");
+            createClientUseCase.create(client);
+            createServiceUseCase.create(service);
+            createBookingUseCase.create(booking);
+            System.out.println("> SUCCESS .....: Injection is complete");
         }
         catch (Exception e) {
             System.out.println("\n> ERROR ...: " + e.getMessage() + "\n");
@@ -58,5 +90,16 @@ public class Main {
         UserDAO userDAO = new InMemoryUserDAO();
         loginUseCase = new LoginUseCase(userDAO);
         cadastrarFuncionarioUseCase = new CadastrarFuncionarioUseCase(userDAO);
+
+        ClientDAO clientDAO = new InMemoryClientDAO();
+        createClientUseCase = new CreateClientUseCase(clientDAO);
+
+        ServiceDAO serviceDAO = new InMemoryServiceDAO();
+        createServiceUseCase = new CreateServiceUseCase(serviceDAO);
+
+        BookingDAO bookingDAO = new InMemoryBookingDAO();
+        createBookingUseCase = new CreateBookingUseCase(bookingDAO);
+        findBookingUseCase = new FindBookingUseCase(bookingDAO);
+        finishBookingUseCase = new FinishBookingUseCase(bookingDAO);
     }
 }
