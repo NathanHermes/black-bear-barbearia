@@ -15,7 +15,6 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.UserDAO;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class EmployeeMain {
     public static LoginUseCase loginUseCase;
@@ -49,7 +48,6 @@ public class EmployeeMain {
     private static void configureInjection() {
         UserDAO userDAO = new InMemoryUserDAO();
         cadastrarFuncionarioUseCase = new CadastrarFuncionarioUseCase(userDAO);
-        loginUseCase = new LoginUseCase(userDAO);
         listarFuncionariosUseCase = new ListarFuncionariosUseCase(userDAO);
         editarFuncionarioUseCase = new EditarFuncionarioUseCase(userDAO);
         apagarSenhaFuncionarioUseCase = new ApagarSenhaFuncionarioUseCase(userDAO);
