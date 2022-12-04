@@ -34,7 +34,7 @@ public class SqliteClientDAO implements ClientDAO {
 
         Optional<Client> created = findOneByEmail(type.getEmail());
 
-        return created.get().getId();
+        return created.map(Client::getId).orElse(null);
     }
 
     @Override
