@@ -95,7 +95,7 @@ public class SqliteServiceDAO implements ServiceDAO {
         serviceTypeDAO.deleteByServiceId(key);
 
         Optional<Service> deleted = findOne(key);
-        return deleted.isPresent();
+        return deleted.isEmpty();
     }
 
     @Override

@@ -101,7 +101,7 @@ public class SqliteAddressDAO implements AddressDAO {
         }
 
         Optional<Address> deleted = findOneByUserId(userId);
-        return deleted.isPresent();
+        return deleted.isEmpty();
     }
 
     @Override

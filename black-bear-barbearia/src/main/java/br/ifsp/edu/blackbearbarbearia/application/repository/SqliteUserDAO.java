@@ -114,7 +114,7 @@ public class SqliteUserDAO implements UserDAO {
         userDayDAO.deleteByUserId(key);
 
         Optional<User> deleted = findOne(key);
-        return deleted.isPresent();
+        return deleted.isEmpty();
     }
 
     @Override
