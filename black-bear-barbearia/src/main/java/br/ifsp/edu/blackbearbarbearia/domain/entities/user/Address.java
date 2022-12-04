@@ -1,11 +1,21 @@
 package br.ifsp.edu.blackbearbarbearia.domain.entities.user;
 
 public class Address {
+    private Integer id;
     private String address;
     private String number;
     private String complement;
     private String district;
     private String city;
+
+    public Address(Integer id, String address, String number, String complement, String district, String city) {
+        this.id = id;
+        this.address = address;
+        this.number = number;
+        this.complement = complement;
+        this.district = district;
+        this.city = city;
+    }
 
     public Address(String address, String number, String complement, String district, String city) {
         this.address = address;
@@ -13,6 +23,14 @@ public class Address {
         this.complement = complement;
         this.district = district;
         this.city = city;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getAddress() {
@@ -48,5 +66,17 @@ public class Address {
     }
     public void setCity(String city) {
         this.city = city;
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", address='" + address + '\'' +
+                ", number='" + number + '\'' +
+                ", complement='" + complement + '\'' +
+                ", district='" + district + '\'' +
+                ", city='" + city + '\'' +
+                '}';
     }
 }

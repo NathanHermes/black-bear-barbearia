@@ -10,7 +10,7 @@ public class ConnectionFactory {
 
     public static Connection createConnection() throws SQLException {
         if(connection == null)
-            connection = DriverManager.getConnection("jdbc:sqlite:database.db");
+            connection = DriverManager.getConnection("jdbc:sqlite:blackbearbarbearia.db");
         return connection;
     }
 
