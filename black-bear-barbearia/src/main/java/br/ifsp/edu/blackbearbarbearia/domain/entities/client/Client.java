@@ -1,9 +1,5 @@
 package br.ifsp.edu.blackbearbarbearia.domain.entities.client;
 
-import br.ifsp.edu.blackbearbarbearia.domain.entities.booking.Booking;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class Client {
@@ -11,6 +7,13 @@ public class Client {
     private String name;
     private String email;
     private String phone;
+
+    public Client(Integer id, String name, String email, String phone) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+    }
 
     public Client(String name, String email, String phone) {
         this.name = name;
