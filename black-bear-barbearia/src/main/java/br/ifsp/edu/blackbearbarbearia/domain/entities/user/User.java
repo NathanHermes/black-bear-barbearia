@@ -1,6 +1,7 @@
 package br.ifsp.edu.blackbearbarbearia.domain.entities.user;
 
 import java.time.DayOfWeek;
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -29,6 +30,19 @@ public class User {
         this.days = days;
     }
 
+    public User(Integer id, String fullName, String email, String phone, Address address, String login, String passwordHash, Boolean active, Role role) {
+        this.id = id;
+        this.fullName = fullName;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.login = login;
+        this.passwordHash = passwordHash;
+        this.active = active;
+        this.role = role;
+        this.days = new ArrayList<>();
+    }
+
     /*
 
     public User(String email, String phone, Address address, Boolean active) {
@@ -38,6 +52,18 @@ public class User {
         this.active = active;
     }
     */
+
+    public User(String fullName, String email, String phone, Address address, String login, String passwordHash, Boolean active, Role role) {
+        this.fullName = fullName;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.login = login;
+        this.passwordHash = passwordHash;
+        this.active = active;
+        this.role = role;
+        this.days = new ArrayList<>();
+    }
 
     public User(String fullName, String email, String phone, Address address, String login, Boolean active, String passwordHash, Role role, List<DayOfWeek> days ){
         this.fullName = fullName;
@@ -115,12 +141,6 @@ public class User {
         days.remove(day);
     }
 
-//    @Override
-//    public String toString() {
-//        return "Employee " + id + "\n" +
-//                "FullName: " + fullName + "\n";
-//    }
-
     @Override
     public String toString() {
         return "User{" +
@@ -128,7 +148,7 @@ public class User {
                 ", fullName='" + fullName + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
-                ", address=" + address +
+                ", address=" + address.toString() +
                 ", login='" + login + '\'' +
                 ", passwordHash='" + passwordHash + '\'' +
                 ", active=" + active +

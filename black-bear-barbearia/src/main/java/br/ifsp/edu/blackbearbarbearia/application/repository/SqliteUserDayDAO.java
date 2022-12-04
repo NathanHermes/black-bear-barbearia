@@ -13,6 +13,56 @@ public class SqliteUserDayDAO implements UserDayDAO {
     final SqliteDayDAO dayDAO = new SqliteDayDAO();
 
     @Override
+    public void create(Integer userId, List<DayOfWeek> days) {
+        String sql = """
+                INSERT INTO userDay(
+                    userId,
+                    dayId
+                ) VALUES (?, ?)
+                """;
+        try {
+            final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
+
+            for(DayOfWeek day : days) {
+                final Optional<Integer> dayId = dayDAO.findId(day);
+
+                stmt.setInt(1, userId);
+                stmt.setInt(2, dayId.get());
+
+                stmt.executeUpdate();
+            }
+
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public Boolean update(Integer userId, List<DayOfWeek> days) {
+        deleteByUserId(userId);
+        create(userId, days);
+        return findByUserId(userId).equals(days);
+    }
+
+    @Override
+    public Boolean deleteByUserId(Integer userId) {
+        String sql = """
+                DELETE FROM userDay WHERE userId = ?
+                """;
+        try {
+            final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
+            stmt.setInt(1, userId);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return findByUserId(userId).isEmpty();
+    }
+
+    @Override
     public List<DayOfWeek> findByUserId(Integer userId) {
         String sql = "SELECT * FROM userDay WHERE userId = ?";
         List<DayOfWeek> days = new ArrayList<>();

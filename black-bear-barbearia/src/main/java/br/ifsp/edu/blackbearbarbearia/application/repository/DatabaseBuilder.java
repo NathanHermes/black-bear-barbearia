@@ -1,4 +1,4 @@
-package com.example.demo.application.repository;
+package br.ifsp.edu.blackbearbarbearia.application.repository;
 
 import java.io.IOException;
 import java.math.BigDecimal;

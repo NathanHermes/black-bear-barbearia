@@ -24,11 +24,16 @@ public class SqliteUserDAO implements UserDAO {
                     phone,
                     login,
                     passwordHash,
-                    active
-                ) VALUES (?, ?, ?, ?, ?, ?)
+                    active,
+                    admin
+                ) VALUES (?, ?, ?, ?, ?, ?, ?)
                 """;
         try {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
+            final Boolean admin;
+
+            if(type.getRole().equals(Role.ADMIN)) admin = true;
+            else admin = false;
 
             stmt.setString(1, type.getFullName());
             stmt.setString(2, type.getEmail());
@@ -36,14 +41,19 @@ public class SqliteUserDAO implements UserDAO {
             stmt.setString(4, type.getLogin());
             stmt.setString(5, type.getPasswordHash());
             stmt.setBoolean(6, type.isActive());
+            stmt.setBoolean(7, admin);
 
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        Optional<User> created = findOneByLogin(type.getLogin());
-        return created.map(User::getId).orElse(null);
+        Optional<Integer> id = findKeyByFullname(type.getFullName());
+
+        addressDAO.create(id.get(), type.getAddress());
+        userDayDAO.create(id.get(), type.getDays());
+
+        return id.get();
     }
 
     @Override
@@ -55,11 +65,16 @@ public class SqliteUserDAO implements UserDAO {
                     phone = ?,
                     login = ?,
                     passwordHash = ?,
-                    active = ?
+                    active = ?,
+                    admin = ?
                 WHERE id = ?
                 """;
         try {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
+            final Boolean admin;
+
+            if(type.getRole().equals(Role.ADMIN)) admin = true;
+            else admin = false;
 
             stmt.setString(1, type.getFullName());
             stmt.setString(2, type.getEmail());
@@ -67,14 +82,18 @@ public class SqliteUserDAO implements UserDAO {
             stmt.setString(4, type.getLogin());
             stmt.setString(5, type.getPasswordHash());
             stmt.setBoolean(6, type.isActive());
-            stmt.setInt(7, type.getId());
+            stmt.setBoolean(7, admin);
+            stmt.setInt(8, type.getId());
 
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
+        addressDAO.update(type.getId(), type.getAddress());
+        userDayDAO.update(type.getId(), type.getDays());
         Optional<User> updated = findOne(type.getId());
+
         return type.equals(updated.get());
     }
 
@@ -90,6 +109,9 @@ public class SqliteUserDAO implements UserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        addressDAO.deleteByUserId(key);
+        userDayDAO.deleteByUserId(key);
 
         Optional<User> deleted = findOne(key);
         return deleted.isPresent();
@@ -113,7 +135,6 @@ public class SqliteUserDAO implements UserDAO {
             final ResultSet result = stmt.executeQuery();
 
             while(result.next()){
-                final Integer id = result.getInt("id");
                 final String fullName = result.getString("fullName");
                 final String email = result.getString("email");
                 final String phone = result.getString("phone");
@@ -122,15 +143,15 @@ public class SqliteUserDAO implements UserDAO {
                 final Boolean active = result.getBoolean("active");
                 final Boolean admin = result.getBoolean("admin");
 
-                Optional<Address> address = addressDAO.findOneByUserId(id);
+                Optional<Address> address = addressDAO.findOneByUserId(key);
 
                 final Role role;
                 if(admin) role = Role.ADMIN;
                 else role = Role.EMPLOYEE;
 
-                final List<DayOfWeek> days = userDayDAO.findByUserId(id);
+                final List<DayOfWeek> days = userDayDAO.findByUserId(key);
 
-                user = Optional.of(new User(id, fullName, email, phone, address.get(), login, passwordHash, active, role, days));
+                user = Optional.of(new User(key, fullName, email, phone, address.get(), login, passwordHash, active, role, days));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -238,6 +259,7 @@ public class SqliteUserDAO implements UserDAO {
                 final Boolean admin = result.getBoolean("admin");
 
                 Optional<Address> address = addressDAO.findOneByUserId(id);
+                if(address.isEmpty()) address = null;
 
                 final Role role;
                 if(admin) role = Role.ADMIN;
@@ -257,5 +279,26 @@ public class SqliteUserDAO implements UserDAO {
     @Override
     public List<User> findOneByDay(DayOfWeek day) {
         return null;
+    }
+
+    private Optional<Integer> findKeyByFullname(String fullName) {
+        String sql = "SELECT id FROM user WHERE fullName = ?";
+        Optional<Integer> id = Optional.empty();
+
+        try {
+            final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
+
+            stmt.setString(1, fullName);
+
+            final ResultSet result = stmt.executeQuery();
+
+            while(result.next()){
+                id = Optional.of(result.getInt("id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return id;
     }
 }

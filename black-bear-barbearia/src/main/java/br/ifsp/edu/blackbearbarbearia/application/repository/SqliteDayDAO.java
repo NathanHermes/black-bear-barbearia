@@ -34,8 +34,8 @@ public class SqliteDayDAO implements DayDAO {
     }
 
     @Override
-    public Optional<Integer> findOne(DayOfWeek entity) {
-        String sql = "SELECT * FROM day WHERE nome = ?";
+    public Optional<Integer> findId(DayOfWeek entity) {
+        String sql = "SELECT * FROM day WHERE name = ?";
         Optional<Integer> id = Optional.empty();
 
         try {
