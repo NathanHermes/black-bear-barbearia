@@ -1,5 +1,6 @@
 package br.ifsp.edu.blackbearbarbearia.application.repository;
 
+import br.ifsp.edu.blackbearbarbearia.domain.entities.booking.Status;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Type;
 
 import java.io.IOException;
@@ -26,6 +27,7 @@ public class DatabaseBuilder {
         createTableService();
         createTableServiceType();
         createTableClient();
+        createTableStatus();
         createTableBooking();
 
         populateDay();
@@ -36,6 +38,7 @@ public class DatabaseBuilder {
         populateService();
         populateServiceType();
         populateClient();
+        populateStatus();
         populateBooking();
     }
 
@@ -184,6 +187,21 @@ public class DatabaseBuilder {
         connection.close();
     }
 
+    private static void createTableStatus() throws SQLException {
+        final Connection connection = DriverManager.getConnection("jdbc:sqlite:blackbearbarbearia.db");
+        final Statement stmt = connection.createStatement();
+
+        String sql = """
+                CREATE TABLE status(
+                    id INTEGER PRIMARY KEY,
+                    name TEXT NOT NULL
+                )
+                """;
+        stmt.executeUpdate(sql);
+        stmt.close();
+        connection.close();
+    }
+
     private static void createTableBooking() throws SQLException {
         final Connection connection = DriverManager.getConnection("jdbc:sqlite:blackbearbarbearia.db");
         final Statement stmt = connection.createStatement();
@@ -195,9 +213,11 @@ public class DatabaseBuilder {
                     clientId INTEGER NOT NULL,
                     serviceId INTEGER NOT NULL,
                     userId INTEGER NOT NULL,
+                    statusId INTEGER NOT NULL,
                     FOREIGN KEY (clientId) REFERENCES client(id),
                     FOREIGN KEY (serviceId) REFERENCES service(id),
-                    FOREIGN KEY (userId) REFERENCES user(id)
+                    FOREIGN KEY (userId) REFERENCES user(id),
+                    FOREIGN KEY (statusId) REFERENCES status(id)
                 )
                 """;
         stmt.executeUpdate(sql);
@@ -372,17 +392,33 @@ public class DatabaseBuilder {
         connection.close();
     }
 
+    private static void populateStatus() throws SQLException {
+        final Connection connection = DriverManager.getConnection("jdbc:sqlite:blackbearbarbearia.db");
+        final Statement stmt = connection.createStatement();
+
+        final String sql = "INSERT INTO status (name) " +
+                "VALUES ('%s')";
+
+        stmt.addBatch(String.format(sql, Status.BOOKED));
+        stmt.addBatch(String.format(sql, Status.DONE));
+        stmt.addBatch(String.format(sql, Status.CANCELLED));
+        stmt.executeBatch();
+
+        stmt.close();
+        connection.close();
+    }
+
     private static void populateBooking() throws SQLException {
         final Connection connection = DriverManager.getConnection("jdbc:sqlite:blackbearbarbearia.db");
         final Statement stmt = connection.createStatement();
 
-        final String sql = "INSERT INTO booking (date, paid, clientId, serviceId, userId) " +
-                "VALUES ('%s', %b, %d, %d, %d)";
+        final String sql = "INSERT INTO booking (date, paid, clientId, serviceId, userId, statusId) " +
+                "VALUES ('%s', %b, %d, %d, %d, %d)";
 
-        stmt.addBatch(String.format(sql, LocalDate.of(2022, 11, 9), Boolean.FALSE, 1, 1, 1));
-        stmt.addBatch(String.format(sql, LocalDate.of(2022,11,8), Boolean.FALSE, 2, 2, 2));
-        stmt.addBatch(String.format(sql, LocalDate.of(2022,11,7), Boolean.FALSE, 3, 3, 3));
-        stmt.addBatch(String.format(sql, LocalDate.of(2022,11,6), Boolean.FALSE, 4, 4, 4));
+        stmt.addBatch(String.format(sql, LocalDate.of(2022, 11, 9), Boolean.FALSE, 1, 1, 1, 1));
+        stmt.addBatch(String.format(sql, LocalDate.of(2022,11,8), Boolean.FALSE, 2, 2, 2, 1));
+        stmt.addBatch(String.format(sql, LocalDate.of(2022,11,7), Boolean.FALSE, 3, 3, 3, 1));
+        stmt.addBatch(String.format(sql, LocalDate.of(2022,11,6), Boolean.FALSE, 4, 4, 4, 1));
         stmt.executeBatch();
 
         stmt.close();

@@ -17,6 +17,16 @@ public class Booking {
     private User employee;
     private Status status;
 
+    public Booking(Integer id, LocalDate date, Boolean paid, Client client, Service service, User employee, Status status) {
+        this.id = id;
+        this.date = date;
+        this.paid = paid;
+        this.client = client;
+        this.service = service;
+        this.employee = employee;
+        this.status = status;
+    }
+
     public Booking(LocalDate date, boolean paid, Client client, Service service, User employee) {
         this.date = date;
         this.paid = paid;
@@ -98,9 +108,9 @@ public class Booking {
                 "id=" + id +
                 ", date=" + date +
                 ", paid=" + paid +
-                ", client=" + client +
-                ", service=" + service +
-                ", user=" + employee +
+                ", client=" + client.toString() +
+                ", service=" + service.toString() +
+                ", employee=" + employee.toString() +
                 ", status=" + status +
                 '}';
     }
