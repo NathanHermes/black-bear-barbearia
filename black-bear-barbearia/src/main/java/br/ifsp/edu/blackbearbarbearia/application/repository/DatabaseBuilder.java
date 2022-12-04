@@ -1,5 +1,7 @@
 package br.ifsp.edu.blackbearbarbearia.application.repository;
 
+import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Type;
+
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Files;
@@ -20,7 +22,9 @@ public class DatabaseBuilder {
         createTableUser();
         createTableAddress();
         createTableUserDay();
+        createTableType();
         createTableService();
+        createTableServiceType();
         createTableClient();
         createTableBooking();
 
@@ -28,7 +32,9 @@ public class DatabaseBuilder {
         populateUser();
         populateAddress();
         populateUserDay();
+        populateType();
         populateService();
+        populateServiceType();
         populateClient();
         populateBooking();
     }
@@ -111,6 +117,21 @@ public class DatabaseBuilder {
         connection.close();
     }
 
+    private static void createTableType() throws SQLException {
+        final Connection connection = DriverManager.getConnection("jdbc:sqlite:blackbearbarbearia.db");
+        final Statement stmt = connection.createStatement();
+
+        String sql = """
+                CREATE TABLE type(
+                    id INTEGER PRIMARY KEY,
+                    name TEXT NOT NULL
+                )
+                """;
+        stmt.executeUpdate(sql);
+        stmt.close();
+        connection.close();
+    }
+
     private static void createTableService() throws SQLException {
         final Connection connection = DriverManager.getConnection("jdbc:sqlite:blackbearbarbearia.db");
         final Statement stmt = connection.createStatement();
@@ -122,6 +143,24 @@ public class DatabaseBuilder {
                     comissionPercentage REAL NOT NULL,
                     taxPercentage REAL NOT NULL,
                     active BOOLEAN NOT NULL
+                )
+                """;
+        stmt.executeUpdate(sql);
+        stmt.close();
+        connection.close();
+    }
+
+    private static void createTableServiceType() throws SQLException {
+        final Connection connection = DriverManager.getConnection("jdbc:sqlite:blackbearbarbearia.db");
+        final Statement stmt = connection.createStatement();
+
+        String sql = """
+                CREATE TABLE serviceType(
+                    serviceId INTEGER,
+                    typeId INTEGER,
+                    PRIMARY KEY(serviceId, typeId),
+                    FOREIGN KEY (serviceId) REFERENCES service(id),
+                    FOREIGN KEY (typeId) REFERENCES type(id)
                 )
                 """;
         stmt.executeUpdate(sql);
@@ -261,6 +300,22 @@ public class DatabaseBuilder {
         connection.close();
     }
 
+    private static void populateType() throws SQLException {
+        final Connection connection = DriverManager.getConnection("jdbc:sqlite:blackbearbarbearia.db");
+        final Statement stmt = connection.createStatement();
+
+        final String sql = "INSERT INTO type (name) " +
+                "VALUES ('%s')";
+
+        stmt.addBatch(String.format(sql, Type.HAIR));
+        stmt.addBatch(String.format(sql, Type.BEARD));
+        stmt.addBatch(String.format(sql, Type.OTHER));
+        stmt.executeBatch();
+
+        stmt.close();
+        connection.close();
+    }
+
     private static void populateService() throws SQLException {
         final Connection connection = DriverManager.getConnection("jdbc:sqlite:blackbearbarbearia.db");
         final Statement stmt = connection.createStatement();
@@ -272,6 +327,27 @@ public class DatabaseBuilder {
         stmt.addBatch(String.format(sql, "Corte de cabelo", new BigDecimal("30.00"), new BigDecimal("0.40"), new BigDecimal("0.08"), Boolean.TRUE));
         stmt.addBatch(String.format(sql, "Corte de barba", new BigDecimal("25.00"), new BigDecimal("0.40"), new BigDecimal("0.08"), Boolean.TRUE));
         stmt.addBatch(String.format(sql, "Risquinho de cria", new BigDecimal("15.00"), new BigDecimal("0.35"), new BigDecimal("0.05"), Boolean.TRUE));
+        stmt.executeBatch();
+
+        stmt.close();
+        connection.close();
+    }
+
+    private static void populateServiceType() throws SQLException {
+        final Connection connection = DriverManager.getConnection("jdbc:sqlite:blackbearbarbearia.db");
+        final Statement stmt = connection.createStatement();
+
+        final String sql = "INSERT INTO serviceType (serviceId, typeId) " +
+                "VALUES (%d, %d)";
+
+        stmt.addBatch(String.format(sql, 1, 1));
+        stmt.addBatch(String.format(sql, 1, 2));
+
+        stmt.addBatch(String.format(sql, 2, 1));
+
+        stmt.addBatch(String.format(sql, 3, 1));
+
+        stmt.addBatch(String.format(sql, 4, 3));
         stmt.executeBatch();
 
         stmt.close();

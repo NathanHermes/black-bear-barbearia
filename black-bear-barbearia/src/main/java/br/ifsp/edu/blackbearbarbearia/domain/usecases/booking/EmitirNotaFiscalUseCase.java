@@ -25,7 +25,7 @@ public class EmitirNotaFiscalUseCase {
         notaFiscal.put("Employee", user);
 
         Service service = booking.getInfoService();
-        notaFiscal.put("Service", service.getNome());
+        notaFiscal.put("Service", service.getName());
         notaFiscal.put("Price", service.getPrice().toString());
 
         return notaFiscal;

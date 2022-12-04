@@ -14,7 +14,7 @@ public class CreateServiceInputRequestValidator extends Validator<Service> {
             return notification;
         }
 
-        if (nullOrEmpty(service.getNome())) notification.addError("Name is null or empty");
+        if (nullOrEmpty(service.getName())) notification.addError("Name is null or empty");
         if (nullOrEmpty(String.valueOf(service.getPrice()))) notification.addError("Price is null or empty");
         if (nullOrEmpty(String.valueOf(service.getComissionPercentage()))) notification.addError("Commission is null or empty");
         if (nullOrEmpty(String.valueOf(service.getTaxPercentage()))) notification.addError("Taxa percentage is null or empty");

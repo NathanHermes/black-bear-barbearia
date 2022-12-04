@@ -8,4 +8,5 @@ import java.util.Optional;
 
 public interface ServiceDAO extends DAO<Service, Integer> {
     Optional<Service> findOneByName(String name);
+    Optional<Integer> findKeyByName(String name);
 }

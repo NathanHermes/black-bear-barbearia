@@ -1,6 +1,5 @@
 package br.ifsp.edu.blackbearbarbearia.domain.usecases.user;
 
-import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Address;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
 
 import java.time.DayOfWeek;

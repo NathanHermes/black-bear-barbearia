@@ -46,7 +46,7 @@ public class InMemoryServiceDAO implements ServiceDAO {
     @Override
     public Optional<Service> findOneByName(String name) {
         return database.values().stream()
-                .filter(service -> service.getNome().equals(name))
+                .filter(service -> service.getName().equals(name))
                 .findAny();
     }
 }

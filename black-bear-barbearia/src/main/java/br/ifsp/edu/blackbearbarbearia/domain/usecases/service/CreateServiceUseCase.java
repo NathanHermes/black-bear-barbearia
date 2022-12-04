@@ -19,7 +19,7 @@ public class CreateServiceUseCase {
         if (notification.hasErros())
             throw new IllegalArgumentException(notification.errorMessage());
 
-        String name = service.getNome();
+        String name = service.getName();
         if (dao.findOneByName(name).isPresent())
             throw new EntityAlreadyExistsException("This name is already in use");
 

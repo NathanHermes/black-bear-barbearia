@@ -59,7 +59,7 @@ public class Booking {
     }
 
     public String getService() {
-        return service.getNome();
+        return service.getName();
     }
     public Service getInfoService() {
         return service;

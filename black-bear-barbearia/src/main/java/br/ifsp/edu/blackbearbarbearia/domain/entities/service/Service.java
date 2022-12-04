@@ -7,15 +7,35 @@ import java.util.Objects;
 
 public class Service {
     private Integer id;
-    private String nome;
+    private String name;
     private BigDecimal price;
     private BigDecimal comissionPercentage;
     private BigDecimal taxPercentage;
     private Boolean active;
     private final List<Type> types;
 
-    public Service(String nome, BigDecimal price, BigDecimal comissionPercentage, BigDecimal taxPercentage, Boolean active) {
-        this.nome = nome;
+    public Service(Integer id, String name, BigDecimal price, BigDecimal comissionPercentage, BigDecimal taxPercentage, Boolean active) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.comissionPercentage = comissionPercentage;
+        this.taxPercentage = taxPercentage;
+        this.active = active;
+        this.types = new ArrayList<>();
+    }
+
+    public Service(Integer id, String name, BigDecimal price, BigDecimal comissionPercentage, BigDecimal taxPercentage, Boolean active, List<Type> types) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.comissionPercentage = comissionPercentage;
+        this.taxPercentage = taxPercentage;
+        this.active = active;
+        this.types = types;
+    }
+
+    public Service(String name, BigDecimal price, BigDecimal comissionPercentage, BigDecimal taxPercentage, Boolean active) {
+        this.name = name;
         this.price = price;
         this.comissionPercentage = comissionPercentage;
         this.taxPercentage = taxPercentage;
@@ -38,12 +58,12 @@ public class Service {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public BigDecimal getPrice() {
@@ -110,7 +130,7 @@ public class Service {
     public String toString() {
         return "Service{" +
                 "id=" + id +
-                ", nome='" + nome + '\'' +
+                ", name='" + name + '\'' +
                 ", price=" + price +
                 ", comissionPercentage=" + comissionPercentage +
                 ", taxPercentage=" + taxPercentage +
