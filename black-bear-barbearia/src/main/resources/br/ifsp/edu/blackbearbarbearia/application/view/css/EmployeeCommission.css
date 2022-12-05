@@ -1,0 +1,11 @@
+.btnOK {
+    -fx-pref-width: 200px;
+    -fx-pref-height: 40px;
+    -fx-background-color: #f0f2f5;
+    -fx-border-color: #1d4c84;
+    -fx-text-fill: #1d4c84;
+    -fx-border-width: 2;
+    -fx-font-family: "Young Heart";
+    -fx-font-size: 24;
+    -fx-font-weight: 700;
+}
