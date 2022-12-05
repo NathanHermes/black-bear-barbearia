@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #f0f2f5;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.CreateBookingController">
+   <children>
+      <Label fx:id="lblCadastrar" alignment="CENTER" contentDisplay="CENTER" layoutX="377.0" layoutY="67.0" text="CADASTRAR" textAlignment="JUSTIFY" textFill="#1d4c88">
+         <font>
+            <Font name="Cambria Bold" size="36.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cbServico" layoutX="377.0" layoutY="131.0" prefWidth="206.0" promptText="Serviços" AnchorPane.leftAnchor="377.0" AnchorPane.rightAnchor="377.0" AnchorPane.topAnchor="131.0" />
+      <DatePicker fx:id="dtData" layoutX="377.0" layoutY="182.0" prefHeight="31.0" prefWidth="206.0" AnchorPane.leftAnchor="377.0" AnchorPane.rightAnchor="377.0" AnchorPane.topAnchor="182.0" />
+      <ComboBox fx:id="cbFuncionario" layoutX="377.0" layoutY="233.0" prefWidth="206.0" promptText="Funcionários" AnchorPane.leftAnchor="377.0" AnchorPane.rightAnchor="377.0" AnchorPane.topAnchor="233.0" />
+      <ComboBox fx:id="cbHorario" layoutX="377.0" layoutY="284.0" prefWidth="206.0" promptText="Horarios" AnchorPane.leftAnchor="377.0" AnchorPane.rightAnchor="377.0" AnchorPane.topAnchor="284.0" />
+      <ComboBox fx:id="cbCliente" layoutX="377.0" layoutY="335.0" prefWidth="206.0" promptText="Clientes" AnchorPane.leftAnchor="377.0" AnchorPane.rightAnchor="377.0" AnchorPane.topAnchor="335.0" />
+      <Label layoutX="377.0" layoutY="386.0" text="Valor:" AnchorPane.leftAnchor="377.0" AnchorPane.rightAnchor="545.0" AnchorPane.topAnchor="386.0" />
+      <Label fx:id="txtValor" layoutX="435.0" layoutY="386.0" text="..." AnchorPane.leftAnchor="435.0" AnchorPane.rightAnchor="507.0" AnchorPane.topAnchor="386.0" />
+      <Button fx:id="btnCadastrar" layoutX="377.0" layoutY="427.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#cadastrar" prefHeight="46.0" prefWidth="206.0" style="-fx-background-color: #e3383e;" text="Cadastrar" AnchorPane.leftAnchor="377.0" AnchorPane.rightAnchor="377.0" AnchorPane.topAnchor="427.0">
+         <font>
+            <Font name="Cambria Bold" size="24.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
