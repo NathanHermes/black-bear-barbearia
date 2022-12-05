@@ -33,15 +33,14 @@ public class FinishBookingUseCase {
         if (daoBooking.getStatus().equals(Status.CANCELLED))
             throw new IllegalArgumentException("Booking is cancelled");
 
-        Service service = booking.getInfoService();
+        daoBooking.setPaid(Boolean.TRUE);
+        daoBooking.setStatus(Status.DONE);
+        dao.update(daoBooking);
 
+        Service service = daoBooking.getInfoService();
         BigDecimal price = service.getPrice();
         BigDecimal commissionPercentage = service.getComissionPercentage();
-        BigDecimal commission = price.multiply(commissionPercentage);
 
-        Map<String, String> notaFiscal = new EmitirNotaFiscalUseCase().create(booking);
-        notaFiscal.forEach((key, value) -> System.out.println(key + ": " + value));
-
-        return commission;
+        return price.multiply(commissionPercentage);
     }
 }
