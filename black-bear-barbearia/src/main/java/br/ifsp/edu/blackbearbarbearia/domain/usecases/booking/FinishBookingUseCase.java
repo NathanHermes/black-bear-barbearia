@@ -27,9 +27,11 @@ public class FinishBookingUseCase {
         if (dao.findOne(id).isEmpty())
             throw new EntityNotFoundException("Booking not found");
 
-        booking.setPaid(Boolean.TRUE);
-        booking.setStatus(Status.DONE);
-        dao.update(booking);
+        Booking daoBooking = dao.findOne(id).get();
+        if (daoBooking.getStatus().equals(Status.DONE))
+            throw new IllegalArgumentException("Booking has already been completed");
+        if (daoBooking.getStatus().equals(Status.CANCELLED))
+            throw new IllegalArgumentException("Booking is cancelled");
 
         Service service = booking.getInfoService();
 
