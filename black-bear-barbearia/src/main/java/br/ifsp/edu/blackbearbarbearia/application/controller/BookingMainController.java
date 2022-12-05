@@ -146,7 +146,7 @@ public class BookingMainController {
     }
 
     @FXML
-    public void concluir(ActionEvent event) throws IOException {
+    public void concludeBooking(ActionEvent event) throws IOException {
         Booking bookingSelected = tbvBookings.getSelectionModel().getSelectedItem();
         BigDecimal employeeCommission = finishBookingUseCase.update(bookingSelected);
         loadBookingData();
