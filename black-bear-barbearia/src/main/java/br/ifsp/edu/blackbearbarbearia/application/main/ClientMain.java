@@ -1,7 +1,7 @@
 package br.ifsp.edu.blackbearbarbearia.application.main;
 
-import br.ifsp.edu.blackbearbarbearia.application.repository.InMemoryClientDAO;
-import br.ifsp.edu.blackbearbarbearia.application.repository.InMemoryUserDAO;
+import br.ifsp.edu.blackbearbarbearia.application.repository.inMemory.InMemoryClientDAO;
+import br.ifsp.edu.blackbearbarbearia.application.repository.inMemory.InMemoryUserDAO;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.client.Client;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Address;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;

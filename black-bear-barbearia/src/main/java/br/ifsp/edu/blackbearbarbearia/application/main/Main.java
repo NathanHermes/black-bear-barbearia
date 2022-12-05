@@ -1,9 +1,9 @@
 package br.ifsp.edu.blackbearbarbearia.application.main;
 
-import br.ifsp.edu.blackbearbarbearia.application.repository.InMemoryBookingDAO;
-import br.ifsp.edu.blackbearbarbearia.application.repository.InMemoryClientDAO;
-import br.ifsp.edu.blackbearbarbearia.application.repository.InMemoryServiceDAO;
-import br.ifsp.edu.blackbearbarbearia.application.repository.InMemoryUserDAO;
+import br.ifsp.edu.blackbearbarbearia.application.repository.inMemory.InMemoryBookingDAO;
+import br.ifsp.edu.blackbearbarbearia.application.repository.inMemory.InMemoryClientDAO;
+import br.ifsp.edu.blackbearbarbearia.application.repository.inMemory.InMemoryServiceDAO;
+import br.ifsp.edu.blackbearbarbearia.application.repository.inMemory.InMemoryUserDAO;
 import br.ifsp.edu.blackbearbarbearia.application.view.WindowLoader;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.booking.Booking;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.client.Client;
