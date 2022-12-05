@@ -8,7 +8,6 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Notification;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Validator;
 
 import java.math.BigDecimal;
-import java.util.Map;
 
 public class FinishBookingUseCase {
     private final BookingDAO dao;
