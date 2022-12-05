@@ -62,10 +62,8 @@
    <Button fx:id="btnConcluir" layoutX="280.0" layoutY="689.0" mnemonicParsing="false" onAction="#concluir"
            text="CONCLUIR" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="300.0"/>
    <Button fx:id="btnServicosPrestados" layoutX="577.0" layoutY="689.0" mnemonicParsing="false"
-           onAction="#servicosPrestados" text="SERVIÇOS PRESTADOS" AnchorPane.bottomAnchor="48.0"
+           onAction="#historyOfBookingFromEmployee" text="SERVIÇOS PRESTADOS" AnchorPane.bottomAnchor="48.0"
            AnchorPane.rightAnchor="297.0"/>
-   <Button fx:id="btnNotaFiscal" layoutX="768.0" layoutY="689.0" mnemonicParsing="false" onAction="#notaFiscal"
-           text="NOTA FISCAL" AnchorPane.bottomAnchor="48.0" AnchorPane.rightAnchor="167.0"/>
    <Button fx:id="btnRelatorio" layoutX="791.0" layoutY="689.0" mnemonicParsing="false" onAction="#relatorio"
            text="RELATÓRIO" AnchorPane.bottomAnchor="48.0" AnchorPane.rightAnchor="50.0"/>
 </AnchorPane>
