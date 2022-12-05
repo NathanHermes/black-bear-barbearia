@@ -122,10 +122,8 @@ public class BookingMainController {
     }
 
     @FXML
-    void goToManageService(ActionEvent event) {
-        /*
-         * Esperando terminar a implementação da tela de gerencimento de serviços
-         */
+    void goToManageService(ActionEvent event) throws IOException {
+        WindowLoader.setRoot("ServiceMain");
     }
 
     @FXML
@@ -146,11 +144,17 @@ public class BookingMainController {
          * Esperando terminar a implementação da tela de cadastro de agendamento
          */
     }
+
     @FXML
-    void concluir(ActionEvent event) {
+    void concluir(ActionEvent event) throws IOException {
         Booking bookingSelected = tbvBookings.getSelectionModel().getSelectedItem();
         BigDecimal employeeCommission = finishBookingUseCase.update(bookingSelected);
         loadBookingData();
+
+        INFOCOMMISSIONPOPUP.clear();
+        INFOCOMMISSIONPOPUP.add(bookingSelected.getEmployee());
+        INFOCOMMISSIONPOPUP.add(String.format("%.2f%n", employeeCommission));
+        WindowLoader.setRoot("EmployeeCommission");
     }
     @FXML
     void desmarcar(ActionEvent event) {
