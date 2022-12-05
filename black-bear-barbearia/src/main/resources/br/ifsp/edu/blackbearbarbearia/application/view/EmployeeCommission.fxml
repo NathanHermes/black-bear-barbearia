@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fillWidth="false" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.EmployeeCommissionController">
+    <HBox>
+        <Label text="Funcionário(a):"/>
+        <Label fx:id="name"/>
+    </HBox>
+    <HBox>
+        <Label text="Comissão:"/>
+        <Label fx:id="commission"/>
+    </HBox>
+    <Button styleClass="btnOK" text="O K" onAction="#back"/>
+</VBox>
