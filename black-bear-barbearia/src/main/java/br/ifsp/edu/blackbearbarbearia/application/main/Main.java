@@ -13,10 +13,7 @@ import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Address;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Role;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.UserBuilder;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.booking.BookingDAO;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.booking.CreateBookingUseCase;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.booking.FindBookingUseCase;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.booking.FinishBookingUseCase;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.booking.*;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.ClientDAO;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.CreateClientUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.CadastrarFuncionarioUseCase;
@@ -36,9 +33,13 @@ public class Main {
     public static CreateClientUseCase createClientUseCase;
     public static CreateServiceUseCase createServiceUseCase;
     public static CreateBookingUseCase createBookingUseCase;
-    public static FinishBookingUseCase finishBookingUseCase;
     public static FindBookingUseCase findBookingUseCase;
+    public static FinishBookingUseCase finishBookingUseCase;
+    public static GenerateNotaFiscalInPDFUseCase generateNotaFiscalInPDFUseCase;
+    public static CancelBookingUseCase cancelBookingUseCase;
+
     public static User USER;
+    public static ArrayList<String> INFOCOMMISSIONPOPUP;
 
     public static void main(String[] args) {
         configureInjection();
@@ -87,6 +88,8 @@ public class Main {
     }
 
     private static void configureInjection() {
+        INFOCOMMISSIONPOPUP = new ArrayList<>();
+
         UserDAO userDAO = new InMemoryUserDAO();
         loginUseCase = new LoginUseCase(userDAO);
         cadastrarFuncionarioUseCase = new CadastrarFuncionarioUseCase(userDAO);
@@ -101,5 +104,7 @@ public class Main {
         createBookingUseCase = new CreateBookingUseCase(bookingDAO);
         findBookingUseCase = new FindBookingUseCase(bookingDAO);
         finishBookingUseCase = new FinishBookingUseCase(bookingDAO);
+        generateNotaFiscalInPDFUseCase = new GenerateNotaFiscalInPDFUseCase();
+        cancelBookingUseCase = new CancelBookingUseCase(bookingDAO);
     }
 }
