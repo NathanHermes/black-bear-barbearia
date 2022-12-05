@@ -1,4 +1,4 @@
-package br.ifsp.edu.blackbearbarbearia.application.repository;
+package br.ifsp.edu.blackbearbarbearia.application.repository.inMemory;
 
 import br.ifsp.edu.blackbearbarbearia.domain.entities.booking.Booking;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;

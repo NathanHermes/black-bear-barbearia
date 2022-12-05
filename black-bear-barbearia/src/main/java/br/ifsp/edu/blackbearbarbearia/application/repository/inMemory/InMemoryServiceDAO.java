@@ -1,4 +1,4 @@
-package br.ifsp.edu.blackbearbarbearia.application.repository;
+package br.ifsp.edu.blackbearbarbearia.application.repository.inMemory;
 
 import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Service;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.ServiceDAO;
