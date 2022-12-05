@@ -24,10 +24,6 @@ public class WindowLoader extends Application {
         stage.show();
     }
 
-    public static Object getController() {
-        return controller;
-    }
-
     public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
@@ -42,5 +38,9 @@ public class WindowLoader extends Application {
 
     public static void main(String[] args) {
         launch();
+    }
+
+    public static Object getController() {
+        return controller;
     }
 }
