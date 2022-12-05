@@ -49,4 +49,9 @@ public class InMemoryServiceDAO implements ServiceDAO {
                 .filter(service -> service.getName().equals(name))
                 .findAny();
     }
+
+    @Override
+    public Optional<Integer> findKeyByName(String name) {
+        return Optional.empty();
+    }
 }
