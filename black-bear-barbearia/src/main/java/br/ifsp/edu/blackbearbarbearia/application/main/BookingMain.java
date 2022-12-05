@@ -1,30 +1,5 @@
 package br.ifsp.edu.blackbearbarbearia.application.main;
 
-import br.ifsp.edu.blackbearbarbearia.application.repository.InMemoryBookingDAO;
-import br.ifsp.edu.blackbearbarbearia.application.repository.InMemoryClientDAO;
-import br.ifsp.edu.blackbearbarbearia.application.repository.InMemoryServiceDAO;
-import br.ifsp.edu.blackbearbarbearia.application.repository.InMemoryUserDAO;
-import br.ifsp.edu.blackbearbarbearia.domain.entities.booking.Booking;
-import br.ifsp.edu.blackbearbarbearia.domain.entities.client.Client;
-import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Service;
-import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Type;
-import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Address;
-import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.booking.*;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.CreateClientUseCase;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.ClientDAO;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.ListarClientesUseCase;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.CadastrarFuncionarioUseCase;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.ListarFuncionariosUseCase;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.CreateServiceUseCase;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.ListarServicosUseCase;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.ServiceDAO;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.LoginUseCase;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.UserDAO;
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
-
 public class BookingMain {
     /*public static LoginUseCase loginUseCase;
     public static CadastrarFuncionarioUseCase cadastrarFuncionarioUseCase;
