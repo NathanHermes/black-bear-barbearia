@@ -112,41 +112,41 @@ public class BookingMainController {
     }
 
     @FXML
-    void goToManageClients(ActionEvent event) throws IOException {
+    public void goToManageClients(ActionEvent event) throws IOException {
         WindowLoader.setRoot("ClientMain");
     }
 
     @FXML
-    void goToManageEmployees(ActionEvent event) throws IOException {
+    public void goToManageEmployees(ActionEvent event) throws IOException {
         WindowLoader.setRoot("EmployeeMain");
     }
 
     @FXML
-    void goToManageService(ActionEvent event) throws IOException {
+    public void goToManageService(ActionEvent event) throws IOException {
         WindowLoader.setRoot("ServiceMain");
     }
 
     @FXML
-    void logout(ActionEvent event) throws IOException {
+    public void logout(ActionEvent event) throws IOException {
         WindowLoader.setRoot("Logout");
     }
 
     @FXML
-    void filtrar(ActionEvent event) {
+    public void filtrar(ActionEvent event) {
         /*
         * Esperando terminar a implementação do banco de dados
         */
     }
 
     @FXML
-    void cadastrar(ActionEvent event) {
+    public void cadastrar(ActionEvent event) {
         /*
          * Esperando terminar a implementação da tela de cadastro de agendamento
          */
     }
 
     @FXML
-    void concluir(ActionEvent event) throws IOException {
+    public void concluir(ActionEvent event) throws IOException {
         Booking bookingSelected = tbvBookings.getSelectionModel().getSelectedItem();
         BigDecimal employeeCommission = finishBookingUseCase.update(bookingSelected);
         loadBookingData();
@@ -155,27 +155,27 @@ public class BookingMainController {
         INFOCOMMISSIONPOPUP.add(bookingSelected.getEmployee());
         INFOCOMMISSIONPOPUP.add(String.format("%.2f%n", employeeCommission));
         WindowLoader.setRoot("EmployeeCommission");
+
+        generateNotaFiscalInPDFUseCase.generate(bookingSelected);
     }
+
     @FXML
-    void desmarcar(ActionEvent event) {
-        
+    public void desmarcar(ActionEvent event) {
+        Booking bookingSelected = tbvBookings.getSelectionModel().getSelectedItem();
+        cancelBookingUseCase.update(bookingSelected);
+        loadBookingData();
     }
+
+    @FXML
+    public void historyOfBookingFromEmployee(ActionEvent event) {
+        /*
+        *  Esperando a criação da tela de histórico de seriços prestados
+        * */
+    }
+
     @FXML
     void relatorio(ActionEvent event) {
 
     }
-
-    @FXML
-    void notaFiscal(ActionEvent event) {
-
-    }
-
-    @FXML
-    void servicosPrestados(ActionEvent event) {
-
-    }
-
-
-
 }
 
