@@ -23,7 +23,11 @@ public class CancelBookingUseCase {
         if (dao.findOne(id).isEmpty())
             throw new EntityNotFoundException("Booking not found.");
 
-        booking.setStatus(Status.CANCELLED);
-        return dao.update(booking);
+        Booking daoBooking = dao.findOne(id).get();
+        if (daoBooking.getStatus().equals(Status.DONE))
+            throw new IllegalArgumentException("Booking has already been completed");
+
+        daoBooking.setStatus(Status.CANCELLED);
+        return dao.update(daoBooking);
     }
 }
