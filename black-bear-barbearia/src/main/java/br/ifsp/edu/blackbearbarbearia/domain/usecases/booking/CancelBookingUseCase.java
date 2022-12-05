@@ -6,8 +6,6 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityNotFoundExcept
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Notification;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Validator;
 
-import java.util.Optional;
-
 public class CancelBookingUseCase {
     private final BookingDAO dao;
     public CancelBookingUseCase(BookingDAO dao) {
