@@ -2,6 +2,7 @@ module br.ifsp.edu.blackbearbarbearia {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires com.github.librepdf.openpdf;
 
     opens br.ifsp.edu.blackbearbarbearia.application.view to javafx.fxml;
     opens br.ifsp.edu.blackbearbarbearia.application.controller to javafx.fxml;
