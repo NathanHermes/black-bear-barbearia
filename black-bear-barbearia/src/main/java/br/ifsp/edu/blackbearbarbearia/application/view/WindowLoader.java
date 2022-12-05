@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,9 +17,15 @@ public class WindowLoader extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("Login"));
+        stage.getIcons().add(new Image(Objects.requireNonNull(WindowLoader.class.getResource("image/barber.png")).openStream()));
+        stage.setTitle("Black Bear");
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public static Object getController() {
+        return controller;
     }
 
     public static void setRoot(String fxml) throws IOException {
@@ -36,10 +43,4 @@ public class WindowLoader extends Application {
     public static void main(String[] args) {
         launch();
     }
-
-    public static Object getController() {
-        return controller;
-    }
 }
-
-// Fonte padrão: Cambria
