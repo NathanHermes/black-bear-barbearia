@@ -59,7 +59,7 @@
            text="CADASTRAR" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="50.0"/>
    <Button fx:id="btnDesmarcar" layoutX="153.0" layoutY="689.0" mnemonicParsing="false" onAction="#desmarcar"
            text="DESMARCAR" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="173.0"/>
-   <Button fx:id="btnConcluir" layoutX="280.0" layoutY="689.0" mnemonicParsing="false" onAction="#concluir"
+   <Button fx:id="btnConcluir" layoutX="280.0" layoutY="689.0" mnemonicParsing="false" onAction="#concludeBooking"
            text="CONCLUIR" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="300.0"/>
    <Button fx:id="btnServicosPrestados" layoutX="577.0" layoutY="689.0" mnemonicParsing="false"
            onAction="#historyOfBookingFromEmployee" text="SERVIÇOS PRESTADOS" AnchorPane.bottomAnchor="48.0"
