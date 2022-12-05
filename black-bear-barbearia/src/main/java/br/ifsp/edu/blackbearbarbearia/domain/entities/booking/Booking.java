@@ -27,7 +27,7 @@ public class Booking {
         this.status = status;
     }
 
-    public Booking(LocalDate date, boolean paid, Client client, Service service, User employee) {
+    public Booking(LocalDate date, Boolean paid, Client client, Service service, User employee) {
         this.date = date;
         this.paid = paid;
         this.client = client;
