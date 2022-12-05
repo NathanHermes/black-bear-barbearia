@@ -25,5 +25,5 @@ module br.ifsp.edu.blackbearbarbearia {
     exports br.ifsp.edu.blackbearbarbearia.domain.entities.service;
     exports br.ifsp.edu.blackbearbarbearia.domain.entities.booking;
     exports br.ifsp.edu.blackbearbarbearia.application.repository;
-
+    exports br.ifsp.edu.blackbearbarbearia.application.repository.inMemory;
 }
