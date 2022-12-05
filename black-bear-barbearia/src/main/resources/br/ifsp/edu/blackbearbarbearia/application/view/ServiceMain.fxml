@@ -4,7 +4,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.HomeServiçosController">
+<AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.ServiceMainController">
    <children>
       <Button fx:id="btnFiltrar" layoutX="751.0" layoutY="57.0" mnemonicParsing="false" onAction="#filtrar" text="FILTRAR" />
       <Button fx:id="btnEditar" layoutX="194.0" layoutY="473.0" mnemonicParsing="false" onAction="#editar" text="EDITAR" />
