@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #f0f2f5;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.client.CreateOrUpdateClientController">
+   <Label fx:id="lblTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="377.0" layoutY="140.0" textAlignment="JUSTIFY" AnchorPane.leftAnchor="377.0" AnchorPane.rightAnchor="377.0" AnchorPane.topAnchor="140.0" />
+   <TextField fx:id="inputName" focusTraversable="false" layoutX="377.0" layoutY="184.0" prefHeight="30.0" prefWidth="206.0" promptText="Digite o nome" AnchorPane.leftAnchor="377.0" AnchorPane.rightAnchor="377.0" AnchorPane.topAnchor="204.0" />
+   <TextField fx:id="inputPhone" focusTraversable="false" layoutX="377.0" layoutY="234.0" prefHeight="30.0" prefWidth="206.0" promptText="Digite o telefone" AnchorPane.leftAnchor="377.0" AnchorPane.rightAnchor="377.0" AnchorPane.topAnchor="254.0">
+      <font>
+         <Font name="Roboto" size="14.0" />
+      </font>
+   </TextField>
+   <TextField fx:id="inputEmail" focusTraversable="false" layoutX="377.0" layoutY="284.0" prefHeight="30.0" prefWidth="206.0" promptText="Digite o e-mail" AnchorPane.leftAnchor="377.0" AnchorPane.rightAnchor="377.0" AnchorPane.topAnchor="304.0">
+      <font>
+         <Font name="Roboto" size="14.0" />
+      </font>
+   </TextField>
+   <Button fx:id="btnSaveOrUpdate" layoutX="377.0" layoutY="334.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#saveOrUpdate" prefHeight="46.0" prefWidth="206.0" style="-fx-background-color: #e3383e;" text="Cadastrar" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="377.0" AnchorPane.rightAnchor="377.0" />
+   <Label fx:id="lblResponseMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="231.0" layoutY="421.0" textAlignment="JUSTIFY" textFill="#1d4c88" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="196.0" AnchorPane.topAnchor="421.0" />
+   <Button layoutX="727.0" layoutY="469.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#back" prefHeight="46.0" prefWidth="206.0" style="-fx-background-color: #e3383e;" text="Voltar" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="727.0" AnchorPane.rightAnchor="27.0" />
+</AnchorPane>
