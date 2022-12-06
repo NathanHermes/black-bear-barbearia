@@ -46,6 +46,7 @@ public class DatabaseBuilder {
 
         populateStatus();
         populateBooking();
+        System.out.println("Banco carregado.");
     }
 
     private static void dropTableIfExists() throws IOException {
@@ -238,13 +239,13 @@ public class DatabaseBuilder {
         final String sql = "INSERT INTO day (name) " +
                 "VALUES ('%s')";
 
-        stmt.addBatch(String.format(sql, DayOfWeek.SUNDAY));
         stmt.addBatch(String.format(sql, DayOfWeek.MONDAY));
         stmt.addBatch(String.format(sql, DayOfWeek.TUESDAY));
         stmt.addBatch(String.format(sql, DayOfWeek.WEDNESDAY));
         stmt.addBatch(String.format(sql, DayOfWeek.THURSDAY));
         stmt.addBatch(String.format(sql, DayOfWeek.FRIDAY));
         stmt.addBatch(String.format(sql, DayOfWeek.SATURDAY));
+        stmt.addBatch(String.format(sql, DayOfWeek.SUNDAY));
         stmt.executeBatch();
 
         stmt.close();
