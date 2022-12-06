@@ -3,7 +3,9 @@ package br.ifsp.edu.blackbearbarbearia.application.repository.sqlite;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Address;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Role;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
+import br.ifsp.edu.blackbearbarbearia.domain.entities.user.UserBuilder;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.UserDAO;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityNotFoundException;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -45,17 +47,24 @@ public class SqliteUserDAO implements UserDAO {
             stmt.setBoolean(6, employee.isActive());
             stmt.setBoolean(7, admin);
 
-            Integer idTeste = stmt.executeUpdate();
-
-            Optional<Integer> id = findKeyByFullname(employee.getFullName());
-
-            addressDAO.create(id.get(), employee.getAddress());
-            userDayDAO.create(id.get(), employee.getDays());
-
-            return Boolean.FALSE;
+            if (stmt.executeUpdate() == 0)
+                return Boolean.FALSE;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        if (findIDByFullname(employee.getFullName()).isEmpty())
+            throw new IllegalArgumentException("Employee not found");
+        Integer id = findIDByFullname(employee.getFullName()).get();
+
+        Boolean addressDAOResponse = addressDAO.create(id, employee.getAddress());
+        if (addressDAOResponse.equals(Boolean.FALSE))
+            return Boolean.FALSE;
+        Boolean userDayDAOResponse = userDayDAO.create(id, employee.getDays());
+        if (userDayDAOResponse.equals(Boolean.FALSE))
+            return Boolean.FALSE;
+
+        return Boolean.TRUE;
     }
 
     @Override
