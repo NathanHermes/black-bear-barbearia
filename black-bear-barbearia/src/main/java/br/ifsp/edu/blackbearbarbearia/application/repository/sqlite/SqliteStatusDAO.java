@@ -1,18 +1,18 @@
-package br.ifsp.edu.blackbearbarbearia.application.repository;
+package br.ifsp.edu.blackbearbarbearia.application.repository.sqlite;
 
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.DayDAO;
+import br.ifsp.edu.blackbearbarbearia.domain.entities.booking.Status;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.booking.StatusDAO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.DayOfWeek;
 import java.util.Optional;
 
-public class SqliteDayDAO implements DayDAO {
+public class SqliteStatusDAO implements StatusDAO {
     @Override
-    public Optional<DayOfWeek> findOne(Integer key) {
-        String sql = "SELECT * FROM day WHERE id = ?";
-        Optional<DayOfWeek> dayOfWeek = Optional.empty();
+    public Optional<Status> findOne(Integer key) {
+        String sql = "SELECT * FROM status WHERE id = ?";
+        Optional<Status> status = Optional.empty();
 
         try {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
@@ -24,18 +24,18 @@ public class SqliteDayDAO implements DayDAO {
             while(result.next()){
                 final String name = result.getString("name");
 
-                dayOfWeek = Optional.of(DayOfWeek.valueOf(name));
+                status = Optional.of(Status.valueOf(name));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return dayOfWeek;
+        return status;
     }
 
     @Override
-    public Optional<Integer> findId(DayOfWeek entity) {
-        String sql = "SELECT * FROM day WHERE name = ?";
+    public Optional<Integer> findId(Status entity) {
+        String sql = "SELECT * FROM status WHERE name = ?";
         Optional<Integer> id = Optional.empty();
 
         try {

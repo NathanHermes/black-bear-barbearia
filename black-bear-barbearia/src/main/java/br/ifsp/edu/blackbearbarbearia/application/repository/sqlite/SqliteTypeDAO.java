@@ -1,18 +1,17 @@
-package br.ifsp.edu.blackbearbarbearia.application.repository;
+package br.ifsp.edu.blackbearbarbearia.application.repository.sqlite;
 
-import br.ifsp.edu.blackbearbarbearia.domain.entities.booking.Status;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.booking.StatusDAO;
+import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Type;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.TypeDAO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class SqliteStatusDAO implements StatusDAO {
-    @Override
-    public Optional<Status> findOne(Integer key) {
-        String sql = "SELECT * FROM status WHERE id = ?";
-        Optional<Status> status = Optional.empty();
+public class SqliteTypeDAO implements TypeDAO {
+    public Optional<Type> findOne(Integer key) {
+        String sql = "SELECT * FROM type WHERE id = ?";
+        Optional<Type> type = Optional.empty();
 
         try {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
@@ -24,18 +23,17 @@ public class SqliteStatusDAO implements StatusDAO {
             while(result.next()){
                 final String name = result.getString("name");
 
-                status = Optional.of(Status.valueOf(name));
+                type = Optional.of(Type.valueOf(name));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return status;
+        return type;
     }
 
-    @Override
-    public Optional<Integer> findId(Status entity) {
-        String sql = "SELECT * FROM status WHERE name = ?";
+    public Optional<Integer> findId(Type entity) {
+        String sql = "SELECT * FROM type WHERE name = ?";
         Optional<Integer> id = Optional.empty();
 
         try {
