@@ -16,7 +16,7 @@ public class SqliteUserDAO implements UserDAO {
     private final SqliteUserDayDAO userDayDAO = new SqliteUserDayDAO();
 
     @Override
-    public Integer create(User type) {
+    public Boolean create(User employee) {
         String sql = """
                 INSERT INTO user(
                     fullName,
@@ -28,32 +28,34 @@ public class SqliteUserDAO implements UserDAO {
                     admin
                 ) VALUES (?, ?, ?, ?, ?, ?, ?)
                 """;
-        try {
-            final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
-            final Boolean admin;
 
-            if(type.getRole().equals(Role.ADMIN)) admin = true;
+        final PreparedStatement stmt;
+        try {
+            stmt = ConnectionFactory.createPreparedStatement(sql);
+            final boolean admin;
+
+            if(employee.getRole().equals(Role.ADMIN)) admin = true;
             else admin = false;
 
-            stmt.setString(1, type.getFullName());
-            stmt.setString(2, type.getEmail());
-            stmt.setString(3, type.getPhone());
-            stmt.setString(4, type.getLogin());
-            stmt.setString(5, type.getPasswordHash());
-            stmt.setBoolean(6, type.isActive());
+            stmt.setString(1, employee.getFullName());
+            stmt.setString(2, employee.getEmail());
+            stmt.setString(3, employee.getPhone());
+            stmt.setString(4, employee.getLogin());
+            stmt.setString(5, employee.getPasswordHash());
+            stmt.setBoolean(6, employee.isActive());
             stmt.setBoolean(7, admin);
 
-            stmt.executeUpdate();
+            Integer idTeste = stmt.executeUpdate();
+
+            Optional<Integer> id = findKeyByFullname(employee.getFullName());
+
+            addressDAO.create(id.get(), employee.getAddress());
+            userDayDAO.create(id.get(), employee.getDays());
+
+            return Boolean.FALSE;
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-
-        Optional<Integer> id = findKeyByFullname(type.getFullName());
-
-        addressDAO.create(id.get(), type.getAddress());
-        userDayDAO.create(id.get(), type.getDays());
-
-        return id.get();
     }
 
     @Override
