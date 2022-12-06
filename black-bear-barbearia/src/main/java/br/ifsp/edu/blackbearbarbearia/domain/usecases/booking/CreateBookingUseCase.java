@@ -14,7 +14,7 @@ public class CreateBookingUseCase {
         this.dao = dao;
     }
 
-    public Integer create(Booking booking) {
+    public Boolean create(Booking booking) {
         Validator<Booking> validator = new BookingInputRequestValidator();
         Notification notification = validator.validate(booking);
 
