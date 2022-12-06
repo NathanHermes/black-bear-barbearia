@@ -83,30 +83,34 @@ public class SqliteUserDAO implements UserDAO {
 
         try {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
-            final Boolean admin;
+            final boolean admin;
 
-            if(type.getRole().equals(Role.ADMIN)) admin = true;
+            if (employee.getRole().equals(Role.ADMIN)) admin = true;
             else admin = false;
 
-            stmt.setString(1, type.getFullName());
-            stmt.setString(2, type.getEmail());
-            stmt.setString(3, type.getPhone());
-            stmt.setString(4, type.getLogin());
-            stmt.setString(5, type.getPasswordHash());
-            stmt.setBoolean(6, type.isActive());
+            stmt.setString(1, employee.getFullName());
+            stmt.setString(2, employee.getEmail());
+            stmt.setString(3, employee.getPhone());
+            stmt.setString(4, employee.getLogin());
+            stmt.setString(5, employee.getPasswordHash());
+            stmt.setBoolean(6, employee.isActive());
             stmt.setBoolean(7, admin);
-            stmt.setInt(8, type.getId());
+            stmt.setInt(8, employee.getId());
 
-            stmt.executeUpdate();
+            if (stmt.executeUpdate() == 0)
+                return Boolean.FALSE;
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        addressDAO.update(type.getId(), type.getAddress());
-        userDayDAO.update(type.getId(), type.getDays());
-        Optional<User> updated = findOne(type.getId());
+        Boolean addressDAOResponse = addressDAO.update(employee.getId(), employee.getAddress());
+        if (addressDAOResponse.equals(Boolean.FALSE))
+            return Boolean.FALSE;
+        Boolean userDayDAOResponse = userDayDAO.update(employee.getId(), employee.getDays());
+        if (userDayDAOResponse.equals(Boolean.FALSE))
+            return Boolean.FALSE;
 
-        return type.equals(updated.get());
+        return Boolean.TRUE;
     }
 
     @Override
