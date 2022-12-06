@@ -37,5 +37,11 @@ public class CreateBookingController {
     void cadastrar(ActionEvent event) {
 
     }
+
+    @FXML
+    void back(ActionEvent event) {
+
+    }
 }
+
 
