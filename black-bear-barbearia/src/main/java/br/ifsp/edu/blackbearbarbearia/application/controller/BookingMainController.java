@@ -52,7 +52,7 @@ public class BookingMainController {
     @FXML
     private TableColumn<Booking, String> cService;
     @FXML
-    private TableColumn<Booking, LocalDate> cDate;
+    private TableColumn<Booking, String> cDate;
     @FXML
     private TableColumn<Booking, String> cStatus;
     @FXML
