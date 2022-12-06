@@ -24,6 +24,12 @@ module br.ifsp.edu.blackbearbarbearia {
     exports br.ifsp.edu.blackbearbarbearia.domain.entities.client;
     exports br.ifsp.edu.blackbearbarbearia.domain.entities.service;
     exports br.ifsp.edu.blackbearbarbearia.domain.entities.booking;
-    exports br.ifsp.edu.blackbearbarbearia.application.repository;
-    exports br.ifsp.edu.blackbearbarbearia.application.repository.inMemory;
+    exports br.ifsp.edu.blackbearbarbearia.application.repository.inmemory;
+    exports br.ifsp.edu.blackbearbarbearia.application.repository.sqlite;
+    exports br.ifsp.edu.blackbearbarbearia.application.controller.booking;
+    opens br.ifsp.edu.blackbearbarbearia.application.controller.booking to javafx.fxml;
+    exports br.ifsp.edu.blackbearbarbearia.application.controller.client;
+    opens br.ifsp.edu.blackbearbarbearia.application.controller.client to javafx.fxml;
+    exports br.ifsp.edu.blackbearbarbearia.application.controller.employee;
+    opens br.ifsp.edu.blackbearbarbearia.application.controller.employee to javafx.fxml;
 }
