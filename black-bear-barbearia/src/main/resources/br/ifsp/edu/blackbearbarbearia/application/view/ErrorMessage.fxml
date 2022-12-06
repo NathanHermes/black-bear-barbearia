@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="180.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.ErrorMessageController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1d4c88" height="35.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="400.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <ImageView fx:id="imgError" fitHeight="35.0" fitWidth="35.0" layoutX="38.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="55.0">
+         <image>
+            <Image url="@image/x.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="14.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ERROR" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="8.0" />
+      <Text fx:id="txtMensage" layoutX="56.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mensagem de error aqui...." AnchorPane.leftAnchor="66.0" />
+      <Button fx:id="btnOk" layoutX="168.0" layoutY="171.0" mnemonicParsing="false" onAction="#ok" text="OK" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="168.0" AnchorPane.rightAnchor="167.0" />
+   </children>
+</AnchorPane>
