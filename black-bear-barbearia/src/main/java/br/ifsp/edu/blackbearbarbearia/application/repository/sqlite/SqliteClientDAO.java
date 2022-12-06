@@ -132,7 +132,6 @@ public class SqliteClientDAO implements ClientDAO {
 
                 clients.add(client);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
