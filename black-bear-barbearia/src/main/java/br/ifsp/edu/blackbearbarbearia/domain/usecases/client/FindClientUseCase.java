@@ -5,10 +5,10 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityNotFoundExcept
 
 import java.util.List;
 
-public class ListarClientesUseCase {
+public class FindClientUseCase {
     private final ClientDAO dao;
 
-    public ListarClientesUseCase(ClientDAO dao) {
+    public FindClientUseCase(ClientDAO dao) {
         this.dao = dao;
     }
 
