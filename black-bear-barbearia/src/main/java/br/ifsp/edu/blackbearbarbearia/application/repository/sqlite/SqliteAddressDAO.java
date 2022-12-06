@@ -130,10 +130,8 @@ public class SqliteAddressDAO implements AddressDAO {
         return Optional.empty();
     }
 
-    @Override
-    public Optional<Address> findOneByUserId(Integer userId) {
+    public Optional<Address> findByUserId(Integer userId) {
         String sql = "SELECT * FROM address WHERE userId = ?";
-        Optional<Address> address = Optional.empty();
 
         try {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
@@ -142,7 +140,7 @@ public class SqliteAddressDAO implements AddressDAO {
 
             final ResultSet result = stmt.executeQuery();
 
-            while(result.next()){
+            if(result.next()){
                 final Integer id = result.getInt("id");
                 final String street = result.getString("address");
                 final String number = result.getString("number");
@@ -150,12 +148,11 @@ public class SqliteAddressDAO implements AddressDAO {
                 final String district = result.getString("district");
                 final String city = result.getString("city");
 
-                address = Optional.of(new Address(id, street, number, complement, district, city));
+                return Optional.of(new Address(id, street, number, complement, district, city));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return address;
+        return Optional.empty();
     }
 }
