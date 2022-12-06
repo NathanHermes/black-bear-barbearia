@@ -60,13 +60,12 @@ public class SqliteAddressDAO implements AddressDAO {
             stmt.setString(5, type.getCity());
             stmt.setInt(6, userId);
 
-            stmt.executeUpdate();
+            if (stmt.executeUpdate() > 0)
+                return Boolean.TRUE;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        Optional<Address> updated = findOne(type.getId());
-        return type.equals(updated.get());
+        return Boolean.FALSE;
     }
 
     @Override
