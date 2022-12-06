@@ -9,9 +9,12 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.ClientDAO;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.CreateClientUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.FindClientUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.UpdateClientUseCase;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.CadastrarFuncionarioUseCase;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.CreateEmployeeUseCase;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.FindEmployeeUseCase;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.UpdateEmployeeUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.CreateServiceUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.ServiceDAO;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.DeletePasswordEmployeeUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.LoginUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.UserDAO;
 
@@ -19,7 +22,10 @@ import java.util.ArrayList;
 
 public class Main {
     public static LoginUseCase loginUseCase;
-    public static CadastrarFuncionarioUseCase cadastrarFuncionarioUseCase;
+    public static CreateEmployeeUseCase createEmployeeUseCase;
+    public static UpdateEmployeeUseCase updateEmployeeUseCase;
+    public static FindEmployeeUseCase findEmployeeUseCase;
+    public static DeletePasswordEmployeeUseCase deletePasswordEmployeeUseCase;
     public static CreateClientUseCase createClientUseCase;
     public static UpdateClientUseCase updateClientUseCase;
     public static FindClientUseCase findClientUseCase;
@@ -43,7 +49,10 @@ public class Main {
 
         UserDAO userDAO = new SqliteUserDAO();
         loginUseCase = new LoginUseCase(userDAO);
-        cadastrarFuncionarioUseCase = new CadastrarFuncionarioUseCase(userDAO);
+        createEmployeeUseCase = new CreateEmployeeUseCase(userDAO);
+        updateEmployeeUseCase = new UpdateEmployeeUseCase(userDAO);
+        findEmployeeUseCase = new FindEmployeeUseCase(userDAO);
+        deletePasswordEmployeeUseCase = new DeletePasswordEmployeeUseCase(userDAO);
 
         ClientDAO clientDAO = new SqliteClientDAO();
         createClientUseCase = new CreateClientUseCase(clientDAO);
