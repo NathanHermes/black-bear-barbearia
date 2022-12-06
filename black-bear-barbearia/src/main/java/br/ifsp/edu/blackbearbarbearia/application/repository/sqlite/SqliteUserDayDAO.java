@@ -44,12 +44,11 @@ public class SqliteUserDayDAO implements UserDayDAO {
     @Override
     public Boolean update(Integer userId, List<DayOfWeek> days) {
         deleteByUserId(userId);
-        create(userId, days);
-        return findByUserId(userId).equals(days);
+        return create(userId, days);
     }
 
     @Override
-    public Boolean deleteByUserId(Integer userId) {
+    public void deleteByUserId(Integer userId) {
         String sql = """
                 DELETE FROM userDay WHERE userId = ?
                 """;
@@ -60,9 +59,6 @@ public class SqliteUserDayDAO implements UserDayDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
-        return findByUserId(userId).isEmpty();
     }
 
     @Override
