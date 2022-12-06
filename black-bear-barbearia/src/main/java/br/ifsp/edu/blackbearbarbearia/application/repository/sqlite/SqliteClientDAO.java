@@ -36,7 +36,7 @@ public class SqliteClientDAO implements ClientDAO {
     }
 
     @Override
-    public Boolean update(Client type) {
+    public Boolean update(Client client) {
         String sql = """
                 UPDATE client SET
                     name = ?,
@@ -47,19 +47,16 @@ public class SqliteClientDAO implements ClientDAO {
         try {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
 
-            stmt.setString(1, type.getName());
-            stmt.setString(2, type.getEmail());
-            stmt.setString(3, type.getPhone());
-            stmt.setInt(4, type.getId());
+            stmt.setString(1, client.getName());
+            stmt.setString(2, client.getEmail());
+            stmt.setString(3, client.getPhone());
+            stmt.setInt(4, client.getId());
 
-            stmt.executeUpdate();
+            if(stmt.executeUpdate() > 0) return Boolean.TRUE;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        Optional<Client> updated = findOne(type.getId());
-
-        return type.equals(updated.get());
+        return Boolean.FALSE;
     }
 
     @Override
