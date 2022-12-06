@@ -1,4 +1,4 @@
-package br.ifsp.edu.blackbearbarbearia.application.controller;
+package br.ifsp.edu.blackbearbarbearia.application.controller.service;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,16 +14,19 @@ public class ServiceMainController {
     private TableColumn<?, ?> cPreco;
 
     @FXML
-    private TableColumn<?, ?> cTaxa;
+    private Label lblPesquisar;
 
     @FXML
-    private Button btnLogout;
+    private TableColumn<?, ?> cTaxa;
 
     @FXML
     private TableColumn<?, ?> cNome;
 
     @FXML
-    private Button btnCadastrar;
+    private TableColumn<?, ?> cAtivo;
+
+    @FXML
+    private TextField inputBusca;
 
     @FXML
     private TableView<?> tbvService;
@@ -38,35 +41,32 @@ public class ServiceMainController {
     private TableColumn<?, ?> cComissao;
 
     @FXML
-    private Label lblPesquisar;
+    private TableColumn<?, ?> cID;
 
     @FXML
-    private Button btnFiltrar;
-
-    @FXML
-    private TableColumn<?, ?> cAtivo;
-
-    @FXML
-    private TextField txtPesquisar;
-
-    @FXML
-    void filtrar(ActionEvent event) {
+    void search(ActionEvent event) {
 
     }
 
     @FXML
-    void editar(ActionEvent event) {
+    void update(ActionEvent event) {
 
     }
 
     @FXML
-    void cadastrar(ActionEvent event) {
+    void save(ActionEvent event) {
 
     }
 
     @FXML
-    void logout(ActionEvent event) {
+    void reloadTableView(ActionEvent event) {
 
     }
 
+    @FXML
+    void back(ActionEvent event) {
+
+    }
 }
+
+
