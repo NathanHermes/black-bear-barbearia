@@ -9,7 +9,7 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.CreateClientUseCase
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.ClientDAO;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.UpdateClientUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.FindClientUseCase;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.CadastrarFuncionarioUseCase;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.CreateEmployeeUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.LoginUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.UserDAO;
 
@@ -18,7 +18,7 @@ public class ClientMain {
     public static UpdateClientUseCase updateClientUseCase;
     public static FindClientUseCase findClientUseCase;
     public static LoginUseCase loginUseCase;
-    public static CadastrarFuncionarioUseCase cadastrarFuncionarioUseCase;
+    public static CreateEmployeeUseCase createEmployeeUseCase;
 
     private static User user = null;
 
@@ -35,7 +35,7 @@ public class ClientMain {
 
     private static void configureInjection() {
         UserDAO userDAO = new InMemoryUserDAO();
-        cadastrarFuncionarioUseCase = new CadastrarFuncionarioUseCase(userDAO);
+        createEmployeeUseCase = new CreateEmployeeUseCase(userDAO);
         loginUseCase = new LoginUseCase(userDAO);
 
         ClientDAO clientDAO = new InMemoryClientDAO();
