@@ -202,26 +202,34 @@ public class SqliteUserDAO implements UserDAO {
                 final String login = result.getString("login");
                 final String passwordHash = result.getString("passwordHash");
                 final Boolean active = result.getBoolean("active");
-                final Boolean admin = result.getBoolean("admin");
+                final boolean admin = result.getBoolean("admin");
 
-                Optional<Address> address = addressDAO.findOneByUserId(id);
+                final Role role = admin ? Role.ADMIN : Role.EMPLOYEE;
 
-                final Role role;
-                if(admin) role = Role.ADMIN;
-                else role = Role.EMPLOYEE;
+                if (addressDAO.findByUserId(id).isEmpty())
+                    throw new EntityNotFoundException("Address not found");
+                Address address = addressDAO.findByUserId(id).get();
 
                 final List<DayOfWeek> days = userDayDAO.findByUserId(id);
 
-                final User user = new User(id, fullName, email, phone, address.get(), login, passwordHash, active, role, days);
+                UserBuilder userBuilder = new UserBuilder();
+                userBuilder.setId(id);
+                userBuilder.setFullName(fullName);
+                userBuilder.setEmail(email);
+                userBuilder.setPhone(phone);
+                userBuilder.setLogin(login);
+                userBuilder.setPasswordHash(passwordHash);
+                userBuilder.setActive(active);
+                userBuilder.setRole(role);
+                userBuilder.setAddress(address);
+                userBuilder.setDays(days);
 
-                users.add(user);
+                users.add(userBuilder.getResult());
             }
-
-            return users;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return Collections.emptyList();
+        return users;
     }
 
     @Override
