@@ -1,22 +1,22 @@
 package br.ifsp.edu.blackbearbarbearia.application.main;
 
-import br.ifsp.edu.blackbearbarbearia.application.repository.inMemory.InMemoryClientDAO;
-import br.ifsp.edu.blackbearbarbearia.application.repository.inMemory.InMemoryUserDAO;
+import br.ifsp.edu.blackbearbarbearia.application.repository.inmemory.InMemoryClientDAO;
+import br.ifsp.edu.blackbearbarbearia.application.repository.inmemory.InMemoryUserDAO;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.client.Client;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Address;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.CreateClientUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.ClientDAO;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.EditarClienteUseCase;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.ListarClientesUseCase;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.UpdateClientUseCase;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.FindClientUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.CadastrarFuncionarioUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.LoginUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.UserDAO;
 
 public class ClientMain {
     public static CreateClientUseCase createClientUseCase;
-    public static EditarClienteUseCase editarClienteUseCase;
-    public static ListarClientesUseCase listarClientesUseCase;
+    public static UpdateClientUseCase updateClientUseCase;
+    public static FindClientUseCase findClientUseCase;
     public static LoginUseCase loginUseCase;
     public static CadastrarFuncionarioUseCase cadastrarFuncionarioUseCase;
 
@@ -40,8 +40,8 @@ public class ClientMain {
 
         ClientDAO clientDAO = new InMemoryClientDAO();
         createClientUseCase = new CreateClientUseCase(clientDAO);
-        listarClientesUseCase = new ListarClientesUseCase(clientDAO);
-        editarClienteUseCase = new EditarClienteUseCase(clientDAO);
+        findClientUseCase = new FindClientUseCase(clientDAO);
+        updateClientUseCase = new UpdateClientUseCase(clientDAO);
 
     }
     private static void createAdmin() {
@@ -105,7 +105,7 @@ public class ClientMain {
         Client clientUpdate = new Client("Patrícia Celestino Montilla", "patricia.montilla@gmail.com", "(89) 99999-9999");
 
         try {
-            editarClienteUseCase.update(1, clientUpdate);
+            updateClientUseCase.update(1, clientUpdate);
             System.out.println("> SUCCESS .....: Client updated");
         } catch (Exception e) {
             System.out.println("\n> ERROR ...: " + e.getMessage() + "\n");
@@ -116,7 +116,7 @@ public class ClientMain {
         System.out.println("> Registered clients");
 
         try {
-            listarClientesUseCase.findAll().forEach(System.out::println);
+            findClientUseCase.findAll().forEach(System.out::println);
         } catch (Exception e) {
             System.out.println("\n> ERROR ...: " + e.getMessage() + "\n");
         }
