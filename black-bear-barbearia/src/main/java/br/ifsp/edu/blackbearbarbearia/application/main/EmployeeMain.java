@@ -1,6 +1,5 @@
 package br.ifsp.edu.blackbearbarbearia.application.main;
 
-import br.ifsp.edu.blackbearbarbearia.application.repository.inMemory.InMemoryUserDAO;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Address;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Role;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
@@ -24,7 +23,7 @@ public class EmployeeMain {
     public static ApagarSenhaFuncionarioUseCase apagarSenhaFuncionarioUseCase;
     public static TrocaSenhaUseCase trocaSenhaUseCase;
     private static User user = null;
-
+/*
     public static void main(String[] args) {
         configureInjection();
         createAdmin();
@@ -130,7 +129,7 @@ public class EmployeeMain {
         e04.addDay(Day.TUESDAY);
         e04.addDay(Day.WEDNESDAY);
         e04.addDay(Day.THURSDAY);
-        e04.addDay(Day.SATURDAY);*/
+        e04.addDay(Day.SATURDAY);
 
         try {
             //cadastrarFuncionarioUseCase.create(e00);
@@ -154,7 +153,7 @@ public class EmployeeMain {
 
         Address employeeUpdateAddress = new Address("Rua dos Crenaques", "40", "Venda nova", "MG", "Belo Horizonte");
         User employeeUpdate = new User("bill.gates@email.com", "(65) 2642-6225", employeeUpdateAddress, Boolean.FALSE);
-*/
+
         try {
             //editarFuncionarioUseCase.update(4, employeeUpdate);
             System.out.println("> SUCCESS .....: Employee updated");
@@ -166,7 +165,7 @@ public class EmployeeMain {
     private static void deleteEmployeePassword() {
         /*if (user.hasRole(Role.ADMIN))
             throw new IllegalArgumentException("You are not an administrator.");
-*/
+
         try{
             apagarSenhaFuncionarioUseCase.deletePassword(2);
             System.out.println("> SUCCESS .....: Password is deleted");
@@ -183,5 +182,6 @@ public class EmployeeMain {
             System.out.println("\n> ERROR ...: " + e.getMessage() + "\n");
         }
     }
+ */
 }
 
