@@ -1,4 +1,4 @@
-package br.ifsp.edu.blackbearbarbearia.application.repository.inMemory;
+package br.ifsp.edu.blackbearbarbearia.application.repository.inmemory;
 
 import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Service;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.ServiceDAO;
@@ -10,11 +10,13 @@ public class InMemoryServiceDAO implements ServiceDAO {
     private Integer serviceID = 0;
 
     @Override
-    public Integer create(Service service) {
+    public Boolean create(Service service) {
         serviceID++;
         service.setId(serviceID);
-        database.put(serviceID, service);
-        return serviceID;
+        if (database.put(serviceID, service) != null)
+            return Boolean.TRUE;
+        else
+            return Boolean.FALSE;
     }
 
     @Override

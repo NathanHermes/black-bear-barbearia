@@ -1,4 +1,4 @@
-package br.ifsp.edu.blackbearbarbearia.application.repository.inMemory;
+package br.ifsp.edu.blackbearbarbearia.application.repository.inmemory;
 
 import br.ifsp.edu.blackbearbarbearia.domain.entities.client.Client;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.client.ClientDAO;
@@ -10,11 +10,13 @@ public class InMemoryClientDAO implements ClientDAO {
     private Integer clientID = 0;
 
     @Override
-    public Integer create(Client client) {
+    public Boolean create(Client client) {
         clientID++;
         client.setId(clientID);
-        database.put(clientID, client);
-        return clientID;
+        if (database.put(clientID, client) != null)
+            return Boolean.TRUE;
+        else
+            return Boolean.FALSE;
     }
 
     @Override

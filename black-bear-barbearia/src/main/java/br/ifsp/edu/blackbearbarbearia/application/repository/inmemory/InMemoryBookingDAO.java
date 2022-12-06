@@ -1,4 +1,4 @@
-package br.ifsp.edu.blackbearbarbearia.application.repository.inMemory;
+package br.ifsp.edu.blackbearbarbearia.application.repository.inmemory;
 
 import br.ifsp.edu.blackbearbarbearia.domain.entities.booking.Booking;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
@@ -12,11 +12,13 @@ public class InMemoryBookingDAO implements BookingDAO {
     private Integer bookingID = 0;
 
     @Override
-    public Integer create(Booking booking) {
+    public Boolean create(Booking booking) {
         bookingID++;
         booking.setId(bookingID);
-        database.put(bookingID, booking);
-        return bookingID;
+        if (database.put(bookingID, booking) != null)
+            return Boolean.TRUE;
+        else
+            return Boolean.FALSE;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package br.ifsp.edu.blackbearbarbearia.application.repository.inMemory;
+package br.ifsp.edu.blackbearbarbearia.application.repository.inmemory;
 
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.UserDAO;
@@ -10,11 +10,13 @@ public class InMemoryUserDAO implements UserDAO {
     private static final Map<Integer, User> database = new LinkedHashMap<>();
     private Integer userID = 0;
     @Override
-    public Integer create(User user) {
+    public Boolean create(User user) {
         userID++;
         user.setId(userID);
-        database.put(userID, user);
-        return userID;
+        if (database.put(userID, user) != null)
+            return Boolean.TRUE;
+        else
+            return Boolean.FALSE;
     }
 
     @Override
