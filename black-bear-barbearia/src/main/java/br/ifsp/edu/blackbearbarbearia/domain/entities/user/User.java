@@ -85,7 +85,6 @@ public class User {
                 ", login='" + login + '\'' +
                 ", passwordHash='" + passwordHash + '\'' +
                 ", active=" + active +
-                ", lastPassword='" + lastPassword + '\'' +
                 ", role=" + role +
                 ", days=" + days +
                 '}';
