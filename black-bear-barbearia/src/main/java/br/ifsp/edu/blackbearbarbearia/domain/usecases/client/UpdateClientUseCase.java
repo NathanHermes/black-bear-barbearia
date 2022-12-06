@@ -22,12 +22,12 @@ public class UpdateClientUseCase {
         if (dao.findOne(id).isEmpty())
             throw new EntityNotFoundException("Client not found.");
 
-        Client client = dao.findOne(id).get();
+        Client daoClient = dao.findOne(id).get();
 
-        client.setName(clientUpdate.getName());
-        client.setPhone(clientUpdate.getPhone());
-        client.setEmail(clientUpdate.getEmail());
+        daoClient.setName(client.getName());
+        daoClient.setPhone(client.getPhone());
+        daoClient.setEmail(client.getEmail());
 
-        return dao.update(client);
+        return dao.update(daoClient);
     }
 }
