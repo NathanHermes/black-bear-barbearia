@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 
 
-<AnchorPane prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #f0f2f5;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.CadastrarFuncionarioController">
+<AnchorPane prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #f0f2f5;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.employee.CadastrarFuncionarioController">
    <children>
       <Button fx:id="btnCadastrar" layoutX="390.0" layoutY="425.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#cadastrar" prefWidth="180.0" style="-fx-background-color: #e3383e;" text="Cadastrar" AnchorPane.topAnchor="425.0">
          <font>

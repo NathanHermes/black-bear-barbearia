@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.ClientMainController">
+<AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.client.ClientMainController">
    <Label layoutX="61.0" layoutY="52.0" text="Pesquisar" AnchorPane.leftAnchor="61.0" AnchorPane.topAnchor="52.0" />
    <TextField fx:id="inputEmail" layoutX="145.0" layoutY="47.0" prefHeight="31.0" prefWidth="578.0" promptText="Digite o clientes" AnchorPane.leftAnchor="145.0" AnchorPane.rightAnchor="257.0" AnchorPane.topAnchor="47.0" />
    <Button layoutX="741.0" layoutY="47.0" mnemonicParsing="false" onAction="#search" text="BUSCAR" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="47.0" />
