@@ -3,7 +3,6 @@ package br.ifsp.edu.blackbearbarbearia.application.repository.inmemory;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.UserDAO;
 
-import java.time.DayOfWeek;
 import java.util.*;
 
 public class InMemoryUserDAO implements UserDAO {
@@ -51,23 +50,23 @@ public class InMemoryUserDAO implements UserDAO {
     }
 
     @Override
-    public Optional<User> findOneByLogin(String login) {
+    public Optional<User> findByLogin(String login) {
         return database.values().stream()
                 .filter(user -> user.getLogin().equals(login))
                 .findAny();
     }
 
     @Override
-    public Optional<User> findOneByEmail(String email) {
+    public Optional<User> findByEmail(String email) {
         return database.values().stream()
                 .filter(user -> user.getEmail().equals(email))
                 .findAny();
     }
 
     @Override
-    public List<User> findOneByDay(DayOfWeek day) {
+    public Integer findCountByDay(Integer day) {
         return database.values().stream()
                 .filter(user -> user.getDays().contains(day))
-                .toList();
+                .toList().size();
     }
 }
