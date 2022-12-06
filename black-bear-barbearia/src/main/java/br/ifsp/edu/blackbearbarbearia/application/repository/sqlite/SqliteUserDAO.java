@@ -233,41 +233,49 @@ public class SqliteUserDAO implements UserDAO {
     }
 
     @Override
-    public Optional<User> findOneByLogin(String login) {
+    public Optional<User> findByLogin(String login) {
         String sql = "SELECT * FROM user WHERE login = ?";
-        Optional<User> user = Optional.empty();
 
         try {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
-
             stmt.setString(1, login);
 
             final ResultSet result = stmt.executeQuery();
-
-            while(result.next()){
+            if(result.next()){
                 final Integer id = result.getInt("id");
                 final String fullName = result.getString("fullName");
                 final String email = result.getString("email");
                 final String phone = result.getString("phone");
                 final String passwordHash = result.getString("passwordHash");
                 final Boolean active = result.getBoolean("active");
-                final Boolean admin = result.getBoolean("admin");
+                final boolean admin = result.getBoolean("admin");
 
-                Optional<Address> address = addressDAO.findOneByUserId(id);
+                final Role role = admin ? Role.ADMIN : Role.EMPLOYEE;
 
-                final Role role;
-                if(admin) role = Role.ADMIN;
-                else role = Role.EMPLOYEE;
+                if (addressDAO.findByUserId(id).isEmpty())
+                    throw new EntityNotFoundException("Address not found");
+                Address address = addressDAO.findByUserId(id).get();
 
                 final List<DayOfWeek> days = userDayDAO.findByUserId(id);
 
-                user = Optional.of(new User(id, fullName, email, phone, address.get(), login, passwordHash, active, role, days));
+                UserBuilder userBuilder = new UserBuilder();
+                userBuilder.setId(id);
+                userBuilder.setFullName(fullName);
+                userBuilder.setEmail(email);
+                userBuilder.setPhone(phone);
+                userBuilder.setLogin(login);
+                userBuilder.setPasswordHash(passwordHash);
+                userBuilder.setActive(active);
+                userBuilder.setRole(role);
+                userBuilder.setAddress(address);
+                userBuilder.setDays(days);
+
+                return Optional.of(userBuilder.getResult());
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return user;
+        return Optional.empty();
     }
 
     @Override
