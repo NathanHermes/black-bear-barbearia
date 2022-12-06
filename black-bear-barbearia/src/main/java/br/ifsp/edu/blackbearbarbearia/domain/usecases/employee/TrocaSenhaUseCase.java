@@ -23,7 +23,6 @@ public class TrocaSenhaUseCase {
         //if (user.isValidPassword(lastPassword)) throw new IllegalArgumentException("Invalid last password");
 
         //user.setPasswordHash(newPassword);
-        user.setLastPassword(newPassword);
 
         dao.update(user);
     }

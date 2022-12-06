@@ -27,9 +27,6 @@ public class LoginUseCase {
         if (userDAO.get().getPasswordHash() != null && !user.getPasswordHash().equals(userDAO.get().getPasswordHash()))
             throw new IllegalArgumentException("Invalid password");
 
-        if (userDAO.get().getPasswordHash() == null && !user.getPasswordHash().equals(userDAO.get().getLastPassword()))
-            throw new IllegalArgumentException("Invalid password");
-
         return userDAO.get();
     }
 }
