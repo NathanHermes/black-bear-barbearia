@@ -16,10 +16,10 @@ public class ClientInputRequestValidator extends Validator<Client> {
 
         if (nullOrEmpty(client.getName()))
             notification.addError("Name is null or empty");
-        if (nullOrEmpty(client.getEmail()))
-            notification.addError("E-mail is null or empty");
         if (nullOrEmpty(client.getPhone()))
             notification.addError("Phone is null or empty");
+        if (nullOrEmpty(client.getEmail()))
+            notification.addError("E-mail is null or empty");
 
         return notification;
     }
