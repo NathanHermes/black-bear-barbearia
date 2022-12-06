@@ -30,24 +30,19 @@ public class SqliteDayDAO implements DayDAO {
     }
 
     @Override
-    public Optional<Integer> findId(DayOfWeek entity) {
+    public Optional<Integer> findDayIDByDay(DayOfWeek day) {
         String sql = "SELECT * FROM day WHERE name = ?";
-        Optional<Integer> id = Optional.empty();
 
         try {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
-
-            stmt.setString(1, entity.name());
+            stmt.setString(1, day.name());
 
             final ResultSet result = stmt.executeQuery();
-
-            while(result.next()){
-                id = Optional.of(result.getInt("id"));
-            }
+            if(result.next())
+                return Optional.of(result.getInt("id"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return id;
+        return Optional.empty();
     }
 }
