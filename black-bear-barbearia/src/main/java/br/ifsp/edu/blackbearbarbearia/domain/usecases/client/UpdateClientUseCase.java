@@ -8,7 +8,7 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Validator;
 public class UpdateClientUseCase {
     private final ClientDAO dao;
 
-    public EditarClienteUseCase(ClientDAO dao) {
+    public UpdateClientUseCase(ClientDAO dao) {
         this.dao = dao;
     }
 
