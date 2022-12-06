@@ -25,4 +25,11 @@ public class FindClientUseCase {
 
         return dao.findOne(id).get();
     }
+
+    public Client findByEmail(String email) {
+        if (dao.findOneByEmail(email).isEmpty())
+            throw new EntityNotFoundException("Client not found");
+
+        return dao.findOneByEmail(email).get();
+    }
 }
