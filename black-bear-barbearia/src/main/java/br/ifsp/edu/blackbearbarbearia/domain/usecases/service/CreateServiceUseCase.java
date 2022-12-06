@@ -12,7 +12,7 @@ public class CreateServiceUseCase {
         this.dao = dao;
     }
 
-    public Integer create(Service service) {
+    public Boolean create(Service service) {
         Validator<Service> validator = new CreateServiceInputRequestValidator();
         Notification notification = validator.validate(service);
 
