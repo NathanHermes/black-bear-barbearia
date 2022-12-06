@@ -69,20 +69,19 @@ public class SqliteAddressDAO implements AddressDAO {
     }
 
     @Override
-    public Boolean deleteByKey(Integer key) {
+    public Boolean deleteById(Integer id) {
         String sql = """
                 DELETE FROM address WHERE id = ?
                 """;
         try {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
-            stmt.setInt(1, key);
-            stmt.executeUpdate();
+            stmt.setInt(1, id);
+            if (stmt.executeUpdate() > 0)
+                return Boolean.TRUE;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        Optional<Address> deleted = findOne(key);
-        return deleted.isPresent();
+        return Boolean.FALSE;
     }
 
     @Override
@@ -98,13 +97,13 @@ public class SqliteAddressDAO implements AddressDAO {
             e.printStackTrace();
         }
 
-        Optional<Address> deleted = findOneByUserId(userId);
+        Optional<Address> deleted = findByUserId(userId);
         return deleted.isEmpty();
     }
 
     @Override
     public Boolean delete(Address type) {
-        return deleteByKey(type.getId());
+        return deleteById(type.getId());
     }
 
     @Override
