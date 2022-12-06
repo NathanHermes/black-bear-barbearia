@@ -62,13 +62,6 @@ public class User {
         return active;
     }
 
-    public String getLastPassword() {
-        return lastPassword;
-    }
-    public void setLastPassword(String lastPassword) {
-        this.lastPassword = lastPassword;
-    }
-
     public Role getRole() {
         return role;
     }
