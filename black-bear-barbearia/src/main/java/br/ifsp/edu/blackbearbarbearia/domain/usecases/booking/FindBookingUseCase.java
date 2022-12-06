@@ -13,11 +13,9 @@ public class FindBookingUseCase {
     }
 
     public List<Booking> findAll() {
-        var bookings = dao.findAll();
-
-        if (bookings.isEmpty())
+        if (dao.findAll().isEmpty())
             throw new EntityNotFoundException("Bookings not found");
 
-        return bookings;
+        return dao.findAll();
     }
 }
