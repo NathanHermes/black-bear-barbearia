@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 
 <AnchorPane prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #f0f2f5;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.booking.CreateBookingController">
    <children>
@@ -22,6 +22,11 @@
       <Button fx:id="btnCadastrar" layoutX="377.0" layoutY="427.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#cadastrar" prefHeight="46.0" prefWidth="206.0" style="-fx-background-color: #e3383e;" text="Cadastrar" AnchorPane.leftAnchor="377.0" AnchorPane.rightAnchor="377.0" AnchorPane.topAnchor="427.0">
          <font>
             <Font name="Cambria Bold" size="24.0" />
+         </font>
+      </Button>
+      <Button layoutX="747.0" layoutY="489.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#back" prefHeight="46.0" prefWidth="206.0" style="-fx-background-color: #e3383e;" text="Voltar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="25.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
          </font>
       </Button>
    </children>
