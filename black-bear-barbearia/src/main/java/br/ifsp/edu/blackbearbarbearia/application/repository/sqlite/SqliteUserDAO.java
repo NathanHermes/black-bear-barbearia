@@ -68,7 +68,7 @@ public class SqliteUserDAO implements UserDAO {
     }
 
     @Override
-    public Boolean update(User type) {
+    public Boolean update(User employee) {
         String sql = """
                 UPDATE user SET
                     fullName = ?,
@@ -80,6 +80,7 @@ public class SqliteUserDAO implements UserDAO {
                     admin = ?
                 WHERE id = ?
                 """;
+
         try {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
             final Boolean admin;
