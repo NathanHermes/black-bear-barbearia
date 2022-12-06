@@ -71,16 +71,7 @@ public class User {
     }
 
     public void clearPasswordHash() {
-        this.passwordHash = null;
-    }
-
-    public void addDay(DayOfWeek day) {
-        if(this.days.size() == 6)
-            throw new IllegalArgumentException("Days with work limit reached");
-        this.days.add(day);
-    }
-    public void removeDay(DayOfWeek day) {
-        days.remove(day);
+        this.passwordHash = "";
     }
 
     @Override
