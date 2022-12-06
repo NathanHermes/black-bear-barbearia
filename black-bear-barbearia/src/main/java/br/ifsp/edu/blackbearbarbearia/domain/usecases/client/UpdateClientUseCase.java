@@ -12,7 +12,7 @@ public class UpdateClientUseCase {
         this.dao = dao;
     }
 
-    public boolean update(Integer id, Client clientUpdate) {
+    public Boolean update(Integer id, Client client) {
         Validator<Client> validator = new ClientInputRequestValidator();
         Notification notification = validator.validate(clientUpdate);
 
