@@ -3,27 +3,23 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.HomefuncionariosController">
-    <Label fx:id="lblPesquisar" layoutX="220.0" layoutY="25.0" text="Pesquisar" AnchorPane.leftAnchor="220.0"
-           AnchorPane.topAnchor="25.0"/>
-    <TextField fx:id="txtPesquisar" layoutX="284.0" layoutY="20.0" prefHeight="31.0" prefWidth="460.0"
-               promptText="Digite o funcionario" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="216.0"
-               AnchorPane.topAnchor="20.0"/>
-    <TableView fx:id="tableView" layoutX="220.0" layoutY="74.0" prefHeight="356.0" prefWidth="520.0"
-               AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="220.0"
-               AnchorPane.topAnchor="74.0">
+<AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.employee.EmployeeMainController">
+    <Label layoutX="220.0" layoutY="25.0" text="Pesquisar" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="25.0" />
+    <TextField fx:id="inputEmail" layoutX="284.0" layoutY="20.0" prefHeight="31.0" prefWidth="328.0" promptText="Digite o email do funcionário" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="328.0" AnchorPane.topAnchor="20.0" />
+    <Button layoutX="676.0" layoutY="23.0" mnemonicParsing="false" onAction="#search" text="Buscar" AnchorPane.rightAnchor="233.0" AnchorPane.topAnchor="23.0" />
+    <Button layoutX="786.0" layoutY="23.0" mnemonicParsing="false" onAction="#reloadTableView" text="Limpar" AnchorPane.rightAnchor="121.0" AnchorPane.topAnchor="23.0" />
+    <TableView fx:id="tbvEmployees" layoutX="220.0" layoutY="74.0" prefHeight="356.0" prefWidth="520.0" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="74.0">
       <columns>
-          <TableColumn fx:id="cNome" prefWidth="519.0" text="FUNCIONÁRIOS"/>
+          <TableColumn fx:id="cID" prefWidth="10.0" text="#" />
+          <TableColumn fx:id="cFullName" prefWidth="100.0" text="Nome completo" />
+          <TableColumn fx:id="cEmail" prefWidth="100.0" text="Email" />
+          <TableColumn fx:id="cPhone" prefWidth="100.0" text="Telefone" />
+          <TableColumn fx:id="cAddress" prefWidth="100.0" text="Endereço" />
+          <TableColumn fx:id="cStatus" prefWidth="100.0" text="Status" />
       </columns>
     </TableView>
-    <Button fx:id="btnLogout" layoutX="867.0" layoutY="20.0" mnemonicParsing="false" onAction="#logout" text="LOGOUT"
-            AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0"/>
-    <Button fx:id="btnApagarSenha" layoutX="522.0" layoutY="450.0" mnemonicParsing="false" onAction="#apagarSenha"
-            prefHeight="31.0" prefWidth="129.0" text="APAGAR SENHA" AnchorPane.bottomAnchor="59.0"
-            AnchorPane.rightAnchor="309.0"/>
-    <Button fx:id="btnCadastrar" layoutX="220.0" layoutY="450.0" mnemonicParsing="false" onAction="#cadastrar"
-            text="CADASTRAR" AnchorPane.bottomAnchor="59.0" AnchorPane.leftAnchor="220.0"/>
-    <Button fx:id="btnEditar" layoutX="671.0" layoutY="450.0" mnemonicParsing="false" onAction="#editar" text="EDITAR"
-            AnchorPane.bottomAnchor="59.0" AnchorPane.rightAnchor="220.0"/>
+    <Button fx:id="btnCadastrar" layoutX="220.0" layoutY="450.0" mnemonicParsing="false" onAction="#save" text="CADASTRAR" AnchorPane.bottomAnchor="59.0" AnchorPane.leftAnchor="220.0" />
+    <Button fx:id="btnEditar" layoutX="332.0" layoutY="459.0" mnemonicParsing="false" onAction="#update" text="EDITAR" AnchorPane.bottomAnchor="59.0" AnchorPane.rightAnchor="569.0" />
+    <Button fx:id="btnApagarSenha" layoutX="408.0" layoutY="455.0" mnemonicParsing="false" onAction="#deletePassword" prefHeight="31.0" prefWidth="129.0" text="APAGAR SENHA" AnchorPane.bottomAnchor="54.0" AnchorPane.rightAnchor="423.0" />
+    <Button layoutX="677.0" layoutY="460.0" mnemonicParsing="false" onAction="#back" text="Voltar" AnchorPane.bottomAnchor="55.0" AnchorPane.rightAnchor="235.0" />
 </AnchorPane>
