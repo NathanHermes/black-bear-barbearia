@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface UserDAO extends DAO<User, Integer> {
     Optional<User> findByLogin(String login);
     Optional<User> findByEmail(String email);
-    Integer findByDay(Integer day);
+    Integer findCountByDay(Integer day);
 }
