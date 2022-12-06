@@ -3,20 +3,20 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.HomeClientesController">
-   <children>
-      <Button fx:id="btnLogout" layoutX="820.0" layoutY="47.0" mnemonicParsing="false" onAction="#logout" text="LOGOUT" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="47.0" />
-      <TableView fx:id="tableView" layoutX="61.0" layoutY="98.0" prefHeight="345.0" prefWidth="838.0" AnchorPane.bottomAnchor="97.0" AnchorPane.leftAnchor="61.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="98.0">
-         <columns>
-            <TableColumn fx:id="cNome" prefWidth="358.0" text="NOME" />
-            <TableColumn fx:id="cEmail" prefWidth="272.0" text="E-MAIL" />
-            <TableColumn fx:id="cTelefone" prefWidth="207.0" text="TELEFONE" />
-         </columns>
-      </TableView>
-      <Button fx:id="btnCadastrar" layoutX="61.0" layoutY="463.0" mnemonicParsing="false" onAction="#cadastrar" text="CADASTRAR" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="61.0" />
-      <TextField fx:id="txtPesquisar" layoutX="145.0" layoutY="47.0" prefHeight="31.0" prefWidth="578.0" promptText="Digite o clientes" AnchorPane.leftAnchor="145.0" AnchorPane.rightAnchor="257.0" AnchorPane.topAnchor="47.0" />
-      <Label fx:id="lblPesquisar" layoutX="61.0" layoutY="52.0" text="Pesquisar" AnchorPane.leftAnchor="61.0" AnchorPane.topAnchor="52.0" />
-      <Button fx:id="btnEditar" layoutX="184.0" layoutY="463.0" mnemonicParsing="false" onAction="#editar" text="EDITAR" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="184.0" />
-      <Button fx:id="btnFiltrar" layoutX="741.0" layoutY="47.0" mnemonicParsing="false" onAction="#filtrar" text="FILTRAR" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="47.0" />
-   </children>
+<AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.ClientMainController">
+   <Label layoutX="61.0" layoutY="52.0" text="Pesquisar" AnchorPane.leftAnchor="61.0" AnchorPane.topAnchor="52.0" />
+   <TextField fx:id="inputEmail" layoutX="145.0" layoutY="47.0" prefHeight="31.0" prefWidth="578.0" promptText="Digite o clientes" AnchorPane.leftAnchor="145.0" AnchorPane.rightAnchor="257.0" AnchorPane.topAnchor="47.0" />
+   <Button layoutX="741.0" layoutY="47.0" mnemonicParsing="false" onAction="#search" text="BUSCAR" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="47.0" />
+   <Button layoutX="820.0" layoutY="50.0" mnemonicParsing="false" onAction="#reloadTableView" text="LIMPAR" AnchorPane.rightAnchor="82.0" AnchorPane.topAnchor="50.0" />
+   <TableView fx:id="tbvClients" layoutX="61.0" layoutY="98.0" prefHeight="345.0" prefWidth="838.0" AnchorPane.bottomAnchor="97.0" AnchorPane.leftAnchor="61.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="98.0">
+      <columns>
+         <TableColumn fx:id="cID" prefWidth="50.0" text="#" />
+         <TableColumn fx:id="cName" prefWidth="358.0" text="NOME" />
+         <TableColumn fx:id="cEmail" prefWidth="272.0" text="E-MAIL" />
+         <TableColumn fx:id="cPhone" prefWidth="207.0" text="TELEFONE" />
+      </columns>
+   </TableView>
+   <Button layoutX="61.0" layoutY="463.0" mnemonicParsing="false" onAction="#save" text="CADASTRAR" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="61.0" />
+   <Button layoutX="184.0" layoutY="463.0" mnemonicParsing="false" onAction="#update" text="EDITAR" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="184.0" />
+   <Button layoutX="840.0" layoutY="469.0" mnemonicParsing="false" onAction="#back" text="VOLTAR" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="840.0" />
 </AnchorPane>
