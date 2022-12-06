@@ -107,30 +107,27 @@ public class SqliteAddressDAO implements AddressDAO {
     }
 
     @Override
-    public Optional<Address> findOne(Integer key) {
+    public Optional<Address> findOne(Integer id) {
         String sql = "SELECT * FROM address WHERE id = ?";
-        Optional<Address> address = Optional.empty();
 
         try {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
-
-            stmt.setInt(1, key);
+            stmt.setInt(1, id);
 
             final ResultSet result = stmt.executeQuery();
-
-            while(result.next()){
+            if(result.next()){
                 final String street = result.getString("address");
                 final String number = result.getString("number");
                 final String complement = result.getString("complement");
                 final String district = result.getString("district");
                 final String city = result.getString("city");
 
-                address = Optional.of(new Address(key, street, number, complement, district, city));
+                return Optional.of(new Address(id, street, number, complement, district, city));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return address;
+        return Optional.empty();
     }
 
     @Override
