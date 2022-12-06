@@ -13,7 +13,7 @@ public class SqliteUserDayDAO implements UserDayDAO {
     final SqliteDayDAO dayDAO = new SqliteDayDAO();
 
     @Override
-    public void create(Integer userId, List<DayOfWeek> days) {
+    public Boolean create(Integer userId, List<DayOfWeek> days) {
         String sql = """
                 INSERT INTO userDay(
                     userId,
@@ -31,11 +31,11 @@ public class SqliteUserDayDAO implements UserDayDAO {
 
                 stmt.executeUpdate();
             }
-
-            stmt.close();
+            return Boolean.TRUE;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return Boolean.FALSE;
     }
 
     @Override
