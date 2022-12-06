@@ -18,7 +18,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 import static br.ifsp.edu.blackbearbarbearia.application.main.Main.*;
 
