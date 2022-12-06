@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="540.0" prefWidth="963.0" style="-fx-background-color: #f0f2f5;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.service.CreateOrUpdateServiceController">
    <children>
-      <Label fx:id="lblTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="379.0" layoutY="99.0" prefHeight="21.0" prefWidth="206.0" textAlignment="JUSTIFY" AnchorPane.leftAnchor="379.0" AnchorPane.rightAnchor="378.0" AnchorPane.topAnchor="79.0" />
-      <ComboBox fx:id="cbTipo" layoutX="379.0" layoutY="388.0" prefWidth="206.0" promptText="Tipo" AnchorPane.leftAnchor="379.0" AnchorPane.rightAnchor="378.0" AnchorPane.topAnchor="388.0" />
-      <TextField fx:id="txtPreco" focusTraversable="false" layoutX="379.0" layoutY="170.0" prefHeight="30.0" prefWidth="206.0" promptText="Digite o preço" AnchorPane.leftAnchor="379.0" AnchorPane.rightAnchor="378.0" AnchorPane.topAnchor="170.0">
+      <Label fx:id="lblTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="361.0" layoutY="127.0" prefHeight="21.0" prefWidth="206.0" textAlignment="JUSTIFY" AnchorPane.leftAnchor="361.0" AnchorPane.rightAnchor="396.0" AnchorPane.topAnchor="127.0" />
+      <TextField fx:id="inputPreco" focusTraversable="false" layoutX="278.0" layoutY="218.0" prefHeight="30.0" prefWidth="206.0" promptText="Digite o preço" AnchorPane.leftAnchor="278.0" AnchorPane.rightAnchor="479.0" AnchorPane.topAnchor="218.0">
          <font>
             <Font name="Roboto" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtComissao" focusTraversable="false" layoutX="379.0" layoutY="220.0" prefHeight="30.0" prefWidth="206.0" promptText="Digite o comissão" AnchorPane.leftAnchor="379.0" AnchorPane.rightAnchor="378.0" AnchorPane.topAnchor="220.0">
+      <TextField fx:id="inputComissao" focusTraversable="false" layoutX="278.0" layoutY="268.0" prefHeight="30.0" prefWidth="206.0" promptText="Digite o comissão" AnchorPane.leftAnchor="278.0" AnchorPane.rightAnchor="479.0" AnchorPane.topAnchor="268.0">
          <font>
             <Font name="Roboto" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtNome" focusTraversable="false" layoutX="379.0" layoutY="120.0" prefHeight="30.0" prefWidth="206.0" promptText="Digite o nome" AnchorPane.leftAnchor="379.0" AnchorPane.rightAnchor="378.0" AnchorPane.topAnchor="120.0">
+      <TextField fx:id="inputName" focusTraversable="false" layoutX="278.0" layoutY="168.0" prefHeight="30.0" prefWidth="206.0" promptText="Digite o nome" AnchorPane.leftAnchor="278.0" AnchorPane.rightAnchor="479.0" AnchorPane.topAnchor="168.0">
          <font>
             <Font name="Roboto" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtTaxa" focusTraversable="false" layoutX="379.0" layoutY="270.0" prefHeight="30.0" prefWidth="206.0" promptText="Digite a taxa" AnchorPane.leftAnchor="379.0" AnchorPane.rightAnchor="378.0" AnchorPane.topAnchor="270.0">
+      <TextField fx:id="inputTaxa" focusTraversable="false" layoutX="278.0" layoutY="318.0" prefHeight="30.0" prefWidth="206.0" promptText="Digite a taxa" AnchorPane.leftAnchor="278.0" AnchorPane.rightAnchor="479.0" AnchorPane.topAnchor="318.0">
          <font>
             <Font name="Roboto" size="14.0" />
          </font>
       </TextField>
-      <RadioButton fx:id="rbNao" layoutX="455.0" layoutY="347.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="56.0" text="Nao" AnchorPane.leftAnchor="455.0" AnchorPane.rightAnchor="452.0" AnchorPane.topAnchor="347.0" />
-      <Label fx:id="lblStatus" layoutX="379.0" layoutY="310.0" prefHeight="27.0" prefWidth="56.0" text="Ativo" AnchorPane.leftAnchor="379.0" AnchorPane.rightAnchor="528.0" AnchorPane.topAnchor="310.0">
+      <RadioButton fx:id="rbNao" layoutX="594.0" layoutY="208.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="56.0" text="Nao" AnchorPane.leftAnchor="594.0" AnchorPane.rightAnchor="313.0" AnchorPane.topAnchor="208.0" />
+      <Label fx:id="lblStatus" layoutX="524.0" layoutY="169.0" prefHeight="27.0" prefWidth="56.0" text="Ativo" AnchorPane.leftAnchor="524.0" AnchorPane.rightAnchor="383.0" AnchorPane.topAnchor="169.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <RadioButton fx:id="rbSim" layoutX="379.0" layoutY="347.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="87.0" text="Sim" AnchorPane.leftAnchor="379.0" AnchorPane.rightAnchor="497.0" AnchorPane.topAnchor="347.0" />
-      <Button fx:id="btnCadastrar" layoutX="379.0" layoutY="439.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#cadastrar" prefHeight="46.0" prefWidth="206.0" style="-fx-background-color: #e3383e;" text="Cadastrar" AnchorPane.leftAnchor="379.0" AnchorPane.rightAnchor="378.0" AnchorPane.topAnchor="439.0">
+      <RadioButton fx:id="rbSim" layoutX="524.0" layoutY="208.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="56.0" text="Sim" AnchorPane.leftAnchor="524.0" AnchorPane.rightAnchor="383.0" AnchorPane.topAnchor="208.0" />
+      <Button fx:id="btnSaveOrUpdate" layoutX="361.0" layoutY="368.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#saveOrUpdate" prefHeight="46.0" prefWidth="206.0" style="-fx-background-color: #e3383e;" text="Cadastrar" AnchorPane.leftAnchor="361.0" AnchorPane.rightAnchor="396.0" AnchorPane.topAnchor="368.0">
          <font>
             <Font name="Cambria Bold" size="24.0" />
          </font>
@@ -45,5 +45,13 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
+      <Text layoutX="524.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipos" AnchorPane.leftAnchor="524.0" AnchorPane.topAnchor="247.8134765625">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Text>
+      <CheckBox fx:id="cbHair" layoutX="524.0" layoutY="278.0" mnemonicParsing="false" text="Cabelo" AnchorPane.leftAnchor="524.0" AnchorPane.topAnchor="278.0" />
+      <CheckBox fx:id="cbBeard" layoutX="524.0" layoutY="309.0" mnemonicParsing="false" text="Barba" AnchorPane.leftAnchor="524.0" AnchorPane.topAnchor="309.0" />
+      <CheckBox fx:id="cbOther" layoutX="612.0" layoutY="278.0" mnemonicParsing="false" text="Outros" AnchorPane.leftAnchor="612.0" AnchorPane.topAnchor="278.0" />
    </children>
 </AnchorPane>
