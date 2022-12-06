@@ -8,6 +8,9 @@ public class Address {
     private String district;
     private String city;
 
+    public Address() {
+
+    }
     public Address(Integer id, String address, String number, String complement, String district, String city) {
         this.id = id;
         this.address = address;
@@ -18,11 +21,7 @@ public class Address {
     }
 
     public Address(String address, String number, String complement, String district, String city) {
-        this.address = address;
-        this.number = number;
-        this.complement = complement;
-        this.district = district;
-        this.city = city;
+        new Address(null, address, number, complement, district, city);
     }
 
     public Integer getId() {
@@ -70,13 +69,6 @@ public class Address {
 
     @Override
     public String toString() {
-        return "Address{" +
-                "id=" + id +
-                ", address='" + address + '\'' +
-                ", number='" + number + '\'' +
-                ", complement='" + complement + '\'' +
-                ", district='" + district + '\'' +
-                ", city='" + city + '\'' +
-                '}';
+        return address + ", " + number + " - " + district + ", " + city + " - " + complement;
     }
 }
