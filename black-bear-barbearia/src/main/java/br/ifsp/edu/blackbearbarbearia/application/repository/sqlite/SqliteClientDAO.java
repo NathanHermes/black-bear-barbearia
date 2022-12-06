@@ -61,24 +61,30 @@ public class SqliteClientDAO implements ClientDAO {
 
     @Override
     public Boolean deleteByKey(Integer key) {
-        String sql = """
-                DELETE FROM client WHERE id = ?
-                """;
-        try {
-            final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
-            stmt.setInt(1, key);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        Optional<Client> deleted = findOne(key);
-        return deleted.isEmpty();
+        /*
+        * String sql = """
+        *           DELETE FROM client WHERE id = ?
+        *           """;
+        *   try {
+        *       final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
+        *       stmt.setInt(1, key);
+        *       stmt.executeUpdate();
+        *   } catch (SQLException e) {
+        *       e.printStackTrace();
+        *   }
+        *
+        *   Optional<Client> deleted = findOne(key);
+        *   return deleted.isEmpty();
+        */
+        return null;
     }
 
     @Override
     public Boolean delete(Client type) {
-        return deleteByKey(type.getId());
+        /*
+        * return deleteByKey(type.getId());
+        */
+        return null;
     }
 
     @Override
