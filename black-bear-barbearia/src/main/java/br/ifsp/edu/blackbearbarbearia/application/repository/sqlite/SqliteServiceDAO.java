@@ -16,7 +16,7 @@ public class SqliteServiceDAO implements ServiceDAO {
     final SqliteServiceTypeDAO serviceTypeDAO = new SqliteServiceTypeDAO();
 
     @Override
-    public Integer create(Service type) {
+    public Boolean create(Service type) {
         String sql = """
                 INSERT INTO service(
                     name,
@@ -44,7 +44,7 @@ public class SqliteServiceDAO implements ServiceDAO {
 
         serviceTypeDAO.create(id.get(), type.getTypes());
 
-        return id.get();
+        return Boolean.FALSE;
     }
 
     @Override
