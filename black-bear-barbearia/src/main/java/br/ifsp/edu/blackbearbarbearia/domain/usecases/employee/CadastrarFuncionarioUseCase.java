@@ -15,7 +15,7 @@ public class CadastrarFuncionarioUseCase {
         this.dao = dao;
     }
 
-    public Integer create(User employee) {
+    public Boolean create(User employee) {
         Validator<User> validator = new CreateEmployeeInputRequestValidator();
         Notification notification = validator.validate(employee);
 
