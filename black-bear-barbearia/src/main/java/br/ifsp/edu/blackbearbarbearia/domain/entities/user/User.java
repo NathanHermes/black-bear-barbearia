@@ -1,21 +1,21 @@
 package br.ifsp.edu.blackbearbarbearia.domain.entities.user;
 
 import java.time.DayOfWeek;
-import java.util.ArrayList;
 import java.util.List;
 
 public class User {
     private Integer id;
-    private final String fullName;
-    private final String email;
-    private final String phone;
-    private final Address address;
-    private final String login;
+    private String fullName;
+    private String email;
+    private String phone;
+    private Address address;
+    private String login;
     private String passwordHash;
-    private final Boolean active;
-    private String lastPassword;
-    private final Role role;
-    private final List<DayOfWeek> days;
+    private Boolean active;
+    private Role role;
+    private List<DayOfWeek> days;
+
+    public User() {}
 
     public User(Integer id, String fullName, String email, String phone, Address address, String login, String passwordHash, Boolean active, Role role, List<DayOfWeek> days) {
         this.id = id;
