@@ -1,22 +1,7 @@
 package br.ifsp.edu.blackbearbarbearia.application.main;
 
-import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Address;
-import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Role;
-import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
-import br.ifsp.edu.blackbearbarbearia.domain.entities.user.UserBuilder;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.CadastrarFuncionarioUseCase;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.EditarFuncionarioUseCase;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.ListarFuncionariosUseCase;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.ApagarSenhaFuncionarioUseCase;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.LoginUseCase;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.TrocaSenhaUseCase;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.UserDAO;
-
-import java.time.DayOfWeek;
-import java.util.ArrayList;
-
 public class EmployeeMain {
-    public static LoginUseCase loginUseCase;
+    /*public static LoginUseCase loginUseCase;
     public static CadastrarFuncionarioUseCase cadastrarFuncionarioUseCase;
     public static EditarFuncionarioUseCase editarFuncionarioUseCase;
     public static ListarFuncionariosUseCase listarFuncionariosUseCase;
