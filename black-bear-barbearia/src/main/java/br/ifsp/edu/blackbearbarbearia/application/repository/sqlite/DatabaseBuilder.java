@@ -1,4 +1,4 @@
-package br.ifsp.edu.blackbearbarbearia.application.repository;
+package br.ifsp.edu.blackbearbarbearia.application.repository.sqlite;
 
 import br.ifsp.edu.blackbearbarbearia.domain.entities.booking.Status;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Type;
@@ -23,10 +23,13 @@ public class DatabaseBuilder {
         createTableUser();
         createTableAddress();
         createTableUserDay();
+
         createTableType();
         createTableService();
         createTableServiceType();
+
         createTableClient();
+
         createTableStatus();
         createTableBooking();
 
@@ -34,10 +37,13 @@ public class DatabaseBuilder {
         populateUser();
         populateAddress();
         populateUserDay();
+
         populateType();
         populateService();
         populateServiceType();
+
         populateClient();
+
         populateStatus();
         populateBooking();
     }
