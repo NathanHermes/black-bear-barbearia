@@ -326,28 +326,40 @@ public class SqliteUserDAO implements UserDAO {
     }
 
     @Override
-    public List<User> findOneByDay(DayOfWeek day) {
-        return null;
-    }
-
-    private Optional<Integer> findKeyByFullname(String fullName) {
-        String sql = "SELECT id FROM user WHERE fullName = ?";
-        Optional<Integer> id = Optional.empty();
+    public Integer findCountByDay(Integer day) {
+        String sql = "SELECT * FROM userDay WHERE dayId = ?";
 
         try {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
-
-            stmt.setString(1, fullName);
+            stmt.setString(1, String.valueOf(day));
 
             final ResultSet result = stmt.executeQuery();
 
-            while(result.next()){
-                id = Optional.of(result.getInt("id"));
+            Integer count = 0;
+            while (result.next()) {
+                count++;
+            }
+            return count;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private Optional<Integer> findIDByFullname(String fullName) {
+        String sql = "SELECT id FROM user WHERE fullName = ?";
+
+        try {
+            final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
+            stmt.setString(1, fullName);
+
+            final ResultSet result = stmt.executeQuery();
+            if (result.next()){
+                return Optional.of(result.getInt("id"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return id;
+        return Optional.empty();
     }
 }
