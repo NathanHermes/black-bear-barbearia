@@ -1,4 +1,4 @@
-package br.ifsp.edu.blackbearbarbearia.application.controller;
+package br.ifsp.edu.blackbearbarbearia.application.controller.service;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,13 +8,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 
-public class CadastrarServicoController {
+public class CreateOrUpdateServiceController {
 
     @FXML
     private RadioButton rbSim;
-
-    @FXML
-    private Label lblCadastrar;
 
     @FXML
     private TextField txtTaxa;
@@ -32,6 +29,9 @@ public class CadastrarServicoController {
     private TextField txtNome;
 
     @FXML
+    private Label lblTitle;
+
+    @FXML
     private TextField txtPreco;
 
     @FXML
@@ -44,5 +44,10 @@ public class CadastrarServicoController {
     void cadastrar(ActionEvent event) {
 
     }
+    @FXML
+    void back(ActionEvent event) {
+
+    }
 
 }
+
