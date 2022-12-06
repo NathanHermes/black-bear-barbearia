@@ -1,13 +1,11 @@
-package br.ifsp.edu.blackbearbarbearia.application.controller;
+package br.ifsp.edu.blackbearbarbearia.application.controller.client;
 
 import br.ifsp.edu.blackbearbarbearia.application.view.WindowLoader;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.client.Client;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityNotFoundException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -63,7 +61,7 @@ public class ClientMainController {
     }
 
     @FXML
-    public void search(ActionEvent event) {
+    public void search() {
         String email = inputEmail.getText();
 
         Client client = findClientUseCase.findByEmail(email);
@@ -73,12 +71,12 @@ public class ClientMainController {
     }
 
     @FXML
-    public void reloadTableView(ActionEvent actionEvent) {
+    public void reloadTableView() {
         loadBookingData();
     }
 
     @FXML
-    public void save(ActionEvent event) {
+    public void save() {
         try {
             WindowLoader.setRoot("CreateOrUpdateClient");
         } catch (IOException exception) {
@@ -87,7 +85,7 @@ public class ClientMainController {
     }
 
     @FXML
-    public void update(ActionEvent event) {
+    public void update() {
         Client clientSelected = tbvClients.getSelectionModel().getSelectedItem();
         if (clientSelected != null) {
             try {
@@ -101,7 +99,7 @@ public class ClientMainController {
     }
 
     @FXML
-    public void back(ActionEvent actionEvent) {
+    public void back() {
         try {
             WindowLoader.setRoot("BookingMain");
         } catch (IOException exception) {
