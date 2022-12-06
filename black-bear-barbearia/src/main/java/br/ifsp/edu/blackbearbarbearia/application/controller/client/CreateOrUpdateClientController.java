@@ -4,7 +4,6 @@ import br.ifsp.edu.blackbearbarbearia.application.view.WindowLoader;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.client.Client;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityAlreadyExistsException;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityNotFoundException;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -45,11 +44,11 @@ public class CreateOrUpdateClientController {
         inputEmail.setText("");
     }
 
-    public void setClient(Client client) {
-        if (client == null)
+    public void setClient(Client clientSelected) {
+        if (clientSelected == null)
             throw new IllegalArgumentException("Client can not be null");
 
-        this.client = client;
+        this.client = clientSelected;
         setInfoClientIntoInputs();
     }
 
@@ -62,7 +61,7 @@ public class CreateOrUpdateClientController {
     }
 
     @FXML
-    void saveOrUpdate(ActionEvent event) {
+    void saveOrUpdate() {
         lblResponseMessage.setText("");
 
         if (client == null) {
@@ -76,11 +75,9 @@ public class CreateOrUpdateClientController {
             } catch (IllegalArgumentException | EntityAlreadyExistsException exception) {
                 lblResponseMessage.setText(exception.getMessage());
             }
-
         } else {
             getInfoClientFromInputs();
             try {
-                System.out.println(client);
                 Boolean response = updateClientUseCase.update(client.getId(), client);
                 if (response.equals(Boolean.TRUE))
                     lblResponseMessage.setText("Cliente atualizado");
@@ -102,7 +99,7 @@ public class CreateOrUpdateClientController {
         client.setEmail(inputEmail.getText());
     }
 
-    public void back(ActionEvent actionEvent) {
+    public void back() {
         try {
             WindowLoader.setRoot("ClientMain");
         } catch (IOException e) {
