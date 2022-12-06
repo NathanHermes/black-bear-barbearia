@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 
 <VBox fillWidth="false" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.EmployeeCommissionController">
+            fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.employee.EmployeeCommissionController">
     <HBox>
         <Label text="Funcionário(a):"/>
         <Label fx:id="name"/>
