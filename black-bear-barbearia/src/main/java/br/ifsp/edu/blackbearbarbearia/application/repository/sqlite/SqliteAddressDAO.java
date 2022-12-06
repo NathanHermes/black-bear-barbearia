@@ -10,7 +10,7 @@ import java.util.*;
 
 public class SqliteAddressDAO implements AddressDAO {
     @Override
-    public Integer create(Integer userId, Address type) {
+    public Boolean create(Integer userId, Address type) {
         String sql = """
                 INSERT INTO address(
                     address,
@@ -31,13 +31,12 @@ public class SqliteAddressDAO implements AddressDAO {
             stmt.setString(5, type.getCity());
             stmt.setInt(6, userId);
 
-            stmt.executeUpdate();
+            if (stmt.executeUpdate() > 0)
+                return Boolean.TRUE;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        Optional<Address> created = findOneByUserId(userId);
-        return created.map(Address::getId).orElse(null);
+        return Boolean.FALSE;
     }
 
     @Override
