@@ -9,7 +9,6 @@ public interface DAO<T, K>{
     Boolean update(T type);
     Boolean deleteByKey(K key);
     Boolean delete(T type);
-
     Optional<T> findOne(K key);
     List<T> findAll();
 }

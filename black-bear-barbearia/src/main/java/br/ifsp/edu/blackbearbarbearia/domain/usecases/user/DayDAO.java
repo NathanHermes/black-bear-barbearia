@@ -5,5 +5,5 @@ import java.util.Optional;
 
 public interface DayDAO {
     Optional<DayOfWeek> findOne(Integer key);
-    Optional<Integer> findId(DayOfWeek entity);
+    Optional<Integer> findDayIDByDay(DayOfWeek entity);
 }
