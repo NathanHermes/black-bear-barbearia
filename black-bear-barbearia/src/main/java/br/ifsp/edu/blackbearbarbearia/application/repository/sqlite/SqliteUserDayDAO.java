@@ -68,22 +68,18 @@ public class SqliteUserDayDAO implements UserDayDAO {
 
         try {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
-
             stmt.setInt(1, userId);
 
             final ResultSet result = stmt.executeQuery();
-
             while(result.next()){
                 final Integer dayId = result.getInt("Dayid");
 
                 DayOfWeek day = dayDAO.findOne(dayId).get();
-
                 days.add(day);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return days;
     }
 
