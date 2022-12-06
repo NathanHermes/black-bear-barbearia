@@ -6,12 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class ConnectionFactory {
-    private static Connection connection;
+    private static Connection CONNECTION;
 
     public static Connection createConnection() throws SQLException {
-        if(connection == null)
-            connection = DriverManager.getConnection("jdbc:sqlite:blackbearbarbearia.db");
-        return connection;
+        if(CONNECTION == null)
+            CONNECTION = DriverManager.getConnection("jdbc:sqlite:blackbearbarbearia.db");
+        return CONNECTION;
     }
 
     public static PreparedStatement createPreparedStatement(String sql) throws SQLException {
