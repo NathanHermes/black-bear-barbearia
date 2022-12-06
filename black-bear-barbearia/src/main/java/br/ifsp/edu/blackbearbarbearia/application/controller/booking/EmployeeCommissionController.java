@@ -1,4 +1,4 @@
-package br.ifsp.edu.blackbearbarbearia.application.controller.employee;
+package br.ifsp.edu.blackbearbarbearia.application.controller.booking;
 
 import br.ifsp.edu.blackbearbarbearia.application.view.WindowLoader;
 import javafx.event.ActionEvent;
