@@ -13,12 +13,10 @@ public class FindClientUseCase {
     }
 
     public List<Client> findAll() {
-        List<Client> clients = dao.findAll();
+        if (dao.findAll().isEmpty())
+            throw new EntityNotFoundException("No client found.");
 
-        if (clients.isEmpty())
-            throw new IllegalArgumentException("No client found.");
-
-        return clients;
+        return dao.findAll();
     }
 
     public Client findOne(Integer id) {
