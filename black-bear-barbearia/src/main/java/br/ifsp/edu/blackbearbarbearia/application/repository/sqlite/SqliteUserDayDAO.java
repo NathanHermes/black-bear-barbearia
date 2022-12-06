@@ -72,12 +72,15 @@ public class SqliteUserDayDAO implements UserDayDAO {
 
             final ResultSet result = stmt.executeQuery();
             while(result.next()){
-                final Integer dayId = result.getInt("Dayid");
+                final Integer dayId = result.getInt("dayId");
+
+                if (dayDAO.findOne(dayId).isEmpty())
+                    throw new EntityNotFoundException("Day not found");
 
                 DayOfWeek day = dayDAO.findOne(dayId).get();
                 days.add(day);
             }
-        } catch (SQLException e) {
+        } catch (SQLException | EntityNotFoundException e) {
             e.printStackTrace();
         }
         return days;
