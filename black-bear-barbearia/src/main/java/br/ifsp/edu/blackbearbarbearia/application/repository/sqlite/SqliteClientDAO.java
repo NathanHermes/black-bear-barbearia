@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public class SqliteClientDAO implements ClientDAO {
     @Override
-    public Integer create(Client type) {
+    public Boolean create(Client client) {
         String sql = """
                 INSERT INTO client(
                     name,
@@ -20,21 +20,19 @@ public class SqliteClientDAO implements ClientDAO {
                     phone
                 ) VALUES (?, ?, ?)
                 """;
+
         try {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
 
-            stmt.setString(1, type.getName());
-            stmt.setString(2, type.getEmail());
-            stmt.setString(3, type.getPhone());
+            stmt.setString(1, client.getName());
+            stmt.setString(2, client.getEmail());
+            stmt.setString(3, client.getPhone());
 
-            stmt.executeUpdate();
+            if(stmt.executeUpdate() > 0) return Boolean.TRUE;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        Optional<Client> created = findOneByEmail(type.getEmail());
-
-        return created.map(Client::getId).orElse(null);
+        return Boolean.FALSE;
     }
 
     @Override
