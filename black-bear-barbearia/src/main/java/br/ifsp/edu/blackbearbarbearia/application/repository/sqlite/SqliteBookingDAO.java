@@ -23,7 +23,7 @@ public class SqliteBookingDAO implements BookingDAO {
     final SqliteUserDAO userDAO = new SqliteUserDAO();
 
     @Override
-    public Integer create(Booking type) {
+    public Boolean create(Booking type) {
         String sql = """
                 INSERT INTO booking(
                     date,
@@ -50,8 +50,7 @@ public class SqliteBookingDAO implements BookingDAO {
             e.printStackTrace();
         }
 
-        Optional<Booking> created = findOneByDateAndUser(type.getNoFormattedDate(), type.getInfoEmployee());
-        return created.map(Booking::getId).orElse(null);
+        return Boolean.FALSE;
     }
 
     @Override
