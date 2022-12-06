@@ -1,4 +1,4 @@
-package br.ifsp.edu.blackbearbarbearia.application.controller;
+package br.ifsp.edu.blackbearbarbearia.application.controller.popUp;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
