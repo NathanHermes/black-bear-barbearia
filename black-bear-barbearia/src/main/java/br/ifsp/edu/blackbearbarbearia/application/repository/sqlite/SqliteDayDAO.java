@@ -10,27 +10,23 @@ import java.util.Optional;
 
 public class SqliteDayDAO implements DayDAO {
     @Override
-    public Optional<DayOfWeek> findOne(Integer key) {
+    public Optional<DayOfWeek> findOne(Integer dayId) {
         String sql = "SELECT * FROM day WHERE id = ?";
-        Optional<DayOfWeek> dayOfWeek = Optional.empty();
 
         try {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
-
-            stmt.setInt(1, key);
+            stmt.setInt(1, dayId);
 
             final ResultSet result = stmt.executeQuery();
 
-            while(result.next()){
+            if(result.next()){
                 final String name = result.getString("name");
-
-                dayOfWeek = Optional.of(DayOfWeek.valueOf(name));
+                return Optional.of(DayOfWeek.valueOf(name));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return dayOfWeek;
+        return Optional.empty();
     }
 
     @Override
