@@ -2,6 +2,7 @@ package br.ifsp.edu.blackbearbarbearia.application.repository.sqlite;
 
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.UserDayDAO;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityNotFoundException;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,10 +25,12 @@ public class SqliteUserDayDAO implements UserDayDAO {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
 
             for(DayOfWeek day : days) {
-                final Optional<Integer> dayId = dayDAO.findId(day);
+                if (dayDAO.findDayIDByDay(day).isEmpty())
+                    throw new EntityNotFoundException("Day not found");
+                final Integer dayId = dayDAO.findDayIDByDay(day).get();
 
                 stmt.setInt(1, userId);
-                stmt.setInt(2, dayId.get());
+                stmt.setInt(2, dayId);
 
                 stmt.executeUpdate();
             }
