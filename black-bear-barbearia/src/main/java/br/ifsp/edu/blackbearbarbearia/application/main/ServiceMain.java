@@ -7,7 +7,7 @@ import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Service;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Type;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Address;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.CadastrarFuncionarioUseCase;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.CreateEmployeeUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.CreateServiceUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.EditarServicoUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.ListarServicosUseCase;
@@ -18,8 +18,8 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.UserDAO;
 import java.math.BigDecimal;
 
 public class ServiceMain {
-    public static LoginUseCase loginUseCase;
-    public static CadastrarFuncionarioUseCase cadastrarFuncionarioUseCase;
+    /*public static LoginUseCase loginUseCase;
+    public static CreateEmployeeUseCase createEmployeeUseCase;
     public static CreateServiceUseCase createServiceUseCase;
     public static EditarServicoUseCase editarServicoUseCase;
     public static ListarServicosUseCase listarServicosUseCase;
@@ -41,7 +41,7 @@ public class ServiceMain {
     private static void configureInjection() {
         UserDAO userDAO = new InMemoryUserDAO();
         loginUseCase = new LoginUseCase(userDAO);
-        cadastrarFuncionarioUseCase = new CadastrarFuncionarioUseCase(userDAO);
+        createEmployeeUseCase = new CreateEmployeeUseCase(userDAO);
 
         ServiceDAO serviceDAO = new InMemoryServiceDAO();
         createServiceUseCase = new CreateServiceUseCase(serviceDAO);
@@ -56,7 +56,7 @@ public class ServiceMain {
         adm.addDay(Day.MONDAY);
         adm.addDay(Day.TUESDAY);
         adm.addDay(Day.WEDNESDAY);
-        adm.addDay(Day.THURSDAY);*/
+        adm.addDay(Day.THURSDAY);
 
         try {
             //cadastrarFuncionarioUseCase.create(adm);
@@ -137,5 +137,5 @@ public class ServiceMain {
         } catch (Exception e) {
             System.out.println("> ERROR ...: " + e.getMessage() + "\n");
         }
-    }
+    }*/
 }
