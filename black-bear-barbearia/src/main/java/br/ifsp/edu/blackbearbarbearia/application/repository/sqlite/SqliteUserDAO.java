@@ -12,8 +12,8 @@ import java.time.DayOfWeek;
 import java.util.*;
 
 public class SqliteUserDAO implements UserDAO {
-    final SqliteAddressDAO addressDAO = new SqliteAddressDAO();
-    final SqliteUserDayDAO userDayDAO = new SqliteUserDayDAO();
+    private final SqliteAddressDAO addressDAO = new SqliteAddressDAO();
+    private final SqliteUserDayDAO userDayDAO = new SqliteUserDayDAO();
 
     @Override
     public Integer create(User type) {
