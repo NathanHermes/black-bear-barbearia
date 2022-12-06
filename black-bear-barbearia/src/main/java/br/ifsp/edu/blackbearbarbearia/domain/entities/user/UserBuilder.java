@@ -4,6 +4,7 @@ import java.time.DayOfWeek;
 import java.util.List;
 
 public class UserBuilder {
+    private Integer id;
     private String fullName;
     private String email;
     private String phone;
@@ -13,6 +14,10 @@ public class UserBuilder {
     private Boolean active;
     private Role role;
     private List<DayOfWeek> days;
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
@@ -51,6 +56,6 @@ public class UserBuilder {
     }
 
     public User getResult() {
-        return new User(fullName, email, phone, address, login, active, passwordHash, role, days);
+        return new User(id, fullName, email, phone, address, login, passwordHash, active, role, days);
     }
 }
