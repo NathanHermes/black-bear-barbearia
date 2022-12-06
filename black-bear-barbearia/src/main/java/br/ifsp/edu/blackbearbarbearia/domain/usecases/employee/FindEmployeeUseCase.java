@@ -5,12 +5,11 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.UserDAO;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityNotFoundException;
 
 import java.util.List;
-import java.util.Optional;
 
-public class ListarFuncionariosUseCase {
+public class FindEmployeeUseCase {
     private final UserDAO dao;
 
-    public ListarFuncionariosUseCase(UserDAO dao) {
+    public FindEmployeeUseCase(UserDAO dao) {
         this.dao = dao;
     }
 
@@ -21,11 +20,16 @@ public class ListarFuncionariosUseCase {
         return dao.findOne(id).get();
     }
     public List<User> findAll() {
-        List<User> users = dao.findAll();
+        if (dao.findAll().isEmpty())
+            throw new EntityNotFoundException("Employees not found.");
 
-        if (users.isEmpty())
-            throw new IllegalArgumentException("No user found.");
+        return dao.findAll();
+    }
 
-        return users;
+    public User findByEmail(String email) {
+        if (dao.findByEmail(email).isEmpty())
+            throw new EntityNotFoundException("Employee not found");
+
+        return dao.findByEmail(email).get();
     }
 }
