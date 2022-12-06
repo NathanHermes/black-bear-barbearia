@@ -10,11 +10,15 @@ import java.io.FileOutputStream;
 public class GenerateNotaFiscalInPDFUseCase {
     private Document NOTA_FISCAL;
 
-    public void generate(Booking booking) throws FileNotFoundException {
+    public void generate(Booking booking) {
         if (NOTA_FISCAL == null)
             NOTA_FISCAL = new Document();
 
-        PdfWriter.getInstance(NOTA_FISCAL, new FileOutputStream(booking.getId() + booking.getClient() + ".pdf"));
+        try {
+            PdfWriter.getInstance(NOTA_FISCAL, new FileOutputStream(booking.getId() + booking.getClient() + ".pdf"));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         NOTA_FISCAL.open();
 
         Font title = new Font(Font.TIMES_ROMAN, 18);
