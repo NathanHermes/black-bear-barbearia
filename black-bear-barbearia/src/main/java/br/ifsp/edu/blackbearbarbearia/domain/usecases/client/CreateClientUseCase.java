@@ -12,7 +12,7 @@ public class CreateClientUseCase {
         this.dao = dao;
     }
 
-    public Integer create(Client client) {
+    public Boolean create(Client client) {
         Validator<Client> validator = new ClientInputRequestValidator();
         Notification notification = validator.validate(client);
 
