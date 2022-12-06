@@ -11,7 +11,7 @@ public class InMemoryUserDAO implements UserDAO {
     @Override
     public Boolean create(User user) {
         userID++;
-        user.setId(userID);
+        //user.setId(userID);
         if (database.put(userID, user) != null)
             return Boolean.TRUE;
         else
