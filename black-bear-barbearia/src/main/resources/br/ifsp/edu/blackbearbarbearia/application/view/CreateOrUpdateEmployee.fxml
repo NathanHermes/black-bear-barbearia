@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #f0f2f5;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.employee.CreateOrUpdateEmployeeController">
+   <Label fx:id="lblTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="348.0" layoutY="41.0" text="CADASTRAR" textAlignment="JUSTIFY" textFill="#1d4c88" AnchorPane.leftAnchor="348.0" AnchorPane.rightAnchor="406.0" AnchorPane.topAnchor="41.0" />
+   <Label layoutX="252.0" layoutY="95.0" prefHeight="27.0" prefWidth="134.0" text="Dados pessoais" AnchorPane.leftAnchor="252.0" AnchorPane.topAnchor="95.0" />
+   <TextField fx:id="inputName" focusTraversable="false" layoutX="252.0" layoutY="142.0" prefWidth="180.0" promptText="Digite o nome" AnchorPane.leftAnchor="252.0" AnchorPane.topAnchor="142.0" />
+   <TextField fx:id="inputEmail" focusTraversable="false" layoutX="252.0" layoutY="192.0" prefWidth="180.0" promptText="Digite o em=ail" AnchorPane.leftAnchor="252.0" AnchorPane.rightAnchor="528.0" AnchorPane.topAnchor="192.0" />
+   <TextField fx:id="inputPhone" focusTraversable="false" layoutX="252.0" layoutY="239.0" prefWidth="180.0" promptText="Digite o telefone" AnchorPane.leftAnchor="252.0" AnchorPane.rightAnchor="528.0" AnchorPane.topAnchor="239.0" />
+   <TextField fx:id="inputLogin" focusTraversable="false" layoutX="252.0" layoutY="289.0" maxWidth="180.0" prefWidth="180.0" promptText="Digite o login" AnchorPane.leftAnchor="252.0" AnchorPane.rightAnchor="528.0" AnchorPane.topAnchor="289.0" />
+   <PasswordField fx:id="inputPassword" layoutX="252.0" layoutY="335.0" prefWidth="180.0" promptText="Digite a senha" AnchorPane.leftAnchor="252.0" AnchorPane.rightAnchor="528.0" AnchorPane.topAnchor="335.0" />
+   <Label layoutX="451.0" layoutY="95.0" prefHeight="27.0" prefWidth="87.0" text="Endereço" AnchorPane.leftAnchor="451.0" AnchorPane.topAnchor="95.0" />
+   <TextField fx:id="inputAddress" focusTraversable="false" layoutX="451.0" layoutY="142.0" maxWidth="180.0" prefWidth="180.0" promptText="Digite o endereço" AnchorPane.leftAnchor="451.0" AnchorPane.rightAnchor="329.0" AnchorPane.topAnchor="142.0" />
+   <TextField fx:id="inputNumber" focusTraversable="false" layoutX="448.0" layoutY="192.0" maxWidth="180.0" prefWidth="180.0" promptText="Digite o número" AnchorPane.leftAnchor="448.0" AnchorPane.topAnchor="192.0" />
+   <TextField fx:id="inputDistrict" focusTraversable="false" layoutX="451.0" layoutY="335.0" maxWidth="180.0" prefWidth="180.0" promptText="Digite o bairro" AnchorPane.leftAnchor="451.0" AnchorPane.topAnchor="335.0" />
+   <TextField fx:id="inputComplement" focusTraversable="false" layoutX="451.0" layoutY="289.0" maxWidth="180.0" prefWidth="180.0" promptText="Digite o complemento" AnchorPane.leftAnchor="451.0" AnchorPane.topAnchor="289.0" />
+   <TextField fx:id="inputCity" focusTraversable="false" layoutX="451.0" layoutY="239.0" maxWidth="180.0" prefWidth="180.0" promptText="Digite o cidade" AnchorPane.leftAnchor="451.0" AnchorPane.topAnchor="239.0" />
+   <Label layoutX="389.0" layoutY="395.0" prefHeight="27.0" prefWidth="87.0" text="Dias de trabalho" AnchorPane.leftAnchor="389.0" AnchorPane.topAnchor="395.0" />
+   <CheckBox fx:id="ckMonday" layoutX="200.0" layoutY="433.0" mnemonicParsing="false" text="Segunda" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="433.0" />
+   <CheckBox fx:id="ckTuesday" layoutX="284.0" layoutY="433.0" mnemonicParsing="false" text="Terça" AnchorPane.leftAnchor="284.0" AnchorPane.topAnchor="433.0" />
+   <CheckBox fx:id="ckWednesday" layoutX="351.0" layoutY="433.0" mnemonicParsing="false" text="Quarta" AnchorPane.leftAnchor="351.0" AnchorPane.topAnchor="433.0" />
+   <CheckBox fx:id="ckThursday" layoutX="414.0" layoutY="433.0" mnemonicParsing="false" text="Quinta" AnchorPane.leftAnchor="414.0" AnchorPane.topAnchor="433.0" />
+   <CheckBox fx:id="ckFriday" layoutX="478.0" layoutY="433.0" mnemonicParsing="false" text="Sexta" AnchorPane.leftAnchor="478.0" AnchorPane.topAnchor="433.0" />
+   <CheckBox fx:id="ckSaturday" layoutX="539.0" layoutY="433.0" mnemonicParsing="false" text="Sabádo" AnchorPane.leftAnchor="539.0" AnchorPane.topAnchor="433.0" />
+   <CheckBox fx:id="ckSunday" layoutX="613.0" layoutY="433.0" mnemonicParsing="false" text="Domingo" AnchorPane.leftAnchor="613.0" AnchorPane.topAnchor="433.0" />
+   <Label layoutX="389.0" layoutY="471.0" prefHeight="27.0" prefWidth="87.0" text="Status" AnchorPane.leftAnchor="389.0" AnchorPane.topAnchor="471.0" />
+   <RadioButton fx:id="rbActive" layoutX="299.0" layoutY="511.0" mnemonicParsing="false" text="Ativo">
+      <toggleGroup>
+         <ToggleGroup fx:id="status" />
+      </toggleGroup>
+   </RadioButton>
+   <RadioButton fx:id="rbDisable" layoutX="453.0" layoutY="511.0" mnemonicParsing="false" text="Inativo" toggleGroup="$status" />
+   <Button fx:id="btnSaveOrUpdate" layoutX="352.0" layoutY="581.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#saveOrUpdate" prefWidth="180.0" style="-fx-background-color: #e3383e;" text="Cadastrar" AnchorPane.topAnchor="581.0" />
+   <Label fx:id="lblResponseMessage" layoutX="389.0" layoutY="636.0" prefHeight="27.0" AnchorPane.leftAnchor="389.0" AnchorPane.topAnchor="636.0" />
+   <Button layoutX="737.0" layoutY="479.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#back" prefHeight="46.0" prefWidth="206.0" style="-fx-background-color: #e3383e;" text="Voltar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+</AnchorPane>
