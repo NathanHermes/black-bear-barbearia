@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="540.0" prefWidth="963.0" style="-fx-background-color: #f0f2f5;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.view.fonts.CadastrarServicoController">
+<AnchorPane prefHeight="540.0" prefWidth="963.0" style="-fx-background-color: #f0f2f5;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.service.CreateOrUpdateServiceController">
    <children>
-      <Label fx:id="lblCadastrar" alignment="CENTER" contentDisplay="CENTER" layoutX="379.0" layoutY="56.0" text="CADASTRAR" textAlignment="JUSTIFY" textFill="#1d4c88" AnchorPane.leftAnchor="379.0" AnchorPane.rightAnchor="378.0" AnchorPane.topAnchor="56.0">
-         <font>
-            <Font name="Cambria Bold" size="36.0" />
-         </font>
-      </Label>
+      <Label fx:id="lblTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="379.0" layoutY="99.0" prefHeight="21.0" prefWidth="206.0" textAlignment="JUSTIFY" AnchorPane.leftAnchor="379.0" AnchorPane.rightAnchor="378.0" AnchorPane.topAnchor="79.0" />
       <ComboBox fx:id="cbTipo" layoutX="379.0" layoutY="388.0" prefWidth="206.0" promptText="Tipo" AnchorPane.leftAnchor="379.0" AnchorPane.rightAnchor="378.0" AnchorPane.topAnchor="388.0" />
       <TextField fx:id="txtPreco" focusTraversable="false" layoutX="379.0" layoutY="170.0" prefHeight="30.0" prefWidth="206.0" promptText="Digite o preço" AnchorPane.leftAnchor="379.0" AnchorPane.rightAnchor="378.0" AnchorPane.topAnchor="170.0">
          <font>
@@ -45,6 +38,11 @@
       <Button fx:id="btnCadastrar" layoutX="379.0" layoutY="439.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#cadastrar" prefHeight="46.0" prefWidth="206.0" style="-fx-background-color: #e3383e;" text="Cadastrar" AnchorPane.leftAnchor="379.0" AnchorPane.rightAnchor="378.0" AnchorPane.topAnchor="439.0">
          <font>
             <Font name="Cambria Bold" size="24.0" />
+         </font>
+      </Button>
+      <Button layoutX="737.0" layoutY="479.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#back" prefHeight="46.0" prefWidth="206.0" style="-fx-background-color: #e3383e;" text="Voltar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="25.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
          </font>
       </Button>
    </children>
