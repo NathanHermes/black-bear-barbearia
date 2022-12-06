@@ -9,9 +9,9 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Validator;
 import java.time.DayOfWeek;
 import java.util.List;
 
-public class CadastrarFuncionarioUseCase {
+public class CreateEmployeeUseCase {
     private final UserDAO dao;
-    public CadastrarFuncionarioUseCase(UserDAO dao) {
+    public CreateEmployeeUseCase(UserDAO dao) {
         this.dao = dao;
     }
 
@@ -19,18 +19,28 @@ public class CadastrarFuncionarioUseCase {
         Validator<User> validator = new CreateEmployeeInputRequestValidator();
         Notification notification = validator.validate(employee);
 
-        if (notification.hasErros()) throw new IllegalArgumentException(notification.errorMessage());
+        if (notification.hasErros())
+            throw new IllegalArgumentException(notification.errorMessage());
 
         String email = employee.getEmail();
-        if (dao.findOneByEmail(email).isPresent()) throw new EntityAlreadyExistsException("This email is already in use");
+        if (dao.findByEmail(email).isPresent())
+            throw new EntityAlreadyExistsException("This email is already in use");
 
         String login = employee.getLogin();
-        if (dao.findOneByLogin(login).isPresent()) throw new EntityAlreadyExistsException("This login is already in use");
+        if (dao.findByLogin(login).isPresent())
+            throw new EntityAlreadyExistsException("This login is already in use");
 
-        List<DayOfWeek> daysEmployee = employee.getDays();
-        if (daysEmployee.stream().filter(day -> dao.findOneByDay(day).size() == 3).count() == 1) throw new IllegalArgumentException("Days with work limit reached");
+        List<DayOfWeek> days = employee.getDays();
+        if (days.size() > 6)
+            throw new IllegalArgumentException("Days with work limit reached");
 
-        employee.setLastPassword(employee.getPasswordHash());
+        for (DayOfWeek day: days) {
+            Integer countDay = dao.findCountByDay(day.getValue());
+
+            if (countDay >= 3)
+                throw new IllegalArgumentException(day + " with work limit reached");
+        }
+
         return dao.create(employee);
     }
 }
