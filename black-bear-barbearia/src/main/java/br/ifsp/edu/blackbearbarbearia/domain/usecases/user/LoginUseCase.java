@@ -20,7 +20,7 @@ public class LoginUseCase {
 
         if (notification.hasErros()) throw new IllegalArgumentException(notification.errorMessage());
 
-        Optional<User> userDAO = dao.findOneByLogin(user.getLogin());
+        Optional<User> userDAO = dao.findByLogin(user.getLogin());
         if (userDAO.isEmpty()) throw new EntityNotFoundException("Login not found");
 
 
