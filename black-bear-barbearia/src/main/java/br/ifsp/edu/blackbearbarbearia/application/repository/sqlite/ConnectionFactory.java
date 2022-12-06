@@ -1,4 +1,4 @@
-package br.ifsp.edu.blackbearbarbearia.application.repository;
+package br.ifsp.edu.blackbearbarbearia.application.repository.sqlite;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
