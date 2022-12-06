@@ -14,7 +14,7 @@ public class UpdateClientUseCase {
 
     public Boolean update(Integer id, Client client) {
         Validator<Client> validator = new ClientInputRequestValidator();
-        Notification notification = validator.validate(clientUpdate);
+        Notification notification = validator.validate(client);
 
         if (notification.hasErros())
             throw new IllegalArgumentException(notification.errorMessage());
