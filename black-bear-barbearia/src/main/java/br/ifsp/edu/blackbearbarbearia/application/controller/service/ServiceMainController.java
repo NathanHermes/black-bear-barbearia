@@ -2,23 +2,23 @@ package br.ifsp.edu.blackbearbarbearia.application.controller.service;
 
 import br.ifsp.edu.blackbearbarbearia.application.view.WindowLoader;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Service;
-import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Type;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityNotFoundException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 
 import static br.ifsp.edu.blackbearbarbearia.application.main.Main.findServiceUseCase;
 
 public class ServiceMainController {
+    @FXML
+    private TextField inputNameService;
     @FXML
     private TableView<Service> tbvService;
 
@@ -26,27 +26,18 @@ public class ServiceMainController {
     private TableColumn<Service, Integer> cID;
 
     @FXML
-    private TableColumn<Service, String> cNome;
+    private TableColumn<Service, String> cName;
 
     @FXML
-    private TableColumn<Service, BigDecimal> cPreco;
+    private TableColumn<Service, BigDecimal> cPrince;
 
     @FXML
     private TableColumn<Service, BigDecimal>  cTaxa;
 
     @FXML
-    private TableColumn<Service, BigDecimal> cComissao;
+    private TableColumn<Service, BigDecimal> cCommission;
     @FXML
-    private TableColumn<Service, Boolean> cAtivo;
-
-    @FXML
-    private TableColumn<Service, Type> cTipo;
-
-    @FXML
-    private TextField inputBusca;
-
-    @FXML
-    private Button btnEditar;
+    private TableColumn<Service, Boolean> cActive;
 
     private ObservableList<Service> serviceData;
 
@@ -73,39 +64,38 @@ public class ServiceMainController {
 
     private void setValueSourceToColumns() {
         cID.setCellValueFactory(new PropertyValueFactory<>("id"));
-        cNome.setCellValueFactory(new PropertyValueFactory<>("name"));
-        cPreco.setCellValueFactory(new PropertyValueFactory<>("price"));
-        cComissao.setCellValueFactory(new PropertyValueFactory<>("comissionPercentage"));
+        cName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        cPrince.setCellValueFactory(new PropertyValueFactory<>("price"));
+        cCommission.setCellValueFactory(new PropertyValueFactory<>("comissionPercentage"));
         cTaxa.setCellValueFactory(new PropertyValueFactory<>("taxPercentage"));
-        cAtivo.setCellValueFactory(new PropertyValueFactory<>("active"));
+        cActive.setCellValueFactory(new PropertyValueFactory<>("active"));
     }
 
     @FXML
-    void search(ActionEvent event) {
-        String name =  inputBusca.getText();
+    void search() {
+        String name =  inputNameService.getText();
 
-        Service service = findServiceUseCase.findKeyByName(name);
-
-        serviceData.clear();
-        serviceData.add(service);
-    }
-
-    @FXML
-    void reloadTableView(ActionEvent event) {
-        loadServiceData();
-    }
-
-    @FXML
-    void save(ActionEvent event) {
-        try {
-            WindowLoader.setRoot("CreateOrUpdateService");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        if (name == null || name.isBlank())
+            loadServiceData();
+        else {
+            Service service = findServiceUseCase.findKeyByName(name);
+            serviceData.clear();
+            serviceData.add(service);
         }
     }
 
     @FXML
-    void update(ActionEvent event) {
+    void reloadTableView() {
+        loadServiceData();
+    }
+
+    @FXML
+    void save() throws IOException {
+       WindowLoader.setRoot("CreateOrUpdateService");
+    }
+
+    @FXML
+    void update() {
         Service serviceSelected = tbvService.getSelectionModel().getSelectedItem();
         if (serviceSelected != null) {
             try {
@@ -119,12 +109,8 @@ public class ServiceMainController {
     }
 
     @FXML
-    void back(ActionEvent event) {
-        try {
-            WindowLoader.setRoot("BookingMain");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    void back() throws IOException {
+        WindowLoader.setRoot("BookingMain");
     }
 }
 

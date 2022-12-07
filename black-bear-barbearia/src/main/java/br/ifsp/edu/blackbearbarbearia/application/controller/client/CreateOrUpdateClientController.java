@@ -36,8 +36,8 @@ public class CreateOrUpdateClientController {
     }
 
     private void clearInputs() {
-        lblTitle.setText("Cadastrar");
-        btnSaveOrUpdate.setText("C A D A S T R A R");
+        lblTitle.setText("Save");
+        btnSaveOrUpdate.setText("S A V E");
         inputName.setText("");
         inputPhone.setText("");
         inputEmail.setText("");
@@ -52,8 +52,8 @@ public class CreateOrUpdateClientController {
     }
 
     private void setInfoClientIntoInputs() {
-        lblTitle.setText("Editar");
-        btnSaveOrUpdate.setText("E D I T A R");
+        lblTitle.setText("E D I T");
+        btnSaveOrUpdate.setText("E D I T");
         inputName.setText(client.getName());
         inputPhone.setText(client.getPhone());
         inputEmail.setText(client.getEmail());

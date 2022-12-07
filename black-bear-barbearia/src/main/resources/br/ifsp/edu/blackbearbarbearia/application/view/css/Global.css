@@ -15,10 +15,11 @@
     src: url('../fonts/JetBrainsMono-Bold.ttf');
 }
 
+/* GLOBAL */
 .anchor {
     -fx-pref-width: 1024px;
     -fx-pref-height: 768px;
-    -fx-alignment: center;
+    -fx-alignment: CENTER;
     -fx-spacing: 20px;
     -fx-background-color: #f0f2f5;
 }
@@ -49,6 +50,48 @@
     -fx-background-color: #1d4c84;
     -fx-text-fill: #f0f2f5;
 }
+.back-big-button {
+    -fx-pref-width: 200px;
+    -fx-pref-height: 40px;
+    -fx-font-family: "Young Heart";
+    -fx-font-size: 18;
+    -fx-font-weight: 700;
+    -fx-background-color: #f0f2f5;
+    -fx-border-color: #e3383e;
+    -fx-text-fill: #e3383e;
+}
+.back-big-button:hover {
+    -fx-background-color: #e3383e;
+    -fx-text-fill: #f0f2f5;
+}
+
+/* POPUP */
+.title-success {
+    -fx-text-fill: #1d4c84;
+    -fx-font-family: "Mochary PERSONAL USE ONLY";
+    -fx-font-size: 48;
+    -fx-font-weight: 700;
+}
+.title-error {
+    -fx-text-fill: #e3383e;
+    -fx-font-family: "Mochary PERSONAL USE ONLY";
+    -fx-font-size: 48;
+    -fx-font-weight: 700;
+}
+.popup-message {
+    -fx-text-fill: #000;
+    -fx-font-family: "JetBrains Mono Bold";
+    -fx-font-size: 14;
+}
+.popup-button {
+    -fx-pref-width: 100px;
+    -fx-pref-height: 40px;
+    -fx-font-family: "Young Heart";
+    -fx-font-size: 18;
+    -fx-font-weight: 700;
+}
+
+/* LOGIN */
 .login-button {
     -fx-pref-width: 200px;
     -fx-pref-height: 40px;
@@ -67,8 +110,59 @@
     -fx-text-fill: #e3383e;
     -fx-underline: true;
 }
-.btnBack {
-    -fx-pref-width: 200px;
+
+/* LOGOUT */
+.message {
+    -fx-font-family: "Mochary PERSONAL USE ONLY";
+    -fx-font-size: 36;
+}
+.groupButton {
+    -fx-spacing: 50px;
+}
+.no-button {
+    -fx-pref-width: 80px;
+    -fx-pref-height: 40px;
+    -fx-border-color: #e3383e;
+    -fx-border-width: 2;
+    -fx-text-fill: #e3383e;
+    -fx-background-color: #f0f2f5;
+    -fx-font-family: "Young Heart";
+    -fx-font-size: 18;
+    -fx-font-weight: 700;
+}
+.no-button:hover {
+    -fx-background-color: #e3383e;
+    -fx-text-fill: #f0f2f5;
+}
+.yes-button {
+    -fx-pref-width: 80px;
+    -fx-pref-height: 40px;
+    -fx-text-fill: #1d4c84;
+    -fx-background-color: #f0f2f5;
+    -fx-font-family: "Young Heart";
+    -fx-font-size: 18;
+    -fx-font-weight: 700;
+}
+
+.main-input {
+    -fx-pref-width: 584px;
+    -fx-pref-height: 30px;
+}
+.main-button {
+    -fx-pref-width: 100px;
+    -fx-pref-height: 40px;
+    -fx-font-family: "Young Heart";
+    -fx-font-size: 18;
+    -fx-font-weight: 700;
+}
+.main-big-button {
+    -fx-pref-width: 180px;
+    -fx-font-family: "Young Heart";
+    -fx-font-size: 18;
+    -fx-font-weight: 700;
+}
+.main-back-button {
+    -fx-pref-width: 100px;
     -fx-pref-height: 40px;
     -fx-font-family: "Young Heart";
     -fx-font-size: 18;
@@ -77,26 +171,11 @@
     -fx-border-color: #e3383e;
     -fx-text-fill: #e3383e;
 }
-.btnBack:hover {
+.main-back-button:hover {
     -fx-background-color: #e3383e;
     -fx-text-fill: #f0f2f5;
 }
 
-.client-input {
-    -fx-pref-width: 584px;
-    -fx-pref-height: 30px;
-}
-.client-button {
-    -fx-pref-width: 100px;
-    -fx-pref-height: 40px;
-    -fx-font-family: "Young Heart";
-    -fx-font-size: 18;
-}
-.client-big-button {
-    -fx-pref-width: 120px;
-    -fx-font-family: "Young Heart";
-    -fx-font-size: 18;
-}
 .table-view {
     -fx-font-family: "JetBrains Mono Regular";
     -fx-font-size: 12;
@@ -106,7 +185,36 @@
     -fx-font-size: 12;
     -fx-alignment: CENTER;
 }
-.form {
-    -fx-alignment: center;
-    -fx-spacing: 20px;
+
+/* EMPLOYEE */
+.session-inputs {
+    -fx-spacing: 50;
+}
+.session-check-box {
+    -fx-spacing: 10;
+}
+.form-data {
+    -fx-spacing: 10;
+}
+.session-title {
+    -fx-font-family: "JetBrains Mono Bold";
+    -fx-font-size: 12;
+}
+.check-box {
+    -fx-font-family: "JetBrains Mono Regular";
+    -fx-font-size: 12;
+}
+.box {
+    -fx-background-color: #f0f2f5;
+    -fx-border-color: #000;
+    -fx-border-radius: 5;
+}
+.radio-button {
+    -fx-font-family: "JetBrains Mono Regular";
+    -fx-font-size: 12;
+}
+.radio {
+    -fx-background-color: #f0f2f5;
+    -fx-border-color: #000;
+    -fx-border-radius: 10;
 }

@@ -20,16 +20,23 @@ import static br.ifsp.edu.blackbearbarbearia.application.main.Main.updateService
 
 public class CreateOrUpdateServiceController {
     @FXML
-    private RadioButton rbNao;
+    private Label lblTitle;
+    @FXML
+    private TextField inputName;
+    @FXML
+    private TextField inputPrince;
+    @FXML
+    private TextField inputCommission;
+    @FXML
+    private TextField inputTaxa;
+    @FXML
+    private RadioButton rbNo;
 
     @FXML
-    private RadioButton rbSim;
+    private RadioButton rbYes;
 
-    @FXML
-    private TextField inputComissao;
 
-    @FXML
-    private TextField inputPreco;
+
 
     @FXML
     private CheckBox cbHair;
@@ -43,14 +50,7 @@ public class CreateOrUpdateServiceController {
     @FXML
     private Button btnSaveOrUpdate;
 
-    @FXML
-    private Label lblTitle;
 
-    @FXML
-    private TextField inputName;
-
-    @FXML
-    private TextField inputTaxa;
 
     @FXML
     private Label lblResponseMessage;
@@ -64,14 +64,14 @@ public class CreateOrUpdateServiceController {
     }
 
     private void clearInputs() {
-        lblTitle.setText("Cadastrar");
-        btnSaveOrUpdate.setText("Cadastrar");
+        lblTitle.setText("Save");
+        btnSaveOrUpdate.setText("S A V E");
         inputName.setText("");
-        inputPreco.setText("");
-        inputComissao.setText("");
+        inputPrince.setText("");
+        inputCommission.setText("");
         inputTaxa.setText("");
-        rbNao.setSelected(false);
-        rbSim.setSelected(false);
+        rbNo.setSelected(false);
+        rbYes.setSelected(false);
         cbHair.setSelected(false);
         cbBeard.setSelected(false);
         cbOther.setSelected(false);
@@ -90,14 +90,14 @@ public class CreateOrUpdateServiceController {
         lblTitle.setText("Editar");
         btnSaveOrUpdate.setText("Editar");
         inputName.setText(service.getName());
-        inputPreco.setText(String.valueOf(service.getPrice()));
-        inputComissao.setText(String.valueOf(service.getComissionPercentage()));
+        inputPrince.setText(String.valueOf(service.getPrice()));
+        inputCommission.setText(String.valueOf(service.getComissionPercentage()));
         inputTaxa.setText(String.valueOf(service.getTaxPercentage()));
         // Verifica se está ativo ou não
         if (service.getActive())
-            rbSim.setSelected(true);
+            rbYes.setSelected(true);
         else
-            rbNao.setSelected(true);
+            rbNo.setSelected(true);
 
         // Verifica os tipos do serviço
         List<Type> types = service.getTypes();
@@ -144,8 +144,8 @@ public class CreateOrUpdateServiceController {
 
     private void getInfoServiceFromInputs() {
         ServiceBuilder serviceBuilder = new ServiceBuilder();
-        serviceBuilder.setPrice(new BigDecimal(inputPreco.getText()));
-        serviceBuilder.setComissionPercentage(new BigDecimal(inputComissao.getText()));
+        serviceBuilder.setPrice(new BigDecimal(inputPrince.getText()));
+        serviceBuilder.setComissionPercentage(new BigDecimal(inputCommission.getText()));
         serviceBuilder.setTaxPercentage(new BigDecimal(inputTaxa.getText()));
 
         // Verifica os checkbox selectionados
@@ -164,7 +164,7 @@ public class CreateOrUpdateServiceController {
             serviceBuilder.setId(service.getId());
 
             // Verifica qual opção do radioButton está selecionada
-            if (rbSim.isSelected()) {
+            if (rbYes.isSelected()) {
                 serviceBuilder.setActive(true);
             } else {
                 serviceBuilder.setActive(false);

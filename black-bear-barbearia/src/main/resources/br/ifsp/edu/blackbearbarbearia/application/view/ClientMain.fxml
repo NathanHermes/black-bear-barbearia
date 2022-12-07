@@ -5,14 +5,13 @@
 
 <AnchorPane styleClass="anchor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.client.ClientMainController">
-   <TextField styleClass="client-input" fx:id="inputEmail" promptText="Enter client email" focusTraversable="false"
+   <TextField styleClass="main-input" fx:id="inputEmail" promptText="Enter client email" focusTraversable="false"
               AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0"/>
-   <Button styleClass="client-button" mnemonicParsing="false" onAction="#search" text="B U S C A R"
+   <Button styleClass="main-button" mnemonicParsing="false" onAction="#search" text="S E A R C H"
            AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="50.0"/>
-   <Button styleClass="client-button" mnemonicParsing="false" onAction="#reloadTableView" text="L I M P A R"
+   <Button styleClass="main-button" mnemonicParsing="false" onAction="#reloadTableView" text="C L E A R"
            AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="50.0"/>
-   <TableView fx:id="tbvClients" AnchorPane.topAnchor="110.0" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0"
-              >
+   <TableView fx:id="tbvClients" AnchorPane.topAnchor="110.0" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
       <columns>
          <TableColumn styleClass="column" fx:id="cID" prefWidth="50.0" text="#"/>
          <TableColumn fx:id="cName" prefWidth="320.0" text="NAME"/>
@@ -20,7 +19,7 @@
          <TableColumn fx:id="cPhone" prefWidth="132.0" text="PHONE"/>
       </columns>
    </TableView>
-   <Button styleClass="client-big-button" onAction="#save" text="C A D A S T R A R" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="100.0"/>
-   <Button styleClass="client-button" onAction="#update" text="E D I T A R" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="240.0"/>
-   <Button styleClass="client-button" onAction="#back" text="V O L T A R" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="100.0"/>
+   <Button styleClass="main-button" onAction="#save" text="S A V E" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="100.0"/>
+   <Button styleClass="main-button" onAction="#update" text="E D I T" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="240.0"/>
+   <Button styleClass="main-back-button" onAction="#back" text="B A C K" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="100.0"/>
 </AnchorPane>

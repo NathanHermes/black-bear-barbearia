@@ -3,25 +3,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.service.ServiceMainController">
-   <children>
-      <Button layoutX="762.0" layoutY="57.0" mnemonicParsing="false" onAction="#search" text="BUSCAR" AnchorPane.rightAnchor="51.0" AnchorPane.topAnchor="57.0" />
-      <Button fx:id="btnEditar" layoutX="194.0" layoutY="473.0" mnemonicParsing="false" onAction="#update" text="EDITAR" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="194.0" />
-      <Label fx:id="lblPesquisar" layoutX="71.0" layoutY="62.0" text="Pesquisar" AnchorPane.leftAnchor="71.0" AnchorPane.topAnchor="62.0" />
-      <TextField fx:id="inputBusca" layoutX="155.0" layoutY="57.0" prefHeight="31.0" prefWidth="586.0" promptText="Digite o serviço" AnchorPane.leftAnchor="155.0" AnchorPane.rightAnchor="219.0" AnchorPane.topAnchor="57.0" />
-      <Button layoutX="71.0" layoutY="473.0" mnemonicParsing="false" onAction="#save" text="CADASTRAR" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="71.0" />
-      <TableView fx:id="tbvService" layoutX="71.0" layoutY="108.0" prefHeight="345.0" prefWidth="838.0" AnchorPane.bottomAnchor="87.0" AnchorPane.leftAnchor="71.0" AnchorPane.rightAnchor="51.0" AnchorPane.topAnchor="108.0">
-         <columns>
-            <TableColumn fx:id="cID" prefWidth="50.0" text="#" />
-            <TableColumn fx:id="cNome" prefWidth="226.0" text="NOME" />
-            <TableColumn fx:id="cPreco" prefWidth="128.0" text="PREÇO" />
-            <TableColumn fx:id="cComissao" prefWidth="128.0" text="COMISSÃO" />
-            <TableColumn fx:id="cTaxa" prefWidth="128.0" text="TAXA" />
-            <TableColumn fx:id="cAtivo" prefWidth="128.0" text="ATIVO" />
-            <TableColumn fx:id="cTipo" prefWidth="128.0" text="TIPO" />
-         </columns>
-      </TableView>
-      <Button layoutX="762.0" layoutY="57.0" mnemonicParsing="false" onAction="#reloadTableView" text="LIMPAR" AnchorPane.rightAnchor="136.0" AnchorPane.topAnchor="57.0" />
-      <Button layoutX="834.0" layoutY="473.0" mnemonicParsing="false" onAction="#back" text="VOLTAR" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="834.0" />
-   </children>
+<AnchorPane styleClass="anchor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.service.ServiceMainController">
+   <TextField styleClass="main-input" fx:id="inputNameService" focusTraversable="false" promptText="Enter name service" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0"/>
+   <Button styleClass="main-button" onAction="#search" text="S E A R C H" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="50.0"/>
+   <Button styleClass="main-button" onAction="#reloadTableView" text="C L E A R" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="50.0"/>
+   <TableView fx:id="tbvService" AnchorPane.topAnchor="110.0" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+      <columns>
+         <TableColumn styleClass="column" fx:id="cID" prefWidth="50.0" text="#"/>
+         <TableColumn fx:id="cName" prefWidth="230.0" text="NAME"/>
+         <TableColumn styleClass="column" fx:id="cPrince" prefWidth="148.0" text="PRINCE"/>
+         <TableColumn styleClass="column" fx:id="cCommission" prefWidth="148.0" text="COMMISSION"/>
+         <TableColumn styleClass="column" fx:id="cTaxa" prefWidth="148.0" text="TAXA"/>
+         <TableColumn styleClass="column" fx:id="cActive" prefWidth="98.0" text="ATIVO"/>
+      </columns>
+   </TableView>
+   <Button styleClass="main-button" onAction="#save" text="S A V E" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="100.0"/>
+   <Button styleClass="main-button" onAction="#update" text="E D I T" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="220.0"/>
+   <Button styleClass="main-back-button" onAction="#back" text="B A C K" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="100.0"/>
 </AnchorPane>
