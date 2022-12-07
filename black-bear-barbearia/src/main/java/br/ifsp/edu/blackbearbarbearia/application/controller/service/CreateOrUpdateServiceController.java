@@ -2,8 +2,10 @@ package br.ifsp.edu.blackbearbarbearia.application.controller.service;
 
 import br.ifsp.edu.blackbearbarbearia.application.view.WindowLoader;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Service;
+import br.ifsp.edu.blackbearbarbearia.domain.entities.service.ServiceBuilder;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Type;
-import javafx.collections.FXCollections;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityAlreadyExistsException;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityNotFoundException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static br.ifsp.edu.blackbearbarbearia.application.main.Main.createServiceUseCase;
+import static br.ifsp.edu.blackbearbarbearia.application.main.Main.updateServiceUseCase;
 
 public class CreateOrUpdateServiceController {
     @FXML
@@ -49,13 +52,15 @@ public class CreateOrUpdateServiceController {
     @FXML
     private TextField inputTaxa;
 
+    @FXML
+    private Label lblResponseMessage;
+
     private Service service;
 
     @FXML
     private void initialize() {
         if (service == null)
             clearInputs();
-
     }
 
     private void clearInputs() {
@@ -65,6 +70,11 @@ public class CreateOrUpdateServiceController {
         inputPreco.setText("");
         inputComissao.setText("");
         inputTaxa.setText("");
+        rbNao.setSelected(false);
+        rbSim.setSelected(false);
+        cbHair.setSelected(false);
+        cbBeard.setSelected(false);
+        cbOther.setSelected(false);
     }
 
     public void setService(Service service) {
@@ -74,8 +84,6 @@ public class CreateOrUpdateServiceController {
         this.service = service;
         setInfoServiceIntoInputs();
         inputName.setDisable(true);
-        inputPreco.setDisable(true);
-
     }
 
     private void setInfoServiceIntoInputs() {
@@ -85,30 +93,86 @@ public class CreateOrUpdateServiceController {
         inputPreco.setText(String.valueOf(service.getPrice()));
         inputComissao.setText(String.valueOf(service.getComissionPercentage()));
         inputTaxa.setText(String.valueOf(service.getTaxPercentage()));
+        // Verifica se está ativo ou não
+        if (service.getActive())
+            rbSim.setSelected(true);
+        else
+            rbNao.setSelected(true);
 
+        // Verifica os tipos do serviço
+        List<Type> types = service.getTypes();
+
+        if (types.contains(Type.HAIR))
+            cbHair.setSelected(true);
+        if (types.contains(Type.BEARD))
+            cbBeard.setSelected(true);
+        if (types.contains(Type.OTHER))
+            cbOther.setSelected(true);
     }
 
     @FXML
     void saveOrUpdate(ActionEvent event) {
+        lblResponseMessage.setText("");
+
         if (service == null) {
             getInfoServiceFromInputs();
+
             try {
                 Boolean response = createServiceUseCase.create(service);
-            } finally {
+                if (response.equals(Boolean.TRUE))
+                    lblResponseMessage.setText("Serviço cadastrado.");
+                else
+                    lblResponseMessage.setText("Não foi possivel cadastrar esse serviço.\nTente novamente mais tarde.");
+            } catch (IllegalArgumentException | EntityAlreadyExistsException exception) {
+                lblResponseMessage.setText(exception.getMessage());
+            }
+        } else {
+            getInfoServiceFromInputs();
 
+            try {
+                Boolean response = updateServiceUseCase.update(service.getId(), service);
+                if (response.equals(Boolean.TRUE))
+                    lblResponseMessage.setText("Serviço atualizado.");
+                else
+                    lblResponseMessage.setText("Não foi possivel atualizar esse serviço.\nTente novamente mais tarde.");
+            } catch (IllegalArgumentException | EntityNotFoundException exception) {
+                lblResponseMessage.setText(exception.getMessage());
             }
         }
+        service = null;
     }
 
     private void getInfoServiceFromInputs() {
-        //if (service == null)
-         //   service = new Service();
+        ServiceBuilder serviceBuilder = new ServiceBuilder();
+        serviceBuilder.setPrice(new BigDecimal(inputPreco.getText()));
+        serviceBuilder.setComissionPercentage(new BigDecimal(inputComissao.getText()));
+        serviceBuilder.setTaxPercentage(new BigDecimal(inputTaxa.getText()));
 
-        service.setName(inputName.getText());
-        service.setPrice(new BigDecimal(inputPreco.getText()));
-        service.setComissionPercentage(new BigDecimal(inputComissao.getText()));
-        service.setTaxPercentage(new BigDecimal(inputTaxa.getText()));
+        // Verifica os checkbox selectionados
+        List<Type> types = new ArrayList<>();
 
+        if (cbHair.isSelected())
+            types.add(Type.valueOf(cbHair.getText()));
+        if (cbBeard.isSelected())
+            types.add(Type.valueOf(cbBeard.getText()));
+        if (cbOther.isSelected())
+            types.add(Type.valueOf(cbOther.getText()));
+
+        serviceBuilder.setTypes(types);
+
+        if (service != null) {
+            serviceBuilder.setId(service.getId());
+
+            // Verifica qual opção do radioButton está selecionada
+            if (rbSim.isSelected()) {
+                serviceBuilder.setActive(true);
+            } else {
+                serviceBuilder.setActive(false);
+            }
+        } else {
+            serviceBuilder.setName(inputName.getText());
+        }
+        service = serviceBuilder.getResult();
     }
 
     @FXML
