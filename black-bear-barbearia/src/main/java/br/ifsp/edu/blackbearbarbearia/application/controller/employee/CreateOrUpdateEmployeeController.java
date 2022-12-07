@@ -166,7 +166,7 @@ public class CreateOrUpdateEmployeeController {
             try {
                 Boolean response = createEmployeeUseCase.create(employee);
                 if (response.equals(Boolean.TRUE))
-                    lblResponseMessage.setText("Cliente cadastrado");
+                    lblResponseMessage.setText("Cliente cadastrado.");
                 else
                     lblResponseMessage.setText("Não foi possível cadastrar esse cliente.\nTente novamente mais tarde.");
             } catch (IllegalArgumentException | EntityAlreadyExistsException exception) {
@@ -178,7 +178,7 @@ public class CreateOrUpdateEmployeeController {
             try {
                 Boolean response = updateEmployeeUseCase.update(employee.getId(), employee);
                 if (response.equals(Boolean.TRUE))
-                    lblResponseMessage.setText("Cliente atualizado");
+                    lblResponseMessage.setText("Cliente atualizado.");
                 else
                     lblResponseMessage.setText("Não foi possível atualizar esse cliente.\nTente novamente mais tarde.");
             } catch (IllegalArgumentException | EntityNotFoundException exception) {
