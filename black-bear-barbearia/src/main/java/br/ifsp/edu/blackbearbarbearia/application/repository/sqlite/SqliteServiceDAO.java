@@ -44,14 +44,13 @@ public class SqliteServiceDAO implements ServiceDAO {
 
         serviceTypeDAO.create(id.get(), type.getTypes());
 
-        return Boolean.FALSE;
+        return Boolean.TRUE;
     }
 
     @Override
     public Boolean update(Service type) {
         String sql = """
                 UPDATE service SET
-                    name = ?,
                     price = ?,
                     comissionPercentage = ?,
                     taxPercentage = ?,
@@ -61,12 +60,11 @@ public class SqliteServiceDAO implements ServiceDAO {
         try {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
 
-            stmt.setString(1, type.getName());
-            stmt.setBigDecimal(2, type.getPrice());
-            stmt.setBigDecimal(3, type.getComissionPercentage());
-            stmt.setBigDecimal(4, type.getTaxPercentage());
-            stmt.setBoolean(5, type.getActive());
-            stmt.setInt(6, type.getId());
+            stmt.setBigDecimal(1, type.getPrice());
+            stmt.setBigDecimal(2, type.getComissionPercentage());
+            stmt.setBigDecimal(3, type.getTaxPercentage());
+            stmt.setBoolean(4, type.getActive());
+            stmt.setInt(5, type.getId());
 
             stmt.executeUpdate();
         } catch (SQLException e) {
