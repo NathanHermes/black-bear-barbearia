@@ -21,40 +21,35 @@
     -fx-spacing: 20px;
     -fx-background-color: #f0f2f5;
 }
-.session-title {
-    -fx-text-fill: #000;
+.title-success {
+    -fx-text-fill: #1d4c84;
     -fx-font-family: "Mochary PERSONAL USE ONLY";
     -fx-font-size: 48;
     -fx-font-weight: 700;
 }
-.input {
-    -fx-pref-width: 200px;
-    -fx-pref-height: 30px;
-    -fx-border-color: #ccc;
-    -fx-background-color: #f0f2f5;
-    -fx-font-family: "JetBrains Mono Regular";
+.title-error {
+    -fx-text-fill: #e3383e;
+    -fx-font-family: "Mochary PERSONAL USE ONLY";
+    -fx-font-size: 48;
+    -fx-font-weight: 700;
+}
+.message {
+    -fx-text-fill: #000;
+    -fx-font-family: "JetBrains Mono Bold";
     -fx-font-size: 14;
 }
-.input:focused {
-    -fx-border-color: #555;
-}
 .button {
-    -fx-pref-width: 200px;
+    -fx-pref-width: 100px;
     -fx-pref-height: 40px;
     -fx-background-color: #f0f2f5;
     -fx-border-color: #1d4c84;
     -fx-text-fill: #1d4c84;
     -fx-border-width: 2;
     -fx-font-family: "Young Heart";
-    -fx-font-size: 24;
+    -fx-font-size: 18;
     -fx-font-weight: 700;
 }
 .button:hover {
     -fx-background-color: #1d4c84;
     -fx-text-fill: #f0f2f5;
-}
-.error-message {
-    -fx-text-fill: #e3383e;
-    -fx-font-family: "JetBrains Mono Bold";
-    -fx-font-size: 14;
 }

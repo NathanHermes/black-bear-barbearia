@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<VBox fillWidth="false" styleClass="anchor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.popUp.PopUpController">
+   <Label fx:id="lblTitle" layoutX="14.0" layoutY="24.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="8.0" />
+   <Label fx:id="lblMessage" layoutX="56.0" layoutY="78.0" AnchorPane.leftAnchor="66.0" styleClass="message"/>
+   <Button layoutX="168.0" layoutY="171.0" mnemonicParsing="false" onAction="#back" text="OK"
+           AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="168.0" AnchorPane.rightAnchor="167.0" styleClass="button"/>
+</VBox>

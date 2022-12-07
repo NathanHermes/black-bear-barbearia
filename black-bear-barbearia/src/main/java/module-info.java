@@ -8,6 +8,11 @@ module br.ifsp.edu.blackbearbarbearia {
     opens br.ifsp.edu.blackbearbarbearia.application.controller to javafx.fxml;
     opens br.ifsp.edu.blackbearbarbearia.application.view.css to javafx.fxml;
     opens br.ifsp.edu.blackbearbarbearia.application.main to javafx.fxml;
+    opens br.ifsp.edu.blackbearbarbearia.application.controller.booking to javafx.fxml;
+    opens br.ifsp.edu.blackbearbarbearia.application.controller.client to javafx.fxml;
+    opens br.ifsp.edu.blackbearbarbearia.application.controller.employee to javafx.fxml;
+    opens br.ifsp.edu.blackbearbarbearia.application.controller.popUp to javafx.fxml;
+
 
     exports br.ifsp.edu.blackbearbarbearia.application.view;
     exports br.ifsp.edu.blackbearbarbearia.application.controller;
@@ -27,9 +32,7 @@ module br.ifsp.edu.blackbearbarbearia {
     exports br.ifsp.edu.blackbearbarbearia.application.repository.inmemory;
     exports br.ifsp.edu.blackbearbarbearia.application.repository.sqlite;
     exports br.ifsp.edu.blackbearbarbearia.application.controller.booking;
-    opens br.ifsp.edu.blackbearbarbearia.application.controller.booking to javafx.fxml;
     exports br.ifsp.edu.blackbearbarbearia.application.controller.client;
-    opens br.ifsp.edu.blackbearbarbearia.application.controller.client to javafx.fxml;
     exports br.ifsp.edu.blackbearbarbearia.application.controller.employee;
-    opens br.ifsp.edu.blackbearbarbearia.application.controller.employee to javafx.fxml;
+    exports br.ifsp.edu.blackbearbarbearia.application.controller.popUp;
 }

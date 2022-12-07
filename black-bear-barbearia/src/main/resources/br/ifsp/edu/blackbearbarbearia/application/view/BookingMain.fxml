@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 
-<AnchorPane styleClass="anchor" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.booking.BookingMainController">
+<AnchorPane styleClass="anchor" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.booking.BookingMainController">
    <Button fx:id="btnClientsManage" onAction="#goToManageClients" styleClass="normal-button" text="GERENCIAR CLIENTES" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0" />
    <Button fx:id="btnEmployeesManage" onAction="#goToManageEmployees" styleClass="" text="GERENCIAR FUNCIONÁRIOS" AnchorPane.rightAnchor="308.0" AnchorPane.topAnchor="50.0" />
    <Button fx:id="btnServiceManage" onAction="#goToManageService" text="GERENCIAR SERVIÇOS" AnchorPane.rightAnchor="149.0" AnchorPane.topAnchor="50.0" />
@@ -27,18 +27,20 @@
    <Button fx:id="btnFiltrar" layoutX="904.0" layoutY="152.0" mnemonicParsing="false" onAction="#filtrar" prefHeight="31.0" prefWidth="200.0" text="FILTRAR" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="172.0" />
    <TableView fx:id="tbvBookings" layoutX="50.0" layoutY="203.0" prefHeight="466.0" prefWidth="924.0" AnchorPane.bottomAnchor="99.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="223.0">
       <columns>
+         <TableColumn fx:id="cID" prefWidth="173.0" text="#" />
          <TableColumn fx:id="cClient" prefWidth="173.0" text="CLIENTE" />
          <TableColumn fx:id="cEmployee" prefWidth="173.0" text="FUNCINÁRIO" />
          <TableColumn fx:id="cService" prefWidth="173.0" text="SERVIÇO" />
          <TableColumn fx:id="cDate" prefWidth="173.0" text="DATA" />
+         <TableColumn fx:id="cHour" prefWidth="173.0" text="HORÁRIO" />
          <TableColumn fx:id="cStatus" prefWidth="114.0" text="STATUS" />
          <TableColumn fx:id="cPaid" prefWidth="117.0" text="PAGO" />
       </columns>
    </TableView>
-   <Button fx:id="btnCadastrar" layoutX="50.0" layoutY="689.0" mnemonicParsing="false" onAction="#cadastrar" text="CADASTRAR" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="50.0" />
-   <Button fx:id="btnDesmarcar" layoutX="153.0" layoutY="689.0" mnemonicParsing="false" onAction="#desmarcar" text="DESMARCAR" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="173.0" />
+   <Button fx:id="btnCadastrar" layoutX="50.0" layoutY="689.0" mnemonicParsing="false" onAction="#goToCreateBooking" text="CADASTRAR" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="50.0" />
+   <Button fx:id="btnDesmarcar" layoutX="153.0" layoutY="689.0" mnemonicParsing="false" onAction="#cancelBooking" text="DESMARCAR" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="173.0" />
    <Button fx:id="btnConcluir" layoutX="280.0" layoutY="689.0" mnemonicParsing="false" onAction="#concludeBooking" text="CONCLUIR" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="300.0" />
    <Button fx:id="btnServicosPrestados" layoutX="577.0" layoutY="689.0" mnemonicParsing="false" onAction="#historyOfBookingFromEmployee" text="SERVIÇOS PRESTADOS" AnchorPane.bottomAnchor="48.0" AnchorPane.rightAnchor="297.0" />
-   <Button fx:id="btnRelatorio" layoutX="791.0" layoutY="689.0" mnemonicParsing="false" onAction="#relatorio" text="RELATÓRIO" AnchorPane.bottomAnchor="48.0" AnchorPane.rightAnchor="50.0" />
+   <Button fx:id="btnReport" layoutX="791.0" layoutY="689.0" mnemonicParsing="false" onAction="#relatorio" text="RELATÓRIO" AnchorPane.bottomAnchor="48.0" AnchorPane.rightAnchor="50.0" />
    <ComboBox fx:id="cbHorario" layoutX="427.0" layoutY="124.0" prefWidth="200.0" />
 </AnchorPane>

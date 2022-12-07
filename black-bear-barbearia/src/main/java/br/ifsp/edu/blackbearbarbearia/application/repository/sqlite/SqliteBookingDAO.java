@@ -19,7 +19,7 @@ public class SqliteBookingDAO implements BookingDAO {
     final SqliteUserDAO userDAO = new SqliteUserDAO();
 
     @Override
-    public Boolean create(Booking type) {
+    public Boolean create(Booking newBooking) {
         String sql = """
                 INSERT INTO booking(
                     date,
@@ -33,145 +33,130 @@ public class SqliteBookingDAO implements BookingDAO {
                 """;
         try {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
-            final Optional<Integer> idStatus = statusDAO.findId(type.getStatus());
 
-            stmt.setDate(1, type.getNoFormattedDate());
-            stmt.setTime(2, type.getHour());
-            stmt.setString(3, type.isPaid());
-            stmt.setInt(4, type.getInfoClient().getId());
-            stmt.setInt(5, type.getInfoService().getId());
-            stmt.setInt(6, type.getInfoEmployee().getId());
-            stmt.setInt(7, idStatus.get());
+            stmt.setString(1, String.valueOf(newBooking.getNoFormattedDate()));
+            stmt.setString(2, String.valueOf(newBooking.getHour()));
+            stmt.setString(3, newBooking.isPaid());
+            stmt.setInt(4, newBooking.getInfoClient().getId());
+            stmt.setInt(5, newBooking.getInfoService().getId());
+            stmt.setInt(6, newBooking.getInfoEmployee().getId());
+            stmt.setInt(7, 1);
 
-            stmt.executeUpdate();
+            if (stmt.executeUpdate() > 0)
+                return Boolean.TRUE;
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return Boolean.TRUE;
+        return Boolean.FALSE;
     }
 
     @Override
     public Boolean update(Booking type) {
-        String sql = """
-                UPDATE booking SET
-                    date = ?,
-                    hour = ?,
-                    paid = ?,
-                    clientId = ?,
-                    serviceId = ?,
-                    userId = ?,
-                    statusId = ?
-                WHERE id = ?
-                """;
+        return null;
+    }
+
+    @Override
+    public Boolean updateStatus(Integer bookingID, Integer statusID, String paid) {
+        String sql = "UPDATE booking SET paid = ?, statusId = ? WHERE id = ?";
         try {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
-            final Optional<Integer> idStatus = statusDAO.findId(type.getStatus());
 
-            stmt.setDate(1, type.getNoFormattedDate());
-            stmt.setTime(2, type.getHour());
-            stmt.setString(3, type.isPaid());
-            stmt.setInt(4, type.getInfoClient().getId());
-            stmt.setInt(5, type.getInfoService().getId());
-            stmt.setInt(6, type.getInfoEmployee().getId());
-            stmt.setInt(7, idStatus.get());
-            stmt.setInt(8, type.getId());
+            stmt.setString(1, paid);
+            stmt.setInt(2, statusID);
+            stmt.setInt(3, bookingID);
 
-            stmt.executeUpdate();
+            if (stmt.executeUpdate() > 0)
+                return Boolean.TRUE;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        Optional<Booking> updated = findOne(type.getId());
-        return type.equals(updated.get());
+        return Boolean.FALSE;
     }
 
     @Override
     public Boolean deleteByKey(Integer key) {
-        String sql = """
-                DELETE FROM booking WHERE id = ?
-                """;
-        try {
-            final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
-            stmt.setInt(1, key);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        Optional<Booking> deleted = findOne(key);
-        return deleted.isEmpty();
+        return null;
     }
 
     @Override
     public Boolean delete(Booking type) {
-        return deleteByKey(type.getId());
+        return null;
     }
 
     @Override
-    public Optional<Booking> findOne(Integer key) {
+    public Optional<Booking> findOne(Integer id) {
         String sql = "SELECT * FROM booking WHERE id = ?";
-        Optional<Booking> booking = Optional.empty();
-
         try {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
-
-            stmt.setInt(1, key);
+            stmt.setInt(1, id);
 
             final ResultSet result = stmt.executeQuery();
-
-            while(result.next()){
-                final Date date = result.getDate("date");
-                final Time hour = result.getTime("hour");
+            if(result.next()){
+                final String date = result.getString("date");
+                final String hour = result.getString("hour");
                 final Boolean paid = result.getBoolean("paid");
                 final Integer clientId = result.getInt("clientId");
                 final Integer serviceId = result.getInt("serviceId");
                 final Integer userId = result.getInt("userId");
                 final Integer statusId = result.getInt("statusId");
 
-                final Optional<Client> client = clientDAO.findOne(clientId);
-                final Optional<Service> service = serviceDAO.findOne(serviceId);
-                final Optional<User> user = userDAO.findOne(userId);
-                final Optional<Status> status = statusDAO.findOne(statusId);
+                Client client = null;
+                if (clientDAO.findOne(clientId).isPresent())
+                    client = clientDAO.findOne(clientId).get();
+                Service service = null;
+                if (serviceDAO.findOne(serviceId).isPresent())
+                    service = serviceDAO.findOne(serviceId).get();
+                User employee = null;
+                if ( userDAO.findOne(userId).isPresent())
+                    employee =  userDAO.findOne(userId).get();
+                Status status = null;
+                if (statusDAO.findOne(statusId).isPresent())
+                    status = statusDAO.findOne(statusId).get();
 
-                booking = Optional.of(new Booking(key, date, hour, paid, client.get(), service.get(), user.get(), status.get()));
+                return Optional.of(new Booking(id, Date.valueOf(date), Time.valueOf(hour), paid, client, service, employee, status));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return booking;
+        return Optional.empty();
     }
 
     @Override
     public List<Booking> findAll() {
+        String sql = "SELECT * FROM booking";
         final List<Booking> bookings = new ArrayList<>();
 
         try {
-            String sql = "SELECT * FROM booking";
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
-            final ResultSet result = stmt.executeQuery();
 
+            final ResultSet result = stmt.executeQuery();
             while(result.next()){
                 final Integer id = result.getInt("id");
-                final Date date = result.getDate("date");
-                final Time hour = result.getTime("hour");
+                final String date = result.getString("date");
+                final String hour = result.getString("hour");
                 final Boolean paid = result.getBoolean("paid");
                 final Integer clientId = result.getInt("clientId");
                 final Integer serviceId = result.getInt("serviceId");
                 final Integer userId = result.getInt("userId");
                 final Integer statusId = result.getInt("statusId");
 
-                final Optional<Client> client = clientDAO.findOne(clientId);
-                final Optional<Service> service = serviceDAO.findOne(serviceId);
-                final Optional<User> user = userDAO.findOne(userId);
-                final Optional<Status> status = statusDAO.findOne(statusId);
+                Client client = null;
+                if (clientDAO.findOne(clientId).isPresent())
+                    client = clientDAO.findOne(clientId).get();
+                Service service = null;
+                if (serviceDAO.findOne(serviceId).isPresent())
+                    service = serviceDAO.findOne(serviceId).get();
+                User employee = null;
+                if ( userDAO.findOne(userId).isPresent())
+                    employee =  userDAO.findOne(userId).get();
+                Status status = null;
+                if (statusDAO.findOne(statusId).isPresent())
+                    status = statusDAO.findOne(statusId).get();
 
-                final Booking booking = new Booking(id, date, hour, paid, client.get(), service.get(), user.get(), status.get());
-
+                final Booking booking = new Booking(id, Date.valueOf(date), Time.valueOf(hour), paid, client, service, employee, status);
                 bookings.add(booking);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -179,37 +164,46 @@ public class SqliteBookingDAO implements BookingDAO {
     }
 
     @Override
-    public Optional<Booking> findOneByDateAndUser(Date date, User user) {
+    public List<Booking> findOneByDateAndUser(Date date, Integer userId) {
         String sql = "SELECT * FROM booking WHERE date = ? AND userId = ?";
-        Optional<Booking> booking = Optional.empty();
+        List<Booking> bookings = new ArrayList<>();
 
         try {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
 
-            stmt.setDate(1, date);
-            stmt.setInt(2, user.getId());
+            stmt.setString(1, date.toString());
+            stmt.setInt(2, userId);
 
             final ResultSet result = stmt.executeQuery();
-
             while(result.next()){
                 final Integer id = result.getInt("id");
-                final Time hour = result.getTime("hour");
+                final String hour = result.getString("hour");
                 final Boolean paid = result.getBoolean("paid");
                 final Integer clientId = result.getInt("clientId");
                 final Integer serviceId = result.getInt("serviceId");
                 final Integer statusId = result.getInt("statusId");
 
-                final Optional<Client> client = clientDAO.findOne(clientId);
-                final Optional<Service> service = serviceDAO.findOne(serviceId);
-                final Optional<Status> status = statusDAO.findOne(statusId);
+                Client client = null;
+                if (clientDAO.findOne(clientId).isPresent())
+                    client = clientDAO.findOne(clientId).get();
+                Service service = null;
+                if (serviceDAO.findOne(serviceId).isPresent())
+                    service = serviceDAO.findOne(serviceId).get();
+                User employee = null;
+                if ( userDAO.findOne(userId).isPresent())
+                    employee =  userDAO.findOne(userId).get();
+                Status status = null;
+                if (statusDAO.findOne(statusId).isPresent())
+                    status = statusDAO.findOne(statusId).get();
 
-                booking = Optional.of(new Booking(id, date, hour, paid, client.get(), service.get(), user, status.get()));
+                final Booking booking = new Booking(id, date, Time.valueOf(hour), paid, client, service, employee, status);
+
+                bookings.add(booking);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return booking;
+        return bookings;
     }
 
     @Override
@@ -225,26 +219,32 @@ public class SqliteBookingDAO implements BookingDAO {
             String sql = "SELECT * FROM booking WHERE date = ?";
 
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
-
             stmt.setDate(1, date);
 
             final ResultSet result = stmt.executeQuery();
-
             while(result.next()){
                 final Integer id = result.getInt("id");
-                final Time hour = result.getTime("hour");
+                final String hour = result.getString("hour");
                 final Boolean paid = result.getBoolean("paid");
                 final Integer clientId = result.getInt("clientId");
                 final Integer serviceId = result.getInt("serviceId");
                 final Integer userId = result.getInt("userId");
                 final Integer statusId = result.getInt("statusId");
 
-                final Optional<Client> client = clientDAO.findOne(clientId);
-                final Optional<Service> service = serviceDAO.findOne(serviceId);
-                final Optional<User> user = userDAO.findOne(userId);
-                final Optional<Status> status = statusDAO.findOne(statusId);
+                Client client = null;
+                if (clientDAO.findOne(clientId).isPresent())
+                    client = clientDAO.findOne(clientId).get();
+                Service service = null;
+                if (serviceDAO.findOne(serviceId).isPresent())
+                    service = serviceDAO.findOne(serviceId).get();
+                User employee = null;
+                if ( userDAO.findOne(userId).isPresent())
+                    employee =  userDAO.findOne(userId).get();
+                Status status = null;
+                if (statusDAO.findOne(statusId).isPresent())
+                    status = statusDAO.findOne(statusId).get();
 
-                final Booking booking = new Booking(id, date, hour, paid, client.get(), service.get(), user.get(), status.get());
+                final Booking booking = new Booking(id, date, Time.valueOf(hour), paid, client, service, employee, status);
 
                 bookings.add(booking);
             }

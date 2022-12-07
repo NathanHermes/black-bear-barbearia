@@ -1,5 +1,6 @@
 package br.ifsp.edu.blackbearbarbearia.application.controller.client;
 
+import br.ifsp.edu.blackbearbarbearia.application.controller.popUp.PopUpController;
 import br.ifsp.edu.blackbearbarbearia.application.view.WindowLoader;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.client.Client;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityNotFoundException;
@@ -35,10 +36,10 @@ public class ClientMainController {
     private void initialize() {
         setValueSourceToColumns();
         setItemListToTBV();
-        loadBookingData();
+        loadClientData();
     }
 
-    private void loadBookingData() {
+    private void loadClientData() {
         try {
             clientData.clear();
             clientData.addAll(findClientUseCase.findAll());
@@ -60,18 +61,27 @@ public class ClientMainController {
     }
 
     @FXML
-    public void search() {
+    public void search() throws IOException {
         String email = inputEmail.getText();
 
-        Client client = findClientUseCase.findByEmail(email);
-
-        clientData.clear();
-        clientData.add(client);
+        if (email == null || email.isEmpty()) {
+            loadClientData();
+        } else {
+            try {
+                Client client = findClientUseCase.findByEmail(email);
+                clientData.clear();
+                clientData.add(client);
+            } catch (EntityNotFoundException e) {
+                WindowLoader.setRoot("PopUp");
+                PopUpController controller = (PopUpController) WindowLoader.getController();
+                controller.setPopUp("error", e.getMessage(), "ClientMain");
+            }
+        }
     }
 
     @FXML
     public void reloadTableView() {
-        loadBookingData();
+        loadClientData();
     }
 
     @FXML

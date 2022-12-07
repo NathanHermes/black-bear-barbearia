@@ -21,7 +21,7 @@ public class CreateServiceUseCase {
 
         String name = service.getName();
         if (dao.findOneByName(name).isPresent())
-            throw new EntityAlreadyExistsException("This name is already in use");
+            throw new EntityAlreadyExistsException("Name is already in use");
 
         return dao.create(service);
     }

@@ -34,24 +34,19 @@ public class SqliteStatusDAO implements StatusDAO {
     }
 
     @Override
-    public Optional<Integer> findId(Status entity) {
+    public Optional<Integer> findIDByStatus(Status status) {
         String sql = "SELECT * FROM status WHERE name = ?";
-        Optional<Integer> id = Optional.empty();
-
         try {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
-
-            stmt.setString(1, entity.name());
+            stmt.setString(1, status.name());
 
             final ResultSet result = stmt.executeQuery();
-
-            while(result.next()){
-                id = Optional.of(result.getInt("id"));
+            if(result.next()){
+                return Optional.of(result.getInt("id"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return id;
+        return Optional.empty();
     }
 }

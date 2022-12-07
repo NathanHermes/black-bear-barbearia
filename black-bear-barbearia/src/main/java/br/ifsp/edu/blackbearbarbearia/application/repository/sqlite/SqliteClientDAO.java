@@ -88,29 +88,46 @@ public class SqliteClientDAO implements ClientDAO {
     }
 
     @Override
-    public Optional<Client> findOne(Integer key) {
+    public Optional<Client> findOne(Integer id) {
         String sql = "SELECT * FROM client WHERE id = ?";
-        Optional<Client> client = Optional.empty();
 
         try {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
-
-            stmt.setInt(1, key);
+            stmt.setInt(1, id);
 
             final ResultSet result = stmt.executeQuery();
-
-            while(result.next()){
+            if(result.next()){
                 final String name = result.getString("name");
                 final String email = result.getString("email");
                 final String phone = result.getString("phone");
 
-                client = Optional.of(new Client(key, name, email, phone));
+                return Optional.of(new Client(id, name, email, phone));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return Optional.empty();
+    }
 
-        return client;
+    @Override
+    public Optional<Client> findOneByName(String name) {
+        String sql = "SELECT * FROM client WHERE name = ?";
+        try {
+            final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
+            stmt.setString(1, name);
+
+            final ResultSet result = stmt.executeQuery();
+            if (result.next()) {
+                final Integer id = result.getInt("id");
+                final String email = result.getString("email");
+                final String phone = result.getString("phone");
+
+                return Optional.of(new Client(id, name, email, phone));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return Optional.empty();
     }
 
     @Override

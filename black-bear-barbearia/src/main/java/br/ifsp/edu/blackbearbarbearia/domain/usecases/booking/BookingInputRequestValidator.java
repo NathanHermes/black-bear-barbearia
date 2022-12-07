@@ -15,7 +15,6 @@ public class BookingInputRequestValidator extends Validator<Booking> {
         }
 
         if (booking.getDate() == null) notification.addError("Date is null");
-        if (booking.isPaid().isBlank()) notification.addError("Paid is null");
         if (booking.getInfoClient() == null) notification.addError("Client is null");
         if (booking.getInfoService() == null) notification.addError("Service is null");
         if (booking.getInfoEmployee() == null) notification.addError("Employee is null");

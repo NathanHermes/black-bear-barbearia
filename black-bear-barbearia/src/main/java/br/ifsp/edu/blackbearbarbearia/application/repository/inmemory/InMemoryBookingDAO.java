@@ -88,11 +88,15 @@ public class InMemoryBookingDAO implements BookingDAO {
 //    }
 
     @Override
-    public Optional<Booking> findOneByDateAndUser(Date date, User user) {
+    public Boolean updateStatus(Integer bookingID, Integer statusID, String paid) {
+        return null;
+    }
+
+    @Override
+    public List<Booking> findOneByDateAndUser(Date date, Integer user) {
         return database.values().stream()
                 .filter(booking -> booking.getDate().equals(date))
-                .filter(booking -> booking.getEmployee().equals(user))
-                .findAny();
+                .filter(booking -> booking.getEmployee().equals(user)).toList();
     }
 
     @Override

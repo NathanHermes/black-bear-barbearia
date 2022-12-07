@@ -6,7 +6,6 @@ import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
@@ -20,6 +19,8 @@ public class Booking {
     private User employee;
     private Status status;
 
+    public Booking() {}
+
     public Booking(Integer id, Date date, Time hour, Boolean paid, Client client, Service service, User employee, Status status) {
         this.id = id;
         this.date = date;
@@ -31,14 +32,8 @@ public class Booking {
         this.status = status;
     }
 
-    public Booking(Date date, Time hour, Boolean paid, Client client, Service service, User employee) {
-        this.date = date;
-        this.hour = hour;
-        this.paid = paid;
-        this.client = client;
-        this.service = service;
-        this.employee = employee;
-        this.status = Status.BOOKED;
+    public Booking(Date date, Time hour, Client client, Service service, User employee) {
+        this(null, date, hour, Boolean.FALSE, client, service, employee, Status.BOOKED);
     }
 
     public int getId() {
@@ -49,7 +44,7 @@ public class Booking {
     }
 
     public String getDate() {
-        return date.toLocalDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        return date.toLocalDate().format((DateTimeFormatter.ofPattern("dd/MM/yyyy")));
     }
     public Date getNoFormattedDate() {
         return date;
@@ -58,10 +53,12 @@ public class Booking {
         this.date = date;
     }
 
-    public Time getHour() {
+    public String getHour() {
+        return String.valueOf(hour);
+    }
+    public Time getNoFormattedHour() {
         return hour;
     }
-
     public void setHour(Time hour) {
         this.hour = hour;
     }
@@ -104,27 +101,20 @@ public class Booking {
     public Status getStatus() {
         return status;
     }
-
     public void setStatus(Status status) {
         this.status = status;
     }
 
-    public boolean isPastDate() {
-        LocalDate today = LocalDate.now();
-
-        return this.date.toLocalDate().isBefore(today);
-    }
 
     @Override
     public String toString() {
         return "Booking{" +
                 "id=" + id +
                 ", date=" + date +
-                ", hour=" + hour +
                 ", paid=" + paid +
-                ", client=" + client +
-                ", service=" + service +
-                ", employee=" + employee +
+                ", client=" + client.toString() +
+                ", service=" + service.toString() +
+                ", employee=" + employee.toString() +
                 ", status=" + status +
                 '}';
     }

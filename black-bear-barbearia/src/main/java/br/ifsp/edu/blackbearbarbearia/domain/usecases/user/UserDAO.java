@@ -9,4 +9,7 @@ public interface UserDAO extends DAO<User, Integer> {
     Optional<User> findByLogin(String login);
     Optional<User> findByEmail(String email);
     Integer findCountByDay(Integer day);
+    Boolean updatePassword(String login, String passwordHash);
+
+    Optional<Integer> findIDByFullName(String fullName);
 }

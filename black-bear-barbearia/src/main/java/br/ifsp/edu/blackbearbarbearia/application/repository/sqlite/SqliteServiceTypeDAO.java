@@ -77,14 +77,12 @@ public class SqliteServiceTypeDAO implements ServiceTypeDAO {
             while(result.next()){
                 final Integer typeId = result.getInt("typeId");
 
-                Type type = typeDAO.findOne(typeId).get();
-
-                types.add(type);
+                if (typeDAO.findOne(typeId).isPresent())
+                    types.add(typeDAO.findOne(typeId).get());
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return types;
     }
 }

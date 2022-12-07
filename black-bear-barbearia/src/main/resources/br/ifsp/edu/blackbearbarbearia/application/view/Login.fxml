@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox fillWidth="false" styleClass="anchor" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.LoginController">
-   <Label alignment="CENTER" contentDisplay="CENTER" styleClass="session-title" text="Login" textAlignment="JUSTIFY" />
+   <Label alignment="CENTER" contentDisplay="CENTER" styleClass="title" text="Login" textAlignment="JUSTIFY" />
    <TextField fx:id="loginInput" alignment="CENTER" focusTraversable="false" promptText="Digite o login" styleClass="input" />
    <PasswordField fx:id="passwordInput" alignment="CENTER" focusTraversable="false" promptText="Digite a senha" styleClass="input"/>
-   <Button alignment="CENTER" contentDisplay="CENTER" onAction="#makeLogin" styleClass="button" text="L O G I N" />
-   <Label fx:id="lblError" styleClass="error-message" />
+   <Button alignment="CENTER" contentDisplay="CENTER" onAction="#makeLogin" styleClass="login-button" text="L O G I N" />
+   <Button alignment="CENTER" contentDisplay="CENTER" onAction="#updatePassword" styleClass="login-link" text="Esqueci minha senha" />
 </VBox>

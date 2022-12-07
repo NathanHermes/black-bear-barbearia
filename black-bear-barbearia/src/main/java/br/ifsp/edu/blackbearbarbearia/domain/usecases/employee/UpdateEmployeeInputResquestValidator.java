@@ -28,10 +28,10 @@ public class UpdateEmployeeInputResquestValidator extends Validator<User> {
         return notification;
     }
 
-    public Notification validate(String lastPassword, String newPassword, String confirmNewPassword) {
+    public Notification validate(String login, String newPassword, String confirmNewPassword) {
         Notification notification = new Notification();
 
-        if (nullOrEmpty(lastPassword)) notification.addError("Last password is null or empty");
+        if (nullOrEmpty(login)) notification.addError("Login is null or empty");
         if (nullOrEmpty(newPassword)) notification.addError("New password is null or empty");
         if (nullOrEmpty(confirmNewPassword)) notification.addError("Confirm new password is null or empty");
 

@@ -53,9 +53,9 @@ public class SqliteUserDAO implements UserDAO {
             throw new RuntimeException(e);
         }
 
-        if (findIDByFullname(employee.getFullName()).isEmpty())
+        if (findIDByFullName(employee.getFullName()).isEmpty())
             throw new IllegalArgumentException("Employee not found");
-        Integer id = findIDByFullname(employee.getFullName()).get();
+        Integer id = findIDByFullName(employee.getFullName()).get();
 
         Boolean addressDAOResponse = addressDAO.create(id, employee.getAddress());
         if (addressDAOResponse.equals(Boolean.FALSE))
@@ -114,6 +114,23 @@ public class SqliteUserDAO implements UserDAO {
     }
 
     @Override
+    public Boolean updatePassword(String login, String passwordHash) {
+        String sql = "UPDATE user SET passwordHash = ? WHERE login = ?";
+        try {
+            final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
+
+            stmt.setString(1, passwordHash);
+            stmt.setString(2, login);
+
+            if (stmt.executeUpdate() > 0)
+                return Boolean.TRUE;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return Boolean.FALSE;
+    }
+
+    @Override
     public Boolean deleteByKey(Integer key) {
         String sql = """
                 DELETE FROM user WHERE id = ?
@@ -147,7 +164,6 @@ public class SqliteUserDAO implements UserDAO {
             stmt.setInt(1, userID);
 
             final ResultSet result = stmt.executeQuery();
-
             if(result.next()){
                 final String fullName = result.getString("fullName");
                 final String email = result.getString("email");
@@ -345,7 +361,8 @@ public class SqliteUserDAO implements UserDAO {
         }
     }
 
-    private Optional<Integer> findIDByFullname(String fullName) {
+    @Override
+    public Optional<Integer> findIDByFullName(String fullName) {
         String sql = "SELECT id FROM user WHERE fullName = ?";
 
         try {

@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -31,7 +32,7 @@ public class WindowLoader extends Application {
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent parent = fxmlLoader.load(Objects.requireNonNull(WindowLoader.class.getResource(fxml + ".fxml")).openStream());
-        parent.getStylesheets().add(Objects.requireNonNull(WindowLoader.class.getResource( "css/"+ fxml +".css")).toExternalForm());
+        parent.getStylesheets().add(Objects.requireNonNull(WindowLoader.class.getResource( "css/Global.css")).toExternalForm());
         controller = fxmlLoader.getController();
         return parent;
     }

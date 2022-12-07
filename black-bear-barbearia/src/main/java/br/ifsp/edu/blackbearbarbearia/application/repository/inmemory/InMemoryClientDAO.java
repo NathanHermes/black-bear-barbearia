@@ -54,6 +54,11 @@ public class InMemoryClientDAO implements ClientDAO {
     }
 
     @Override
+    public Optional<Client> findOneByName(String name) {
+        return Optional.empty();
+    }
+
+    @Override
     public Optional<Client> findOneByEmail(String email) {
         return database.values().stream()
                 .filter(client -> client.getEmail().equals(email))

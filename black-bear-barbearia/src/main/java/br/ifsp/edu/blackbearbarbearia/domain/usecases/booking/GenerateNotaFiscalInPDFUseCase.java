@@ -72,10 +72,10 @@ public class GenerateNotaFiscalInPDFUseCase {
         serviceElement.add(new Chunk("     Data: ", contrastParagraph));
         serviceElement.add(new Chunk(booking.getDate() + "\n", paragraph));
 
-        /*
-            serviceElement.add(new Chunk("     Horário: ", contrastParagraph));
-            serviceElement.add(new Chunk(booking.getDate() + "\n", paragraph));
-        */
+
+        serviceElement.add(new Chunk("     Horário: ", contrastParagraph));
+        serviceElement.add(new Chunk(booking.getHour() + "\n", paragraph));
+
 
         serviceElement.add(new Chunk("     Serviço: ", contrastParagraph));
         serviceElement.add(new Chunk(booking.getService() + "\n", paragraph));

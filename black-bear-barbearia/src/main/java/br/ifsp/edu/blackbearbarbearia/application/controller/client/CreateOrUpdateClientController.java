@@ -1,5 +1,6 @@
 package br.ifsp.edu.blackbearbarbearia.application.controller.client;
 
+import br.ifsp.edu.blackbearbarbearia.application.controller.popUp.PopUpController;
 import br.ifsp.edu.blackbearbarbearia.application.view.WindowLoader;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.client.Client;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityAlreadyExistsException;
@@ -24,8 +25,6 @@ public class CreateOrUpdateClientController {
     @FXML
     private TextField inputEmail;
     @FXML
-    private Label lblResponseMessage;
-    @FXML
     private Button btnSaveOrUpdate;
 
     private Client client;
@@ -38,7 +37,7 @@ public class CreateOrUpdateClientController {
 
     private void clearInputs() {
         lblTitle.setText("Cadastrar");
-        btnSaveOrUpdate.setText("Cadastrar");
+        btnSaveOrUpdate.setText("C A D A S T R A R");
         inputName.setText("");
         inputPhone.setText("");
         inputEmail.setText("");
@@ -54,37 +53,38 @@ public class CreateOrUpdateClientController {
 
     private void setInfoClientIntoInputs() {
         lblTitle.setText("Editar");
-        btnSaveOrUpdate.setText("Editar");
+        btnSaveOrUpdate.setText("E D I T A R");
         inputName.setText(client.getName());
         inputPhone.setText(client.getPhone());
         inputEmail.setText(client.getEmail());
     }
 
     @FXML
-    void saveOrUpdate() {
-        lblResponseMessage.setText("");
-
+    void saveOrUpdate() throws IOException {
+        WindowLoader.setRoot("PopUp");
+        PopUpController controller = (PopUpController) WindowLoader.getController();
         if (client == null) {
             getInfoClientFromInputs();
             try {
                 Boolean response = createClientUseCase.create(client);
-                if (response.equals(Boolean.TRUE))
-                    lblResponseMessage.setText("Cliente cadastrado");
+
+                if (response)
+                    controller.setPopUp("success", "Client created", "ClientMain");
                 else
-                    lblResponseMessage.setText("Não foi possível cadastrar esse cliente.\nTente novamente mais tarde.");
-            } catch (IllegalArgumentException | EntityAlreadyExistsException exception) {
-                lblResponseMessage.setText(exception.getMessage());
+                    controller.setPopUp("error", "Unable to create client.\nTry again.", "ClientMain");
+            } catch (IllegalArgumentException | EntityAlreadyExistsException e) {
+                controller.setPopUp("error", e.getMessage(), "CreateOrUpdateClient");
             }
         } else {
             getInfoClientFromInputs();
             try {
                 Boolean response = updateClientUseCase.update(client.getId(), client);
-                if (response.equals(Boolean.TRUE))
-                    lblResponseMessage.setText("Cliente atualizado");
+                if (response)
+                    controller.setPopUp("success", "Client updated", "ClientMain");
                 else
-                    lblResponseMessage.setText("Não foi possível atualizar esse cliente.\nTente novamente mais tarde.");
-            } catch (IllegalArgumentException | EntityNotFoundException exception) {
-                lblResponseMessage.setText(exception.getMessage());
+                    controller.setPopUp("error", "Unable to update client.\nTry again.", "ClientMain");
+            } catch (IllegalArgumentException | EntityNotFoundException e) {
+                controller.setPopUp("error", e.getMessage(), "CreateOrUpdateClient");
             }
         }
         client = null;
@@ -99,12 +99,8 @@ public class CreateOrUpdateClientController {
         client.setEmail(inputEmail.getText());
     }
 
-    public void back() {
-        try {
-            WindowLoader.setRoot("ClientMain");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public void back() throws IOException {
+        WindowLoader.setRoot("ClientMain");
     }
 }
 

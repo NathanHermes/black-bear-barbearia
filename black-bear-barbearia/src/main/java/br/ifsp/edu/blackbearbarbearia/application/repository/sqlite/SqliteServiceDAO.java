@@ -102,55 +102,57 @@ public class SqliteServiceDAO implements ServiceDAO {
     }
 
     @Override
-    public Optional<Service> findOne(Integer key) {
+    public Optional<Service> findOne(Integer id) {
         String sql = "SELECT * FROM service WHERE id = ?";
-        Optional<Service> service = Optional.empty();
 
         try {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
-
-            stmt.setInt(1, key);
+            stmt.setInt(1, id);
 
             final ResultSet result = stmt.executeQuery();
-
-            while(result.next()){
+            if(result.next()){
                 final String name = result.getString("name");
-                final BigDecimal price = BigDecimal.valueOf(result.getDouble("price"));
-                final BigDecimal comissionPercentage = BigDecimal.valueOf(result.getDouble("comissionPercentage"));
-                final BigDecimal taxPercentage = BigDecimal.valueOf(result.getDouble("taxPercentage"));
-                final Boolean active = result.getBoolean("active");
-
-                final List<Type> types = serviceTypeDAO.findByServiceId(key);
-
-                service = Optional.of(new Service(key, name, price, comissionPercentage, taxPercentage, active, types));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return service;
-    }
-
-    @Override
-    public List<Service> findAll() {
-        List<Service> services = new ArrayList<>();
-
-        try {
-            String sql = "SELECT * FROM service";
-            final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
-            final ResultSet result = stmt.executeQuery();
-
-            while(result.next()){
-                final Integer id = result.getInt("id");
-                final String name = result.getString("name");
-                final BigDecimal price = BigDecimal.valueOf(result.getDouble("price"));
-                final BigDecimal comissionPercentage = BigDecimal.valueOf(result.getDouble("comissionPercentage"));
-                final BigDecimal taxPercentage = BigDecimal.valueOf(result.getDouble("taxPercentage"));
+                final double price = result.getDouble("price");
+                final String commissionPercentage = result.getString("comissionPercentage").replace(",", ".");
+                final String taxPercentage = result.getString("taxPercentage").replace(",", ".");
                 final Boolean active = result.getBoolean("active");
 
                 final List<Type> types = serviceTypeDAO.findByServiceId(id);
 
-                final Service service = new Service(id, name, price, comissionPercentage, taxPercentage, active, types);
+                double cp = Double.parseDouble(commissionPercentage);
+                double tp = Double.parseDouble(taxPercentage);
+
+                return Optional.of(new Service(id, name, BigDecimal.valueOf(price), BigDecimal.valueOf(cp), BigDecimal.valueOf(tp), active, types));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Service> findAll() {
+        String sql = "SELECT * FROM service";
+        List<Service> services = new ArrayList<>();
+
+        try {
+            final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
+
+            final ResultSet result = stmt.executeQuery();
+            while(result.next()){
+                final Integer id = result.getInt("id");
+                final String name = result.getString("name");
+                final double price = result.getDouble("price");
+                final String comissionPercentage = result.getString("comissionPercentage").replace(",", ".");
+                final String taxPercentage = result.getString("taxPercentage").replace(",", ".");
+                final Boolean active = result.getBoolean("active");
+
+                final List<Type> types = serviceTypeDAO.findByServiceId(id);
+
+                double cp = Double.parseDouble(comissionPercentage);
+                double tp = Double.parseDouble(taxPercentage);
+
+                final Service service = new Service(id, name, BigDecimal.valueOf(price), BigDecimal.valueOf(cp), BigDecimal.valueOf(tp), active, types);
 
                 services.add(service);
             }
@@ -164,31 +166,28 @@ public class SqliteServiceDAO implements ServiceDAO {
     @Override
     public Optional<Service> findOneByName(String name) {
         String sql = "SELECT * FROM service WHERE name = ?";
-        Optional<Service> service = Optional.empty();
 
         try {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
-
             stmt.setString(1, name);
 
             final ResultSet result = stmt.executeQuery();
-
-            while(result.next()){
+            if(result.next()){
                 final Integer id = result.getInt("id");
-                final BigDecimal price = BigDecimal.valueOf(result.getDouble("price"));
-                final BigDecimal comissionPercentage = BigDecimal.valueOf(result.getDouble("comissionPercentage"));
+                final double price = result.getDouble("price");
+                final double commissionPercentage = result.getDouble("comissionPercentage");
                 final BigDecimal taxPercentage = BigDecimal.valueOf(result.getDouble("taxPercentage"));
                 final Boolean active = result.getBoolean("active");
 
                 final List<Type> types = serviceTypeDAO.findByServiceId(id);
 
-                service = Optional.of(new Service(id, name, price, comissionPercentage, taxPercentage, active, types));
+                return Optional.of(new Service(id, name, BigDecimal.valueOf(price), BigDecimal.valueOf(commissionPercentage), taxPercentage, active, types));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return service;
+        return Optional.empty();
     }
 
     public Optional<Integer> findKeyByName(String name) {

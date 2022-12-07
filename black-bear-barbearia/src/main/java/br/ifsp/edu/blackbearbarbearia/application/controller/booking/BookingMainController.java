@@ -1,5 +1,6 @@
 package br.ifsp.edu.blackbearbarbearia.application.controller.booking;
 
+import br.ifsp.edu.blackbearbarbearia.application.controller.popUp.PopUpController;
 import br.ifsp.edu.blackbearbarbearia.application.view.WindowLoader;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.booking.Booking;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.client.Client;
@@ -16,13 +17,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,13 +30,9 @@ import static br.ifsp.edu.blackbearbarbearia.application.main.Main.*;
 
 public class BookingMainController {
     @FXML
-    private Button btnClientsManage;
-    @FXML
     private Button btnEmployeesManage;
     @FXML
     private Button btnServiceManage;
-    @FXML
-    private Button btnLogout;
     @FXML
     private DatePicker dtData;
     @FXML
@@ -48,9 +44,9 @@ public class BookingMainController {
     @FXML
     private ComboBox<String> cbCliente;
     @FXML
-    private Button btnFiltrar;
-    @FXML
     private TableView<Booking> tbvBookings;
+    @FXML
+    private TableColumn<Booking, Integer> cID;
     @FXML
     private TableColumn<Booking, String> cClient;
     @FXML
@@ -60,21 +56,13 @@ public class BookingMainController {
     @FXML
     private TableColumn<Booking, String> cDate;
     @FXML
+    private TableColumn<Booking, String> cHour;
+    @FXML
     private TableColumn<Booking, String> cStatus;
     @FXML
     private TableColumn<Booking, String> cPaid;
     @FXML
-    private Button btnCadastrar;
-    @FXML
-    private Button btnDesmarcar;
-    @FXML
-    private Button btnConcluir;
-    @FXML
-    private Button btnServicosPrestados;
-    @FXML
-    private Button btnNotaFiscal;
-    @FXML
-    private Button btnRelatorio;
+    private Button btnReport;
 
     private ObservableList<Booking> bookingData;
 
@@ -118,7 +106,32 @@ public class BookingMainController {
     }
 
     private void setItemsCbHorario() {
-        // Esperando criação do list de horários
+        List<String> horarios = new ArrayList<>();
+        horarios.add("08:00:00");
+        horarios.add("08:30:00");
+        horarios.add("09:00:00");
+        horarios.add("09:30:00");
+        horarios.add("10:00:00");
+        horarios.add("10:30:00");
+        horarios.add("11:00:00");
+        horarios.add("11:30:00");
+        horarios.add("12:00:00");
+        horarios.add("12:30:00");
+        horarios.add("13:00:00");
+        horarios.add("13:30:00");
+        horarios.add("14:00:00");
+        horarios.add("14:30:00");
+        horarios.add("15:00:00");
+        horarios.add("15:30:00");
+        horarios.add("16:00:00");
+        horarios.add("16:30:00");
+        horarios.add("17:00:00");
+        horarios.add("17:30:00");
+        horarios.add("18:00:00");
+        horarios.add("18:30:00");
+        horarios.add("19:00:00");
+        horarios.add("19:30:00");
+        cbHorario.setItems(FXCollections.observableList(horarios));
     }
 
     private void loadBookingData() {
@@ -137,10 +150,12 @@ public class BookingMainController {
     }
 
     private void setValueSourceToColumns() {
+        cID.setCellValueFactory(new PropertyValueFactory<>("id"));
         cClient.setCellValueFactory(new PropertyValueFactory<>("client"));
         cEmployee.setCellValueFactory(new PropertyValueFactory<>("employee"));
         cService.setCellValueFactory(new PropertyValueFactory<>("service"));
         cDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        cHour.setCellValueFactory(new PropertyValueFactory<>("hour"));
         cStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         cPaid.setCellValueFactory(new PropertyValueFactory<>("paid"));
     }
@@ -149,6 +164,7 @@ public class BookingMainController {
         if (USER.getRole() != Role.ADMIN) {
             btnEmployeesManage.setDisable(true);
             btnServiceManage.setDisable(true);
+            btnReport.setDisable(true);
         }
     }
 
@@ -228,31 +244,45 @@ public class BookingMainController {
     }
 
     @FXML
-    public void cadastrar(ActionEvent event) {
-        /*
-         * Esperando terminar a implementação da tela de cadastro de agendamento
-         */
+    public void goToCreateBooking() throws IOException {
+        WindowLoader.setRoot("CreateBooking");
     }
 
     @FXML
-    public void concludeBooking(ActionEvent event) throws IOException {
+    public void concludeBooking() throws IOException {
         Booking bookingSelected = tbvBookings.getSelectionModel().getSelectedItem();
-        BigDecimal employeeCommission = finishBookingUseCase.update(bookingSelected);
-        loadBookingData();
+        try {
+            BigDecimal response = finishBookingUseCase.update(bookingSelected);
+            WindowLoader.setRoot("EmployeeCommission");
+            EmployeeCommissionController controller = (EmployeeCommissionController) WindowLoader.getController();
+            controller.setBooking(bookingSelected.getEmployee(), response);
+            generateNotaFiscalInPDFUseCase.generate(bookingSelected);
+            loadBookingData();
 
-        INFOCOMMISSIONPOPUP.clear();
-        INFOCOMMISSIONPOPUP.add(bookingSelected.getEmployee());
-        INFOCOMMISSIONPOPUP.add(String.format("%.2f%n", employeeCommission));
-        WindowLoader.setRoot("EmployeeCommission");
-
-        generateNotaFiscalInPDFUseCase.generate(bookingSelected);
+        } catch (IllegalArgumentException | EntityNotFoundException | IllegalStateException e) {
+            WindowLoader.setRoot("PopUp");
+            PopUpController controller = (PopUpController) WindowLoader.getController();
+            controller.setPopUp("error", e.getMessage(), "BookingMain");
+        }
     }
 
     @FXML
-    public void desmarcar(ActionEvent event) {
+    public void cancelBooking() throws IOException {
         Booking bookingSelected = tbvBookings.getSelectionModel().getSelectedItem();
-        cancelBookingUseCase.update(bookingSelected);
-        loadBookingData();
+        try {
+            Boolean response = cancelBookingUseCase.update(bookingSelected);
+            WindowLoader.setRoot("PopUp");
+            PopUpController controller = (PopUpController) WindowLoader.getController();
+            if (response) {
+                controller.setPopUp("success", "Booking canceled", "BookingMain");
+                loadBookingData();
+            } else
+                controller.setPopUp("error", "It was not possible to cancel the booking. Try again later.", "BookingMain");
+        } catch (IllegalArgumentException | EntityNotFoundException e) {
+            WindowLoader.setRoot("PopUp");
+            PopUpController controller = (PopUpController) WindowLoader.getController();
+            controller.setPopUp("error", e.getMessage(), "BookingMain");
+        }
     }
 
     @FXML

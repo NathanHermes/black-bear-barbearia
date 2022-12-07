@@ -6,5 +6,5 @@ import java.util.Optional;
 
 public interface StatusDAO {
     Optional<Status> findOne(Integer key);
-    Optional<Integer> findId(Status entity);
+    Optional<Integer> findIDByStatus(Status entity);
 }

@@ -1,0 +1,112 @@
+@font-face {
+    font-family: "Mochary PERSONAL USE ONLY";
+    src: url('../fonts/Mochary.ttf');
+}
+@font-face {
+    font-family: "Young Heart";
+    src: url('../fonts/YoungHeart.ttf');
+}
+@font-face {
+    font-family: "JetBrains Mono Regular";
+    src: url('../fonts/JetBrainsMono-Regular.ttf');
+}
+@font-face {
+    font-family: "JetBrains Mono Bold";
+    src: url('../fonts/JetBrainsMono-Bold.ttf');
+}
+
+.anchor {
+    -fx-pref-width: 1024px;
+    -fx-pref-height: 768px;
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+    -fx-background-color: #f0f2f5;
+}
+.title {
+    -fx-text-fill: #000;
+    -fx-font-family: "Mochary PERSONAL USE ONLY";
+    -fx-font-size: 48;
+    -fx-font-weight: 700;
+}
+.text-field {
+    -fx-pref-width: 200px;
+    -fx-pref-height: 30px;
+    -fx-border-color: #ccc;
+    -fx-background-color: #f0f2f5;
+    -fx-font-family: "JetBrains Mono Regular";
+    -fx-font-size: 12;
+}
+.text-field:focused {
+    -fx-border-color: #555;
+}
+.button {
+    -fx-background-color: #f0f2f5;
+    -fx-border-color: #1d4c84;
+    -fx-text-fill: #1d4c84;
+    -fx-border-width: 2;
+}
+.button:hover {
+    -fx-background-color: #1d4c84;
+    -fx-text-fill: #f0f2f5;
+}
+.login-button {
+    -fx-pref-width: 200px;
+    -fx-pref-height: 40px;
+    -fx-font-family: "Young Heart";
+    -fx-font-size: 18;
+    -fx-font-weight: 700;
+}
+.login-link {
+    -fx-border-color: none;
+    -fx-text-fill: #e3383e;
+    -fx-font-family: "JetBrains Mono Bold";
+    -fx-font-size: 14;
+}
+.login-link:hover {
+    -fx-background-color: none;
+    -fx-text-fill: #e3383e;
+    -fx-underline: true;
+}
+.btnBack {
+    -fx-pref-width: 200px;
+    -fx-pref-height: 40px;
+    -fx-font-family: "Young Heart";
+    -fx-font-size: 18;
+    -fx-font-weight: 700;
+    -fx-background-color: #f0f2f5;
+    -fx-border-color: #e3383e;
+    -fx-text-fill: #e3383e;
+}
+.btnBack:hover {
+    -fx-background-color: #e3383e;
+    -fx-text-fill: #f0f2f5;
+}
+
+.client-input {
+    -fx-pref-width: 584px;
+    -fx-pref-height: 30px;
+}
+.client-button {
+    -fx-pref-width: 100px;
+    -fx-pref-height: 40px;
+    -fx-font-family: "Young Heart";
+    -fx-font-size: 18;
+}
+.client-big-button {
+    -fx-pref-width: 120px;
+    -fx-font-family: "Young Heart";
+    -fx-font-size: 18;
+}
+.table-view {
+    -fx-font-family: "JetBrains Mono Regular";
+    -fx-font-size: 12;
+}
+.column {
+    -fx-font-family: "JetBrains Mono Bold";
+    -fx-font-size: 12;
+    -fx-alignment: CENTER;
+}
+.form {
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+}

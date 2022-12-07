@@ -69,4 +69,14 @@ public class InMemoryUserDAO implements UserDAO {
                 .filter(user -> user.getDays().contains(day))
                 .toList().size();
     }
+
+    @Override
+    public Boolean updatePassword(String login, String passwordHash) {
+        return null;
+    }
+
+    @Override
+    public Optional<Integer> findIDByFullName(String fullName) {
+        return Optional.empty();
+    }
 }

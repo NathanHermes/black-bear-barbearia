@@ -11,12 +11,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
 import java.time.DayOfWeek;
-import java.util.Date;
 
 public class DatabaseBuilder {
     public static void main(String[] args) throws SQLException, IOException {
         dropTableIfExists();
 
+        System.out.println("> Criando as tabelas ...");
         createTableDay();
         createTableUser();
         createTableAddress();
@@ -30,6 +30,7 @@ public class DatabaseBuilder {
 
         createTableStatus();
         createTableBooking();
+        System.out.println("> Tabelas criadas.");
 
         populateDay();
         populateUser();
@@ -419,12 +420,12 @@ public class DatabaseBuilder {
         final Statement stmt = connection.createStatement();
 
         final String sql = "INSERT INTO booking (date, hour, paid, clientId, serviceId, userId, statusId) " +
-                "VALUES ('%s', %b, %d, %d, %d, %d)";
+                "VALUES ('%s', '%s', %b, %d, %d, %d, %d)";
 
-        stmt.addBatch(String.format(sql, new Date(2022, 11, 9), new Time(13, 30, 00), Boolean.FALSE, 1, 1, 1, 1));
-        stmt.addBatch(String.format(sql, new Date(2022,11,8), new Time(14, 00, 00), Boolean.FALSE, 2, 2, 2, 1));
-        stmt.addBatch(String.format(sql, new Date(2022,11,7), new Time(15, 30, 00), Boolean.FALSE, 3, 3, 3, 1));
-        stmt.addBatch(String.format(sql, new Date(2022,11,6), new Time(16, 00, 00), Boolean.FALSE, 4, 4, 4, 1));
+        stmt.addBatch(String.format(sql, Date.valueOf("2022-11-9"), Time.valueOf("09:00:00"), Boolean.FALSE, 1, 1, 1, 1));
+        stmt.addBatch(String.format(sql, Date.valueOf("2022-11-8"), Time.valueOf("12:00:00"), Boolean.FALSE, 2, 2, 2, 1));
+        stmt.addBatch(String.format(sql, Date.valueOf("2022-11-7"), Time.valueOf("10:30:00"), Boolean.FALSE, 3, 3, 3, 1));
+        stmt.addBatch(String.format(sql, Date.valueOf("2022-11-6"), Time.valueOf("17:00:00"), Boolean.FALSE, 4, 4, 4, 1));
         stmt.executeBatch();
 
         stmt.close();
