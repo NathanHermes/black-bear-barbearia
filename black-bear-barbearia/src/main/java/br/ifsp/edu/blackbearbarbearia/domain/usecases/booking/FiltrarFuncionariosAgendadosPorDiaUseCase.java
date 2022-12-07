@@ -10,6 +10,7 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityNotFoundExcept
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Notification;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Validator;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class FiltrarFuncionariosAgendadosPorDiaUseCase {
     }
 
     public List<Booking> findByDay() {
-        LocalDate date = LocalDate.now();
+        Date date = Date.valueOf(LocalDate.now());
         if (bookingDAO.findAllByDate(date).isEmpty())
             throw new EntityNotFoundException("No booking found.");
 

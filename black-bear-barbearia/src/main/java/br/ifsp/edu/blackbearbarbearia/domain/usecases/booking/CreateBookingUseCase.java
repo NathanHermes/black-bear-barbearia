@@ -6,7 +6,7 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityAlreadyExistsE
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Notification;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Validator;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class CreateBookingUseCase {
     private final BookingDAO dao;
@@ -20,7 +20,7 @@ public class CreateBookingUseCase {
 
         if (notification.hasErros()) throw new IllegalArgumentException(notification.errorMessage());
 
-        LocalDate date = booking.getNoFormattedDate();
+        Date date = booking.getNoFormattedDate();
         User user = booking.getInfoEmployee();
         if (dao.findOneByDateAndUser(date, user).isPresent()) throw new EntityAlreadyExistsException("This date and user is already in use");
 

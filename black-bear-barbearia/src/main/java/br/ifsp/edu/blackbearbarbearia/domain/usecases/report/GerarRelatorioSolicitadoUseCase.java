@@ -11,7 +11,7 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityNotFoundExcept
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Notification;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Validator;
 
-import java.time.LocalDate;
+import java.sql.Date;
 import java.util.List;
 
 public class GerarRelatorioSolicitadoUseCase {
@@ -19,10 +19,10 @@ public class GerarRelatorioSolicitadoUseCase {
     private final UserDAO userDAO;
     private final ServiceDAO serviceDAO;
 
-    private LocalDate start;
-    private LocalDate end;
+    private Date start;
+    private Date end;
 
-    public GerarRelatorioSolicitadoUseCase(BookingDAO bookingDAO, UserDAO userDAO, ServiceDAO serviceDAO, LocalDate start, LocalDate end) {
+    public GerarRelatorioSolicitadoUseCase(BookingDAO bookingDAO, UserDAO userDAO, ServiceDAO serviceDAO, Date start, Date end) {
         this.bookingDAO = bookingDAO;
         this.userDAO = userDAO;
         this.serviceDAO = serviceDAO;
@@ -31,7 +31,7 @@ public class GerarRelatorioSolicitadoUseCase {
         this.end = end;
     }
 
-    public List<Booking> findByPeriod(LocalDate start, LocalDate end) {
+    public List<Booking> findByPeriod(Date start, Date end) {
         if (bookingDAO.findAllByPeriod(start, end).isEmpty())
             throw new EntityNotFoundException("No booking found.");
 

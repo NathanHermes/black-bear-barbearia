@@ -4,22 +4,26 @@ import br.ifsp.edu.blackbearbarbearia.domain.entities.client.Client;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Service;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Booking {
     private Integer id;
-    private LocalDate date;
+    private Date date;
+    private Time hour;
     private Boolean paid;
     private Client client;
     private Service service;
     private User employee;
     private Status status;
 
-    public Booking(Integer id, LocalDate date, Boolean paid, Client client, Service service, User employee, Status status) {
+    public Booking(Integer id, Date date, Time hour, Boolean paid, Client client, Service service, User employee, Status status) {
         this.id = id;
         this.date = date;
+        this.hour = hour;
         this.paid = paid;
         this.client = client;
         this.service = service;
@@ -27,8 +31,9 @@ public class Booking {
         this.status = status;
     }
 
-    public Booking(LocalDate date, Boolean paid, Client client, Service service, User employee) {
+    public Booking(Date date, Time hour, Boolean paid, Client client, Service service, User employee) {
         this.date = date;
+        this.hour = hour;
         this.paid = paid;
         this.client = client;
         this.service = service;
@@ -44,13 +49,21 @@ public class Booking {
     }
 
     public String getDate() {
-        return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        return date.toLocalDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
-    public LocalDate getNoFormattedDate() {
+    public Date getNoFormattedDate() {
         return date;
     }
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Time getHour() {
+        return hour;
+    }
+
+    public void setHour(Time hour) {
+        this.hour = hour;
     }
 
     public String isPaid() {
@@ -99,7 +112,7 @@ public class Booking {
     public boolean isPastDate() {
         LocalDate today = LocalDate.now();
 
-        return this.date.isBefore(today);
+        return this.date.toLocalDate().isBefore(today);
     }
 
     @Override
@@ -107,10 +120,11 @@ public class Booking {
         return "Booking{" +
                 "id=" + id +
                 ", date=" + date +
+                ", hour=" + hour +
                 ", paid=" + paid +
-                ", client=" + client.toString() +
-                ", service=" + service.toString() +
-                ", employee=" + employee.toString() +
+                ", client=" + client +
+                ", service=" + service +
+                ", employee=" + employee +
                 ", status=" + status +
                 '}';
     }

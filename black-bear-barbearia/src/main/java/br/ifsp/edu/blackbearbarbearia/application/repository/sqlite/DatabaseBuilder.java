@@ -9,12 +9,9 @@ import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.DayOfWeek;
-import java.time.LocalDate;
+import java.util.Date;
 
 public class DatabaseBuilder {
     public static void main(String[] args) throws SQLException, IOException {
@@ -217,6 +214,7 @@ public class DatabaseBuilder {
                 CREATE TABLE booking(
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     date DATE NOT NULL,
+                    hour TIME NOT NULL,
                     paid BOOLEAN NOT NULL,
                     clientId INTEGER NOT NULL,
                     serviceId INTEGER NOT NULL,
@@ -420,13 +418,13 @@ public class DatabaseBuilder {
         final Connection connection = DriverManager.getConnection("jdbc:sqlite:blackbearbarbearia.db");
         final Statement stmt = connection.createStatement();
 
-        final String sql = "INSERT INTO booking (date, paid, clientId, serviceId, userId, statusId) " +
+        final String sql = "INSERT INTO booking (date, hour, paid, clientId, serviceId, userId, statusId) " +
                 "VALUES ('%s', %b, %d, %d, %d, %d)";
 
-        stmt.addBatch(String.format(sql, LocalDate.of(2022, 11, 9), Boolean.FALSE, 1, 1, 1, 1));
-        stmt.addBatch(String.format(sql, LocalDate.of(2022,11,8), Boolean.FALSE, 2, 2, 2, 1));
-        stmt.addBatch(String.format(sql, LocalDate.of(2022,11,7), Boolean.FALSE, 3, 3, 3, 1));
-        stmt.addBatch(String.format(sql, LocalDate.of(2022,11,6), Boolean.FALSE, 4, 4, 4, 1));
+        stmt.addBatch(String.format(sql, new Date(2022, 11, 9), new Time(13, 30, 00), Boolean.FALSE, 1, 1, 1, 1));
+        stmt.addBatch(String.format(sql, new Date(2022,11,8), new Time(14, 00, 00), Boolean.FALSE, 2, 2, 2, 1));
+        stmt.addBatch(String.format(sql, new Date(2022,11,7), new Time(15, 30, 00), Boolean.FALSE, 3, 3, 3, 1));
+        stmt.addBatch(String.format(sql, new Date(2022,11,6), new Time(16, 00, 00), Boolean.FALSE, 4, 4, 4, 1));
         stmt.executeBatch();
 
         stmt.close();

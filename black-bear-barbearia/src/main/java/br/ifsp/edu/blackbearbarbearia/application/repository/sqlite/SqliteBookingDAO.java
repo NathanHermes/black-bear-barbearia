@@ -7,11 +7,7 @@ import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Service;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.booking.BookingDAO;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.time.LocalDate;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,30 +23,32 @@ public class SqliteBookingDAO implements BookingDAO {
         String sql = """
                 INSERT INTO booking(
                     date,
+                    hour,
                     paid,
                     clientId,
                     serviceId,
                     userId,
                     statusId
-                ) VALUES (?, ?, ?, ?, ?, ?)
+                ) VALUES (?, ?, ?, ?, ?, ?, ?)
                 """;
         try {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
             final Optional<Integer> idStatus = statusDAO.findId(type.getStatus());
 
-            stmt.setDate(1, Date.valueOf(type.getNoFormattedDate()));
-            stmt.setString(2, type.isPaid());
-            stmt.setInt(3, type.getInfoClient().getId());
-            stmt.setInt(4, type.getInfoService().getId());
-            stmt.setInt(5, type.getInfoEmployee().getId());
-            stmt.setInt(6, idStatus.get());
+            stmt.setDate(1, type.getNoFormattedDate());
+            stmt.setTime(2, type.getHour());
+            stmt.setString(3, type.isPaid());
+            stmt.setInt(4, type.getInfoClient().getId());
+            stmt.setInt(5, type.getInfoService().getId());
+            stmt.setInt(6, type.getInfoEmployee().getId());
+            stmt.setInt(7, idStatus.get());
 
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return Boolean.FALSE;
+        return Boolean.TRUE;
     }
 
     @Override
@@ -58,6 +56,7 @@ public class SqliteBookingDAO implements BookingDAO {
         String sql = """
                 UPDATE booking SET
                     date = ?,
+                    hour = ?,
                     paid = ?,
                     clientId = ?,
                     serviceId = ?,
@@ -69,13 +68,14 @@ public class SqliteBookingDAO implements BookingDAO {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
             final Optional<Integer> idStatus = statusDAO.findId(type.getStatus());
 
-            stmt.setDate(1, Date.valueOf(type.getNoFormattedDate()));
-            stmt.setString(2, type.isPaid());
-            stmt.setInt(3, type.getInfoClient().getId());
-            stmt.setInt(4, type.getInfoService().getId());
-            stmt.setInt(5, type.getInfoEmployee().getId());
-            stmt.setInt(6, idStatus.get());
-            stmt.setInt(7, type.getId());
+            stmt.setDate(1, type.getNoFormattedDate());
+            stmt.setTime(2, type.getHour());
+            stmt.setString(3, type.isPaid());
+            stmt.setInt(4, type.getInfoClient().getId());
+            stmt.setInt(5, type.getInfoService().getId());
+            stmt.setInt(6, type.getInfoEmployee().getId());
+            stmt.setInt(7, idStatus.get());
+            stmt.setInt(8, type.getId());
 
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -121,7 +121,8 @@ public class SqliteBookingDAO implements BookingDAO {
             final ResultSet result = stmt.executeQuery();
 
             while(result.next()){
-                final LocalDate date = result.getDate("date").toLocalDate();
+                final Date date = result.getDate("date");
+                final Time hour = result.getTime("hour");
                 final Boolean paid = result.getBoolean("paid");
                 final Integer clientId = result.getInt("clientId");
                 final Integer serviceId = result.getInt("serviceId");
@@ -133,7 +134,7 @@ public class SqliteBookingDAO implements BookingDAO {
                 final Optional<User> user = userDAO.findOne(userId);
                 final Optional<Status> status = statusDAO.findOne(statusId);
 
-                booking = Optional.of(new Booking(key, date, paid, client.get(), service.get(), user.get(), status.get()));
+                booking = Optional.of(new Booking(key, date, hour, paid, client.get(), service.get(), user.get(), status.get()));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -153,7 +154,8 @@ public class SqliteBookingDAO implements BookingDAO {
 
             while(result.next()){
                 final Integer id = result.getInt("id");
-//                final LocalDate date = result.getDate("date").toLocalDate();
+                final Date date = result.getDate("date");
+                final Time hour = result.getTime("hour");
                 final Boolean paid = result.getBoolean("paid");
                 final Integer clientId = result.getInt("clientId");
                 final Integer serviceId = result.getInt("serviceId");
@@ -165,7 +167,7 @@ public class SqliteBookingDAO implements BookingDAO {
                 final Optional<User> user = userDAO.findOne(userId);
                 final Optional<Status> status = statusDAO.findOne(statusId);
 
-                final Booking booking = new Booking(id, null, paid, client.get(), service.get(), user.get(), status.get());
+                final Booking booking = new Booking(id, date, hour, paid, client.get(), service.get(), user.get(), status.get());
 
                 bookings.add(booking);
             }
@@ -177,20 +179,21 @@ public class SqliteBookingDAO implements BookingDAO {
     }
 
     @Override
-    public Optional<Booking> findOneByDateAndUser(LocalDate date, User user) {
+    public Optional<Booking> findOneByDateAndUser(Date date, User user) {
         String sql = "SELECT * FROM booking WHERE date = ? AND userId = ?";
         Optional<Booking> booking = Optional.empty();
 
         try {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
 
-            stmt.setDate(1, Date.valueOf(date));
+            stmt.setDate(1, date);
             stmt.setInt(2, user.getId());
 
             final ResultSet result = stmt.executeQuery();
 
             while(result.next()){
                 final Integer id = result.getInt("id");
+                final Time hour = result.getTime("hour");
                 final Boolean paid = result.getBoolean("paid");
                 final Integer clientId = result.getInt("clientId");
                 final Integer serviceId = result.getInt("serviceId");
@@ -200,7 +203,7 @@ public class SqliteBookingDAO implements BookingDAO {
                 final Optional<Service> service = serviceDAO.findOne(serviceId);
                 final Optional<Status> status = statusDAO.findOne(statusId);
 
-                booking = Optional.of(new Booking(id, date, paid, client.get(), service.get(), user, status.get()));
+                booking = Optional.of(new Booking(id, date, hour, paid, client.get(), service.get(), user, status.get()));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -210,12 +213,12 @@ public class SqliteBookingDAO implements BookingDAO {
     }
 
     @Override
-    public Optional<Booking> findOneByDate(LocalDate date) {
+    public Optional<Booking> findOneByDate(Date date) {
         return Optional.empty();
     }
 
     @Override
-    public List<Booking> findAllByDate(LocalDate date) {
+    public List<Booking> findAllByDate(Date date) {
         final List<Booking> bookings = new ArrayList<>();
 
         try {
@@ -223,12 +226,13 @@ public class SqliteBookingDAO implements BookingDAO {
 
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
 
-            stmt.setDate(1, Date.valueOf(date));
+            stmt.setDate(1, date);
 
             final ResultSet result = stmt.executeQuery();
 
             while(result.next()){
                 final Integer id = result.getInt("id");
+                final Time hour = result.getTime("hour");
                 final Boolean paid = result.getBoolean("paid");
                 final Integer clientId = result.getInt("clientId");
                 final Integer serviceId = result.getInt("serviceId");
@@ -240,7 +244,7 @@ public class SqliteBookingDAO implements BookingDAO {
                 final Optional<User> user = userDAO.findOne(userId);
                 final Optional<Status> status = statusDAO.findOne(statusId);
 
-                final Booking booking = new Booking(id, date, paid, client.get(), service.get(), user.get(), status.get());
+                final Booking booking = new Booking(id, date, hour, paid, client.get(), service.get(), user.get(), status.get());
 
                 bookings.add(booking);
             }
@@ -252,7 +256,7 @@ public class SqliteBookingDAO implements BookingDAO {
     }
 
     @Override
-    public List<Booking> findAllByUserAndPeriod(User user, LocalDate start, LocalDate end) {
+    public List<Booking> findAllByUserAndPeriod(User user, Date start, Date end) {
         final List<Booking> bookings = new ArrayList<>();
 
         try {
@@ -261,14 +265,15 @@ public class SqliteBookingDAO implements BookingDAO {
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
 
             stmt.setInt(1, user.getId());
-            stmt.setDate(2, Date.valueOf(start));
-            stmt.setDate(3, Date.valueOf(end));
+            stmt.setDate(2, start);
+            stmt.setDate(3, end);
 
             final ResultSet result = stmt.executeQuery();
 
             while(result.next()){
                 final Integer id = result.getInt("id");
-                final LocalDate date = result.getDate("date").toLocalDate();
+                final Date date = result.getDate("date");
+                final Time hour = result.getTime("hour");
                 final Boolean paid = result.getBoolean("paid");
                 final Integer clientId = result.getInt("clientId");
                 final Integer serviceId = result.getInt("serviceId");
@@ -278,7 +283,7 @@ public class SqliteBookingDAO implements BookingDAO {
                 final Optional<Service> service = serviceDAO.findOne(serviceId);
                 final Optional<Status> status = statusDAO.findOne(statusId);
 
-                final Booking booking = new Booking(id, date, paid, client.get(), service.get(), user, status.get());
+                final Booking booking = new Booking(id, date, hour, paid, client.get(), service.get(), user, status.get());
 
                 bookings.add(booking);
             }
@@ -304,7 +309,8 @@ public class SqliteBookingDAO implements BookingDAO {
 
             while(result.next()){
                 final Integer id = result.getInt("id");
-                final LocalDate date = result.getDate("date").toLocalDate();
+                final Date date = result.getDate("date");
+                final Time hour = result.getTime("hour");
                 final Boolean paid = result.getBoolean("paid");
                 final Integer clientId = result.getInt("clientId");
                 final Integer serviceId = result.getInt("serviceId");
@@ -314,7 +320,7 @@ public class SqliteBookingDAO implements BookingDAO {
                 final Optional<Service> service = serviceDAO.findOne(serviceId);
                 final Optional<Status> status = statusDAO.findOne(statusId);
 
-                final Booking booking = new Booking(id, date, paid, client.get(), service.get(), user, status.get());
+                final Booking booking = new Booking(id, date, hour, paid, client.get(), service.get(), user, status.get());
 
                 bookings.add(booking);
             }
@@ -325,7 +331,7 @@ public class SqliteBookingDAO implements BookingDAO {
         return bookings;    }
 
     @Override
-    public List<Booking> findAllByPeriod(LocalDate start, LocalDate end) {
+    public List<Booking> findAllByPeriod(Date start, Date end) {
         final List<Booking> bookings = new ArrayList<>();
 
         try {
@@ -333,14 +339,15 @@ public class SqliteBookingDAO implements BookingDAO {
 
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
 
-            stmt.setDate(1, Date.valueOf(start));
-            stmt.setDate(2, Date.valueOf(end));
+            stmt.setDate(1, start);
+            stmt.setDate(2, end);
 
             final ResultSet result = stmt.executeQuery();
 
             while(result.next()){
                 final Integer id = result.getInt("id");
-                final LocalDate date = result.getDate("date").toLocalDate();
+                final Date date = result.getDate("date");
+                final Time hour = result.getTime("hour");
                 final Boolean paid = result.getBoolean("paid");
                 final Integer clientId = result.getInt("clientId");
                 final Integer serviceId = result.getInt("serviceId");
@@ -352,7 +359,7 @@ public class SqliteBookingDAO implements BookingDAO {
                 final Optional<User> user = userDAO.findOne(userId);
                 final Optional<Status> status = statusDAO.findOne(statusId);
 
-                final Booking booking = new Booking(id, date, paid, client.get(), service.get(), user.get(), status.get());
+                final Booking booking = new Booking(id, date, hour, paid, client.get(), service.get(), user.get(), status.get());
 
                 bookings.add(booking);
             }

@@ -9,6 +9,7 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityNotFoundExcept
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Notification;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Validator;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -21,14 +22,14 @@ public class ListarHistoricoServicoPrestadosUseCase {
         this.userDAO = userDAO;
     }
 
-    public List<Booking> create(User user, LocalDate start, LocalDate end) {
+    public List<Booking> create(User user, Date start, Date end) {
         Validator<User> validator = new UserInputRequestValidator();
         Notification notification = validator.validate(user);
 
         if (notification.hasErros())
             throw new IllegalArgumentException(notification.errorMessage());
 
-        if (start.isBefore(LocalDate.now()) || end.isBefore(LocalDate.now()) || start.isAfter(end))
+        if (start.before(Date.valueOf(LocalDate.now())) || end.before(Date.valueOf(LocalDate.now())) || start.after(end))
             throw new IllegalArgumentException("Period is invalid.");
 
         Integer id = user.getId();
