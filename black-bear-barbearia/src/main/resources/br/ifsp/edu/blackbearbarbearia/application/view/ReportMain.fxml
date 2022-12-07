@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.booking.ReportMainController">
+   <children>
+      <Label layoutX="188.0" layoutY="201.0" text="Data Final" AnchorPane.leftAnchor="188.0" AnchorPane.topAnchor="201.0" />
+      <DatePicker fx:id="dtDataFinal" editable="false" layoutX="283.0" layoutY="196.0" prefHeight="31.0" prefWidth="200.0" AnchorPane.leftAnchor="283.0" AnchorPane.topAnchor="196.0" />
+      <Label layoutX="188.0" layoutY="149.0" text="Data Iniicio" AnchorPane.leftAnchor="188.0" AnchorPane.topAnchor="149.0" />
+      <DatePicker fx:id="dtDataInicial" editable="false" layoutX="283.0" layoutY="144.0" prefHeight="31.0" prefWidth="200.0" AnchorPane.leftAnchor="283.0" AnchorPane.topAnchor="144.0" />
+      <ComboBox fx:id="cbFuncionario" layoutX="283.0" layoutY="248.0" prefWidth="200.0" AnchorPane.leftAnchor="283.0" AnchorPane.topAnchor="248.0" />
+      <Label layoutX="188.0" layoutY="253.0" text="Funcionáro" AnchorPane.leftAnchor="188.0" AnchorPane.topAnchor="253.0" />
+      <ComboBox fx:id="cbServico" layoutX="283.0" layoutY="300.0" prefWidth="200.0" AnchorPane.leftAnchor="283.0" AnchorPane.topAnchor="300.0" />
+      <Label layoutX="188.0" layoutY="306.0" text="Serviço" AnchorPane.leftAnchor="188.0" AnchorPane.topAnchor="306.0" />
+      <ComboBox fx:id="cbTipo" layoutX="573.0" layoutY="144.0" prefWidth="200.0" AnchorPane.leftAnchor="573.0" AnchorPane.topAnchor="144.0" />
+      <Label layoutX="523.0" layoutY="149.0" text="Tipo" AnchorPane.leftAnchor="523.0" AnchorPane.topAnchor="149.0" />
+      <Label layoutX="525.0" layoutY="201.0" text="Dia " AnchorPane.leftAnchor="525.0" AnchorPane.topAnchor="201.0" />
+      <ComboBox fx:id="cbDiaSemana" layoutX="573.0" layoutY="196.0" prefWidth="200.0" AnchorPane.leftAnchor="573.0" AnchorPane.topAnchor="196.0" />
+      <RadioButton fx:id="rbPDF" layoutX="523.0" layoutY="289.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="56.0" selected="true" text="PDF" AnchorPane.leftAnchor="523.0" AnchorPane.topAnchor="289.0">
+         <toggleGroup>
+            <ToggleGroup fx:id="groupRadio" />
+         </toggleGroup>
+      </RadioButton>
+      <Label fx:id="lblStatus" layoutX="523.0" layoutY="246.0" prefHeight="27.0" prefWidth="88.0" text="Extensão" AnchorPane.leftAnchor="523.0" AnchorPane.topAnchor="246.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="rbCSV" layoutX="599.0" layoutY="289.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="56.0" text="CSV" toggleGroup="$groupRadio" AnchorPane.leftAnchor="599.0" AnchorPane.topAnchor="289.0" />
+      <Button layoutX="355.0" layoutY="351.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#generateReport" prefHeight="46.0" prefWidth="250.0" style="-fx-background-color: #e3383e;" text="GERAR RELATÓRIO" AnchorPane.leftAnchor="355.0" AnchorPane.topAnchor="351.0">
+         <font>
+            <Font name="Cambria Bold" size="24.0" />
+         </font>
+      </Button>
+      <Label fx:id="lblTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="380.0" layoutY="109.0" prefHeight="21.0" prefWidth="206.0" text="RELÁTORIO" textAlignment="JUSTIFY" AnchorPane.leftAnchor="380.0" AnchorPane.topAnchor="89.0">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Button layoutX="747.0" layoutY="489.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#back" prefHeight="46.0" prefWidth="206.0" style="-fx-background-color: #e3383e;" text="Voltar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="25.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
