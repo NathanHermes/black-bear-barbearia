@@ -19,16 +19,16 @@ public class GerarRelatorioSolicitadoUseCase {
     private final UserDAO userDAO;
     private final ServiceDAO serviceDAO;
 
-    private Date start;
-    private Date end;
+//    private Date start;
+//    private Date end;
 
-    public GerarRelatorioSolicitadoUseCase(BookingDAO bookingDAO, UserDAO userDAO, ServiceDAO serviceDAO, Date start, Date end) {
+    public GerarRelatorioSolicitadoUseCase(BookingDAO bookingDAO, UserDAO userDAO, ServiceDAO serviceDAO) {
         this.bookingDAO = bookingDAO;
         this.userDAO = userDAO;
         this.serviceDAO = serviceDAO;
 
-        this.start = start;
-        this.end = end;
+//        this.start = start;
+//        this.end = end;
     }
 
     public List<Booking> findByPeriod(Date start, Date end) {
