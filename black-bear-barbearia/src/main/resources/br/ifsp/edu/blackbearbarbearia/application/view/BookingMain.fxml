@@ -6,7 +6,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 
@@ -19,7 +18,6 @@
    <Label layoutX="53.0" layoutY="126.0" text="Data" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="126.0" />
    <DatePicker fx:id="dtData" editable="false" layoutX="121.0" layoutY="121.0" prefHeight="31.0" prefWidth="200.0" AnchorPane.leftAnchor="121.0" AnchorPane.topAnchor="121.0" />
    <Label layoutX="357.0" layoutY="126.0" text="Horário" AnchorPane.leftAnchor="357.0" AnchorPane.topAnchor="126.0" />
-   <TextField fx:id="inputHours" layoutX="427.0" layoutY="121.0" prefWidth="200.0" AnchorPane.leftAnchor="427.0" AnchorPane.topAnchor="121.0" />
    <Label layoutX="701.0" layoutY="126.0" text="Funcionáro" AnchorPane.rightAnchor="270.0" AnchorPane.topAnchor="126.0" />
    <ComboBox fx:id="cbFuncionario" layoutX="775.0" layoutY="121.0" prefWidth="200.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="121.0" />
    <Label layoutX="50.0" layoutY="177.0" text="Serviço" AnchorPane.leftAnchor="50.0" />
@@ -42,4 +40,5 @@
    <Button fx:id="btnConcluir" layoutX="280.0" layoutY="689.0" mnemonicParsing="false" onAction="#concludeBooking" text="CONCLUIR" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="300.0" />
    <Button fx:id="btnServicosPrestados" layoutX="577.0" layoutY="689.0" mnemonicParsing="false" onAction="#historyOfBookingFromEmployee" text="SERVIÇOS PRESTADOS" AnchorPane.bottomAnchor="48.0" AnchorPane.rightAnchor="297.0" />
    <Button fx:id="btnRelatorio" layoutX="791.0" layoutY="689.0" mnemonicParsing="false" onAction="#relatorio" text="RELATÓRIO" AnchorPane.bottomAnchor="48.0" AnchorPane.rightAnchor="50.0" />
+   <ComboBox fx:id="cbHorario" layoutX="427.0" layoutY="124.0" prefWidth="200.0" />
 </AnchorPane>
