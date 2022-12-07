@@ -1,28 +1,12 @@
 package br.ifsp.edu.blackbearbarbearia.application.main;
 
 
-import br.ifsp.edu.blackbearbarbearia.application.repository.inmemory.InMemoryServiceDAO;
-import br.ifsp.edu.blackbearbarbearia.application.repository.inmemory.InMemoryUserDAO;
-import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Service;
-import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Type;
-import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Address;
-import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.CreateEmployeeUseCase;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.CreateServiceUseCase;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.EditarServicoUseCase;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.ListarServicosUseCase;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.ServiceDAO;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.LoginUseCase;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.UserDAO;
-
-import java.math.BigDecimal;
-
 public class ServiceMain {
     /*public static LoginUseCase loginUseCase;
     public static CreateEmployeeUseCase createEmployeeUseCase;
     public static CreateServiceUseCase createServiceUseCase;
     public static EditarServicoUseCase editarServicoUseCase;
-    public static ListarServicosUseCase listarServicosUseCase;
+    public static FindServiceUseCase findServiceUseCase;
 
     private static User user = null;
 
@@ -46,7 +30,7 @@ public class ServiceMain {
         ServiceDAO serviceDAO = new InMemoryServiceDAO();
         createServiceUseCase = new CreateServiceUseCase(serviceDAO);
         editarServicoUseCase = new EditarServicoUseCase(serviceDAO);
-        listarServicosUseCase = new ListarServicosUseCase(serviceDAO);
+        findServiceUseCase = new FindServiceUseCase(serviceDAO);
     }
 
     private static void createAdmin() {
@@ -125,7 +109,7 @@ public class ServiceMain {
         System.out.println("\n> REGISTERED SERVICES");
 
         try {
-            listarServicosUseCase.findAll().forEach(System.out::println);
+            findServiceUseCase.findAll().forEach(System.out::println);
         } catch (Exception e) {
             System.out.println("\n> ERROR ...: " + e.getMessage() + "\n");
         }
@@ -133,7 +117,7 @@ public class ServiceMain {
 
     private static void findService() {
         try {
-            System.out.println(listarServicosUseCase.findOne(4));
+            System.out.println(findServiceUseCase.findOne(4));
         } catch (Exception e) {
             System.out.println("> ERROR ...: " + e.getMessage() + "\n");
         }
