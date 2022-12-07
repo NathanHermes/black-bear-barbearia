@@ -40,7 +40,7 @@ public class BookingMainController {
     @FXML
     private DatePicker dtData;
     @FXML
-    private TextField inputHours;
+    private ComboBox<String> cbHorario;
     @FXML
     private ComboBox<String> cbFuncionario;
     @FXML
@@ -84,6 +84,7 @@ public class BookingMainController {
         setValueSourceToColumns();
         setItemListToTBV();
         loadBookingData();
+        setItemsCbHorario();
         setItemsCbFuncionario();
         setItemsCbServico();
         setItemsCbCliente();
@@ -114,6 +115,10 @@ public class BookingMainController {
                 .collect(Collectors.toList());
 
         cbFuncionario.setItems(FXCollections.observableList(names));
+    }
+
+    private void setItemsCbHorario() {
+        // Esperando criação do list de horários
     }
 
     private void loadBookingData() {
@@ -172,7 +177,7 @@ public class BookingMainController {
         loadBookingData();
 
         LocalDate date = dtData.getValue();
-        String hour = inputHours.getText();
+        String hour = cbHorario.getSelectionModel().getSelectedItem();
         String employee = cbFuncionario.getSelectionModel().getSelectedItem();
         String service = cbServico.getSelectionModel().getSelectedItem();
         String client = cbCliente.getSelectionModel().getSelectedItem();
@@ -186,9 +191,9 @@ public class BookingMainController {
         }
 
         if(hour != null) {
-//            filteredBookings = filteredBookings.stream()
-//                    .filter(booking -> booking.getNoFormattedDate().
-//                    .collect(Collectors.toList());
+            filteredBookings = filteredBookings.stream()
+                    .filter(booking -> booking.getHour().toString().equals(hour))
+                    .collect(Collectors.toList());
         }
 
         if(employee != null) {
@@ -211,15 +216,16 @@ public class BookingMainController {
 
         bookingData.clear();
         bookingData.addAll(filteredBookings);
-        //clearFields();
+        clearInputs();
     }
-    /*private void clearFields() {
+
+    private void clearInputs() {
         dtData.setValue(null);
-        inputHours.setText("");
-        cbFuncionario.setSelectionModel(null);
-        cbServico.setSelectionModel(null);
-        cbCliente.setSelectionModel(null);
-    }*/
+        cbHorario.getSelectionModel().select(null);
+        cbFuncionario.getSelectionModel().select(null);
+        cbServico.getSelectionModel().select(null);
+        cbCliente.getSelectionModel().select(null);
+    }
 
     @FXML
     public void cadastrar(ActionEvent event) {
