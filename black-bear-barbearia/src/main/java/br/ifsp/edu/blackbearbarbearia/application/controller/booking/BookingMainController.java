@@ -99,7 +99,7 @@ public class BookingMainController {
     }
 
     private void setItemsCbServico() {
-        var services = listarServicosUseCase.findAll();
+        var services = findServiceUseCase.findAll();
         var names = services.stream()
                 .map(Service::getName)
                 .collect(Collectors.toList());
@@ -211,15 +211,15 @@ public class BookingMainController {
 
         bookingData.clear();
         bookingData.addAll(filteredBookings);
-        clearFields();
+        //clearFields();
     }
-    private void clearFields() {
+    /*private void clearFields() {
         dtData.setValue(null);
         inputHours.setText("");
         cbFuncionario.setSelectionModel(null);
         cbServico.setSelectionModel(null);
         cbCliente.setSelectionModel(null);
-    }
+    }*/
 
     @FXML
     public void cadastrar(ActionEvent event) {
