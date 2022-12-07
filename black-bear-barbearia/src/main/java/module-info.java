@@ -10,6 +10,7 @@ module br.ifsp.edu.blackbearbarbearia {
     opens br.ifsp.edu.blackbearbarbearia.application.main to javafx.fxml;
     opens br.ifsp.edu.blackbearbarbearia.application.controller.booking to javafx.fxml;
     opens br.ifsp.edu.blackbearbarbearia.application.controller.client to javafx.fxml;
+    opens br.ifsp.edu.blackbearbarbearia.application.controller.service to javafx.fxml;
     opens br.ifsp.edu.blackbearbarbearia.application.controller.employee to javafx.fxml;
     opens br.ifsp.edu.blackbearbarbearia.application.controller.popUp to javafx.fxml;
 
