@@ -2,6 +2,9 @@ package br.ifsp.edu.blackbearbarbearia.application.controller.booking;
 
 import br.ifsp.edu.blackbearbarbearia.application.view.WindowLoader;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.booking.Booking;
+import br.ifsp.edu.blackbearbarbearia.domain.entities.client.Client;
+import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Service;
+import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Role;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityNotFoundException;
 import javafx.collections.FXCollections;
@@ -18,6 +21,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static br.ifsp.edu.blackbearbarbearia.application.main.Main.*;
 
@@ -35,11 +42,11 @@ public class BookingMainController {
     @FXML
     private TextField inputHours;
     @FXML
-    private ComboBox<?> cbFuncionario;
+    private ComboBox<String> cbFuncionario;
     @FXML
-    private ComboBox<?> cbServico;
+    private ComboBox<String> cbServico;
     @FXML
-    private ComboBox<?> cbCliente;
+    private ComboBox<String> cbCliente;
     @FXML
     private Button btnFiltrar;
     @FXML
@@ -77,6 +84,36 @@ public class BookingMainController {
         setValueSourceToColumns();
         setItemListToTBV();
         loadBookingData();
+        setItemsCbFuncionario();
+        setItemsCbServico();
+        setItemsCbCliente();
+    }
+
+    private void setItemsCbCliente() {
+        var clients = findClientUseCase.findAll();
+        var names = clients.stream()
+                .map(Client::getName)
+                .collect(Collectors.toList());
+
+        cbCliente.setItems(FXCollections.observableList(names));
+    }
+
+    private void setItemsCbServico() {
+        var services = listarServicosUseCase.findAll();
+        var names = services.stream()
+                .map(Service::getName)
+                .collect(Collectors.toList());
+
+        cbServico.setItems(FXCollections.observableList(names));
+    }
+
+    private void setItemsCbFuncionario() {
+        var employees = findEmployeeUseCase.findAll();
+        var names = employees.stream()
+                .map(User::getFullName)
+                .collect(Collectors.toList());
+
+        cbFuncionario.setItems(FXCollections.observableList(names));
     }
 
     private void loadBookingData() {
@@ -132,9 +169,56 @@ public class BookingMainController {
 
     @FXML
     public void filtrar(ActionEvent event) {
-        /*
-        * Esperando terminar a implementação do banco de dados
-        */
+        loadBookingData();
+
+        LocalDate date = dtData.getValue();
+        String hour = inputHours.getText();
+        String employee = cbFuncionario.getSelectionModel().getSelectedItem();
+        String service = cbServico.getSelectionModel().getSelectedItem();
+        String client = cbCliente.getSelectionModel().getSelectedItem();
+
+        List<Booking> filteredBookings = bookingData;
+
+        if(date != null) {
+            filteredBookings = filteredBookings.stream()
+                    .filter(booking -> booking.getNoFormattedDate().toString().equals(date.toString()))
+                    .collect(Collectors.toList());
+        }
+
+        if(hour != null) {
+//            filteredBookings = filteredBookings.stream()
+//                    .filter(booking -> booking.getNoFormattedDate().
+//                    .collect(Collectors.toList());
+        }
+
+        if(employee != null) {
+            filteredBookings = filteredBookings.stream()
+                    .filter(booking -> booking.getInfoEmployee().getFullName().equals(employee))
+                    .collect(Collectors.toList());
+        }
+
+        if(service != null) {
+            filteredBookings = filteredBookings.stream()
+                    .filter(booking -> booking.getInfoService().getName().equals(employee))
+                    .collect(Collectors.toList());
+        }
+
+        if(client != null) {
+            filteredBookings = filteredBookings.stream()
+                    .filter(booking -> booking.getInfoClient().getName().equals(client))
+                    .collect(Collectors.toList());
+        }
+
+        bookingData.clear();
+        bookingData.addAll(filteredBookings);
+        clearFields();
+    }
+    private void clearFields() {
+        dtData.setValue(null);
+        inputHours.setText("");
+        cbFuncionario.setSelectionModel(null);
+        cbServico.setSelectionModel(null);
+        cbCliente.setSelectionModel(null);
     }
 
     @FXML
@@ -168,7 +252,7 @@ public class BookingMainController {
     @FXML
     public void historyOfBookingFromEmployee(ActionEvent event) {
         /*
-        *  Esperando a criação da tela de histórico de seriços prestados
+        *  Esperando a criação da tela de histórico de serviços prestados
         * */
     }
 
