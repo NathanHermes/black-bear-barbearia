@@ -6,10 +6,10 @@
 
 <AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.service.ServiceMainController">
    <children>
-      <Button layoutX="762.0" layoutY="57.0" mnemonicParsing="false" onAction="#search" text="BUSCAR" AnchorPane.leftAnchor="752.0" AnchorPane.topAnchor="57.0" />
+      <Button layoutX="762.0" layoutY="57.0" mnemonicParsing="false" onAction="#search" text="BUSCAR" AnchorPane.rightAnchor="51.0" AnchorPane.topAnchor="57.0" />
       <Button fx:id="btnEditar" layoutX="194.0" layoutY="473.0" mnemonicParsing="false" onAction="#update" text="EDITAR" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="194.0" />
       <Label fx:id="lblPesquisar" layoutX="71.0" layoutY="62.0" text="Pesquisar" AnchorPane.leftAnchor="71.0" AnchorPane.topAnchor="62.0" />
-      <TextField fx:id="inputBusca" layoutX="155.0" layoutY="57.0" prefHeight="31.0" prefWidth="578.0" promptText="Digite o serviço" AnchorPane.leftAnchor="155.0" AnchorPane.rightAnchor="227.0" AnchorPane.topAnchor="57.0" />
+      <TextField fx:id="inputBusca" layoutX="155.0" layoutY="57.0" prefHeight="31.0" prefWidth="586.0" promptText="Digite o serviço" AnchorPane.leftAnchor="155.0" AnchorPane.rightAnchor="219.0" AnchorPane.topAnchor="57.0" />
       <Button layoutX="71.0" layoutY="473.0" mnemonicParsing="false" onAction="#save" text="CADASTRAR" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="71.0" />
       <TableView fx:id="tbvService" layoutX="71.0" layoutY="108.0" prefHeight="345.0" prefWidth="838.0" AnchorPane.bottomAnchor="87.0" AnchorPane.leftAnchor="71.0" AnchorPane.rightAnchor="51.0" AnchorPane.topAnchor="108.0">
          <columns>
@@ -22,7 +22,7 @@
             <TableColumn fx:id="cTipo" prefWidth="128.0" text="TIPO" />
          </columns>
       </TableView>
-      <Button layoutX="837.0" layoutY="57.0" mnemonicParsing="false" onAction="#reloadTableView" text="LIMPAR" AnchorPane.leftAnchor="837.0" AnchorPane.topAnchor="57.0" />
+      <Button layoutX="762.0" layoutY="57.0" mnemonicParsing="false" onAction="#reloadTableView" text="LIMPAR" AnchorPane.rightAnchor="136.0" AnchorPane.topAnchor="57.0" />
       <Button layoutX="834.0" layoutY="473.0" mnemonicParsing="false" onAction="#back" text="VOLTAR" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="834.0" />
    </children>
 </AnchorPane>
