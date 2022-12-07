@@ -2,6 +2,7 @@ package br.ifsp.edu.blackbearbarbearia.application.repository.sqlite;
 
 import br.ifsp.edu.blackbearbarbearia.domain.entities.booking.Status;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Type;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.ConverterSenhaParaMD5;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -259,12 +260,12 @@ public class DatabaseBuilder {
         final String sql = "INSERT INTO user (fullName, email, phone, login, passwordHash, active, admin) " +
                 "VALUES ('%s', '%s', '%s', '%s', '%s', %b, %b)";
 
-        stmt.addBatch(String.format(sql, "Black Bear ADM", "blackbear@adm.com", "(16) 99999-9999", "BB", "123", Boolean.TRUE, Boolean.TRUE));
-        stmt.addBatch(String.format(sql, "Grace Hopper", "grace.hopper@email.com", "(13) 2745-5802", "Grace", "Hopper", Boolean.TRUE, Boolean.FALSE));
-        stmt.addBatch(String.format(sql, "John Backus", "john.backus@email.com", "(24) 2208-8210", "John", "Backus", Boolean.TRUE, Boolean.FALSE));
-        stmt.addBatch(String.format(sql, "Bill Gates", "gates.bill@email.com", "(33) 2544-6585", "Gates", "Bill", Boolean.TRUE, Boolean.FALSE));
-        stmt.addBatch(String.format(sql, "Brian Kernighan", "brian.kernighan@email.com", "(45) 2583-1359", "Brian", "Brian", Boolean.TRUE, Boolean.FALSE));
-        stmt.addBatch(String.format(sql, "Ken Thompson", "ken.thompson@email.com", "(65) 2642-6225", "Thompson", "Ken", Boolean.TRUE, Boolean.FALSE));
+        stmt.addBatch(String.format(sql, "Black Bear ADM", "blackbear@adm.com", "(16) 99999-9999", "BB", ConverterSenhaParaMD5.converterSenhaParaMD5("123"), Boolean.TRUE, Boolean.TRUE));
+        stmt.addBatch(String.format(sql, "Grace Hopper", "grace.hopper@email.com", "(13) 2745-5802", "Grace", ConverterSenhaParaMD5.converterSenhaParaMD5("Hopper"), Boolean.TRUE, Boolean.FALSE));
+        stmt.addBatch(String.format(sql, "John Backus", "john.backus@email.com", "(24) 2208-8210", "John", ConverterSenhaParaMD5.converterSenhaParaMD5("Backus"), Boolean.TRUE, Boolean.FALSE));
+        stmt.addBatch(String.format(sql, "Bill Gates", "gates.bill@email.com", "(33) 2544-6585", "Gates", ConverterSenhaParaMD5.converterSenhaParaMD5("Bill"), Boolean.TRUE, Boolean.FALSE));
+        stmt.addBatch(String.format(sql, "Brian Kernighan", "brian.kernighan@email.com", "(45) 2583-1359", "Brian", ConverterSenhaParaMD5.converterSenhaParaMD5("Brian"), Boolean.TRUE, Boolean.FALSE));
+        stmt.addBatch(String.format(sql, "Ken Thompson", "ken.thompson@email.com", "(65) 2642-6225", "Thompson", ConverterSenhaParaMD5.converterSenhaParaMD5("Ken"), Boolean.TRUE, Boolean.FALSE));
         stmt.executeBatch();
 
         stmt.close();

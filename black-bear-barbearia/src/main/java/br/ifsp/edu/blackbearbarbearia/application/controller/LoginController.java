@@ -2,6 +2,7 @@ package br.ifsp.edu.blackbearbarbearia.application.controller;
 
 import br.ifsp.edu.blackbearbarbearia.application.view.WindowLoader;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.UserBuilder;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.ConverterSenhaParaMD5;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityNotFoundException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,7 +27,7 @@ public class LoginController {
         lblError.setText("");
         var userBuilder = new UserBuilder();
         userBuilder.setLogin(loginInput.getText());
-        userBuilder.setPasswordHash(passwordInput.getText());
+        userBuilder.setPasswordHash(ConverterSenhaParaMD5.converterSenhaParaMD5(passwordInput.getText()));
 
         try {
             USER = loginUseCase.login(userBuilder.getResult());
