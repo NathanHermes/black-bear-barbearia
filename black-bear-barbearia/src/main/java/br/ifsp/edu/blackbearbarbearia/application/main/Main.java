@@ -13,6 +13,8 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.CreateEmployeeUse
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.FindEmployeeUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.UpdateEmployeeUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.UpdatePasswordUseCase;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.report.GerarRelatorioSolicitadoUseCase;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.report.ListarHistoricoServicoPrestadosUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.CreateServiceUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.FindServiceUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.ServiceDAO;
@@ -34,6 +36,7 @@ public class Main {
     public static UpdateClientUseCase updateClientUseCase;
     public static FindClientUseCase findClientUseCase;
     public static CreateServiceUseCase createServiceUseCase;
+    public static UpdateServiceUseCase updateServiceUseCase;
     public static FindServiceUseCase findServiceUseCase;
     public static CreateBookingUseCase createBookingUseCase;
     public static FindBookingUseCase findBookingUseCase;
@@ -41,7 +44,9 @@ public class Main {
     public static GenerateNotaFiscalInPDFUseCase generateNotaFiscalInPDFUseCase;
     public static CancelBookingUseCase cancelBookingUseCase;
 
-    public static UpdateServiceUseCase updateServiceUseCase;
+    public static ListarHistoricoServicoPrestadosUseCase listarHistoricoServicoPrestadosUseCase;
+    public static GerarRelatorioSolicitadoUseCase gerarRelatorioSolicitadoUseCase;
+
     public static User USER;
     public static ArrayList<String> INFOCOMMISSIONPOPUP;
 
@@ -78,5 +83,8 @@ public class Main {
         finishBookingUseCase = new FinishBookingUseCase(bookingDAO, statusDAO);
         generateNotaFiscalInPDFUseCase = new GenerateNotaFiscalInPDFUseCase();
         cancelBookingUseCase = new CancelBookingUseCase(bookingDAO, statusDAO);
+
+        listarHistoricoServicoPrestadosUseCase = new ListarHistoricoServicoPrestadosUseCase(bookingDAO, userDAO);
+        gerarRelatorioSolicitadoUseCase = new GerarRelatorioSolicitadoUseCase(bookingDAO, userDAO, serviceDAO);
     }
 }
