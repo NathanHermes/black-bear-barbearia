@@ -12,17 +12,9 @@ public class Service {
     private BigDecimal comissionPercentage;
     private BigDecimal taxPercentage;
     private Boolean active;
-    private final List<Type> types;
+    private List<Type> types;
 
-    public Service(Integer id, String name, BigDecimal price, BigDecimal comissionPercentage, BigDecimal taxPercentage, Boolean active) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.comissionPercentage = comissionPercentage;
-        this.taxPercentage = taxPercentage;
-        this.active = active;
-        this.types = new ArrayList<>();
-    }
+    public Service() {}
 
     public Service(Integer id, String name, BigDecimal price, BigDecimal comissionPercentage, BigDecimal taxPercentage, Boolean active, List<Type> types) {
         this.id = id;
@@ -34,68 +26,28 @@ public class Service {
         this.types = types;
     }
 
-    public Service(String name, BigDecimal price, BigDecimal comissionPercentage, BigDecimal taxPercentage, Boolean active) {
-        this.name = name;
-        this.price = price;
-        this.comissionPercentage = comissionPercentage;
-        this.taxPercentage = taxPercentage;
-        this.active = active;
-        this.types = new ArrayList<>();
-    }
-
-    public Service(BigDecimal comissionPercentage, BigDecimal taxPercentage, Boolean active) {
-        this.comissionPercentage = comissionPercentage;
-        this.taxPercentage = taxPercentage;
-        this.active = active;
-        this.types = new ArrayList<>();
-    }
-
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public BigDecimal getPrice() {
         return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
     }
 
     public BigDecimal getComissionPercentage() {
         return comissionPercentage;
     }
 
-    public void setComissionPercentage(BigDecimal comissionPercentage) {
-        this.comissionPercentage = comissionPercentage;
-    }
-
     public BigDecimal getTaxPercentage() {
         return taxPercentage;
     }
 
-    public void setTaxPercentage(BigDecimal taxPercentage) {
-        this.taxPercentage = taxPercentage;
-    }
-
     public Boolean getActive() {
         return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
     }
 
     public List<Type> getTypes() {
@@ -104,14 +56,6 @@ public class Service {
 
     public void addType(Type type) {
         if(!types.contains(type)) this.types.add(type);
-    }
-
-    public void removeType(Type type) {
-        this.types.remove(type);
-    }
-
-    public boolean isOneOfType(Type type) {
-        return this.types.contains(type);
     }
 
     public BigDecimal calculateComission() {

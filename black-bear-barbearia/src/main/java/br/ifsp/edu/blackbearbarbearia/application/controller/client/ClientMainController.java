@@ -40,9 +40,8 @@ public class ClientMainController {
 
     private void loadBookingData() {
         try {
-            var clients = findClientUseCase.findAll();
             clientData.clear();
-            clientData.addAll(clients);
+            clientData.addAll(findClientUseCase.findAll());
         } catch (EntityNotFoundException exception) {
             clientData.clear();
         }
