@@ -13,7 +13,9 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.CreateEmployeeUse
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.FindEmployeeUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.UpdateEmployeeUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.CreateServiceUseCase;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.FindServiceUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.ServiceDAO;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.UpdateServiceUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.DeletePasswordEmployeeUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.LoginUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.user.UserDAO;
@@ -36,6 +38,9 @@ public class Main {
     public static GenerateNotaFiscalInPDFUseCase generateNotaFiscalInPDFUseCase;
     public static CancelBookingUseCase cancelBookingUseCase;
 
+    public static FindServiceUseCase findServiceUseCase;
+
+    public static UpdateServiceUseCase updateServiceUseCase;
     public static User USER;
     public static ArrayList<String> INFOCOMMISSIONPOPUP;
 
@@ -61,6 +66,8 @@ public class Main {
 
         ServiceDAO serviceDAO = new SqliteServiceDAO();
         createServiceUseCase = new CreateServiceUseCase(serviceDAO);
+        updateServiceUseCase = new UpdateServiceUseCase(serviceDAO);
+        findServiceUseCase = new FindServiceUseCase(serviceDAO);
 
         BookingDAO bookingDAO = new SqliteBookingDAO();
         createBookingUseCase = new CreateBookingUseCase(bookingDAO);
