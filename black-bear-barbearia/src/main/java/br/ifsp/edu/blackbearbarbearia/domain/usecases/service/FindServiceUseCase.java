@@ -3,12 +3,11 @@ package br.ifsp.edu.blackbearbarbearia.domain.usecases.service;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Service;
 
 import java.util.List;
-import java.util.Optional;
 
-public class ListarServicosUseCase {
+public class FindServiceUseCase {
     private final ServiceDAO dao;
 
-    public ListarServicosUseCase(ServiceDAO dao) {
+    public FindServiceUseCase(ServiceDAO dao) {
         this.dao = dao;
     }
 
@@ -25,5 +24,11 @@ public class ListarServicosUseCase {
         if (dao.findOne(serviceId).isEmpty()) throw new IllegalArgumentException("Service not found");
 
         return dao.findOne(serviceId).get();
+    }
+
+    public Service findKeyByName(String serviceName) {
+        if (dao.findOneByName(serviceName).isEmpty()) throw new IllegalArgumentException("Service not found");
+
+        return dao.findOneByName(serviceName).get();
     }
 }
