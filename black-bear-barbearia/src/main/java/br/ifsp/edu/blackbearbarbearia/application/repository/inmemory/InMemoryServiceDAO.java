@@ -1,6 +1,7 @@
 package br.ifsp.edu.blackbearbarbearia.application.repository.inmemory;
 
 import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Service;
+import br.ifsp.edu.blackbearbarbearia.domain.entities.service.ServiceBuilder;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.ServiceDAO;
 
 import java.util.*;
@@ -11,8 +12,9 @@ public class InMemoryServiceDAO implements ServiceDAO {
 
     @Override
     public Boolean create(Service service) {
+        ServiceBuilder serviceBuilder = new ServiceBuilder();
         serviceID++;
-        service.setId(serviceID);
+        serviceBuilder.setId(serviceID);
         if (database.put(serviceID, service) != null)
             return Boolean.TRUE;
         else
