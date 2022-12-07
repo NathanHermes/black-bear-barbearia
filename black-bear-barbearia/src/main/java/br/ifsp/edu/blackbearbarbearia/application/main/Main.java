@@ -13,7 +13,6 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.CreateEmployeeUse
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.FindEmployeeUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.UpdateEmployeeUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.CreateServiceUseCase;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.ListarServicosUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.FindServiceUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.ServiceDAO;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.UpdateServiceUseCase;
@@ -33,14 +32,12 @@ public class Main {
     public static UpdateClientUseCase updateClientUseCase;
     public static FindClientUseCase findClientUseCase;
     public static CreateServiceUseCase createServiceUseCase;
-    public static ListarServicosUseCase listarServicosUseCase;
+    public static FindServiceUseCase findServiceUseCase;
     public static CreateBookingUseCase createBookingUseCase;
     public static FindBookingUseCase findBookingUseCase;
     public static FinishBookingUseCase finishBookingUseCase;
     public static GenerateNotaFiscalInPDFUseCase generateNotaFiscalInPDFUseCase;
     public static CancelBookingUseCase cancelBookingUseCase;
-
-    public static FindServiceUseCase findServiceUseCase;
 
     public static UpdateServiceUseCase updateServiceUseCase;
     public static User USER;
