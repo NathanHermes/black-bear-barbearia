@@ -1,5 +1,6 @@
 package br.ifsp.edu.blackbearbarbearia.application.controller.service;
 
+import br.ifsp.edu.blackbearbarbearia.application.controller.popUp.PopUpController;
 import br.ifsp.edu.blackbearbarbearia.application.view.WindowLoader;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Service;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.service.ServiceBuilder;
@@ -35,9 +36,6 @@ public class CreateOrUpdateServiceController {
     @FXML
     private RadioButton rbYes;
 
-
-
-
     @FXML
     private CheckBox cbHair;
 
@@ -50,16 +48,13 @@ public class CreateOrUpdateServiceController {
     @FXML
     private Button btnSaveOrUpdate;
 
-
-
-    @FXML
-    private Label lblResponseMessage;
-
     private Service service;
 
     @FXML
     private void initialize() {
         if (service == null)
+            rbNo.setDisable(true);
+            rbYes.setDisable(true);
             clearInputs();
     }
 
@@ -84,6 +79,8 @@ public class CreateOrUpdateServiceController {
         this.service = service;
         setInfoServiceIntoInputs();
         inputName.setDisable(true);
+        rbNo.setDisable(false);
+        rbYes.setDisable(false);
     }
 
     private void setInfoServiceIntoInputs() {
@@ -111,32 +108,33 @@ public class CreateOrUpdateServiceController {
     }
 
     @FXML
-    void saveOrUpdate(ActionEvent event) {
-        lblResponseMessage.setText("");
+    void saveOrUpdate(ActionEvent event) throws IOException {
+        WindowLoader.setRoot("PopUp");
+        PopUpController controller = (PopUpController) WindowLoader.getController();
 
         if (service == null) {
             getInfoServiceFromInputs();
 
             try {
                 Boolean response = createServiceUseCase.create(service);
-                if (response.equals(Boolean.TRUE))
-                    lblResponseMessage.setText("Serviço cadastrado.");
+                if (response)
+                    controller.setPopUp("success", "Service created", "ServiceMain");
                 else
-                    lblResponseMessage.setText("Não foi possivel cadastrar esse serviço.\nTente novamente mais tarde.");
-            } catch (IllegalArgumentException | EntityAlreadyExistsException exception) {
-                lblResponseMessage.setText(exception.getMessage());
+                    controller.setPopUp("error", "Unable to create service.\nTry again.", "ServiceMain");
+            } catch (IllegalArgumentException | EntityAlreadyExistsException e) {
+                controller.setPopUp("error", e.getMessage(), "CreateOrUpdateService");
             }
         } else {
             getInfoServiceFromInputs();
 
             try {
                 Boolean response = updateServiceUseCase.update(service.getId(), service);
-                if (response.equals(Boolean.TRUE))
-                    lblResponseMessage.setText("Serviço atualizado.");
+                if (response)
+                    controller.setPopUp("success", "Service updated", "ServiceMain");
                 else
-                    lblResponseMessage.setText("Não foi possivel atualizar esse serviço.\nTente novamente mais tarde.");
-            } catch (IllegalArgumentException | EntityNotFoundException exception) {
-                lblResponseMessage.setText(exception.getMessage());
+                    controller.setPopUp("error", "Unable to update service.\nTry again.", "ServiceMain");
+            } catch (IllegalArgumentException | EntityNotFoundException e) {
+                controller.setPopUp("error", e.getMessage(), "CreateOrUpdateService");
             }
         }
         service = null;
