@@ -29,15 +29,15 @@ public class ListarHistoricoServicoPrestadosUseCase {
         if (notification.hasErros())
             throw new IllegalArgumentException(notification.errorMessage());
 
-        if (start.after(Date.valueOf(LocalDate.now())) || end.after(Date.valueOf(LocalDate.now())) || end.after(start))
+        if (start.after(Date.valueOf(LocalDate.now())) || end.after(Date.valueOf(LocalDate.now())) || start.after(end))
             throw new IllegalArgumentException("Period is invalid.");
 
         Integer id = user.getId();
         if (userDAO.findOne(id).isEmpty())
             throw new EntityNotFoundException("User not found.");
 
-        if (bookingDAO.findAllByUser(user).isEmpty())
-            throw new EntityNotFoundException("No booking found.");
+//        if (bookingDAO.findAllByUser(user).isEmpty())
+//            throw new EntityNotFoundException("No booking found.");
 
         return bookingDAO.findAllByUserAndPeriod(user, start, end);
     }
