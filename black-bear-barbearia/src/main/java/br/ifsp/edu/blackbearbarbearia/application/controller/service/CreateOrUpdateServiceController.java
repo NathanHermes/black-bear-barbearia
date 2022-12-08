@@ -7,7 +7,6 @@ import br.ifsp.edu.blackbearbarbearia.domain.entities.service.ServiceBuilder;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Type;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityAlreadyExistsException;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityNotFoundException;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -31,20 +30,15 @@ public class CreateOrUpdateServiceController {
     @FXML
     private TextField inputTaxa;
     @FXML
-    private RadioButton rbNo;
-
-    @FXML
     private RadioButton rbYes;
-
+    @FXML
+    private RadioButton rbNo;
     @FXML
     private CheckBox cbHair;
-
     @FXML
     private CheckBox cbBeard;
-
     @FXML
     private CheckBox cbOther;
-
     @FXML
     private Button btnSaveOrUpdate;
 
@@ -91,15 +85,13 @@ public class CreateOrUpdateServiceController {
         inputPrince.setText(String.valueOf(service.getPrice()));
         inputCommission.setText(String.valueOf(service.getComissionPercentage()));
         inputTaxa.setText(String.valueOf(service.getTaxPercentage()));
-        // Verifica se está ativo ou não
+
         if (service.getActive())
             rbYes.setSelected(true);
         else
             rbNo.setSelected(true);
 
-        // Verifica os tipos do serviço
         List<Type> types = service.getTypes();
-
         if (types.contains(Type.HAIR))
             cbHair.setSelected(true);
         if (types.contains(Type.BEARD))
@@ -109,7 +101,7 @@ public class CreateOrUpdateServiceController {
     }
 
     @FXML
-    void saveOrUpdate(ActionEvent event) throws IOException {
+    void saveOrUpdate() throws IOException {
         WindowLoader.setRoot("PopUp");
         PopUpController controller = (PopUpController) WindowLoader.getController();
 
@@ -147,9 +139,7 @@ public class CreateOrUpdateServiceController {
         serviceBuilder.setComissionPercentage(new BigDecimal(inputCommission.getText()));
         serviceBuilder.setTaxPercentage(new BigDecimal(inputTaxa.getText()));
 
-        // Verifica os checkbox selectionados
         List<Type> types = new ArrayList<>();
-
         if (cbHair.isSelected())
             types.add(Type.valueOf(cbHair.getText()));
         if (cbBeard.isSelected())
@@ -158,16 +148,13 @@ public class CreateOrUpdateServiceController {
             types.add(Type.valueOf(cbOther.getText()));
 
         serviceBuilder.setTypes(types);
-
         if (service != null) {
             serviceBuilder.setId(service.getId());
 
-            // Verifica qual opção do radioButton está selecionada
-            if (rbYes.isSelected()) {
-                serviceBuilder.setActive(true);
-            } else {
-                serviceBuilder.setActive(false);
-            }
+            if (rbYes.isSelected())
+                serviceBuilder.setActive(Boolean.TRUE);
+            else
+                serviceBuilder.setActive(Boolean.FALSE);
         } else {
             serviceBuilder.setName(inputName.getText());
         }
@@ -175,12 +162,8 @@ public class CreateOrUpdateServiceController {
     }
 
     @FXML
-    void back(ActionEvent event) {
-        try {
-            WindowLoader.setRoot("ServiceMain");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    void back() throws IOException {
+        WindowLoader.setRoot("ServiceMain");
     }
 }
 

@@ -38,7 +38,22 @@ public class ListarHistoricoServicoPrestadosUseCase {
 
 //        if (bookingDAO.findAllByUser(user).isEmpty())
 //            throw new EntityNotFoundException("No booking found.");
+        var bookings = bookingDAO.findAllByUser(user);
+        var bookingStart = bookings.stream()
+                .filter(booking -> booking.getNoFormattedDate().equals(start))
+                .toList();
+        var bookingEnd = bookings.stream()
+                .filter(booking -> booking.getNoFormattedDate().equals(end))
+                .toList();
 
-        return bookingDAO.findAllByUserAndPeriod(user, start, end);
+        bookings = bookings.stream()
+                .filter(booking -> booking.getNoFormattedDate().after(start))
+                .filter(booking -> booking.getNoFormattedDate().before(end))
+                .toList();
+        bookings.addAll(bookingStart);
+        bookings.addAll(bookingEnd);
+
+        return bookings;
+        //return bookingDAO.findAllByUserAndPeriod(user, start, end);
     }
 }

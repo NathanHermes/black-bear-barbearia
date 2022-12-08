@@ -1,31 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #f0f2f5;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.booking.CreateBookingController">
-   <children>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="377.0" layoutY="67.0" text="CADASTRAR" textAlignment="JUSTIFY" textFill="#1d4c88">
-         <font>
-            <Font name="Cambria Bold" size="36.0" />
-         </font>
-      </Label>
-      <ComboBox fx:id="cbService" layoutX="377.0" layoutY="131.0" prefWidth="206.0" promptText="Serviços" AnchorPane.leftAnchor="377.0" AnchorPane.rightAnchor="377.0" AnchorPane.topAnchor="131.0" />
-      <DatePicker fx:id="dtDate" layoutX="377.0" layoutY="182.0" prefHeight="31.0" prefWidth="206.0" AnchorPane.leftAnchor="377.0" AnchorPane.rightAnchor="377.0" AnchorPane.topAnchor="182.0" />
-      <ComboBox fx:id="cbEmployee" layoutX="377.0" layoutY="233.0" prefWidth="206.0" promptText="Funcionários" AnchorPane.leftAnchor="377.0" AnchorPane.rightAnchor="377.0" AnchorPane.topAnchor="233.0" />
-      <ComboBox fx:id="cbHour" layoutX="377.0" layoutY="284.0" prefWidth="206.0" promptText="Horarios" AnchorPane.leftAnchor="377.0" AnchorPane.rightAnchor="377.0" AnchorPane.topAnchor="284.0" />
-      <ComboBox fx:id="cbClient" layoutX="377.0" layoutY="335.0" prefWidth="206.0" promptText="Clientes" AnchorPane.leftAnchor="377.0" AnchorPane.rightAnchor="377.0" AnchorPane.topAnchor="335.0" />
-      <Button layoutX="377.0" layoutY="427.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#save" prefHeight="46.0" prefWidth="206.0" style="-fx-background-color: #e3383e;" text="Cadastrar" AnchorPane.leftAnchor="377.0" AnchorPane.rightAnchor="377.0" AnchorPane.topAnchor="427.0">
-         <font>
-            <Font name="Cambria Bold" size="24.0" />
-         </font>
-      </Button>
-      <Button layoutX="747.0" layoutY="489.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#back" prefHeight="46.0" prefWidth="206.0" style="-fx-background-color: #e3383e;" text="Voltar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="25.0">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Button>
-   </children>
-</AnchorPane>
+<VBox styleClass="anchor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.booking.CreateBookingController">
+   <Label styleClass="title" alignment="CENTER" contentDisplay="CENTER" text="Save"
+          textAlignment="JUSTIFY" />
+   <ComboBox fx:id="cbService" focusTraversable="false" promptText="Services"/>
+   <DatePicker styleClass="combo-box" focusTraversable="false" fx:id="dtDate" />
+   <ComboBox fx:id="cbEmployee" focusTraversable="false" promptText="Employees"/>
+   <ComboBox fx:id="cbHour" focusTraversable="false" promptText="Hours" />
+   <ComboBox fx:id="cbClient" focusTraversable="false" promptText="Clients" />
+   <Button styleClass="login-button" focusTraversable="false" onAction="#save" text="S A V E" />
+   <Button styleClass="back-big-button" focusTraversable="false" onAction="#back" text="B A C K" />
+</VBox>

@@ -272,18 +272,27 @@ public class SqliteBookingDAO implements BookingDAO {
 
             while(result.next()){
                 final Integer id = result.getInt("id");
-                final Date date = result.getDate("date");
-                final Time hour = result.getTime("hour");
+                final String date = result.getString("date");
+                final String hour = result.getString("hour");
                 final Boolean paid = result.getBoolean("paid");
                 final Integer clientId = result.getInt("clientId");
                 final Integer serviceId = result.getInt("serviceId");
                 final Integer statusId = result.getInt("statusId");
 
-                final Optional<Client> client = clientDAO.findOne(clientId);
-                final Optional<Service> service = serviceDAO.findOne(serviceId);
-                final Optional<Status> status = statusDAO.findOne(statusId);
+                Client client = null;
+                if (clientDAO.findOne(clientId).isPresent())
+                    client = clientDAO.findOne(clientId).get();
+                Service service = null;
+                if (serviceDAO.findOne(serviceId).isPresent())
+                    service = serviceDAO.findOne(serviceId).get();
+                User employee = null;
+                if ( userDAO.findOne(user.getId()).isPresent())
+                    employee =  userDAO.findOne(user.getId()).get();
+                Status status = null;
+                if (statusDAO.findOne(statusId).isPresent())
+                    status = statusDAO.findOne(statusId).get();
 
-                final Booking booking = new Booking(id, date, hour, paid, client.get(), service.get(), user, status.get());
+                final Booking booking = new Booking(id, Date.valueOf(date), Time.valueOf(hour), paid, client, service, user, status);
 
                 bookings.add(booking);
             }
@@ -309,18 +318,27 @@ public class SqliteBookingDAO implements BookingDAO {
 
             while(result.next()){
                 final Integer id = result.getInt("id");
-                final Date date = result.getDate("date");
-                final Time hour = result.getTime("hour");
+                final String date = result.getString("date");
+                final String hour = result.getString("hour");
                 final Boolean paid = result.getBoolean("paid");
                 final Integer clientId = result.getInt("clientId");
                 final Integer serviceId = result.getInt("serviceId");
                 final Integer statusId = result.getInt("statusId");
 
-                final Optional<Client> client = clientDAO.findOne(clientId);
-                final Optional<Service> service = serviceDAO.findOne(serviceId);
-                final Optional<Status> status = statusDAO.findOne(statusId);
+                Client client = null;
+                if (clientDAO.findOne(clientId).isPresent())
+                    client = clientDAO.findOne(clientId).get();
+                Service service = null;
+                if (serviceDAO.findOne(serviceId).isPresent())
+                    service = serviceDAO.findOne(serviceId).get();
+                User employee = null;
+                if ( userDAO.findOne(user.getId()).isPresent())
+                    employee =  userDAO.findOne(user.getId()).get();
+                Status status = null;
+                if (statusDAO.findOne(statusId).isPresent())
+                    status = statusDAO.findOne(statusId).get();
 
-                final Booking booking = new Booking(id, date, hour, paid, client.get(), service.get(), user, status.get());
+                final Booking booking = new Booking(id, Date.valueOf(date), Time.valueOf(hour), paid, client, service, user, status);
 
                 bookings.add(booking);
             }
@@ -328,7 +346,8 @@ public class SqliteBookingDAO implements BookingDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return bookings;    }
+        return bookings;
+    }
 
     @Override
     public List<Booking> findAllByPeriod(Date start, Date end) {

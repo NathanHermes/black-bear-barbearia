@@ -218,3 +218,20 @@
     -fx-border-color: #000;
     -fx-border-radius: 10;
 }
+.combo-box {
+    -fx-pref-width: 200;
+    -fx-pref-height: 30;
+    -fx-font-family: "JetBrains Mono Regular";
+    -fx-font-size: 12;
+    -fx-border-color: #ccc;
+    -fx-background-color: #f0f2f5;
+}
+.combo-box:focused {
+    -fx-border-color: #555;
+}
+.date-piker {
+    -fx-pref-width: 200;
+    -fx-pref-height: 30;
+    -fx-font-family: "JetBrains Mono Regular";
+    -fx-font-size: 12;
+}
