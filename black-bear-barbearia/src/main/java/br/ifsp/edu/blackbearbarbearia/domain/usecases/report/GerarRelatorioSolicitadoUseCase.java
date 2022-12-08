@@ -38,30 +38,30 @@ public class GerarRelatorioSolicitadoUseCase {
         return bookingDAO.findAllByPeriod(start, end);
     }
 
-    public List<Booking> findByUser(User user) {
-        Validator<User> validator = new UserInputRequestValidator();
-        Notification notification = validator.validate(user);
-
-        if (notification.hasErros())
-            throw new IllegalArgumentException(notification.errorMessage());
-
-        Integer id = user.getId();
-        if (userDAO.findOne(id).isEmpty())
-            throw new EntityNotFoundException("User not found.");
-
-        return findByPeriod(start, end).stream()
-                .filter(booking -> booking.getEmployee().equals(user))
-                .toList();
-    }
-
-    public List<Booking> findByService(Service service) {
-        Integer id = service.getId();
-        if (serviceDAO.findOne(id).isEmpty())
-            throw new EntityNotFoundException("Service not found.");
-
-        return findByPeriod(start, end).stream()
-                .filter(booking -> booking.getService().equals(service))
-                .toList();
-
-    }
+//    public List<Booking> findByUser(User user) {
+//        Validator<User> validator = new UserInputRequestValidator();
+//        Notification notification = validator.validate(user);
+//
+//        if (notification.hasErros())
+//            throw new IllegalArgumentException(notification.errorMessage());
+//
+//        Integer id = user.getId();
+//        if (userDAO.findOne(id).isEmpty())
+//            throw new EntityNotFoundException("User not found.");
+//
+//        return findByPeriod(start, end).stream()
+//                .filter(booking -> booking.getEmployee().equals(user))
+//                .toList();
+//    }
+//
+//    public List<Booking> findByService(Service service) {
+//        Integer id = service.getId();
+//        if (serviceDAO.findOne(id).isEmpty())
+//            throw new EntityNotFoundException("Service not found.");
+//
+//        return findByPeriod(start, end).stream()
+//                .filter(booking -> booking.getService().equals(service))
+//                .toList();
+//
+//    }
 }
