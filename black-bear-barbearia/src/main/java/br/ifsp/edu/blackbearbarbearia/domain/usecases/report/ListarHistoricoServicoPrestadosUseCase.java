@@ -11,7 +11,10 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.Validator;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ListarHistoricoServicoPrestadosUseCase {
     private final BookingDAO bookingDAO;
@@ -36,24 +39,21 @@ public class ListarHistoricoServicoPrestadosUseCase {
         if (userDAO.findOne(id).isEmpty())
             throw new EntityNotFoundException("User not found.");
 
-//        if (bookingDAO.findAllByUser(user).isEmpty())
-//            throw new EntityNotFoundException("No booking found.");
-        var bookings = bookingDAO.findAllByUser(user);
-        var bookingStart = bookings.stream()
-                .filter(booking -> booking.getNoFormattedDate().equals(start))
-                .toList();
-        var bookingEnd = bookings.stream()
+        var daoBookings = bookingDAO.findAllByUser(user);
+        var bookingStart = daoBookings.stream()
+                .filter(booking -> booking.getNoFormattedDate().equals(start)).toList();
+
+        List<Booking> bookings = new ArrayList<>(bookingStart);
+        var bookingEnd = daoBookings.stream()
                 .filter(booking -> booking.getNoFormattedDate().equals(end))
                 .toList();
-
-        bookings = bookings.stream()
+        bookings.addAll(bookingEnd);
+        daoBookings = daoBookings.stream()
                 .filter(booking -> booking.getNoFormattedDate().after(start))
                 .filter(booking -> booking.getNoFormattedDate().before(end))
                 .toList();
-        bookings.addAll(bookingStart);
-        bookings.addAll(bookingEnd);
+        bookings.addAll(daoBookings);
 
         return bookings;
-        //return bookingDAO.findAllByUserAndPeriod(user, start, end);
     }
 }

@@ -8,19 +8,16 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Random;
 
 public class GenerateReportInPDF {
-    private Document REPORT;
+    private Random id = new Random();
 
-    public void generate(List<Booking> bookings) {
-        if (REPORT == null)
-            REPORT = new Document();
+    public void generate(List<Booking> bookings) throws FileNotFoundException {
+        Document REPORT = new Document();
 
-        try {
-            PdfWriter.getInstance(REPORT, new FileOutputStream(bookings.get(0).getEmployee() + ".pdf"));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        PdfWriter.getInstance(REPORT, new FileOutputStream("report" + id.nextInt(10000) + ".pdf"));
+
         REPORT.open();
 
         Font title = new Font(Font.TIMES_ROMAN, 18);
@@ -30,12 +27,12 @@ public class GenerateReportInPDF {
 
         Paragraph documentTitle = new Paragraph();
         documentTitle.setAlignment(Element.ALIGN_CENTER);
-        documentTitle.add(new Chunk("RELATÓRIO", title));
+        documentTitle.add(new Chunk("REPORT", title));
         REPORT.add(documentTitle);
         REPORT.add(new Paragraph(" "));
 
         Booking booking;
-        BigDecimal total = new BigDecimal(0);
+        double total = 0;
         for(int i = 0; i < bookings.size(); i++) {
             booking = bookings.get(0);
             Paragraph serviceHeader = new Paragraph();
@@ -43,32 +40,32 @@ public class GenerateReportInPDF {
             REPORT.add(serviceHeader);
 
             Paragraph serviceElement = new Paragraph();
-            serviceElement.add(new Chunk("       Nome do serviço: ", contrastParagraph));
+            serviceElement.add(new Chunk("       Service name: ", contrastParagraph));
             serviceElement.add(new Chunk(booking.getService() + "\n", paragraph));
 
-            serviceElement.add(new Chunk("       Nome do funcionário: ", contrastParagraph));
+            serviceElement.add(new Chunk("       Employee name: ", contrastParagraph));
             serviceElement.add(new Chunk(booking.getEmployee() + "\n", paragraph));
 
-            serviceElement.add(new Chunk("       Data: ", contrastParagraph));
-            serviceElement.add(new Chunk(booking.getDate(), paragraph));
+            serviceElement.add(new Chunk("       Date: ", contrastParagraph));
+            serviceElement.add(new Chunk(booking.getDate() + "\n", paragraph));
 
-            serviceElement.add(new Chunk("       Horário: ", contrastParagraph));
-            serviceElement.add(new Chunk(booking.getHour(), paragraph));
+            serviceElement.add(new Chunk("       Hour: ", contrastParagraph));
+            serviceElement.add(new Chunk(booking.getHour() + "\n", paragraph));
 
-            serviceElement.add(new Chunk("       Nome do cliente: ", contrastParagraph));
-            serviceElement.add(new Chunk(booking.getClient(), paragraph));
+            serviceElement.add(new Chunk("       Client name: ", contrastParagraph));
+            serviceElement.add(new Chunk(booking.getClient() + "\n", paragraph));
 
-            serviceElement.add(new Chunk("       Valor: ", contrastParagraph));
+            serviceElement.add(new Chunk("       Price: ", contrastParagraph));
             serviceElement.add(new Chunk(booking.getInfoService().getPrice().toString(), paragraph));
             REPORT.add(serviceElement);
 
-            total.add(booking.getInfoService().getPrice());
+            total = total + booking.getInfoService().calculateComission().doubleValue();
         }
 
         Paragraph serviceFooter = new Paragraph();
         serviceFooter.setAlignment(Element.ALIGN_RIGHT);
-        serviceFooter.add(new Chunk("Quantidade: " + bookings.size(), new Font(Font.COURIER, 18)));
-        serviceFooter.add(new Chunk(String.format("R$%.2f", total), new Font(Font.COURIER, 18)));
+        serviceFooter.add(new Chunk("Quantity: " + bookings.size() + "\n", new Font(Font.COURIER, 18)));
+        serviceFooter.add(new Chunk(String.format("Commission: R$%.2f", total), new Font(Font.COURIER, 18)));
         REPORT.add(serviceFooter);
 
         REPORT.close();

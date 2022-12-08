@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox fillWidth="false" styleClass="anchor" xmlns="http://javafx.com/javafx/17" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.LogoutController" xmlns:fx="http://javafx.com/fxml/1">
-    <Label styleClass="popup-message" text="Tem certeza que deseja sair ?"/>
+    <Label styleClass="message" text="Tem certeza que deseja sair ?"/>
     <HBox styleClass="groupButton">
         <Button styleClass="yes-button" text="S I M" onAction="#logout"/>
         <Button styleClass="no-button" text="N Ã O" onAction="#goBack"/>

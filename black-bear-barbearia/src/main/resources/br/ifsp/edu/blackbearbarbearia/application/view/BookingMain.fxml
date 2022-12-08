@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
@@ -9,54 +8,38 @@
             fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.booking.BookingMainController">
    <Button onAction="#goToManageClients" styleClass="main-big-button" text="M A N A G E  C L I E N T S"
            AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0"/>
-   <Button fx:id="btnEmployeesManage" layoutX="561.0" layoutY="50.0" onAction="#goToManageEmployees" styleClass=""
-           text="MANAGE EMPLOYEES" AnchorPane.rightAnchor="318.0" AnchorPane.topAnchor="50.0"/>
-   <Button fx:id="btnServiceManage" layoutX="747.0" layoutY="50.0" onAction="#goToManageService" text="MANAGE SERVICES"
-           AnchorPane.rightAnchor="149.0" AnchorPane.topAnchor="50.0"/>
-   <Button fx:id="btnLogout" onAction="#logout" text="LOGOUT" AnchorPane.rightAnchor="50.0"
-           AnchorPane.topAnchor="50.0"/>
-   <Line endX="974.0" layoutX="236.0" layoutY="111.0" startX="50.0" AnchorPane.leftAnchor="50.0"
-         AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="101.0"/>
-   <Label layoutX="53.0" layoutY="126.0" text="Date" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="126.0"/>
-   <DatePicker fx:id="dtData" editable="false" layoutX="121.0" layoutY="121.0" prefHeight="31.0" prefWidth="200.0"
-               AnchorPane.leftAnchor="121.0" AnchorPane.topAnchor="121.0"/>
-   <Label layoutX="357.0" layoutY="126.0" text="Time" AnchorPane.leftAnchor="357.0" AnchorPane.topAnchor="126.0"/>
-   <Label layoutX="701.0" layoutY="126.0" text="Employee" AnchorPane.rightAnchor="270.0" AnchorPane.topAnchor="126.0"/>
-   <ComboBox fx:id="cbFuncionario" layoutX="775.0" layoutY="121.0" prefWidth="200.0" AnchorPane.rightAnchor="50.0"
-             AnchorPane.topAnchor="121.0"/>
-   <Label layoutX="50.0" layoutY="177.0" text="Service" AnchorPane.leftAnchor="50.0"/>
-   <ComboBox fx:id="cbServico" layoutX="101.0" layoutY="172.0" prefWidth="200.0" AnchorPane.leftAnchor="121.0"
-             AnchorPane.topAnchor="172.0"/>
-   <Label layoutX="382.0" layoutY="177.0" text="Client" AnchorPane.leftAnchor="362.0" AnchorPane.topAnchor="177.0"/>
-   <ComboBox fx:id="cbCliente" layoutX="443.0" layoutY="182.0" prefWidth="200.0" AnchorPane.leftAnchor="427.0"
-             AnchorPane.topAnchor="172.0"/>
-   <Button fx:id="btnFiltrar" layoutX="904.0" layoutY="152.0" mnemonicParsing="false" onAction="#filtrar"
-           prefHeight="31.0" prefWidth="200.0" text="SEARCH" AnchorPane.rightAnchor="50.0"
-           AnchorPane.topAnchor="172.0"/>
-   <TableView fx:id="tbvBookings" layoutX="50.0" layoutY="203.0" prefHeight="466.0" prefWidth="924.0"
-              AnchorPane.bottomAnchor="99.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0"
-              AnchorPane.topAnchor="223.0">
+   <Button fx:id="btnEmployeesManage" onAction="#goToManageEmployees" styleClass="main-big-button" text="M A N A G E   E M P L O Y E E S"
+            AnchorPane.topAnchor="50.0" AnchorPane.rightAnchor="390.0"/>
+   <Button fx:id="btnServiceManage" onAction="#goToManageService" styleClass="main-big-button" text="M A N A G E   S E R V I C E S"
+           AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="50.0"/>
+   <Button styleClass="main-button" onAction="#logout" text="L O G O U T" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0"/>
+   <Line startX="50.0" endX="974.0"  AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="110.0"/>
+   <DatePicker fx:id="dtData" editable="false" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="130.0"/>
+   <ComboBox fx:id="cbHorario" AnchorPane.leftAnchor="412.0" AnchorPane.topAnchor="130.0"/>
+   <ComboBox fx:id="cbFuncionario" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="130.0"/>
+   <ComboBox fx:id="cbServico" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="180.0"/>
+   <ComboBox fx:id="cbCliente" AnchorPane.leftAnchor="412.0" AnchorPane.topAnchor="180.0"/>
+   <Button styleClass="main-button" onAction="#filtrar" text="S E A R C H" AnchorPane.rightAnchor="170.0"
+           AnchorPane.topAnchor="180.0"/>
+   <Button styleClass="main-button" onAction="#clear" text="C L E A R" AnchorPane.rightAnchor="50.0"
+           AnchorPane.topAnchor="180.0"/>
+   <TableView fx:id="tbvBookings" AnchorPane.topAnchor="240.0" AnchorPane.bottomAnchor="110.0"
+              AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
       <columns>
-         <TableColumn fx:id="cID" prefWidth="173.0" text="#"/>
-         <TableColumn fx:id="cClient" prefWidth="173.0" text="CLIENT"/>
-         <TableColumn fx:id="cEmployee" prefWidth="173.0" text="EMPLOYEE"/>
-         <TableColumn fx:id="cService" prefWidth="173.0" text="SERVICE"/>
-         <TableColumn fx:id="cDate" prefWidth="173.0" text="DATE"/>
-         <TableColumn fx:id="cHour" prefWidth="173.0" text="TIME"/>
-         <TableColumn fx:id="cStatus" prefWidth="114.0" text="STATUS"/>
-         <TableColumn fx:id="cPaid" prefWidth="117.0" text="PAID "/>
+         <TableColumn styleClass="column" fx:id="cID" prefWidth="50.0" text="#"/>
+         <TableColumn fx:id="cClient" prefWidth="200.0" text="CLIENT"/>
+         <TableColumn fx:id="cEmployee" prefWidth="120.0" text="EMPLOYEE"/>
+         <TableColumn fx:id="cService" prefWidth="152.0" text="SERVICE"/>
+         <TableColumn fx:id="cDate" prefWidth="100.0" text="DATE"/>
+         <TableColumn fx:id="cHour" prefWidth="100.0" text="TIME"/>
+         <TableColumn styleClass="column" fx:id="cStatus" prefWidth="100.0" text="STATUS"/>
+         <TableColumn styleClass="column" fx:id="cPaid" prefWidth="100.0" text="PAID "/>
       </columns>
    </TableView>
-   <Button fx:id="btnCadastrar" layoutX="50.0" layoutY="689.0" mnemonicParsing="false" onAction="#goToCreateBooking"
-           text="SAVE" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="50.0"/>
-   <Button fx:id="btnDesmarcar" layoutX="105.0" layoutY="709.0" mnemonicParsing="false" onAction="#cancelBooking"
-           text="MARK OFF" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="125.0"/>
-   <Button fx:id="btnConcluir" layoutX="216.0" layoutY="709.0" mnemonicParsing="false" onAction="#concludeBooking"
-           text="CONCLUDE" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="236.0"/>
-   <Button fx:id="btnServicosPrestados" layoutX="763.0" layoutY="709.0" mnemonicParsing="false"
-           onAction="#historyOfBookingFromEmployee" text="SERVICE HISTORY" AnchorPane.bottomAnchor="48.0"
-           AnchorPane.rightAnchor="144.0"/>
-   <Button fx:id="btnReport" layoutX="791.0" layoutY="689.0" mnemonicParsing="false" onAction="#relatorio" text="REPORT"
-           AnchorPane.bottomAnchor="48.0" AnchorPane.rightAnchor="50.0"/>
-   <ComboBox fx:id="cbHorario" layoutX="427.0" layoutY="124.0" prefWidth="200.0"/>
+   <Button styleClass="main-button" onAction="#goToCreateBooking" text="S A V E" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0"/>
+   <Button styleClass="main-button" onAction="#cancelBooking" text="M A R K  O F F" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="170.0"/>
+   <Button styleClass="main-big-button" onAction="#concludeBooking" text="C O N C L U D E" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="290.0"/>
+   <Button styleClass="main-big-button" onAction="#historyOfBookingFromEmployee" text="S E R V I C E  H I S T O R Y" AnchorPane.bottomAnchor="50.0"
+           AnchorPane.rightAnchor="170.0"/>
+   <Button styleClass="main-button" fx:id="btnReport" onAction="#relatorio" text="R E P O R T" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0"/>
 </AnchorPane>

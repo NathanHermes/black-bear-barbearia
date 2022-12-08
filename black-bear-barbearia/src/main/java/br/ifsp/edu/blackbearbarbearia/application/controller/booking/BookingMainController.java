@@ -190,8 +190,6 @@ public class BookingMainController {
 
     @FXML
     public void filtrar(ActionEvent event) {
-        loadBookingData();
-
         LocalDate date = dtData.getValue();
         String hour = cbHorario.getSelectionModel().getSelectedItem();
         String employee = cbFuncionario.getSelectionModel().getSelectedItem();
@@ -205,42 +203,39 @@ public class BookingMainController {
                     .filter(booking -> booking.getNoFormattedDate().toString().equals(date.toString()))
                     .collect(Collectors.toList());
         }
-
         if(hour != null) {
             filteredBookings = filteredBookings.stream()
                     .filter(booking -> booking.getHour().toString().equals(hour))
                     .collect(Collectors.toList());
         }
-
         if(employee != null) {
             filteredBookings = filteredBookings.stream()
                     .filter(booking -> booking.getInfoEmployee().getFullName().equals(employee))
                     .collect(Collectors.toList());
         }
-
         if(service != null) {
             filteredBookings = filteredBookings.stream()
                     .filter(booking -> booking.getInfoService().getName().equals(employee))
                     .collect(Collectors.toList());
         }
-
         if(client != null) {
             filteredBookings = filteredBookings.stream()
                     .filter(booking -> booking.getInfoClient().getName().equals(client))
                     .collect(Collectors.toList());
         }
-
         bookingData.clear();
         bookingData.addAll(filteredBookings);
-        clearInputs();
     }
 
-    private void clearInputs() {
+    @FXML
+    public void clear() {
         dtData.setValue(null);
         cbHorario.getSelectionModel().select(null);
         cbFuncionario.getSelectionModel().select(null);
         cbServico.getSelectionModel().select(null);
         cbCliente.getSelectionModel().select(null);
+
+        loadBookingData();
     }
 
     @FXML
@@ -291,7 +286,7 @@ public class BookingMainController {
     }
 
     @FXML
-    void relatorio(ActionEvent event) throws IOException {
+    void relatorio() throws IOException {
         WindowLoader.setRoot("ReportMain");
     }
 }

@@ -84,7 +84,7 @@ public class Main {
         cancelBookingUseCase = new CancelBookingUseCase(bookingDAO, statusDAO);
 
         listarHistoricoServicoPrestadosUseCase = new ListarHistoricoServicoPrestadosUseCase(bookingDAO, userDAO);
-        gerarRelatorioSolicitadoUseCase = new GerarRelatorioSolicitadoUseCase(bookingDAO, userDAO, serviceDAO);
+        gerarRelatorioSolicitadoUseCase = new GerarRelatorioSolicitadoUseCase(bookingDAO);
         generateReportInPDF = new GenerateReportInPDF();
     }
 }

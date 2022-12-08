@@ -27,7 +27,6 @@ public class ServiceHistoryController {
     @FXML
     private TableColumn<Booking, String> cService;
 
-
     @FXML
     private TableColumn<Booking, String> cValue;
 

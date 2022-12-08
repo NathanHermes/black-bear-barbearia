@@ -66,9 +66,6 @@ public class Service {
         return price.multiply(taxPercentage);
     }
 
-    public BigDecimal calculateNetPrice() {
-        return price.subtract(calculateComission().add(calculateTax()));
-    }
 
     @Override
     public String toString() {

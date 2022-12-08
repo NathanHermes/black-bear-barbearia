@@ -423,6 +423,7 @@ public class DatabaseBuilder {
                 "VALUES ('%s', '%s', %b, %d, %d, %d, %d)";
 
         stmt.addBatch(String.format(sql, Date.valueOf("2022-11-9"), Time.valueOf("09:00:00"), Boolean.FALSE, 1, 1, 1, 1));
+        stmt.addBatch(String.format(sql, Date.valueOf("2022-11-17"), Time.valueOf("13:00:00"), Boolean.FALSE, 1, 1, 1, 1));
         stmt.addBatch(String.format(sql, Date.valueOf("2022-11-8"), Time.valueOf("12:00:00"), Boolean.FALSE, 2, 2, 2, 1));
         stmt.addBatch(String.format(sql, Date.valueOf("2022-11-7"), Time.valueOf("10:30:00"), Boolean.FALSE, 3, 3, 3, 1));
         stmt.addBatch(String.format(sql, Date.valueOf("2022-11-6"), Time.valueOf("17:00:00"), Boolean.FALSE, 4, 4, 4, 1));
