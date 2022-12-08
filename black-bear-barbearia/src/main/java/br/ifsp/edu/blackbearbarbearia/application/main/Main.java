@@ -13,6 +13,7 @@ import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.CreateEmployeeUse
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.FindEmployeeUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.UpdateEmployeeUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.employee.UpdatePasswordUseCase;
+import br.ifsp.edu.blackbearbarbearia.domain.usecases.report.GenerateReportInPDF;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.report.GerarRelatorioSolicitadoUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.report.ListarHistoricoServicoPrestadosUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.service.CreateServiceUseCase;
@@ -46,6 +47,7 @@ public class Main {
 
     public static ListarHistoricoServicoPrestadosUseCase listarHistoricoServicoPrestadosUseCase;
     public static GerarRelatorioSolicitadoUseCase gerarRelatorioSolicitadoUseCase;
+    public static GenerateReportInPDF generateReportInPDF;
 
     public static User USER;
 
@@ -83,5 +85,6 @@ public class Main {
 
         listarHistoricoServicoPrestadosUseCase = new ListarHistoricoServicoPrestadosUseCase(bookingDAO, userDAO);
         gerarRelatorioSolicitadoUseCase = new GerarRelatorioSolicitadoUseCase(bookingDAO, userDAO, serviceDAO);
+        generateReportInPDF = new GenerateReportInPDF();
     }
 }
