@@ -29,11 +29,10 @@ public class UpdatePasswordController {
             Boolean response = updatePasswordUseCase.modifyPassword(login, newPassword, confirmPassword);
             WindowLoader.setRoot("PopUp");
             PopUpController controller = (PopUpController) WindowLoader.getController();
-            if (response) {
+            if (response)
                 controller.setPopUp("success", "A senha foi atualizada.", "Login");
-            } else {
+            else
                 controller.setPopUp("error", "Não foi possivel atualizar a senha.\nTente novamente.", "UpdatePassword");
-            }
         }catch (IllegalArgumentException | EntityNotFoundException e) {
             WindowLoader.setRoot("PopUp");
             PopUpController controller = (PopUpController) WindowLoader.getController();

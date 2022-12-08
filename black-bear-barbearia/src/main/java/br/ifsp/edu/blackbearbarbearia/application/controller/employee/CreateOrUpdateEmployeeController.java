@@ -1,5 +1,6 @@
 package br.ifsp.edu.blackbearbarbearia.application.controller.employee;
 
+import br.ifsp.edu.blackbearbarbearia.application.controller.popUp.PopUpController;
 import br.ifsp.edu.blackbearbarbearia.application.view.WindowLoader;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Address;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.user.Role;
@@ -60,8 +61,6 @@ public class CreateOrUpdateEmployeeController {
     private RadioButton rbDisable;
     @FXML
     private Button btnSaveOrUpdate;
-    @FXML
-    private Label lblResponseMessage;
 
     private User employee;
 
@@ -72,8 +71,8 @@ public class CreateOrUpdateEmployeeController {
     }
 
     private void clearInputs() {
-        lblTitle.setText("Cadastrar");
-        btnSaveOrUpdate.setText("Cadastrar");
+        lblTitle.setText("Save");
+        btnSaveOrUpdate.setText("S A V E");
         inputName.setText("");
         inputEmail.setText("");
         inputPhone.setText("");
@@ -104,8 +103,8 @@ public class CreateOrUpdateEmployeeController {
     }
 
     private void setInfoEmployeeIntoInputs() {
-        lblTitle.setText("Editar");
-        btnSaveOrUpdate.setText("Editar");
+        lblTitle.setText("Edit");
+        btnSaveOrUpdate.setText("E D I T");
         inputName.setText(employee.getFullName());
         inputName.setDisable(true);
         inputEmail.setText(employee.getEmail());
@@ -157,32 +156,32 @@ public class CreateOrUpdateEmployeeController {
     }
 
     @FXML
-    void saveOrUpdate() {
-        lblResponseMessage.setText("");
-
+    void saveOrUpdate() throws IOException {
+        WindowLoader.setRoot("PopUp");
+        PopUpController controller = (PopUpController) WindowLoader.getController();
         if (employee == null) {
             getInfoEmployeeFromInputs();
 
             try {
                 Boolean response = createEmployeeUseCase.create(employee);
-                if (response.equals(Boolean.TRUE))
-                    lblResponseMessage.setText("Cliente cadastrado.");
+                if (response)
+                    controller.setPopUp("success", "Employee created", "EmployeeMain");
                 else
-                    lblResponseMessage.setText("Não foi possível cadastrar esse cliente.\nTente novamente mais tarde.");
-            } catch (IllegalArgumentException | EntityAlreadyExistsException exception) {
-                lblResponseMessage.setText(exception.getMessage());
+                    controller.setPopUp("error", "Unable to create employee.\nTry again.", "EmployeeMain");
+            } catch (IllegalArgumentException | EntityAlreadyExistsException e) {
+                controller.setPopUp("error", e.getMessage(), "CreateOrUpdateEmployee");
             }
         } else {
             getInfoEmployeeFromInputs();
 
             try {
                 Boolean response = updateEmployeeUseCase.update(employee.getId(), employee);
-                if (response.equals(Boolean.TRUE))
-                    lblResponseMessage.setText("Cliente atualizado.");
+                if (response)
+                    controller.setPopUp("success", "Employee updated", "EmployeeMain");
                 else
-                    lblResponseMessage.setText("Não foi possível atualizar esse cliente.\nTente novamente mais tarde.");
-            } catch (IllegalArgumentException | EntityNotFoundException exception) {
-                lblResponseMessage.setText(exception.getMessage());
+                    controller.setPopUp("error", "Unable to update employee.\nTry again.", "EmployeeMain");
+            } catch (IllegalArgumentException | EntityNotFoundException e) {
+                controller.setPopUp("error", e.getMessage(), "CreateOrUpdateEmployee");
             }
         }
         employee = null;
@@ -239,12 +238,8 @@ public class CreateOrUpdateEmployeeController {
     }
 
     @FXML
-    public void back() {
-        try {
-            WindowLoader.setRoot("EmployeeMain");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public void back() throws IOException {
+        WindowLoader.setRoot("EmployeeMain");
     }
 }
 

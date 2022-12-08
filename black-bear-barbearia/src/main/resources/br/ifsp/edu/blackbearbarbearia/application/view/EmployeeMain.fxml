@@ -3,23 +3,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.employee.EmployeeMainController">
-    <Label layoutX="220.0" layoutY="25.0" text="Pesquisar" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="25.0" />
-    <TextField fx:id="inputEmail" layoutX="284.0" layoutY="20.0" prefHeight="31.0" prefWidth="328.0" promptText="Digite o email do funcionário" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="328.0" AnchorPane.topAnchor="20.0" />
-    <Button layoutX="676.0" layoutY="23.0" mnemonicParsing="false" onAction="#search" text="Buscar" AnchorPane.rightAnchor="233.0" AnchorPane.topAnchor="23.0" />
-    <Button layoutX="786.0" layoutY="23.0" mnemonicParsing="false" onAction="#reloadTableView" text="Limpar" AnchorPane.rightAnchor="121.0" AnchorPane.topAnchor="23.0" />
-    <TableView fx:id="tbvEmployees" layoutX="220.0" layoutY="74.0" prefHeight="356.0" prefWidth="520.0" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="74.0">
+<AnchorPane styleClass="anchor" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.employee.EmployeeMainController">
+    <TextField styleClass="main-input" focusTraversable="false" fx:id="inputEmail" promptText="Enter employee email" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0" />
+    <Button styleClass="main-button" onAction="#search" text="S E A R C H" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="50.0" />
+    <Button styleClass="main-button" onAction="#reloadTableView" text="C L E A R" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="50.0" />
+    <TableView fx:id="tbvEmployees" AnchorPane.topAnchor="110.0" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
       <columns>
-          <TableColumn fx:id="cID" prefWidth="10.0" text="#" />
-          <TableColumn fx:id="cFullName" prefWidth="100.0" text="Nome completo" />
-          <TableColumn fx:id="cEmail" prefWidth="100.0" text="Email" />
-          <TableColumn fx:id="cPhone" prefWidth="100.0" text="Telefone" />
-          <TableColumn fx:id="cAddress" prefWidth="100.0" text="Endereço" />
-          <TableColumn fx:id="cStatus" prefWidth="100.0" text="Status" />
+          <TableColumn styleClass="column" fx:id="cID" prefWidth="50.0" text="#" />
+          <TableColumn fx:id="cFullName" prefWidth="180.0" text="FULL NAME" />
+          <TableColumn fx:id="cEmail" prefWidth="180.0" text="E-MAIL" />
+          <TableColumn fx:id="cPhone" prefWidth="132.0" text="PHONE" />
+          <TableColumn fx:id="cAddress" prefWidth="180.0" text="ADDRESS" />
+          <TableColumn styleClass="column" fx:id="cStatus" prefWidth="100.0" text="STATUS" />
       </columns>
     </TableView>
-    <Button fx:id="btnCadastrar" layoutX="220.0" layoutY="450.0" mnemonicParsing="false" onAction="#save" text="CADASTRAR" AnchorPane.bottomAnchor="59.0" AnchorPane.leftAnchor="220.0" />
-    <Button fx:id="btnEditar" layoutX="332.0" layoutY="459.0" mnemonicParsing="false" onAction="#update" text="EDITAR" AnchorPane.bottomAnchor="59.0" AnchorPane.rightAnchor="569.0" />
-    <Button fx:id="btnApagarSenha" layoutX="408.0" layoutY="455.0" mnemonicParsing="false" onAction="#deletePassword" prefHeight="31.0" prefWidth="129.0" text="APAGAR SENHA" AnchorPane.bottomAnchor="54.0" AnchorPane.rightAnchor="423.0" />
-    <Button layoutX="677.0" layoutY="460.0" mnemonicParsing="false" onAction="#back" text="Voltar" AnchorPane.bottomAnchor="55.0" AnchorPane.rightAnchor="235.0" />
+    <Button styleClass="main-button" onAction="#save" text="S A V E" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="100.0" />
+    <Button styleClass="main-button" onAction="#update" text="E D I T" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="220.0" />
+    <Button styleClass="main-big-button" onAction="#deletePassword" text="D E L E T E  P A S S W O R D" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="340.0" />
+    <Button styleClass="main-back-button" onAction="#back" text="B A C K" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="100.0" />
 </AnchorPane>

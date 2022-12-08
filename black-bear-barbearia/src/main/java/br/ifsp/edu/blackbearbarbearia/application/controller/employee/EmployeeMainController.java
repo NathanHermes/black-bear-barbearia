@@ -6,7 +6,6 @@ import br.ifsp.edu.blackbearbarbearia.domain.entities.user.User;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityNotFoundException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -72,10 +71,13 @@ public class EmployeeMainController {
     public void search() {
         String email = inputEmail.getText();
 
-        User client = findEmployeeUseCase.findByEmail(email);
-
-        employeeData.clear();
-        employeeData.add(client);
+        if (email == null || email.isBlank())
+            loadEmployeeData();
+        else {
+            User client = findEmployeeUseCase.findByEmail(email);
+            employeeData.clear();
+            employeeData.add(client);
+        }
     }
 
     @FXML

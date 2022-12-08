@@ -48,7 +48,6 @@ public class Main {
     public static GerarRelatorioSolicitadoUseCase gerarRelatorioSolicitadoUseCase;
 
     public static User USER;
-    public static ArrayList<String> INFOCOMMISSIONPOPUP;
 
     public static void main(String[] args) {
         configureInjection();
@@ -56,8 +55,6 @@ public class Main {
     }
 
     private static void configureInjection() {
-        INFOCOMMISSIONPOPUP = new ArrayList<>();
-
         UserDAO userDAO = new SqliteUserDAO();
         loginUseCase = new LoginUseCase(userDAO);
         createEmployeeUseCase = new CreateEmployeeUseCase(userDAO);

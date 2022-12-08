@@ -10,5 +10,5 @@
    <TextField fx:id="inputPhone" focusTraversable="false" promptText="Enter client phone"/>
    <TextField fx:id="inputEmail" focusTraversable="false" promptText="Enter client email"/>
    <Button styleClass="login-button" fx:id="btnSaveOrUpdate" onAction="#saveOrUpdate"/>
-   <Button styleClass="btnBack" onAction="#back" text="V O L T A R" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="100.0"/>
+   <Button styleClass="back-big-button" onAction="#back" text="B A C K" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="100.0"/>
 </VBox>
