@@ -2,24 +2,18 @@ package br.ifsp.edu.blackbearbarbearia.application.controller.booking;
 
 import br.ifsp.edu.blackbearbarbearia.application.view.WindowLoader;
 import br.ifsp.edu.blackbearbarbearia.domain.entities.booking.Booking;
-import br.ifsp.edu.blackbearbarbearia.domain.entities.service.Service;
-import br.ifsp.edu.blackbearbarbearia.domain.usecases.report.ListarHistoricoServicoPrestadosUseCase;
 import br.ifsp.edu.blackbearbarbearia.domain.usecases.utils.EntityNotFoundException;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Window;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.sql.Time;
 import java.sql.Date;
 
@@ -33,8 +27,6 @@ public class ServiceHistoryController {
     @FXML
     private TableColumn<Booking, String> cService;
 
-    @FXML
-    private Button btnFiltrar;
 
     @FXML
     private TableColumn<Booking, String> cValue;
@@ -92,6 +84,8 @@ public class ServiceHistoryController {
 
     @FXML
     void filtrar(ActionEvent event) {
+        loadBookingData();
+
         Date dataInicial = Date.valueOf(dtDataInicial.getValue());
         Date dataFinal = Date.valueOf(dtDataFinal.getValue());
 
@@ -100,7 +94,14 @@ public class ServiceHistoryController {
             return;
         }
 
-        listarHistoricoServicoPrestadosUseCase.create(USER, dataInicial, dataFinal);
+        var bookings = listarHistoricoServicoPrestadosUseCase.create(USER, dataInicial, dataFinal);
+        bookingData.clear();
+        bookingData.addAll(bookings);
+    }
+
+    @FXML
+    void limpar(ActionEvent event) {
+        loadBookingData();
     }
 
     @FXML
