@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane styleClass="anchor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.service.ServiceMainController">
-   <TextField styleClass="main-input" fx:id="inputNameService" focusTraversable="false" promptText="Enter name service" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0"/>
-   <Button styleClass="main-button" onAction="#search" text="S E A R C H" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="50.0"/>
-   <Button styleClass="main-button" onAction="#reloadTableView" text="C L E A R" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="50.0"/>
-   <TableView fx:id="tbvService" AnchorPane.topAnchor="110.0" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
-      <columns>
-         <TableColumn styleClass="column" fx:id="cID" prefWidth="50.0" text="#"/>
-         <TableColumn fx:id="cName" prefWidth="230.0" text="NAME"/>
-         <TableColumn styleClass="column" fx:id="cPrince" prefWidth="148.0" text="PRINCE"/>
-         <TableColumn styleClass="column" fx:id="cCommission" prefWidth="148.0" text="COMMISSION"/>
-         <TableColumn styleClass="column" fx:id="cTaxa" prefWidth="148.0" text="TAXA"/>
-         <TableColumn styleClass="column" fx:id="cActive" prefWidth="98.0" text="ATIVO"/>
-      </columns>
-   </TableView>
-   <Button styleClass="main-button" onAction="#save" text="S A V E" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="100.0"/>
-   <Button styleClass="main-button" onAction="#update" text="E D I T" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="220.0"/>
-   <Button styleClass="main-back-button" onAction="#back" text="B A C K" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="100.0"/>
+<AnchorPane styleClass="anchor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.service.ServiceMainController">
+   <children>
+      <TextField fx:id="inputNameService" focusTraversable="false" promptText="Enter name service" styleClass="main-input" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0" />
+      <Button onAction="#search" styleClass="main-button" text="S E A R C H" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="50.0" />
+      <Button onAction="#reloadTableView" styleClass="main-button" text="C L E A R" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="50.0" />
+      <TableView fx:id="tbvService" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="110.0">
+         <columns>
+            <TableColumn fx:id="cID" prefWidth="50.0" styleClass="column" text="#" />
+            <TableColumn fx:id="cName" prefWidth="230.0" text="NAME" />
+            <TableColumn fx:id="cPrince" prefWidth="148.0" styleClass="column" text="PRICE" />
+            <TableColumn fx:id="cCommission" prefWidth="148.0" styleClass="column" text="COMMISSION" />
+            <TableColumn fx:id="cTaxa" prefWidth="148.0" styleClass="column" text="TAXA" />
+            <TableColumn fx:id="cActive" prefWidth="98.0" styleClass="column" text="ATIVO" />
+         </columns>
+      </TableView>
+      <Button onAction="#save" styleClass="main-button" text="S A V E" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="100.0" />
+      <Button onAction="#update" styleClass="main-button" text="E D I T" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="220.0" />
+      <Button onAction="#back" styleClass="main-back-button" text="B A C K" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="100.0" />
+   </children>
 </AnchorPane>
