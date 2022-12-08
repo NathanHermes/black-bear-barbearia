@@ -6,20 +6,21 @@
 
 <AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ifsp.edu.blackbearbarbearia.application.controller.booking.ServiceHistoryController">
    <children>
-      <Button fx:id="btnFiltrar" layoutX="746.0" layoutY="14.0" mnemonicParsing="false" onAction="#filtrar" prefHeight="31.0" prefWidth="200.0" text="FILTRAR" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0" />
       <DatePicker fx:id="dtDataInicial" editable="false" layoutX="125.0" layoutY="30.0" prefHeight="31.0" prefWidth="200.0" AnchorPane.leftAnchor="154.75" AnchorPane.topAnchor="50.0" />
-      <Label layoutX="50.0" layoutY="55.0" text="Data Início" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="55.0" />
+      <Label layoutX="50.0" layoutY="55.0" text="Start day" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="55.0" />
       <DatePicker fx:id="dtDataFinal" editable="false" layoutX="451.0" layoutY="30.0" prefHeight="31.0" prefWidth="200.0" AnchorPane.leftAnchor="480.75" AnchorPane.topAnchor="50.0" />
-      <Label layoutX="355.0" layoutY="35.0" text="Data Final" AnchorPane.leftAnchor="384.75" AnchorPane.topAnchor="55.0" />
+      <Label layoutX="355.0" layoutY="35.0" text="End day" AnchorPane.leftAnchor="384.75" AnchorPane.topAnchor="55.0" />
       <TableView fx:id="tbvService" layoutX="50.0" layoutY="121.0" prefHeight="345.0" prefWidth="838.0" AnchorPane.bottomAnchor="74.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="121.0">
          <columns>
-            <TableColumn fx:id="cDate" prefWidth="158.0" text="DATA" />
-            <TableColumn fx:id="cTime" prefWidth="158.0" text="HORÁRIO" />
-            <TableColumn fx:id="cValue" prefWidth="158.0" text="VALOR" />
-            <TableColumn fx:id="cService" prefWidth="218.0" text="SERVIÇO" />
-            <TableColumn fx:id="cClient" prefWidth="218.0" text="CLIENTE" />
+            <TableColumn fx:id="cDate" prefWidth="158.0" text="DATE" />
+            <TableColumn fx:id="cTime" prefWidth="158.0" text="TIME" />
+            <TableColumn fx:id="cValue" prefWidth="158.0" text="PRICE" />
+            <TableColumn fx:id="cService" prefWidth="218.0" text="SERVICE" />
+            <TableColumn fx:id="cClient" prefWidth="218.0" text="CLIENT" />
          </columns>
       </TableView>
-      <Button layoutX="835.0" layoutY="495.0" mnemonicParsing="false" onAction="#back" text="VOLTAR" AnchorPane.bottomAnchor="21.5" AnchorPane.rightAnchor="50.0" />
+      <Button layoutX="835.0" layoutY="495.0" mnemonicParsing="false" onAction="#back" text="BACK" AnchorPane.bottomAnchor="21.5" AnchorPane.rightAnchor="50.0" />
+      <Button layoutX="835.0" layoutY="50.0" mnemonicParsing="false" onAction="#limpar" prefHeight="31.0" prefWidth="83.0" text="CLEAR" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0" />
+      <Button layoutX="744.0" layoutY="50.0" mnemonicParsing="false" onAction="#filtrar" prefHeight="31.0" prefWidth="83.0" text="SEARCH" AnchorPane.rightAnchor="163.0" AnchorPane.topAnchor="50.0" />
    </children>
 </AnchorPane>
