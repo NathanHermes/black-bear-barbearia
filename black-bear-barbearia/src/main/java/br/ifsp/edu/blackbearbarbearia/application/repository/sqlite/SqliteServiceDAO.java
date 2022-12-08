@@ -33,7 +33,7 @@ public class SqliteServiceDAO implements ServiceDAO {
             stmt.setBigDecimal(2, type.getPrice());
             stmt.setBigDecimal(3, type.getComissionPercentage());
             stmt.setBigDecimal(4, type.getTaxPercentage());
-            stmt.setBoolean(5, type.getActive());
+            stmt.setBoolean(5, Boolean.TRUE);
 
             stmt.executeUpdate();
         } catch (SQLException e) {
