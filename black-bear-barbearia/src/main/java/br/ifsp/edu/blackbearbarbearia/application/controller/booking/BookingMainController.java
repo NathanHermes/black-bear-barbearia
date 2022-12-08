@@ -291,8 +291,8 @@ public class BookingMainController {
     }
 
     @FXML
-    void relatorio(ActionEvent event) {
-
+    void relatorio(ActionEvent event) throws IOException {
+        WindowLoader.setRoot("ReportMain");
     }
 }
 
