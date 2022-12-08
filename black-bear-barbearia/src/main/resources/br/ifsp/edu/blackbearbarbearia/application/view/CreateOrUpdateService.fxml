@@ -16,30 +16,23 @@
       </VBox>
       <VBox styleClass="form-data">
          <Label styleClass="session-title" text="ACTIVE"/>
-         <HBox>
-            <RadioButton fx:id="rbYes" selected="true" text="Yes" toggleGroup="$groupRadio" />
-            <RadioButton fx:id="rbNo" text="No" >
-               <toggleGroup>
-                  <ToggleGroup fx:id="groupRadio"/>
-               </toggleGroup>
-            </RadioButton>
+         <HBox styleClass="form-data">
+            <RadioButton fx:id="rbYes" selected="true" text="Yes">
+            <toggleGroup>
+               <ToggleGroup fx:id="groupRadio"/>
+            </toggleGroup>
+         </RadioButton>
+            <RadioButton fx:id="rbNo" text="No" toggleGroup="$groupRadio"/>
          </HBox>
          <Label styleClass="session-title" text="TYPES"/>
-         <HBox>
-            <CheckBox fx:id="cbHair" layoutX="521.0" layoutY="270.0" mnemonicParsing="false" text="HAIR"
-                      AnchorPane.rightAnchor="380.0" AnchorPane.topAnchor="270.0"/>
-            <CheckBox fx:id="cbBeard" layoutX="523.0" layoutY="300.0" mnemonicParsing="false" text="BEARD"
-                      AnchorPane.rightAnchor="366.0" AnchorPane.topAnchor="300.0"/>
-            <CheckBox fx:id="cbOther" layoutX="613.0" layoutY="270.0" mnemonicParsing="false" text="OTHER"
-                      AnchorPane.rightAnchor="276.0" AnchorPane.topAnchor="270.0"/>
+         <HBox styleClass="form-data">
+            <CheckBox fx:id="cbHair" text="HAIR"/>
+            <CheckBox fx:id="cbBeard" text="BEARD"/>
+            <CheckBox fx:id="cbOther" text="OTHER"/>
          </HBox>
       </VBox>
    </HBox>
 
-   <Button fx:id="btnSaveOrUpdate" layoutX="362.0" layoutY="340.0" maxWidth="-Infinity" mnemonicParsing="false"
-           onAction="#saveOrUpdate" prefHeight="46.0" prefWidth="206.0" style="-fx-background-color: #e3383e;"
-           text="Cadastrar" AnchorPane.leftAnchor="362.0" AnchorPane.rightAnchor="395.0" AnchorPane.topAnchor="360.0"/>
-   <Button layoutX="737.0" layoutY="479.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#back"
-           prefHeight="46.0" prefWidth="206.0" style="-fx-background-color: #e3383e;" text="Voltar"
-           AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="25.0"/>
+   <Button styleClass="login-button" fx:id="btnSaveOrUpdate" onAction="#saveOrUpdate"/>
+   <Button styleClass="back-big-button" onAction="#back" text="B A C K"/>
 </VBox>

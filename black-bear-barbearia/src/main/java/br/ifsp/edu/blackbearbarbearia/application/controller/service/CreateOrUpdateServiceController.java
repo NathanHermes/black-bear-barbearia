@@ -53,8 +53,6 @@ public class CreateOrUpdateServiceController {
     @FXML
     private void initialize() {
         if (service == null)
-            rbNo.setDisable(true);
-            rbYes.setDisable(true);
             clearInputs();
     }
 
@@ -70,6 +68,9 @@ public class CreateOrUpdateServiceController {
         cbHair.setSelected(false);
         cbBeard.setSelected(false);
         cbOther.setSelected(false);
+
+        rbNo.setDisable(true);
+        rbYes.setDisable(true);
     }
 
     public void setService(Service service) {
@@ -84,8 +85,8 @@ public class CreateOrUpdateServiceController {
     }
 
     private void setInfoServiceIntoInputs() {
-        lblTitle.setText("Editar");
-        btnSaveOrUpdate.setText("Editar");
+        lblTitle.setText("Edit");
+        btnSaveOrUpdate.setText("E D I T");
         inputName.setText(service.getName());
         inputPrince.setText(String.valueOf(service.getPrice()));
         inputCommission.setText(String.valueOf(service.getComissionPercentage()));
