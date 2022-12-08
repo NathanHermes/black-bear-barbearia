@@ -286,10 +286,8 @@ public class BookingMainController {
     }
 
     @FXML
-    public void historyOfBookingFromEmployee(ActionEvent event) {
-        /*
-        *  Esperando a criação da tela de histórico de serviços prestados
-        * */
+    public void historyOfBookingFromEmployee(ActionEvent event) throws IOException {
+        WindowLoader.setRoot("ServiceHistory");
     }
 
     @FXML
