@@ -28,6 +28,12 @@ public class GenerateReportInPDF {
         Font contrastParagraph = new Font(Font.TIMES_ROMAN, 14);
         Font paragraph = new Font(Font.HELVETICA, 12);
 
+        Paragraph documentTitle = new Paragraph();
+        documentTitle.setAlignment(Element.ALIGN_CENTER);
+        documentTitle.add(new Chunk("RELATÓRIO", title));
+        REPORT.add(documentTitle);
+        REPORT.add(new Paragraph(" "));
+
         Booking booking;
         BigDecimal total = new BigDecimal(0);
         for(int i = 0; i < bookings.size(); i++) {
