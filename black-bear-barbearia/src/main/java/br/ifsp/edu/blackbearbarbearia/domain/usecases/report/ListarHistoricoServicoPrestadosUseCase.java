@@ -29,7 +29,7 @@ public class ListarHistoricoServicoPrestadosUseCase {
         if (notification.hasErros())
             throw new IllegalArgumentException(notification.errorMessage());
 
-        if (start.before(Date.valueOf(LocalDate.now())) || end.before(Date.valueOf(LocalDate.now())) || start.after(end))
+        if (start.after(Date.valueOf(LocalDate.now())) || end.after(Date.valueOf(LocalDate.now())) || end.after(start))
             throw new IllegalArgumentException("Period is invalid.");
 
         Integer id = user.getId();
