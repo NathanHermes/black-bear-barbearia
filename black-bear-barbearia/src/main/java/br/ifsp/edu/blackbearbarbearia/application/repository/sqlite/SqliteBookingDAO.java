@@ -260,7 +260,7 @@ public class SqliteBookingDAO implements BookingDAO {
         final List<Booking> bookings = new ArrayList<>();
 
         try {
-            String sql = "SELECT * FROM booking WHERE userId = ? AND date >= ? AND date <= end";
+            String sql = "SELECT * FROM booking WHERE userId = ? AND date >= ? AND date <= ?";
 
             final PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql);
 
